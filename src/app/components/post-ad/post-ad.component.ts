@@ -184,10 +184,16 @@ export class PostAdComponent implements OnInit {
     this.selectCoinTypeComponent.toSelect();
   }
 
-  selectCoinType(data) {
+  async selectCoinType(data) {
     if (data) {
       this.coinTypeCode = data.code;
       this.coinType = data;
+      const _coinTypeCode = this.coinTypeCode;
+      const _currencyCode = this.currencyCode;
+      const _result = await this.commonService.getCoinRate(_coinTypeCode, _currencyCode);
+      if (_coinTypeCode === this.coinTypeCode && _currencyCode === this.currencyCode) {
+        this.coinRate = _result.value;
+      }
     }
   }
 
