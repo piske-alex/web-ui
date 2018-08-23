@@ -1,0 +1,37 @@
+<div class="gz-action-deposit">
+  <div style="display: flex;">
+    向如下地址汇入 <span>BTC</span> 完成充值
+    <div id="qrcode" (click)="showBigImg()"></div>
+  </div>
+  <div class="gz-action-address">
+    {{coinAddress}}
+  </div>
+  <div class="gz-notice">
+    <p>
+      注意事项
+    </p>
+    <p>
+      BTC地址只能充值BTC资产，任何冲入BTC地址的非BTC资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 BTC
+    </p>
+  </div>
+</div>
+
+<div class="gz-process-list">
+  <div class="gz-title">
+    <div>即将到账的转账
+      <fa-icon [icon]="['fas', 'question-circle']"></fa-icon>
+    </div>
+    <div class="gz-link">刷新</div>
+  </div>
+  <div class="gz-list">
+    <div>2018-08-08</div>
+    <div>1.00002202</div>
+  </div>
+</div>
+
+<div class="gz-full-screen" *ngIf="isShowBigImg">
+  <div class="gz-full-screen-bg" *ngIf="isShowBigImg" (click)="hideBigImg()"></div>
+  <div class="gz-full-screen-content">
+    <div id="qrcodeFull"></div>
+  </div>
+</div>

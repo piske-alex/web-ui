@@ -1,0 +1,119 @@
+@import "../../../constants";
+
+.gz-header {
+  .bs-popover-bottom {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    left: auto;
+
+    .arrow {
+      right: 2px;
+    }
+
+    .popover-body {
+
+      & > div {
+        border-bottom: 1px solid $border_default;
+        padding: 4px 0;
+      }
+
+      fa-icon {
+        color: $icon_color;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .gz-pc-header-right {
+    fa-icon {
+      margin-left: 10px;
+    }
+  }
+}
+
+.gz-form {
+  background: $article_bg;
+
+  .gz-edit-right {
+    min-width: 20px;
+    width: 20px;
+  }
+}
+
+article {
+  nav {
+    width: 100%;
+    border-bottom: 1px solid $border_default;
+
+    ul {
+      color: $link_default_color;
+      display: flex;
+      justify-content: space-around;
+
+      li {
+        cursor: pointer;
+
+        &.active {
+          color: $link_active_color;
+          border-bottom: 2px solid $link_active_color;
+        }
+      }
+    }
+  }
+
+  .gz-transaction-list {
+    background: $article_bg;
+    margin-top: $section_margin_top;
+
+  }
+
+  .gz-ad-slide {
+    position: relative;
+
+    .gz-ad-slide-img {
+      width: 375px;
+      overflow: hidden;
+
+      .gz-ad-slide-imgs {
+        width: 1500px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        li {
+          width: 375px;
+          overflow: hidden;
+          list-style: none;
+
+          img {
+            width: 375px;
+          }
+        }
+      }
+    }
+
+    .gz-ad-slide-circle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+
+      li {
+        width: 10px;
+        height: 10px;
+        background: #ffffff;
+        border-radius: 100px;
+        margin: 0 2px;
+
+        &.gz-active {
+          background: $header_bg;
+        }
+      }
+    }
+  }
+
+}

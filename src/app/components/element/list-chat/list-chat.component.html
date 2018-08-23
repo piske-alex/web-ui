@@ -1,0 +1,13 @@
+<article class="gz-chat-list">
+  <section *ngFor="let chat of chatList">
+    <div class="chat-time" *ngIf="chat.sendTime">{{chat.sendTime | date: 'MM:dd:HH:mm:ss'}}</div>
+    <div class="gz-chat-me" *ngIf="chat.isMe">
+      <div class="gz-chat-content">{{chat.content}}</div>
+      <img class="headImg" src="{{user.avatar | avatar}}">
+    </div>
+    <div class="gz-chat-other" *ngIf="!chat.isMe">
+      <img class="headImg" src="{{otherUser.avatar | avatar}}">
+      <div class="gz-chat-content">{{chat.content}}</div>
+    </div>
+  </section>
+</article>

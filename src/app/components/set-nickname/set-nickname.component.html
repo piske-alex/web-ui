@@ -1,0 +1,23 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">设置昵称</div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-register gz-form">
+  <section>
+    <div class="gz-label {{isFocus('nickname')}}">请输入昵称</div>
+    <div>
+      <input type="text" class="{{isFocus('nickname')}}" placeholder="请输入昵称"
+             [(ngModel)]="nickname"
+             (focus)="focus('nickname')" (blur)="blur('nickname')">
+    </div>
+  </section>
+  <section class="gz-submit">
+    <div class="btn gz-circle active" (click)="submit()">保存</div>
+  </section>
+</article>

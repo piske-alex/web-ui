@@ -1,0 +1,19 @@
+@import "../../constants";
+
+body {
+  background: $body_bg !important;
+  color: $link_default_color !important;
+
+  .gz-app {
+
+    nav {
+      background: $nav_bg;
+    }
+
+    article {
+      background: $article_bg;
+    }
+
+  }
+
+}

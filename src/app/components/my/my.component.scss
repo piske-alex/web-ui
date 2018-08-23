@@ -1,0 +1,78 @@
+@import "../../../constants";
+
+.gz-my {
+
+  .gz-user {
+    color: #ffffff;
+    background: $header_bg;
+
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      margin-right: 20px;
+    }
+
+    span {
+      margin-right: 3px;
+    }
+
+    .gz-avatar-file {
+      width: 1px;
+      height: 1px;
+    }
+  }
+
+  .gz-my-group {
+    margin-top: 10px;
+    background: $article_bg;
+
+    .gz-my-row {
+      padding: 20px 10px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid $border_default;
+      margin-left: 10px;
+
+      .gz-my-left {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .gz-my-right {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .gz-icon-user {
+        color: #EC639B;
+      }
+
+      .gz-icon-setting {
+        color: #E76B4C;
+      }
+
+      .gz-icon-help {
+        color: #6593F7;
+      }
+
+      .gz-icon-logout {
+        color: #56A0F7;
+      }
+
+      .gz-right-info {
+        font-size: 11px;
+        color: #D86661;
+      }
+
+      fa-icon {
+        margin: 0 10px;
+      }
+    }
+  }
+
+}

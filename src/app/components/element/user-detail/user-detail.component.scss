@@ -1,0 +1,40 @@
+@import "../list-transaction/list-transaction.component";
+
+.gz-user-detail {
+  section {
+    background: $article_bg;
+    padding: 10px 20px;
+
+    .btn {
+      margin-right: 10px;
+    }
+
+    &.gz-list-tr {
+      border: 0;
+
+      .gz-list-tr-right {
+        flex-direction: row;
+      }
+    }
+
+    &.gz-history {
+      height: 60px;
+      justify-content: space-around;
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    &.gz-ad-remark {
+      & > div {
+        padding: 20px 0;
+        border-top: 1px solid $border_default;
+      }
+    }
+  }
+
+}

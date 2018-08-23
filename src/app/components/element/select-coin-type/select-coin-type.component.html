@@ -1,0 +1,4 @@
+<gz-select-single *ngIf="isShowSelect"
+                  [head]="selectHead" [keyField]="selectKey" [valueField]="selectValue"
+                  [list]="list" [active]="data"
+                  (cancel)="selectCancel($event)" (done)="selectOne($event)"></gz-select-single>

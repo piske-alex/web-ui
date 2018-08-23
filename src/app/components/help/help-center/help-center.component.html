@@ -1,0 +1,18 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      支持
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-help-center">
+  <section *ngFor="let helpList of helpList">
+    <div class="gz-category">{{helpList.category.name}}</div>
+    <div class="gz-help-title" *ngFor="let help of helpList.helpList" (click)="goToHelp(help)">{{help.title}}</div>
+  </section>
+</article>

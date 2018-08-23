@@ -1,0 +1,27 @@
+<section class="gz-bg" (click)="cancelSelect()"></section>
+
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">{{head}}</h5>
+  </div>
+  <div class="modal-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item gz-title">{{title1}}</li>
+      <li class="list-group-item {{isActiveLeft(data)}}"
+          *ngFor="let data of list1"
+          (click)="selectLeft(data)">{{data[valueField]}}
+      </li>
+    </ul>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item gz-title">{{title2}}</li>
+      <li class="list-group-item {{isActiveRight(data)}}"
+          *ngFor="let data of list2"
+          (click)="selectRight(data)">{{data[valueField]}}
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancelSelect()">取消</button>
+    <button type="button" class="btn btn-primary" (click)="confirmSelect()">确认</button>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+@import "../../../constants";
+
+.gz-full-tab, .gz-list-ad, .gz-empty-foot {
+  background: $article_bg;
+  margin-top: $section_margin_top;
+}
+
+.gz-list-ad {
+  margin-top: 0;
+}
+
+.gz-list-ad {
+  padding: 10px;
+}

@@ -1,0 +1,46 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      币币账户 {{coinType}}
+    </div>
+    <div (click)="goToTransactionList()">
+      明细
+    </div>
+  </div>
+</header>
+
+<article class="gz-wallet gz-coin-action">
+  <section class="gz-wallet-summery">
+    <div class="gz-title">总资产</div>
+    <div class="gz-amount">{{coinBalance.allBalance}} {{coinType}}</div>
+    <!--<div class="gz-currency">≈0.00 CNY</div>-->
+    <div class="gz-wallet-coin-detail">
+      <div class="">
+        <div>可用资产({{coinType}})</div>
+        <div>{{coinBalance.balance}}</div>
+      </div>
+      <div class="">
+        <div>冻结资产({{coinType}})</div>
+        <div>{{coinBalance.locked}}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gz-full-tab">
+    <nav class="nav">
+      <a [class]="'nav-link ' + (isDeposit() ? 'active': '')" (click)="toDeposit()">充币</a>
+      <a [class]="'nav-link ' + (isWithraw() ? 'active': '')" (click)="toWithraw()">提币</a>
+      <!--<a [class]="'nav-link ' + (isTransfer() ? 'active': '')" (click)="toTransfer()">资产划转</a>-->
+    </nav>
+  </section>
+
+  <section class="gz-action-container">
+    <gz-coin-action-deposit [coinType]="coinType" *ngIf="isDeposit()"></gz-coin-action-deposit>
+    <gz-coin-action-withraw [coinType]="coinType" *ngIf="isWithraw()"></gz-coin-action-withraw>
+    <gz-coin-action-transfer *ngIf="isTransfer()"></gz-coin-action-transfer>
+  </section>
+
+</article>

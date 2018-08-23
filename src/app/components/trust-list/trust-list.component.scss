@@ -1,0 +1,67 @@
+@import "../../../constants";
+
+.gz-trust-list {
+  background: $article_bg;
+
+  .gz-full-tab {
+    nav {
+      .nav-link {
+        width: 33.333333%;
+      }
+    }
+  }
+
+  .gz-list-tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $border_default;
+    padding: 10px;
+
+    .gz-list-tr-left {
+      display: flex;
+      justify-content: left;
+    }
+
+    .gz-list-tr-detail {
+      margin-left: 10px;
+    }
+
+    .gz-list-tr-right, .gz-list-tr-head, .gz-list-tr-detail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+
+      .btn {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+    }
+
+    .gz-list-tr-head {
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+        margin-bottom: 5px;
+      }
+    }
+
+    .gz-list-tr-detail {
+      align-items: left;
+      color: $sub_font_color;
+
+      h3 {
+        font-size: 14px;
+        font-weight: 900;
+        color: $head_font;
+      }
+    }
+
+    .gz-list-tr-right {
+      color: $heighline_font_color;
+    }
+  }
+}

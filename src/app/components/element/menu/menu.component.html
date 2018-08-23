@@ -1,0 +1,18 @@
+<nav class="gz-menu">
+  <ul class="nav">
+    <li class="nav-item" [class]="isActiveNav('otc')" (click)="navTo('otc')" routerLink="/otc">
+      <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon>
+      <a class="nav-link active">
+        <gz-i18n key="tabsPage.otc"></gz-i18n>
+      </a>
+    </li>
+    <li class="nav-item" [class]="isActiveNav('wallet')" (click)="navTo('wallet')" routerLink="/wallet">
+      <fa-icon [icon]="['fas', 'wallet']"></fa-icon>
+      <a class="nav-link">钱包</a>
+    </li>
+    <li class="nav-item" [class]="isActiveNav('my')" (click)="navTo('my')" routerLink="/my">
+      <fa-icon [icon]="['fas', 'user']"></fa-icon>
+      <a class="nav-link">我的</a>
+    </li>
+  </ul>
+</nav>

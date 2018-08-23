@@ -1,0 +1,103 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title" *ngIf="data.adType == '2'">
+      <span>{{i18ns.buy}}</span>
+      <span>{{data.transactionCurrency}}</span>
+    </div>
+    <div class="gz-title" *ngIf="data.adType == '1'">
+      <span>{{i18ns.sale}}</span>
+      <span>{{data.transactionCoinType}}</span>
+    </div>
+    <div></div>
+    <!--<div (click)="goToHelp()">{{i18ns.help}}</div>-->
+  </div>
+</header>
+
+<article class="gz-form gz-transaction">
+  <gz-user-detail *ngIf="data.userId"
+                  rightTop="money"
+                  [userId]="data.userId"
+                  [coinType]="data.transactionCoinType"
+                  [headHrefUrl]="'/user'"
+                  [leftTopTxt]="getLeftTopTxt()"
+                  [rightTopTxt]="data.rate + ' ' + data.transactionCurrency"
+                  [remark]="getRemark()"
+  ></gz-user-detail>
+
+  <section class="gz-exchange">
+    <div *ngIf="data.adType == '1'">{{i18ns.wantSale}}</div>
+    <div *ngIf="data.adType == '2'">{{i18ns.wantBuy}}</div>
+    <div *ngIf="data.adType == '2' && payAmount >= 0">{{getLeftPlacehold()}}</div>
+    <div class="gz-input-row">
+      <span *ngIf="data.adType == '1'">{{data.transactionCoinType}}</span>
+      <span *ngIf="data.adType == '2'">{{data.transactionCurrency}}</span>
+      <input type="number" [(ngModel)]="payAmount" (keyup)="changePay()" [placeholder]="getLeftPlacehold()">
+      <fa-icon [icon]="['fas', 'exchange-alt']"></fa-icon>
+      <span *ngIf="data.adType == '1'">{{data.transactionCurrency}}</span>
+      <span *ngIf="data.adType == '2'">{{data.transactionCoinType}}</span>
+      <input type="number" [(ngModel)]="receiveAmount" [placeholder]="getRightPlacehold()" disabled>
+    </div>
+  </section>
+
+  <section class="gz-exchange-notify">
+    <p>{{i18ns.saleWarn_1}}</p>
+    <p>{{i18ns.saleWarn_2}}</p>
+    <p>{{i18ns.saleWarn_3}}</p>
+    <p>{{i18ns.saleWarn_4}}</p>
+  </section>
+
+</article>
+
+<footer>
+  <div class="gz-concat" (click)="goToChat()">
+    <fa-icon [icon]="['fas', 'comment-dots']"></fa-icon>
+    {{i18ns.contact}}
+  </div>
+  <div class="btn gz-foot-blue" *ngIf="data.userId != userId" (click)="transaction()">
+    <span *ngIf="data.adType == '1'">{{i18ns.sale}}</span>
+    <span *ngIf="data.adType == '2'">{{i18ns.buy}}</span>
+  </div>
+  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="obtained()">
+    <span>下架</span>
+  </div>
+  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="edit()">
+    <span>编辑</span>
+  </div>
+</footer>
+
+<section class="gz-bg" *ngIf="isShowConfirm" (click)="cancelTransaction()"></section>
+<div class="gz-popup" *ngIf="isShowConfirm">
+  <div class="gz-popup-content">
+    <h3>下单确认</h3>
+    <div class="gz-popup-row">
+      <div>单价</div>
+      <div>{{data.rate}} {{data.transactionCurrency}}</div>
+    </div>
+    <div class="gz-popup-row">
+      <div>总额</div>
+      <div>{{payAmount}} {{data.transactionCurrency}}</div>
+    </div>
+    <div class="gz-popup-row">
+      <div>数量</div>
+      <div>{{receiveAmount}} {{data.transactionCoinType}}</div>
+    </div>
+    <div>
+      <div class="gz-warn">提醒：请确认价格再下单</div>
+    </div>
+    <div class="gz-popup-btn-row">
+      <div (click)="cancelTransaction()">
+        <span>放弃</span>
+        <span *ngIf="data.adType == '1'">{{i18ns.sale}}</span>
+        <span *ngIf="data.adType == '2'">{{i18ns.buy}}</span>
+      </div>
+      <div>
+        <span (click)="confirmTransaction()">确认</span>
+        <span *ngIf="data.adType == '1'">{{i18ns.sale}}</span>
+        <span *ngIf="data.adType == '2'">{{i18ns.buy}}</span>
+      </div>
+    </div>
+  </div>
+</div>

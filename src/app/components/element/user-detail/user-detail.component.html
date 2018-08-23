@@ -1,0 +1,59 @@
+<div class="gz-user-detail">
+  <section class="gz-list-tr">
+    <div class="gz-list-tr-left">
+      <div class="gz-list-tr-head">
+        <img (click)="showUserDetail()" src="{{data.avatar | avatar}}">
+      </div>
+      <div class="gz-list-tr-detail">
+        <h3>{{data.username}}</h3>
+        <div>{{getLeftTopTxt()}}</div>
+      </div>
+    </div>
+
+    <div class="gz-list-tr-right" *ngIf="rightTop=== 'trustBtn'">
+      <div class="btn btn-primary" *ngIf="!data.is_in_my_black_list" (click)="addBlackList()">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        {{i18ns.blackList}}
+      </div>
+      <div class="btn btn-primary" *ngIf="data.is_in_my_black_list" (click)="cancelBlackList()">
+        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+        {{i18ns.cancel}}{{i18ns.blackList}}
+      </div>
+      <div class="btn btn-primary" *ngIf="!data.is_in_my_trust_list" (click)="addTrustList()">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        {{i18ns.trust}}
+      </div>
+      <div class="btn btn-primary" *ngIf="data.is_in_my_trust_list" (click)="cancelTrustList()">
+        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+        {{i18ns.cancel}}{{i18ns.trust}}
+      </div>
+    </div>
+    <div class="gz-list-tr-right" *ngIf="rightTop=== 'money'">
+      <div class="gz-currency-large">{{rightTopTxt}}</div>
+    </div>
+  </section>
+
+  <section class="gz-list-tr gz-history">
+    <div>
+      <h3>{{data.transaction_count}}</h3>
+      <div>{{i18ns.transactionCount}}</div>
+    </div>
+    <div>
+      <h3>{{data.trust_count}}</h3>
+      <div>{{i18ns.trustCount}}</div>
+    </div>
+    <div>
+      <h3>{{data.positive_count}}%</h3>
+      <div>{{i18ns.praiseCount}}</div>
+    </div>
+    <!--<div>-->
+      <!--<h3>{{data.historyDealCoin}} {{data.historyDealCoinType}}</h3>-->
+      <!--<div>{{i18ns.historyDeal}}</div>-->
+    <!--</div>-->
+  </section>
+
+  <section class="gz-ad-remark" *ngIf="remark">
+    <div>{{remark}}</div>
+  </section>
+
+</div>

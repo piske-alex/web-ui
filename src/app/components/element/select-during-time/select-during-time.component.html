@@ -1,0 +1,23 @@
+<section class="gz-every-day-during" *ngIf="openTimes">
+  <div class="gz-one-day" *ngFor="let openTime of openTimes" (click)="toSelect(openTime)">
+    <div><span *ngIf="everyDayDesc">{{everyDayDesc[openTime.key]}}</span></div>
+    <div>{{openTime.start}}</div>
+    <div>~</div>
+    <div>{{openTime.end}}</div>
+  </div>
+</section>
+
+
+<gz-select-two *ngIf="isShowSelect"
+               [head]="selectHead"
+               [title1]="startTitle"
+               [title2]="endTitle"
+               [list1]="times"
+               [list2]="times"
+               [code1]="startTimeCode"
+               [code2]="endTimeCode"
+               keyField="code"
+               valueField="name"
+               (cancel)="selectCancel($event)"
+               (done)="selectOne($event)"
+></gz-select-two>

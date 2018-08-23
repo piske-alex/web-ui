@@ -1,0 +1,40 @@
+<gz-menu class="gz-main-page-menu" [activeNavName]="'my'"></gz-menu>
+
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      绑定邮箱
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-form">
+  <section>
+    <p>绑定邮箱用于消息提醒和相关安全操作，保护和帮助您完成交易</p>
+  </section>
+  <section>
+    <div>
+      <input type="text" [(ngModel)]="email" placeholder="请输入邮箱">
+    </div>
+  </section>
+
+  <section>
+    <div style="position: relative;">
+      <input type="text" class="{{isFocus('emailVerifyCode')}}" placeholder="请输入邮件中的验证码"
+             [(ngModel)]="emailVerifyCode">
+      <div class="gz-get-smscode" *ngIf="!resendEmailVerifyCodeDelay" (click)="sendEmailVerifyCode()">获取验证码</div>
+      <div class="gz-get-smscode" *ngIf="resendEmailVerifyCodeDelay">重新获取验证码({{resendEmailVerifyCodeDelay}})</div>
+    </div>
+  </section>
+
+  <section class="gz-submit">
+    <div class="btn btn-outline-blue gz-circle" (click)="submit()">
+      提交
+    </div>
+  </section>
+
+</article>

@@ -1,0 +1,82 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      实名认证
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-form">
+  <!--<section class="gz-my-group">-->
+  <!--<div class="gz-my-row" (click)="toSelectCountry()">-->
+  <!--<div class="gz-my-left">-->
+  <!--<div>-->
+  <!--&lt;!&ndash;<fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>&ndash;&gt;-->
+  <!--</div>-->
+  <!--<div>国家/地区</div>-->
+  <!--</div>-->
+  <!--<div class="gz-my-right">-->
+  <!--<div>-->
+  <!--{{country.name}}-->
+  <!--<fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</section>-->
+
+  <!--<section class="gz-edit-row gz-edit-radio-row gz-mt-10">-->
+  <!--<label for="idCard">身份证</label>-->
+  <!--<div><input type="radio" name="credType" id="idCard" value="1" [(ngModel)]="credType"></div>-->
+  <!--</section>-->
+  <!--<section class="gz-edit-row gz-edit-radio-row gz-mt-10">-->
+  <!--<label for="passport">护照</label>-->
+  <!--<div><input type="radio" name="credType" id="passport" value="2" [(ngModel)]="credType"></div>-->
+  <!--</section>-->
+  <!--<section class="gz-edit-row gz-edit-radio-row gz-mt-10">-->
+  <!--<label for="driverLicense">驾驶证</label>-->
+  <!--<div><input type="radio" name="credType" id="driverLicense" value="3" [(ngModel)]="credType"></div>-->
+  <!--</section>-->
+
+  <section class="gz-edit-row gz-mt-10">
+    <div class="gz-edit-left">
+      <input type="text" placeholder="请输入姓名" [(ngModel)]="realName">
+    </div>
+  </section>
+
+  <section class="gz-edit-row gz-mt-10">
+    <div class="gz-edit-left">
+      <input type="text" placeholder="请输入证件号" [(ngModel)]="realCardNo">
+    </div>
+  </section>
+
+  <section class="gz-full-img">
+    <img alt="证件正面" [src]="frontImg.src" (click)="selectImg(frontImgFile)">
+    <input type="file" #frontImgFile (change)="imgChange($event, frontImg)">
+  </section>
+  <section class="gz-full-img">
+    <img alt="证件反面" [src]="backImg.src" (click)="selectImg(backImgFile)">
+    <input type="file" #backImgFile (change)="imgChange($event, backImg)">
+  </section>
+  <section class="gz-full-img">
+    <img alt="半身像" [src]="halfImg.src" (click)="selectImg(halfImgFile)">
+    <input type="file" #halfImgFile (change)="imgChange($event, halfImg)">
+  </section>
+
+  <section class="gz-agree">
+    <input type="checkbox" id="isSelectPromise" [(ngModel)]="isSelectPromise">
+    <label for="isSelectPromise">我承诺提交的信息属于本人所有，不存在盗用他人证件的行为。</label>
+  </section>
+
+  <section class="gz-submit">
+    <div class="btn btn-outline-blue gz-circle" (click)="submit()">
+      提交
+    </div>
+  </section>
+
+</article>
+
+<!--<gz-select-country [code]="countryCode" (done)="selectCountry($event)"></gz-select-country>-->

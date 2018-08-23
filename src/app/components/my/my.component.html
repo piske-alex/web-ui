@@ -1,0 +1,92 @@
+<gz-menu class="gz-main-page-menu" [activeNavName]="'my'"></gz-menu>
+
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div></div>
+    <div class="gz-title">
+      <gz-i18n key="tabsPage.my"></gz-i18n>
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-my">
+  <section class="gz-user">
+    <img *ngIf="!(user && user.avatar)" src="/assets/images/logo.jpg" (click)="setAvatar(avatarFile)"/>
+    <img *ngIf="user && user.avatar" src="{{user.avatar | avatar}}" (click)="setAvatar(avatarFile)"/>
+    <input type="file" class="gz-avatar-file" #avatarFile (change)="fileChange($event)"style="visibility: hidden;">
+    <div *ngIf="!(user && user.id)">
+      <div routerLink="/login">登陆/注册</div>
+      <div>立刻登录可以查看更多内容</div>
+    </div>
+    <div *ngIf="user && user.id">
+      <div>{{user.username}}</div>
+      <div>
+        <span>交易</span>
+        <span>{{user.transaction_count}}</span>
+        <span>|</span>
+        <span>好评</span>
+        <span>{{user.positive_count}}%</span>
+        <span>|</span>
+        <span>信任</span>
+        <span>{{user.trust_count}}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="gz-my-group">
+    <div class="gz-my-row">
+      <div class="gz-my-left">
+        <div>
+          <fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>
+        </div>
+        <div>邀请好友</div>
+      </div>
+      <div class="gz-my-right">
+        <div class="gz-right-info">邀友得奖励</div>
+        <div>
+          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="gz-my-row" (click)="goToSetting()">
+      <div class="gz-my-left">
+        <div>
+          <fa-icon class="gz-icon-setting" [icon]="['fas', 'cog']"></fa-icon>
+        </div>
+        <div>设置</div>
+      </div>
+      <div class="gz-my-right">
+        <div>
+          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="gz-my-row" routerLink="/helpCenter">
+      <div class="gz-my-left">
+        <div>
+          <fa-icon class="gz-icon-help" [icon]="['fas', 'question-circle']"></fa-icon>
+        </div>
+        <div>帮助中心</div>
+      </div>
+      <div class="gz-my-right">
+        <div>
+          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="gz-my-row" (click)="logout()">
+      <div class="gz-my-left">
+        <div>
+          <fa-icon class="gz-icon-logout" [icon]="['fas', 'power-off']"></fa-icon>
+        </div>
+        <div>退出</div>
+      </div>
+      <div class="gz-my-right">
+        <div>
+          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,93 @@
+@import "../../constants";
+
+body .gz-app {
+
+  .btn {
+    font-size: 12px;
+    font-weight: 100;
+    color: $btn_default_font;
+    background: $btn_default_bg;
+
+    &:active {
+      color: $btn_default_bg;
+      background: $btn_default_font;
+    }
+
+    &.btn-outline-orange {
+      color: $btn_orange;
+      background-color: transparent;
+      background-image: none;
+      border: 1px solid $btn_orange;
+      border-radius: 4px;
+
+      &:active {
+        background-color: $btn_orange;
+        color: #ffffff;
+      }
+    }
+
+    &.btn-outline-blue {
+      color: $btn_primary;
+      background-color: transparent;
+      background-image: none;
+      border: 1px solid $btn_primary;
+      border-radius: 4px;
+
+      &:active {
+        background-color: $btn_primary;
+        color: #ffffff;
+      }
+    }
+
+    &.btn-default {
+      border: 0;
+      color: $btn_default_bg;
+      background: $btn_default;
+
+      &:active {
+        background-color: $btn_default_bg;
+        color: $btn_default;
+      }
+    }
+
+    &.btn-primary {
+      border: 0;
+      color: $btn_default_bg;
+      background: $btn_primary;
+
+      &:active {
+        background-color: $btn_default_bg;
+        color: $btn_primary;
+      }
+    }
+
+    &.gz-sm {
+      padding: 2px;
+      font-size: 11px;
+      font-weight: 100;
+    }
+
+    &.gz-circle {
+      font-size: 13px;
+      border-radius: 20px;
+    }
+
+    &.gz-foot-blue {
+      color: #ffffff;
+      height: 50px;
+      background: $btn_primary;
+      border-radius: 0;
+      padding-left: 30px;
+      padding-right: 30px;
+      display: flex;
+      align-items: center;
+
+      &:active {
+        background-color: #ffffff;
+        color: $btn_primary;
+        border: 1px solid $btn_primary;
+      }
+    }
+  }
+
+}

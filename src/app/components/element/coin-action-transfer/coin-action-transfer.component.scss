@@ -1,0 +1,73 @@
+@import "../../../../constants";
+
+.gz-action-transfer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $article_bg;
+  padding: 10px;
+
+  .gz-transfer-title {
+    position: relative;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .gz-transfer-title-m {
+      position: relative;
+      width: 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: $sub_font_color;
+
+      .gz-transfer-title-m1 {
+        border-bottom: 2px solid $sub_font_color;
+        position: absolute;
+        top: -10px;
+        width: 100%;
+        text-align: center;
+      }
+
+    }
+  }
+
+  .gz-full-width {
+    width: 100%;
+  }
+
+  .gz-transfer-left {
+    width: 100%;
+    color: $link_active_color;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .gz-notice {
+    color: $sub_font_color;
+    padding: 10px;
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .btn.gz-circle {
+    width: 100px;
+    border: 1px solid $border_default;
+
+    &.active {
+      color: #ffffff;
+      background: $btn_primary;
+    }
+  }
+}
+
+
+

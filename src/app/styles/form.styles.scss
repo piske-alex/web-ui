@@ -1,0 +1,189 @@
+@import "../../constants";
+
+.gz-app {
+  input {
+    border: 0;
+    border-bottom: 1px solid $border_default;
+  }
+
+  .gz-form {
+    background: $body_bg;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    section {
+      width: 100%;
+      padding: 10px 0;
+
+    }
+
+    .gz-label.active, .gz-active {
+      color: $link_active_color;
+    }
+
+    .gz-password {
+      display: flex;
+      justify-content: space-between;
+
+      fa-icon {
+        font-size: 18px;
+      }
+    }
+
+    .gz-agree-terms {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .gz-forget-paaswd {
+      text-decoration: underline;
+    }
+
+    .gz-agree {
+      display: flex;
+
+      input[type="checkbox"] {
+        height: 18px;
+        line-height: 18px;
+      }
+    }
+
+    input {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      background: $input_bg;
+      color: $link_default_color;
+
+      &.active {
+        border-bottom: 1px solid $link_active_color;
+      }
+
+      &[type="checkbox"], &[type="radio"] {
+        width: 14px;
+        height: 14px;
+        margin-right: 10px;
+      }
+
+    }
+
+    label {
+      margin: 0;
+    }
+
+    .gz-country {
+      border-bottom: 1px solid $border_default;
+      display: flex;
+      justify-content: space-between;
+
+      .gz-country-select {
+        width: 100%;
+        text-align: center;
+        padding-left: 50px;
+
+        select {
+          color: $link_default_color;
+          width: 100%;
+        }
+      }
+    }
+
+    .gz-submit {
+      display: flex;
+      justify-content: center;
+
+      .gz-circle {
+        border: 1px solid $border_default;
+        width: 80%;
+
+        &.active {
+          color: #ffffff;
+          background: $link_active_color;
+          border: 1px solid $link_active_color;
+        }
+      }
+    }
+
+    .gz-get-smscode {
+      position: absolute;
+      right: 0;
+      top: 0;
+      line-height: 30px;
+      color: $link_active_color;
+    }
+
+    .gz-edit-row {
+      line-height: 30px;
+      border-bottom: 1px solid $border_default;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: $article_bg;
+      padding: 10px;
+
+      &.gz-edit-desc {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 11px;
+
+        p {
+          margin: 0;
+          padding: 0;
+          line-height: 20px;
+        }
+      }
+
+      &.gz-edit-radio-row {
+        display: flex;
+
+        label {
+          width: 100%;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        height: 80px;
+      }
+
+      .gz-edit-left {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+
+        .gz-edit-label {
+          border-right: 1px solid $border_default;
+          padding-right: 10px;
+          margin-right: 10px;
+          width: 80px;
+          min-width: 80px;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      .gz-edit-right {
+        width: 60px;
+        min-width: 60px;
+
+        fa-icon {
+          color: $icon_color;
+          font-size: 18px;
+          margin-left: 10px;
+
+          &.gz-icon-question {
+            color: $link_active_color;
+          }
+        }
+      }
+    }
+  }
+
+  // end .gz-app
+}
+

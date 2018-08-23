@@ -1,0 +1,171 @@
+<div *ngIf="!isShowSearch">
+  <gz-menu class="gz-main-page-menu" [activeNavName]="'otc'"></gz-menu>
+
+  <header class="gz-header-container">
+    <div class="gz-header">
+      <div (click)="toSelectCountry()">
+        <span class="gz-pc-hide" *ngIf="country">{{country.name}}</span>
+      </div>
+      <div class="btn-group gz-tab" role="group">
+        <div class="btn btn-secondary {{isActiveAdType('2')}}" (click)="selectAdType('2')">我要购买</div>
+        <div class="btn btn-secondary {{isActiveAdType('1')}}" (click)="selectAdType('1')">我要出售</div>
+      </div>
+      <div class="gz-pc-header-right">
+        <div (click)="toSelectCountry()">
+          <span class="gz-pc-show" *ngIf="country">{{country.name}}</span>
+        </div>
+        <div>
+          <fa-icon [icon]="['fas', 'search']" (click)="showSearch()"></fa-icon>
+          <fa-icon [icon]="['fas', 'plus']" (click)="toggleAddList()"></fa-icon>
+        </div>
+
+        <div class="popover fade show bs-popover-bottom" *ngIf="showAddList">
+          <div class="arrow"></div>
+          <h3 class="popover-header"></h3>
+          <div class="popover-body">
+            <div (click)="goToPostAd()">
+              <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+              发布广告
+            </div>
+            <div (click)="goToMyAd()">
+              <fa-icon [icon]="['fas', 'indent']"></fa-icon>
+              我的广告
+            </div>
+            <div (click)="goToTrust()">
+              <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+              信任管理
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article>
+    <section class="gz-ad-slide">
+      <ul class="gz-ad-slide-circle">
+        <li class="gz-active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="gz-ad-slide-img">
+        <ul class="gz-ad-slide-imgs">
+          <li><img src="/assets/images/1.jpg"></li>
+          <li><img src="/assets/images/2.jpg"></li>
+          <li><img src="/assets/images/3.jpg"></li>
+          <li><img src="/assets/images/4.jpg"></li>
+        </ul>
+      </div>
+    </section>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item {{filter.coinType === type.code ? 'active' : ''}}" *ngFor="let type of coinTypes"
+            (click)="selectType(type)">
+          <a class="nav-link">{{type.code}}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="gz-transaction-list">
+      <gz-list-transaction [transactionList]="adList" [adType]="filter.adType"></gz-list-transaction>
+    </div>
+  </article>
+
+  <footer>
+
+  </footer>
+</div>
+
+<div *ngIf="isShowSearch">
+  <header class="gz-header-container">
+    <div class="gz-header">
+      <div>
+        <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="hideSearch()"></fa-icon>
+      </div>
+      <div class="gz-title">
+        搜索
+      </div>
+      <div></div>
+    </div>
+  </header>
+
+  <article class="gz-form gz-post-ad">
+    <section class="gz-edit-row">
+      <div class="gz-edit-left" (click)="toSelectCoinType()">
+        <div class="gz-edit-label">
+          <gz-i18n key="otc.coinType"></gz-i18n>
+        </div>
+        <div>
+          <span *ngIf="coinType">{{coinType.name}}</span>
+        </div>
+      </div>
+      <div class="gz-edit-right">
+        <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCoinType()"></fa-icon>
+      </div>
+    </section>
+    <section class="gz-edit-row">
+      <div class="gz-edit-left" (click)="toSelectCountry()">
+        <div class="gz-edit-label">
+          <gz-i18n key="otc.country"></gz-i18n>
+        </div>
+        <div>
+          <span *ngIf="country">{{country.name}}</span>
+        </div>
+      </div>
+      <div class="gz-edit-right">
+        <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCountry()"></fa-icon>
+      </div>
+    </section>
+    <!--<section class="gz-edit-row">-->
+    <!--<div class="gz-edit-left">-->
+    <!--<div class="gz-edit-label">-->
+    <!--价格区间-->
+    <!--</div>-->
+    <!--<input type="number" [(ngModel)]="minPrice">-->
+    <!-- - -->
+    <!--<input type="number" [(ngModel)]="maxPrice">-->
+    <!--</div>-->
+    <!--<div class="gz-edit-right">-->
+    <!--<span *ngIf="currency">{{currency.code}}</span>-->
+    <!--</div>-->
+    <!--</section>-->
+    <section class="gz-edit-row">
+      <div class="gz-edit-left" (click)="toSelectPayType()">
+        <div class="gz-edit-label">
+          <gz-i18n key="otc.payType"></gz-i18n>
+        </div>
+        <div>
+          <span *ngIf="payType">{{payType.name}}</span>
+        </div>
+      </div>
+      <div class="gz-edit-right">
+        <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectPayType()"></fa-icon>
+      </div>
+    </section>
+    <section class="gz-edit-row">
+      <div class="gz-edit-left" (click)="toSelectCurrency()">
+        <div class="gz-edit-label">
+          <gz-i18n key="otc.currency"></gz-i18n>
+        </div>
+        <div>
+          <span *ngIf="currency">{{currency.name}}</span>
+        </div>
+      </div>
+      <div class="gz-edit-right">
+        <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCurrency()"></fa-icon>
+      </div>
+    </section>
+
+    <section class="gz-submit">
+      <div class="btn btn-primary gz-circle" (click)="search()">
+        搜索
+      </div>
+    </section>
+  </article>
+</div>
+
+<gz-select-coin-type [code]="coinTypeCode" (done)="selectCoinType($event)"></gz-select-coin-type>
+<gz-select-country [code]="countryCode" (done)="selectCountry($event)"></gz-select-country>
+<gz-select-currency [code]="currencyCode" (done)="selectCurrency($event)"></gz-select-currency>
+<gz-select-pay-type [code]="payTypeCode" (done)="selectPayType($event)"></gz-select-pay-type>

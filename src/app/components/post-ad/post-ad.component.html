@@ -1,0 +1,275 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      <gz-i18n key="otc.saleAd" *ngIf="adTypeCode === '1'"></gz-i18n>
+      <gz-i18n key="otc.buyAd" *ngIf="adTypeCode === '2'"></gz-i18n>
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-form gz-post-ad">
+  <!--<section class="alert alert-danger" role="alert">-->
+  <!--<gz-i18n key="otc.walletNotEnough"></gz-i18n>-->
+  <!--0.05BTC,-->
+  <!--<gz-i18n key="otc.adShowFail"></gz-i18n>-->
+  <!--</section>-->
+
+  <section class="alert alert-warning" role="alert">
+    <ul>
+      <li>
+        <gz-i18n key="otc.adWarning_1"></gz-i18n>
+      </li>
+      <li>
+        <gz-i18n key="otc.adWarning_2"></gz-i18n>
+      </li>
+      <li>
+        <gz-i18n key="otc.adWarning_3"></gz-i18n>
+      </li>
+    </ul>
+  </section>
+  <section class="gz-edit-row">
+    <div class="gz-edit-left" (click)="toSelectAdType()">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.adType"></gz-i18n>
+      </div>
+      <div>
+        <span *ngIf="adType">{{adType.name}}</span>
+      </div>
+    </div>
+    <div class="gz-edit-right">
+      <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectAdType()"></fa-icon>
+      <!--<fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp()"></fa-icon>-->
+    </div>
+  </section>
+  <section class="gz-edit-row">
+    <div class="gz-edit-left" (click)="toSelectCoinType()">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.coinType"></gz-i18n>
+      </div>
+      <div>
+        <span *ngIf="coinType">{{coinType.name}}</span>
+      </div>
+    </div>
+    <div class="gz-edit-right">
+      <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCoinType()"></fa-icon>
+      <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('coinType')"></fa-icon>
+    </div>
+  </section>
+  <section class="gz-edit-row">
+    <div class="gz-edit-left" (click)="toSelectCountry()">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.country"></gz-i18n>
+      </div>
+      <div>
+        <span *ngIf="country">{{country.name}}</span>
+      </div>
+    </div>
+    <div class="gz-edit-right">
+      <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCountry()"></fa-icon>
+      <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('country')"></fa-icon>
+    </div>
+  </section>
+  <section class="gz-edit-row">
+    <div class="gz-edit-left" (click)="toSelectCurrency()">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.currency"></gz-i18n>
+      </div>
+      <div>
+        <span *ngIf="currency">{{currency.name}}</span>
+      </div>
+    </div>
+    <div class="gz-edit-right">
+      <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCurrency()"></fa-icon>
+      <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('currency')"></fa-icon>
+    </div>
+  </section>
+  <section class="gz-edit-row gz-mt-10">
+    <div class="gz-edit-left">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.transactionPrice"></gz-i18n>
+      </div>
+      <div><input type="number" [(ngModel)]="ad.price"></div>
+    </div>
+    <div class="gz-edit-right">
+      <span *ngIf="currency">{{currency.code}}</span>
+      <!--<fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp()"></fa-icon>-->
+    </div>
+  </section>
+  <!--<section>-->
+  <!--<p>当前报价大概排在第一位</p>-->
+  <!--<p>溢价设置(市场参考价格44151.12CNY/BTC)</p>-->
+  <!--</section>-->
+  <section ng-if="currency && coinType">
+    <p>当前报价大概排在第一位(市场参考价格{{coinRate}}{{currencyCode}}/{{coinTypeCode}})</p>
+  </section>
+  <!-- <section class="gz-slid-row"> -->
+  <!--<div class="gz-min-val">-99</div>-->
+  <!--<div class="gz-slid-val">-->
+  <!--<div class="gz-slid-line"></div>-->
+  <!--<div class="gz-slid-point"></div>-->
+  <!--</div>-->
+  <!--<div class="gz-max-val">99</div>-->
+  <!-- <div> -->
+  <!-- <gz-i18n key="otc.premiumSettting"></gz-i18n> -->
+  <!-- </div> -->
+  <!-- <div class="gz-input-val"> -->
+  <!-- <input type="number" [(ngModel)]="ad.premium" (keyup)="updatePremium()">% -->
+  <!-- </div> -->
+  <!-- </section> -->
+  <!--<section>-->
+  <!--<p>-->
+  <!--<gz-i18n key="otc.premiumDesc"></gz-i18n>-->
+  <!--</p>-->
+  <!--</section>-->
+  <!--<section class="gz-edit-row" *ngIf="adTypeCode == '2'">-->
+  <!--<div class="gz-edit-left">-->
+  <!--<div class="gz-edit-label">-->
+  <!--<gz-i18n key="otc.maxPrice"></gz-i18n>-->
+  <!--</div>-->
+  <!--<input type="number" [(ngModel)]="ad.maxPrice">-->
+  <!--</div>-->
+  <!--<div class="gz-edit-right">-->
+  <!--<span *ngIf="currency">{{currency.code}}</span>-->
+  <!--<fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('maxPrice')"></fa-icon>-->
+  <!--</div>-->
+  <!--</section>-->
+  <!--<section class="gz-edit-row" *ngIf="adTypeCode == '1'">-->
+  <!--<div class="gz-edit-left">-->
+  <!--<div class="gz-edit-label">-->
+  <!--<gz-i18n key="otc.minPrice"></gz-i18n>-->
+  <!--</div>-->
+  <!--<input type="number" [(ngModel)]="ad.minPrice">-->
+  <!--</div>-->
+  <!--<div class="gz-edit-right">-->
+  <!--<span *ngIf="currency">{{currency.code}}</span>-->
+  <!--<fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('minPrice')"></fa-icon>-->
+  <!--</div>-->
+  <!--</section>-->
+  <section class="gz-edit-row">
+    <div class="gz-edit-left">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.minCount"></gz-i18n>
+      </div>
+      <input type="number" [(ngModel)]="ad.minCount">
+    </div>
+    <div class="gz-edit-right">
+      <span *ngIf="currency">{{currency.code}}</span>
+      <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('minCount')"></fa-icon>
+    </div>
+  </section>
+  <section class="gz-edit-row">
+    <div class="gz-edit-left">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.maxCount"></gz-i18n>
+      </div>
+      <input type="number" [(ngModel)]="ad.maxCount">
+    </div>
+    <div class="gz-edit-right">
+      <span *ngIf="currency">{{currency.code}}</span>
+      <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('maxCount')"></fa-icon>
+    </div>
+  </section>
+  <section class="gz-edit-row">
+    <div class="gz-edit-left" (click)="toSelectPayType()">
+      <div class="gz-edit-label">
+        <gz-i18n key="otc.payType"></gz-i18n>
+      </div>
+      <div>
+        <span *ngIf="payType">{{payType.name}}</span>
+      </div>
+    </div>
+    <div class="gz-edit-right">
+      <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectPayType()"></fa-icon>
+      <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('payType')"></fa-icon>
+    </div>
+  </section>
+  <!--<section class="gz-edit-row">-->
+  <!--<div class="gz-edit-left">-->
+  <!--<div class="gz-edit-label">-->
+  <!--<gz-i18n key="otc.payTerm"></gz-i18n>-->
+  <!--</div>-->
+  <!--<input type="number" [(ngModel)]="ad.payTerm">-->
+  <!--</div>-->
+  <!--<div class="gz-edit-right">-->
+  <!--<gz-i18n key="common.minute"></gz-i18n>-->
+  <!--&lt;!&ndash;<fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp()"></fa-icon>&ndash;&gt;-->
+  <!--</div>-->
+  <!--</section>-->
+
+  <section class="gz-edit-row gz-edit-desc">
+    <p>
+      <gz-i18n key="otc.remarkDesc_1"></gz-i18n>
+    </p>
+    <p>
+      <gz-i18n key="otc.remarkDesc_2"></gz-i18n>
+    </p>
+    <p>
+      <gz-i18n key="otc.remarkDesc_3"></gz-i18n>
+    </p>
+    <p>
+      <gz-i18n key="otc.remarkDesc_4"></gz-i18n>
+    </p>
+  </section>
+
+  <section class="gz-edit-row">
+    <textarea [(ngModel)]="ad.remark"></textarea>
+  </section>
+
+  <!--<section class="gz-edit-row">-->
+  <!--<label class="gz-edit-label gz-w-100p" for="onlyTrustUser">-->
+  <!--<gz-i18n key="otc.onlyTrustUser"></gz-i18n>-->
+  <!--</label>-->
+  <!--<input type="checkbox" id="onlyTrustUser" [(ngModel)]="ad.isOnlyTrustUser">-->
+  <!--</section>-->
+
+  <!--<section class="gz-edit-row">-->
+  <!--<label class="gz-edit-label gz-w-100p" for="onlyRealUser">-->
+  <!--<gz-i18n key="otc.onlyRealUser"></gz-i18n>-->
+  <!--</label>-->
+  <!--<input type="checkbox" id="onlyRealUser" [(ngModel)]="ad.isOnlyRealUser">-->
+  <!--</section>-->
+
+  <!--<section class="gz-edit-row gz-open-time">-->
+  <!--<div class="gz-edit-left">-->
+  <!--<div class="gz-edit-label">-->
+  <!--<gz-i18n key="otc.openTime"></gz-i18n>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="gz-edit-right">-->
+  <!--<input type="radio" name="openTimeType" id="openTimeType1" value="1" [(ngModel)]="ad.openTimeType">-->
+  <!--<label for="openTimeType1">-->
+  <!--<gz-i18n key="otc.anyTime"></gz-i18n>-->
+  <!--</label>-->
+  <!--<input type="radio" name="openTimeType" id="openTimeType2" value="2" [(ngModel)]="ad.openTimeType">-->
+  <!--<label for="openTimeType2">-->
+  <!--<gz-i18n key="otc.customTime"></gz-i18n>-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--</section>-->
+
+  <!--<section style="padding: 0;" *ngIf="ad.openTimeType == 2">-->
+  <!--<gz-select-during-time (done)="selectOpenTime()"></gz-select-during-time>-->
+  <!--</section>-->
+
+  <section class="gz-submit">
+    <div class="btn btn-outline-blue gz-circle" (click)="publish()">
+      <gz-i18n key="otc.publish"></gz-i18n>
+    </div>
+  </section>
+</article>
+
+<section class="gz-bg" *ngIf="showInnerHelp" (click)="hideInnerHelp()"></section>
+<section class="gz-inner-help" *ngIf="showInnerHelp">
+  <div [innerHTML]="helpContent"></div>
+</section>
+
+
+<gz-select-ad-type [code]="adTypeCode" (done)="selectAdType($event)"></gz-select-ad-type>
+<gz-select-coin-type [code]="coinTypeCode" (done)="selectCoinType($event)"></gz-select-coin-type>
+<gz-select-country [code]="countryCode" (done)="selectCountry($event)"></gz-select-country>
+<gz-select-currency [code]="currencyCode" (done)="selectCurrency($event)"></gz-select-currency>
+<gz-select-pay-type [code]="payTypeCode" (done)="selectPayType($event)"></gz-select-pay-type>

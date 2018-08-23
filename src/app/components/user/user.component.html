@@ -1,0 +1,31 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">{{data.username}}</div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-transaction">
+  <gz-user-detail *ngIf="userId"
+                  rightTop="trustBtn"
+                  [userId]="userId"
+                  [coinType]="coinType"
+  ></gz-user-detail>
+
+  <section class="gz-full-tab">
+    <nav class="nav">
+      <a class="nav-link {{isSelectPublish ? 'active': ''}}" (click)="selectPublish()">{{i18ns.hisPublishAd}}</a>
+      <a class="nav-link {{isSelectPublish ? '': 'active'}}" (click)="selectDeal()">{{i18ns.iDealWithHim}}</a>
+    </nav>
+  </section>
+
+  <section class="gz-list-ad">
+    <gz-list-ad *ngIf="isSelectPublish && publishList.length" [list]="publishList"></gz-list-ad>
+    <gz-list-deal *ngIf="!isSelectPublish && dealWithMeList.length" [list]="dealWithMeList"></gz-list-deal>
+  </section>
+
+  <section class="gz-exchange-foot"></section>
+</article>

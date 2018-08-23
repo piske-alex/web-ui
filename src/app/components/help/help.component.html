@@ -1,0 +1,16 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      {{help.title || '帮助'}}
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-help">
+  <!--<h2 class="gz-title">{{help.title}}</h2>-->
+  <section [innerHTML]="help.content"></section>
+</article>

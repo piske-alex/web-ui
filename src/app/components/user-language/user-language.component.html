@@ -1,0 +1,17 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      选择币种
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-coin-select">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let data of list" (click)="submit(data)">{{data.name}}</li>
+  </ul>
+</article>

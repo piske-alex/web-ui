@@ -1,0 +1,37 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      {{i18ns.trustManage}}
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-trust-list">
+  <section class="gz-full-tab">
+    <nav class="nav">
+      <a class="nav-link {{relationShip == 1 ? 'active' : ''}}" (click)="loadList(1)">{{i18ns.iTrusted}}</a>
+      <a class="nav-link {{relationShip == 2 ? 'active' : ''}}" (click)="loadList(2)">{{i18ns.trustedMe}}</a>
+      <a class="nav-link {{relationShip == 3 ? 'active' : ''}}" (click)="loadList(3)">{{i18ns.iBlackList}}</a>
+    </nav>
+  </section>
+
+  <section class="gz-list-tr" *ngFor="let data of list">
+    <div class="gz-list-tr-left">
+      <div class="gz-list-tr-head">
+        <img src="{{data.headUrl}}" alt="">
+      </div>
+      <div class="gz-list-tr-detail">
+        <h3>{{data.username}}</h3>
+        <div>{{i18ns.transaction}} {{data.transactionCount}} | 好评 {{data.praiseCount}} | 信任 {{data.trustCount}}</div>
+      </div>
+    </div>
+    <div class="gz-list-tr-right">
+      <div>{{getDealWithHimDesc(data)}}</div>
+    </div>
+  </section>
+
+</article>

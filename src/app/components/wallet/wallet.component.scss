@@ -1,0 +1,70 @@
+@import "../../../constants";
+
+.gz-wallet {
+
+  .gz-wallet-summery {
+    background: $header_bg;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 10px;
+
+    .gz-amount {
+      font-size: 22px;
+    }
+
+    .gz-currency {
+      color: #ffffff;
+    }
+
+    .gz-wallet-action {
+      color: $header_bg;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+
+      .btn {
+        width: 25%;
+      }
+    }
+
+  }
+
+  .gz-full-tab {
+    background: $article_bg;
+  }
+
+  .gz-my-coin-list {
+    background: $article_bg;
+    margin-top: 10px;
+
+    .gz-my-coin {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid $border_default;
+
+      .gz-coin-detail {
+        width: 100%;
+
+        .gz-coin-amount {
+          display: flex;
+          width: 100%;
+
+          & > div {
+            width: 45%;
+            overflow: hidden;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+

@@ -1,0 +1,31 @@
+@import "../wallet/wallet.component";
+
+.gz-coin-action {
+
+  .gz-wallet-summery {
+    padding: 0;
+
+    .gz-wallet-coin-detail {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+      background: $header_bg_up;
+      padding: 10px;
+
+    }
+  }
+
+  .gz-full-tab {
+
+    .nav-link {
+      //width: 33.333333%;
+      width: 50%;
+    }
+  }
+
+  .gz-action-container {
+    margin-top: 10px;
+  }
+
+}

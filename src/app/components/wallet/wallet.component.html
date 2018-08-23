@@ -1,0 +1,48 @@
+<gz-menu class="gz-main-page-menu" [activeNavName]="'wallet'"></gz-menu>
+
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div style="width: 12px;"></div>
+    <div class="gz-title">
+      {{i18ns.title}}
+    </div>
+    <div>
+      <fa-icon [icon]="['fas', 'question-circle']"></fa-icon>
+    </div>
+  </div>
+</header>
+
+<article class="gz-wallet">
+  <section class="gz-wallet-summery">
+    <div class="gz-title">{{i18ns.cointEqualsCurrency}}</div>
+    <div class="gz-amount">{{mainCoin.usableAmount}} {{mainCoin.coinType}}</div>
+    <div class="gz-currency">≈{{mainCoin.currencyAmount}} {{mainCoin.currency}}</div>
+    <div class="gz-wallet-action">
+      <div class="btn gz-circle" (click)="goToCoinActionDeposit()">{{i18ns.deposit}}</div>
+      <div class="btn gz-circle" (click)="goToCoinActionTransfer()">{{i18ns.transfer}}</div>
+      <div class="btn gz-circle" (click)="goToCoinActionWithraw()">{{i18ns.withraw}}</div>
+    </div>
+  </section>
+
+  <!--<section class="gz-full-tab">-->
+  <!--<nav class="nav">-->
+  <!--<a class="nav-link active">币币账户</a>-->
+  <!--<a class="nav-link">场外账户</a>-->
+  <!--</nav>-->
+  <!--</section>-->
+
+  <section class="gz-my-coin-list">
+    <div class="gz-my-coin" *ngFor="let data of coinList" (click)="goToCoinAction(data)">
+      <div class="gz-coin-detail">
+        <div>{{data.coinType}}</div>
+        <div class="gz-coin-amount">
+          <div>{{i18ns.usable}} {{data.usableAmount}}</div>
+          <div>{{i18ns.freeze}} {{data.freezeAmount}}</div>
+        </div>
+      </div>
+      <div>
+        <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+      </div>
+    </div>
+  </section>
+</article>

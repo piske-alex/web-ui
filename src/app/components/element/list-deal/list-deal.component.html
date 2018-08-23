@@ -1,0 +1,25 @@
+<section class="gz-list-tr" *ngFor="let data of list">
+  <div class="gz-list-tr-left">
+    <div class="gz-list-tr-detail">
+      <h3>
+        <span>{{data.adUsername}}</span>
+      </h3>
+      <div>
+        <span *ngIf="data.adType == '1'">{{i18ns.sale}}</span>
+        <span *ngIf="data.adType == '2'">{{i18ns.buy}}</span>
+        <span>{{data.adCurrency}} {{data.adCoinType}} {{data.adAmount}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="gz-list-tr-right">
+    <div class="gz-list-tr-detail">
+      <h3>
+        {{data.dealUsername}}
+      </h3>
+      <div>
+        <span>{{i18ns.dealPrice}}</span>
+        <span>{{data.dealCurrency}} {{data.dealCoinType}} {{data.dealAmount}}</span>
+      </div>
+    </div>
+  </div>
+</section>

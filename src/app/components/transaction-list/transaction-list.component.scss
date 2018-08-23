@@ -1,0 +1,14 @@
+@import "../../../constants";
+
+.gz-transaction-list {
+  background: $article_bg;
+
+  .gz-tl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid $border_default;
+
+  }
+}

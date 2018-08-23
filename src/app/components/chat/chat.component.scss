@@ -1,0 +1,56 @@
+@import "../../../constants";
+
+//.gz-chat {
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: space-between;
+//
+//  position: fixed;
+//  left: 0;
+//  top: 60px;
+//  right: 0;
+//  bottom: 0;
+//  background: #F2F6F9;
+
+article {
+  padding-bottom: $chat_template_height;
+
+  .gz-transaction-detail {
+    background: $article_bg;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .gz-transaction-detail-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: left;
+    }
+
+    .btn-outline-blue {
+      background: $btn_primary;
+      color: #ffffff;
+    }
+  }
+
+  .gz-info {
+    text-align: center;
+    padding: 10px;
+    color: $link_default_color;
+    font-size: 11px;
+  }
+
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: $chat_template_height;
+  overflow: auto;
+}
+
+//}

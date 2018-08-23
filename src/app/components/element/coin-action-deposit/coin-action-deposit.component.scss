@@ -1,0 +1,73 @@
+@import "../../../../constants";
+
+.gz-action-deposit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $article_bg;
+  padding: 20px;
+  font-size: 12px;
+
+
+  .gz-action-address {
+    font-size: 16px;
+    font-weight: 900;
+    padding: 10px 0;
+  }
+
+  .gz-notice {
+    color: $sub_font_color;
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+}
+
+.gz-process-list {
+  margin-top: 10px;
+  background: #fff;
+
+  .gz-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    border-bottom: 1px solid $border_default;
+
+  }
+
+  .gz-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid $border_default;
+  }
+}
+
+.gz-full-screen, .gz-full-screen-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gz-full-screen-bg {
+  background: #000;
+  opacity: .6;
+}
+
+.gz-full-screen-content {
+  z-index: 9999;
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+}

@@ -1,0 +1,19 @@
+<section class="gz-list-tr" *ngFor="let data of list">
+  <div class="gz-list-tr-left">
+    <div class="gz-list-tr-detail">
+      <h3>
+        {{i18ns.bid}}: {{data.rate}} {{data.currency}} <span
+        class="btn btn-success gz-sm">银行转账</span>
+      </h3>
+      <div>{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.currency}}</div>
+    </div>
+  </div>
+  <div class="gz-list-tr-right">
+    <div class="btn btn-outline-blue gz-circle" *ngIf="data.adType == '1'" (click)="toTransaction(data)">
+      {{i18ns.sale}} {{data.transactionCoinType}}
+    </div>
+    <div class="btn btn-outline-blue gz-circle" *ngIf="data.adType == '2'" (click)="toTransaction(data)">
+      {{i18ns.buy}} {{data.transactionCoinType}}
+    </div>
+  </div>
+</section>

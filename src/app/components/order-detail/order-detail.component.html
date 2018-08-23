@@ -1,0 +1,53 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      <gz-i18n key="common.sale" *ngIf="order.ad_data.type === 'buy'"></gz-i18n>
+      <gz-i18n key="common.buy" *ngIf="order.ad_data.type === 'sell'"></gz-i18n>
+      订单
+    </div>
+    <div></div>
+  </div>
+</header>
+
+
+<article class="gz-order-detail">
+  <section class="gz-order-delay">
+    <h3 *ngIf="order.status == 'unfinish'">
+      {{delayDesc}}
+    </h3>
+
+    <p>将在托管中保存15分钟，逾期未付款交易将自动取消.</p>
+  </section>
+
+  <section class="gz-row gz-row-1">
+    <div>卖家 {{order.my_data.username}}</div>
+    <fa-icon [icon]="['fas', 'exchange-alt']"></fa-icon>
+    <div>买家 {{order.ad_data.user_data.name}}</div>
+  </section>
+
+  <section class="gz-row">
+    <div>订单编号</div>
+    <div>{{order.id}}</div>
+  </section>
+  <section class="gz-row">
+    <div>总额</div>
+    <div>{{order.amount}} {{order.currency}}</div>
+  </section>
+  <section class="gz-row">
+    <div>数量</div>
+    <div>{{order.amount}} {{order.currency}}</div>
+  </section>
+  <section class="gz-row">
+    <div>单价</div>
+    <div>{{order.ad_data.legal_currency_rate}} {{order.ad_data.legal_currency}}</div>
+  </section>
+
+  <section class="gz-row-btn">
+    <div class="btn btn-default gz-circle" (click)="cancelOrder()">取消交易</div>
+    <div class="btn btn-primary gz-circle" *ngIf="order.ad_data.type === 'buy'" (click)="payOrder()">标记付款</div>
+    <div class="btn btn-primary gz-circle" *ngIf="order.ad_data.type === 'sell'" (click)="sellOrder()">标记收款</div>
+  </section>
+</article>

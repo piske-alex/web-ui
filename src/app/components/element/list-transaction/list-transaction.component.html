@@ -1,0 +1,19 @@
+<section class="gz-list-tr" *ngFor="let data of transactionList">
+  <div class="gz-list-tr-left">
+    <div class="gz-list-tr-head">
+      <img src="{{data.userHeadUrl | avatar}}" alt="">
+      <div class="btn btn-outline-orange gz-sm" *ngIf="data.isRealUser">已实名</div>
+    </div>
+    <div class="gz-list-tr-detail">
+      <h3>{{data.username}}&nbsp;<span class="btn btn-success gz-sm" *ngIf="data.isAccessBankTransfer">银行转账</span></h3>
+      <div>交易 {{data.transactionCount || 0}} | 好评 {{data.praiseCount || ''}} | 信任 {{data.trustCount || 0}}</div>
+      <div>限额 {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.currency}}</div>
+    </div>
+  </div>
+  <div class="gz-list-tr-right">
+    <div class="gz-currency-large">{{data.rate}} {{data.transactionCurrency}}</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '1'">出售 BTC</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '2'">购买 BTC</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId == userId">编辑</div>
+  </div>
+</section>

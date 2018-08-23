@@ -1,0 +1,106 @@
+@import "../../../constants";
+
+.gz-post-ad {
+  padding: 0;
+
+  section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .alert {
+    margin: 0;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      color: $warn_font_color;
+    }
+
+  }
+
+  .gz-slid-row {
+    background: $article_bg;
+    width: 100%;
+    display: flex;
+    //justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+
+    .gz-min-val, .gz-max-val {
+      width: 40px;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .gz-input-val {
+      //width: 80px;
+      min-width: 80px;
+
+      input {
+        //width: 60px;
+        width: 120px;
+        text-align: center;
+      }
+    }
+
+    .gz-slid-val {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .gz-slid-line {
+        width: 100%;
+        height: 2px;
+        background: $border_default;
+      }
+
+      .gz-slid-point {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 20px;
+        background: $link_active_color;
+      }
+    }
+
+  }
+
+  .gz-open-time {
+    .gz-edit-right {
+      min-width: 150px;
+      align-items: center;
+
+      input[type="radio"] {
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+
+  .gz-submit {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+    .btn-outline-blue {
+      width: 100px;
+      background: $btn_primary;
+      color: #ffffff;
+    }
+  }
+
+}
+
+.modal-content {
+  position: fixed;
+  width: 100%;
+  max-width: $pc_max_width;
+  bottom: 0;
+  height: 200px;
+
+  .modal-header {
+    border: 0;
+  }
+}

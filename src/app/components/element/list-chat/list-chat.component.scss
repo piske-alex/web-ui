@@ -1,0 +1,52 @@
+@import "../../../../constants";
+
+.gz-chat-list {
+
+  .chat-time {
+    display: flex;
+    justify-content: center;
+    color: $link_default_color;
+  }
+
+  .gz-chat-me, .gz-chat-other {
+    display: flex;
+    margin-bottom: 10px;
+
+    .headImg {
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+    }
+
+    .gz-chat-content {
+      min-height: 40px;
+      max-width: 80%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      background-color: $chat_bg_color;
+      color: $chat_font_color;
+    }
+
+  }
+
+  .gz-chat-me {
+    justify-content: flex-end;
+
+    .gz-chat-content {
+      margin-right: 10px;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .gz-chat-other {
+    justify-content: flex-start;
+
+    .gz-chat-content {
+      margin-left: 10px;
+      border-top-left-radius: 0;
+    }
+  }
+
+}

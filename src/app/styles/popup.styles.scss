@@ -1,0 +1,37 @@
+@import "../../constants";
+
+body {
+  .gz-app {
+    .modal-content {
+      position: fixed;
+      width: 100%;
+      max-width: $pc_max_width;
+      bottom: 0;
+      height: 400px;
+      background: $article_bg;
+      color: $link_default_color;
+
+      .modal-header {
+        border: 0;
+        height: 62px;
+        overflow: hidden;
+      }
+
+      .modal-body {
+        height: 273px;
+        overflow: auto;
+
+        .list-group {
+          .list-group-item {
+            background: $modal_item_bg;
+
+            &:active, &.active {
+              background: $modal_item_bg_active;
+              border: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

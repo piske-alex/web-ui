@@ -1,0 +1,50 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      登录
+    </div>
+    <div>
+      <div routerLink="/register">注册</div>
+    </div>
+  </div>
+</header>
+
+<article class="gz-login gz-form">
+  <section class="gz-country">
+    <div style="min-width: 60px;">国家/地区</div>
+    <div class="gz-country-select">
+      <select [(ngModel)]="countryCode">
+        <option *ngFor="let cc of countryCodes" value="{{cc.code}}">
+          {{cc.name}}({{cc.code}})
+        </option>
+      </select>
+    </div>
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+    </div>
+  </section>
+  <section>
+    <div class="gz-label {{isFocus('phone')}}">请输入手机号</div>
+    <div>
+      <input type="text" class="{{isFocus('phone')}}" placeholder="请输入手机号" [(ngModel)]="phone" (focus)="focus('password')" (blur)="blur('password')">
+    </div>
+  </section>
+  <section>
+    <div class="gz-label {{isFocus('password')}}">请输入密码</div>
+    <div class="gz-password">
+      <input type="password" class="{{isFocus('password')}}" placeholder="请输入密码" [(ngModel)]="password" *ngIf="!isShowPassword"
+          (focus)="focus('password')" (blur)="blur('password')">
+      <input type="text" class="{{isFocus('password')}}" placeholder="请输入密码" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
+          (blur)="blur('password')">
+      <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
+      <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
+    </div>
+  </section>
+  <section class="gz-submit">
+    <div class="btn gz-circle active" (click)="login()">登录</div>
+  </section>
+  <section class="gz-forget-paaswd" routerLink="/forgetPassword">忘记密码</section>
+</article>

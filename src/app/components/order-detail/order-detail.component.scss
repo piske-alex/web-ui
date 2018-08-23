@@ -1,0 +1,29 @@
+@import "../../../constants";
+
+.gz-order-detail {
+  padding: 20px;
+
+  .gz-order-delay {
+
+  }
+
+  .gz-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  .gz-row-1 {
+    border-bottom: 1px solid $border_default;
+    padding: 10px 0;
+    font-size: 18px;
+  }
+
+  .gz-row-btn {
+    display: flex;
+    justify-content: space-around;
+
+  }
+
+}
+

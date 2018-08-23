@@ -1,0 +1,14 @@
+@import "../../../../constants";
+
+.gz-coin-select {
+  .list-group-item {
+    background: $article_bg;
+    border-bottom: 2px solid $btn_default;
+
+    img {
+      width: 50px;
+      margin-right: 20px;
+    }
+  }
+}
+
