@@ -16,6 +16,7 @@ export class HelpCenterComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.location.href = 'https://kcb.zendesk.com/';
     this.helpList = this.helpCenterService.queryHelpList();
   }
 

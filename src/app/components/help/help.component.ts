@@ -16,9 +16,9 @@ export class HelpComponent implements OnInit {
   help: any = {};
 
   constructor(private route: ActivatedRoute,
-              private location: Location,
-              private helpCenterService: HelpCenterService,
-              private domSanitized: DomSanitizer) {
+    private location: Location,
+    private helpCenterService: HelpCenterService,
+    private domSanitized: DomSanitizer) {
   }
 
   ngOnInit() {
