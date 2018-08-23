@@ -17,15 +17,6 @@ export class HelpCenterComponent implements OnInit {
 
   ngOnInit() {
     window.location.href = 'https://kcb.zendesk.com/';
-    this.helpList = this.helpCenterService.queryHelpList();
-  }
-
-  goBack() {
-    this.location.back();
-  }
-
-  goToHelp(help: any) {
-    this.router.navigate(['/help', {id: help.id}]);
   }
 
 }
