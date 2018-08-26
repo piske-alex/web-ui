@@ -13,14 +13,16 @@ import { CommonService } from "../../providers/common/common.service";
 export class WalletComponent implements OnInit {
 
   accountType: number = 2;
-  mainCoin: { usableAmount: number, freezeAmount: number, currencyAmount: number, currency: string, coinType: string } = {
-    usableAmount: 0,
-    freezeAmount: 0,
-    currencyAmount: 0,
-    currency: 'USD',
+  mainCoin: any = {
+    usableAmount: '0.00000000',
+    freezeAmount: '0.00000000',
+    totalAmount: '0.00000000',
+    currencyAmount: '0.00',
+    currency: 'CNY',
     coinType: 'BTC'
   };
-  coinList: { usableAmount: number, freezeAmount: number, currencyAmount: number, currency: string, coinType: string }[] = [];
+  coinList: any;
+  defaultCurrency = 'CNY';
 
   i18ns: any = {};
 
@@ -61,25 +63,31 @@ export class WalletComponent implements OnInit {
 
   private async loadAccount() {
     try {
-      let _coinList = await this.commonService.getCoinTypeList();
-      for (let i = 0; i < _coinList.length; i++) {
-        let _data = _coinList[i];
-        let _coin = await this.walletService.walletBalance({coin: _data.code, accountType: 'otc'});
-        let _rate = await this.commonService.getCoinRate(_data.code, 'USD');
+      let _coins = await this.walletService.walletBalance({coin: '', accountType: 'otc'});
+      this.coinList = [];
+      for (let _coin in _coins) {
+        let _data = _coins[_coin];
         this.coinList.push({
-          coinType: _data.code,
-          usableAmount: _coin.balance,
-          freezeAmount: _coin.locked,
-          currencyAmount: _coin.balance * _rate.value,
-          currency: 'USD',
+          coinType: _coin,
+          usableAmount: _data.balance,
+          freezeAmount: _data.locked,
         });
       }
-
-      if (this.coinList.length > 0) {
-        this.mainCoin = this.coinList[0];
-      } else {
-        this.mainCoin = {usableAmount: 0, freezeAmount: 0, currencyAmount: 0, currency: 'USD', coinType: 'BTC'};
+      if (this.coinList && this.coinList.length > 0) {
+        let _data = this.coinList[0];
+        let _rate = await this.commonService.getCoinRate(_data.coinType, this.defaultCurrency);
+        this.mainCoin = {
+          coinType: _data.coinType,
+          usableAmount: _data.usableAmount,
+          freezeAmount: _data.freezeAmount,
+          totalAmount: (+_data.usableAmount + +_data.freezeAmount).toFixed(8),
+          rate: _rate.value,
+          currencyAmount: '0.00',
+          currency: this.defaultCurrency,
+        };
+        this.mainCoin.currencyAmount = (this.mainCoin.totalAmount * this.mainCoin.rate).toFixed(2);
       }
+
     } catch (e) {
       console.error(e);
     }

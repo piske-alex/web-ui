@@ -1,9 +1,8 @@
 {
   "tabsPage": {
-    "home": "首页",
-    "otc": "场外",
-    "wallet": "钱包",
-    "my": "我的"
+    "otc": "otc",
+    "wallet": "wallet",
+    "my": "my"
   },
   "common": {
     "minute": "分钟",
@@ -107,11 +106,10 @@
     "title": "场外账户",
     "cointEqualsCurrency": "场外资产折合",
     "deposit": "充币",
-    "transfer": "资产划转",
-    "withraw": "提币",
+    "transfer": "提币",
+    "withraw": "资产划转",
     "usable": "可用",
     "freeze": "冻结",
-    "selectCoin": "选择币种",
-    "depositWillReceiveHelp": "<p>温馨提示</p><p>在${coinTYpe}网络接收${coinTYpe}通常需要10分钟，我们会在收到${coinTYpe}网络1个确认后给您入帐。最低存入金额为0.01${coinTYpe}， 我们不会处理少于该金额的${coinTYpe}存入请求，在平台内互相转账是实时到账且免费的。</p>"
+    "selectCoin": "选择币种"
   }
 }

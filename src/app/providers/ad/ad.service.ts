@@ -147,5 +147,19 @@ export class AdService {
     });
   }
 
+  otcTrending(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.OTC_TRENDING, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 
 }

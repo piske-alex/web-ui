@@ -114,7 +114,15 @@ export class CommonService {
 
   getCoinRate(coin: string, currency: string): Promise<{ value: number }> {
     return new Promise((resolve, reject) => {
-      this.httpService.request(RouteMap.V1.COMMON.COIN_RATE, { coin: coin, currency: currency }).then(data => {
+      let _params: any = {};
+      if (coin) {
+        _params.coin = coin;
+      }
+      if (currency) {
+        _params.currency = currency;
+      }
+      // { coin: coin, currency: currency }
+      this.httpService.request(RouteMap.V1.COMMON.COIN_RATE, _params).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {

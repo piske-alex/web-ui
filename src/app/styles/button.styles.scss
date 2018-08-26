@@ -73,7 +73,7 @@ body .gz-app {
     }
 
     &.gz-foot-blue {
-      color: #ffffff;
+      color: $btn_default_bg;
       height: 50px;
       background: $btn_primary;
       border-radius: 0;
@@ -87,6 +87,18 @@ body .gz-app {
         color: $btn_primary;
         border: 1px solid $btn_primary;
       }
+    }
+
+    &.gz-btn-price-up {
+      color: #ffffff;
+      background: $btn_price-up;
+      border-radius: 8px;
+    }
+
+    &.gz-btn-price-down {
+      color: #ffffff;
+      background: $btn_price-down;
+      border-radius: 8px;
     }
   }
 

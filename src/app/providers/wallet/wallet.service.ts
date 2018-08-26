@@ -66,5 +66,19 @@ export class WalletService {
     });
   }
 
+  walletTransaction(params: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.WALLET.WALLET_TRANSACTION, params).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 
 }

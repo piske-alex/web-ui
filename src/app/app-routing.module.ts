@@ -24,9 +24,11 @@ import { UserTransactionPasswordComponent } from "./components/user-transaction-
 import { UserEmailComponent } from "./components/user-email/user-email.component";
 import { UserLanguageComponent } from "./components/user-language/user-language.component";
 import { OrderDetailComponent } from "./components/order-detail/order-detail.component";
+import { HomeComponent } from "./components/home/home.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/otc', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'otc', component: OtcComponent},
   {path: 'wallet', component: WalletComponent},
   {path: 'my', component: MyComponent},

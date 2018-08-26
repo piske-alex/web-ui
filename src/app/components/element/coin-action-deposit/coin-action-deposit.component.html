@@ -18,14 +18,23 @@
 
 <div class="gz-process-list">
   <div class="gz-title">
-    <div>即将到账的转账
-      <fa-icon [icon]="['fas', 'question-circle']"></fa-icon>
+    <div>
+      <span>即将到账的转账</span>
+      <span (click)="showInnerHelp()">
+        <fa-icon class="gz-active" [icon]="['fas', 'question-circle']"></fa-icon>
+      </span>
     </div>
-    <div class="gz-link">刷新</div>
+    <div class="gz-link" (click)="refreshWillReceive()">刷新</div>
   </div>
-  <div class="gz-list">
-    <div>2018-08-08</div>
-    <div>1.00002202</div>
+  <div class="gz-list" *ngFor="let transaction of willReceiveTransactions">
+    <div>
+      <span>TXID: </span>
+      <span>{{transaction.txid}}</span>
+    </div>
+    <div>
+      <span>发送数量: </span>
+      <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+    </div>
   </div>
 </div>
 
@@ -35,3 +44,8 @@
     <div id="qrcodeFull"></div>
   </div>
 </div>
+
+<section class="gz-bg" *ngIf="isShowInnerHelp" (click)="hideInnerHelp()"></section>
+<section class="gz-inner-help" *ngIf="isShowInnerHelp">
+  <div [innerHTML]="helpContent"></div>
+</section>

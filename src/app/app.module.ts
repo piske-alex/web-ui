@@ -58,6 +58,8 @@ import { UserEmailComponent } from './components/user-email/user-email.component
 import { UserLanguageComponent } from './components/user-language/user-language.component';
 import { AvatarPipe } from './pipes/avatar/avatar.pipe';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { HomeComponent } from './components/home/home.component';
+import { CoinNumberPipe } from './pipes/coin/coin-number.pipe';
 
 library.add(fas);
 
@@ -111,6 +113,8 @@ const createTranslateLoader = function (http: HttpClient) {
     UserLanguageComponent,
     AvatarPipe,
     OrderDetailComponent,
+    HomeComponent,
+    CoinNumberPipe,
   ],
   imports: [
     BrowserModule,

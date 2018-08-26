@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { Country } from "../../models/common/Country";
 import { SelectCountryComponent } from "../element/select-country/select-country.component";
@@ -55,12 +55,14 @@ export class OtcComponent implements OnInit, OnDestroy {
   scrollAdIndex = 0;
 
   constructor(private router: Router,
-    private commonService: CommonService,
-    private adService: AdService,
-    private languageService: LanguageService) {
+              private commonService: CommonService,
+              private adService: AdService,
+              private languageService: LanguageService) {
   }
 
   async ngOnInit() {
+    this._updateScroll('otc', 4, true);
+
     this.filter.adType = '2'; // 1 出售, 2 购买
     this.filter.coinType = this.coinTypeCode;
     this.filter.countryCode = this.countryCode;
@@ -72,11 +74,6 @@ export class OtcComponent implements OnInit, OnDestroy {
     this.i18ns.listError = await this.languageService.get('otc.listError');
 
     // this.loadList();
-
-    $('.gz-ad-slide-img').width(innerWidth);
-    $('.gz-ad-slide-imgs').width(innerWidth * 4);
-    $('.gz-ad-slide-img').find('ul').find('li').width(innerWidth);
-    $('.gz-ad-slide-img').find('ul').find('li').find('img').width(innerWidth);
 
     this.autoScroll();
   }
@@ -98,7 +95,7 @@ export class OtcComponent implements OnInit, OnDestroy {
   private async loadList() {
     try {
       const _params = {
-        type: this.filter.adType === '1' ? 'sell' : 'buy',
+        type: this.filter.adType === '2' ? 'sell' : 'buy',
         country: this.filter.countryCode,
         coin: this.filter.coinType,
         currency: this.filter.currencyCode,
@@ -117,19 +114,39 @@ export class OtcComponent implements OnInit, OnDestroy {
 
   }
 
+  private _updateScroll(scrollName, scrollSize, isFullImg) {
+    if ($(`.gz-ad-slide-${scrollName}`).find('.gz-ad-slide-img').find('ul').find('li').length) {
+      let _innerWidth = innerWidth - 20;
+      if (isFullImg) {
+        _innerWidth = innerWidth;
+      }
+      $(`.gz-ad-slide-${scrollName}`).find('.gz-ad-slide-imgs').width(_innerWidth * scrollSize);
+      $(`.gz-ad-slide-${scrollName}`).find('.gz-ad-slide-img').width(_innerWidth);
+      $(`.gz-ad-slide-${scrollName}`).find('.gz-ad-slide-img').find('ul').find('li').width(_innerWidth);
+      $(`.gz-ad-slide-${scrollName}`).find('.gz-ad-slide-circle').find('li').eq(0).addClass('gz-active');
+      if (isFullImg) {
+        $(`.gz-ad-slide-${scrollName}`).find('.gz-ad-slide-img').find('ul').find('li').find('img').width(_innerWidth);
+      }
+    } else {
+      setTimeout(() => {
+        this._updateScroll(scrollName, scrollSize, isFullImg);
+      }, 25);
+    }
+  }
+
   private async autoScroll() {
     if (ScrollTimer === undefined) {
       ScrollTimer = setTimeout(() => {
         ScrollTimer = undefined;
-        const _imgUl = $('.gz-ad-slide-img').find('ul');
+        const _imgUl = $('.gz-ad-slide-otc').find('.gz-ad-slide-img').find('ul');
         const lineWidth = _imgUl.find('li:first').width();
 
         _imgUl.animate({
           'marginLeft': -lineWidth + 'px'
         }, 500, () => {
           this.scrollAdIndex = (++this.scrollAdIndex) % 4;
-          $('.gz-ad-slide-circle').find('li').removeClass('gz-active');
-          $('.gz-ad-slide-circle').find('li').eq(this.scrollAdIndex).addClass('gz-active');
+          $('.gz-ad-slide-otc').find('.gz-ad-slide-circle').find('li').removeClass('gz-active');
+          $('.gz-ad-slide-otc').find('.gz-ad-slide-circle').find('li').eq(this.scrollAdIndex).addClass('gz-active');
           _imgUl.css({
             marginLeft: 0
           }).find('li:first').appendTo(_imgUl);

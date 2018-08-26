@@ -27,12 +27,19 @@ export class CoinActionComponent implements OnInit {
     console.log('this.coinType:::', this.coinType);
     console.log('this.action:::', this.action);
 
-    try {
-      this.coinBalance = await this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'});
-      this.coinBalance.allBalance = (+this.coinBalance.balance + +this.coinBalance.locked).toFixed(10);
-    } catch (e) {
-      console.error(e);
-    }
+    // try {
+    //   this.coinBalance = await this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'});
+    //   this.coinBalance.allBalance = (+this.coinBalance.balance + +this.coinBalance.locked).toFixed(8);
+    // } catch (e) {
+    //   console.error(e);
+    // }
+
+    this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
+      data.allBalance = (+data.balance + +data.locked).toFixed(8);
+      this.coinBalance = data;
+    }, error => {
+      console.error(error);
+    });
 
   }
 

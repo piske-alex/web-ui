@@ -2,27 +2,34 @@
   <div class="gz-action-withraw-row">
     <div class="gz-label">发送地址</div>
     <div class="gz-input">
-      <input type="text" [(ngModel)]="address" placeholder="请输入BTC地址">
+      <input type="text" [(ngModel)]="address" placeholder="请输入{{coinType}}地址">
     </div>
   </div>
   <div class="gz-action-withraw-row">
-    <div class="gz-label">BTC数量</div>
+    <div class="gz-label">{{coinType}}数量</div>
     <div class="gz-input">
       <input type="number" [(ngModel)]="amount" placeholder="请输入数量">
     </div>
   </div>
   <div class="gz-action-withraw-info">
-    最多可以发送0BTC
+    最多可以发送{{coinBalance.balance}}{{coinType}}
   </div>
   <div class="gz-action-withraw-row gz-input">
     <input type="text" [(ngModel)]="remark" placeholder="备注(仅在交易明细展示)">
+  </div>
+  <div class="gz-action-withraw-row">
+    <div class="gz-label">交易密码</div>
+    <div class="gz-input">
+      <input type="password" [(ngModel)]="paypassword" placeholder="请输入资金交易密码">
+    </div>
   </div>
   <div class="gz-notice">
     <p>
       注意事项
     </p>
     <p>
-      BTC地址只能向BTC地址发送资产，如果向非BTC地址发送资产将不可找回。BTC网络转账费为0.0005 BTC，最低传出金额为 0.01 BTC
+      {{coinType}}地址只能向{{coinType}}地址发送资产，如果向非{{coinType}}地址发送资产将不可找回。{{coinType}}网络转账费为0.0005 {{coinType}}，最低传出金额为 0.01
+      {{coinType}}
     </p>
   </div>
   <div class="gz-btn-row">
@@ -33,13 +40,26 @@
 
 <div class="gz-process-list">
   <div class="gz-title">
-    <div>正在处理中的转账
-      <fa-icon [icon]="['fas', 'question-circle']"></fa-icon>
+    <div>
+      <span>正在处理中的转账</span>
+      <span class="gz-active" (click)="showInnerHelp()"><fa-icon [icon]="['fas', 'question-circle']"></fa-icon></span>
     </div>
-    <div class="gz-link">刷新</div>
+    <div class="gz-link" (click)="refreshWillReceive()">刷新</div>
   </div>
-  <div class="gz-list">
-    <div>2018-08-08</div>
-    <div>1.00002202</div>
+  <div class="gz-list" *ngFor="let transaction of transactions">
+    <div>
+      <span>TXID: </span>
+      <span>{{transaction.txid}}</span>
+    </div>
+    <div>
+      <span>发送数量: </span>
+      <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+    </div>
   </div>
 </div>
+
+
+<section class="gz-bg" *ngIf="isShowInnerHelp" (click)="hideInnerHelp()"></section>
+<section class="gz-inner-help" *ngIf="isShowInnerHelp">
+  <div [innerHTML]="helpContent"></div>
+</section>

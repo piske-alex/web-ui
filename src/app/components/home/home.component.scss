@@ -1,0 +1,151 @@
+@import "../../../constants";
+
+article {
+
+  .gz-list-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 20px 10px;
+  }
+
+  .gz-ad-slide-ad {
+    position: relative;
+
+    .gz-ad-slide-img {
+      width: 375px;
+      overflow: hidden;
+
+      .gz-ad-slide-imgs {
+        width: 1500px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        li {
+          width: 375px;
+          overflow: hidden;
+          list-style: none;
+
+          img {
+            width: 375px;
+          }
+        }
+      }
+    }
+
+    .gz-ad-slide-circle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+
+      li {
+        width: 10px;
+        height: 10px;
+        background: #ffffff;
+        border-radius: 100px;
+        margin: 0 2px;
+
+        &.gz-active {
+          background: $header_bg;
+        }
+      }
+    }
+  }
+
+  .gz-ad-slide-homeotc {
+    position: relative;
+    padding: 10px;
+    padding-bottom: 40px;
+
+    .gz-ad-slide-img {
+      width: 375px;
+      overflow: hidden;
+    }
+    .gz-ad-slide-imgs {
+      width: 1500px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    li {
+      width: 375px;
+      overflow: hidden;
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+
+      & > div {
+        width: 30%;
+        border: 1px solid $border_default;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+
+        &.gz-no-border {
+          border: 0;
+        }
+
+        img {
+          width: 30px;
+          border-radius: 100px;
+        }
+      }
+    }
+
+    .gz-ad-slide-circle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+
+      li {
+        width: 10px;
+        height: 10px;
+        background: #DEE2E4;
+        border-radius: 100px;
+        margin: 0 2px;
+
+        &.gz-active {
+          background: $header_bg;
+        }
+      }
+    }
+  }
+
+  .gz-coin {
+    .gz-list-title {
+      border-bottom: 1px solid $border_default;
+    }
+
+    .gz-coin-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid $border_default;
+
+      &:last-child {
+        border: 0;
+      }
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+
+      }
+    }
+  }
+
+}

@@ -55,13 +55,15 @@ export class RouteMap {
       UPDATE_ORDER_STATUS: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/orderstatus'),
       LIST_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc'),
       DEAL_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/ad/otc/transaction/deal'),
+      OTC_TRENDING: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/trending'),
     },
     WALLET: {
       MY_ACCOUNT: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/coin/my'),
       WALLET_BALANCE: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/wallet/balance'),
       WALLET_ADDRESS: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/wallet/address'),
       WALLET_WIDTHDRAW: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/wallet/withdraw'),
-    }
+      WALLET_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/wallet/transaction'),
+    },
 
   };
 }

@@ -3,11 +3,11 @@
     <div>
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
-    <div class="gz-title" *ngIf="data.adType == '2'">
+    <div class="gz-title" *ngIf="data.adType == '1'">
       <span>{{i18ns.buy}}</span>
       <span>{{data.transactionCurrency}}</span>
     </div>
-    <div class="gz-title" *ngIf="data.adType == '1'">
+    <div class="gz-title" *ngIf="data.adType == '2'">
       <span>{{i18ns.sale}}</span>
       <span>{{data.transactionCoinType}}</span>
     </div>
@@ -57,15 +57,15 @@
     {{i18ns.contact}}
   </div>
   <div class="btn gz-foot-blue" *ngIf="data.userId != userId" (click)="transaction()">
-    <span *ngIf="data.adType == '1'">{{i18ns.sale}}</span>
-    <span *ngIf="data.adType == '2'">{{i18ns.buy}}</span>
+    <span *ngIf="data.adType == '2'">{{i18ns.sale}}</span>
+    <span *ngIf="data.adType == '1'">{{i18ns.buy}}</span>
   </div>
   <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="obtained()">
     <span>下架</span>
   </div>
-  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="edit()">
-    <span>编辑</span>
-  </div>
+  <!--<div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="edit()">-->
+    <!--<span>编辑</span>-->
+  <!--</div>-->
 </footer>
 
 <section class="gz-bg" *ngIf="isShowConfirm" (click)="cancelTransaction()"></section>

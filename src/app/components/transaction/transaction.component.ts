@@ -78,7 +78,7 @@ export class TransactionComponent implements OnInit {
   }
 
   async transaction() {
-    if (this.data.adType == '2') {
+    if (this.data.adType == '1') {
       let _payDes = '买入';
       if (!this.payAmount) {
         alert('请输入' + _payDes + '金额');
@@ -108,9 +108,9 @@ export class TransactionComponent implements OnInit {
   }
 
   getLeftPlacehold() {
-    if (this.data.adType == '1') {
+    if (this.data.adType == '2') {
       return `请输入卖出金额`;
-    } else if (this.data.adType == '2') {
+    } else if (this.data.adType == '1') {
       return `${this.data.limitMinAmount}-${this.data.limitMaxAmount}`;
     } else {
       return '';
@@ -118,9 +118,9 @@ export class TransactionComponent implements OnInit {
   }
 
   getRightPlacehold() {
-    if (this.data.adType == '1') {
+    if (this.data.adType == '2') {
       return `请输入卖出数量`;
-    } else if (this.data.adType == '2') {
+    } else if (this.data.adType == '1') {
       return `请输入买入的数量`;
     } else {
       return '';

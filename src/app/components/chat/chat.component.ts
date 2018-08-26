@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit {
 
   getTitle() {
     if (this.data && this.data.transactionCoinType) {
-      return `${this.data.transactionCoinType}   ${this.data.adType == '1' ? '出售' : '购买'}  订单(${this.data.username})`;
+      return `${this.data.transactionCoinType}   ${this.data.adType == '2' ? '出售' : '购买'}  订单(${this.data.username})`;
     } else {
       return '订单';
     }

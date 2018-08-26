@@ -6,151 +6,155 @@
 @import "app/styles/help.styles";
 
 body .gz-app {
-    font-size: 12px;
+  font-size: 12px;
 
-    .gz-pc-menu {
-        display: none;
-    }
+  .gz-pc-menu {
+    display: none;
+  }
 
-    .gz-header-container {
-        height: $header_height;
+  .gz-active {
+    color: $link_active_color;
+  }
 
-        .gz-header {
-            position: fixed;
-            z-index: 10;
+  .gz-header-container {
+    height: $header_height;
 
-            //left: 0;
-            //right: 0;
-            width: 100%;
-            top: 0;
-            height: $header_height;
-            color: #ffffff;
-            background: $header_bg;
-            line-height: 38px;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            font-weight: 100;
+    .gz-header {
+      position: fixed;
+      z-index: 10;
 
-            .gz-back {
-                font-size: 20px;
-            }
+      //left: 0;
+      //right: 0;
+      width: 100%;
+      top: 0;
+      height: $header_height;
+      color: #ffffff;
+      background: $header_bg;
+      line-height: 38px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 100;
 
-            .gz-title {
-                font-size: 16px;
-                font-weight: 200;
-            }
-        }
-    }
+      .gz-back {
+        font-size: 20px;
+      }
 
-    // 按钮选项卡
-    .gz-tab {
-        .btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited, .btn-secondary:focus {
-            line-height: 24px;
-            cursor: pointer;
-            background: $header_bg !important;
-            color: #ffffff;
-            border: 1px solid #ffffff !important;
-
-            &.gz-active {
-                background-color: #ffffff !important;
-                color: $header_bg;
-            }
-        }
-    }
-
-    //宽度100%的选项卡
-    .gz-full-tab {
-        width: 100%;
-
-        nav {
-            width: 100%;
-
-            .nav-link {
-                border-bottom: 1px solid $border_default;
-                width: 50%;
-                padding-left: 0;
-                padding-right: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                &.active {
-                    color: $link_active_color;
-                    border-bottom: 1px solid $link_active_color;
-                }
-            }
-        }
-    }
-
-    h3 {
-        font-size: 14px;
-        font-weight: 900;
-        color: $head_font;
-    }
-
-    .gz-w-100p {
-        width: 100%;
-    }
-
-    .gz-mt-10 {
-        margin-top: 10px;
-    }
-
-    .gz-currency {
-        color: $currency_inc;
-    }
-
-    .gz-currency-red {
-        color: $currency_red;
-    }
-
-    .gz-currency-large {
-        font-size: 13px;
+      .gz-title {
+        font-size: 16px;
         font-weight: 200;
-        color: $font_green;
+      }
     }
+  }
 
-    .gz-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #000;
-        opacity: .6;
+  // 按钮选项卡
+  .gz-tab {
+    .btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited, .btn-secondary:focus {
+      line-height: 24px;
+      cursor: pointer;
+      background: $header_bg !important;
+      color: #ffffff;
+      border: 1px solid #ffffff !important;
+
+      &.gz-active {
+        background-color: #ffffff !important;
+        color: $header_bg;
+      }
     }
+  }
 
-    .gz-inner-help {
-        position: fixed;
-        top: 55px;
-        left: 0;
-        right: 0;
-        padding: 20px;
-        background: $article_bg;
+  //宽度100%的选项卡
+  .gz-full-tab {
+    width: 100%;
 
-        p {
-            margin: 0;
+    nav {
+      width: 100%;
+
+      .nav-link {
+        border-bottom: 1px solid $border_default;
+        width: 50%;
+        padding-left: 0;
+        padding-right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.active {
+          color: $link_active_color;
+          border-bottom: 1px solid $link_active_color;
         }
+      }
     }
+  }
 
-    .gz-link {
-        cursor: pointer;
-        color: $link_active_color;
+  h3 {
+    font-size: 14px;
+    font-weight: 900;
+    color: $head_font;
+  }
+
+  .gz-w-100p {
+    width: 100%;
+  }
+
+  .gz-mt-10 {
+    margin-top: 10px;
+  }
+
+  .gz-currency {
+    color: $currency_inc;
+  }
+
+  .gz-currency-red {
+    color: $currency_red;
+  }
+
+  .gz-currency-large {
+    font-size: 13px;
+    font-weight: 200;
+    color: $font_green;
+  }
+
+  .gz-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: .6;
+  }
+
+  .gz-inner-help {
+    position: fixed;
+    top: 55px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: $article_bg;
+
+    p {
+      margin: 0;
     }
+  }
+
+  .gz-link {
+    cursor: pointer;
+    color: $link_active_color;
+  }
 }
 
 .gz-landing-page {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 
-    img {
-        width: 100%;
-    }
+  img {
+    width: 100%;
+  }
 }
 
 @import "app/styles/pc.styles";

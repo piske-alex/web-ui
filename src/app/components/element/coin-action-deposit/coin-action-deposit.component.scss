@@ -9,11 +9,15 @@
   padding: 20px;
   font-size: 12px;
 
+  #qrcode {
+    margin-left: 20px;
+  }
 
   .gz-action-address {
     font-size: 16px;
     font-weight: 900;
     padding: 10px 0;
+    word-break: break-all;
   }
 
   .gz-notice {
@@ -40,9 +44,11 @@
 
   .gz-list {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid $border_default;
+    word-break: break-all;
   }
 }
 
