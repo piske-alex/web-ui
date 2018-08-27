@@ -4,38 +4,36 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title">
-      交易明细(BTC)
+      交易明细({{coinType}})
     </div>
     <div></div>
   </div>
 </header>
 
 <article class="gz-transaction-list">
-  <section class="gz-tl-row">
-    <div>
-      <div>充值</div>
-      <div>BTC</div>
-    </div>
-    <div class="gz-currency">
-      +10.000000002
-    </div>
-    <div>
-      <div>2016-11-12</div>
-      <div>手续费 +0.00</div>
-    </div>
-  </section>
-
-  <section class="gz-tl-row">
-    <div>
-      <div>充值</div>
-      <div>BTC</div>
-    </div>
-    <div class="gz-currency-red">
-      -10.000000002
-    </div>
-    <div>
-      <div>2016-11-12</div>
-      <div>手续费 +0.00</div>
+  <section *ngFor="let date of monthDates">
+    <div class="gz-transaction-date">{{date}}</div>
+    <div class="gz-list" *ngFor="let transaction of transactions[date]">
+      <div class="gz-coin gz-coin-{{transaction.type}}">
+        <span *ngIf="transaction.type === 'receive'">接收</span>
+        <span *ngIf="transaction.type === 'send'">发送</span>
+        <span>数量: </span>
+        <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+      </div>
+      <div>
+        <span *ngIf="transaction.type === 'receive'">转入</span>
+        <span *ngIf="transaction.type === 'send'">转出</span>
+        <span>地址: </span>
+        <span>{{transaction.address}}</span>
+      </div>
+      <div>
+        <span>TXID: </span>
+        <span>{{transaction.txid}}</span>
+      </div>
+      <div>
+        <span>到账时间:</span>
+        <span>{{transaction.confirmTime}}</span>
+      </div>
     </div>
   </section>
 

@@ -13,7 +13,7 @@ import { OtcAd } from '../../models/ad/OtcAd';
 import { AdService } from '../../providers/ad/ad.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { CommonService } from '../../providers/common/common.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'gz-post-ad',
@@ -57,6 +57,7 @@ export class PostAdComponent implements OnInit {
   private selectPayTypeComponent;
 
   constructor(private location: Location,
+              private router: Router,
               private activatedRoute: ActivatedRoute,
               private adService: AdService,
               private languageService: LanguageService,
@@ -264,7 +265,8 @@ export class PostAdComponent implements OnInit {
       console.log(_params);
       console.log(JSON.stringify(this.ad));
       const _result = await this.adService.publishOtcAd(_params);
-      this.location.back();
+      // this.location.back();
+      this.router.navigate(['/otc', {adType: this.adTypeCode}]);
     } catch (e) {
       console.error(e);
       alert(e && e.errMsg || this.i18ns.publishError);

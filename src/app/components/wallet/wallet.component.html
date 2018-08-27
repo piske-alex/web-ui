@@ -13,7 +13,7 @@
 </header>
 
 <article class="gz-wallet">
-  <section class="gz-wallet-summery">
+  <section class="gz-wallet-summery" *ngIf="!isLoading">
     <div class="gz-title">{{i18ns.cointEqualsCurrency}}</div>
     <div class="gz-amount">{{mainCoin.usableAmount}} {{mainCoin.coinType}}</div>
     <div class="gz-currency">≈{{mainCoin.currencyAmount}} {{mainCoin.currency}}</div>
@@ -31,7 +31,9 @@
   <!--</nav>-->
   <!--</section>-->
 
-  <section class="gz-my-coin-list">
+  <div class="loader" *ngIf="isLoading">Loading...</div>
+
+  <section class="gz-my-coin-list" *ngIf="!isLoading">
     <div class="gz-my-coin" *ngFor="let data of coinList" (click)="goToCoinAction(data)">
       <div class="gz-coin-detail">
         <div>{{data.coinType}}</div>

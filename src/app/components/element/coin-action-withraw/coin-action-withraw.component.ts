@@ -9,12 +9,14 @@ import { LanguageService } from "../../../providers/language/language.service";
 })
 export class CoinActionWithrawComponent implements OnInit {
 
+  isLoadingTransaction = false;
+
   transactions: any[] = [];
   isShowInnerHelp = false;
   helpContent = '';
 
   address: string;
-  amount: number;
+  amount: number | string;
   remark: string;
   paypassword: string;
 
@@ -49,6 +51,7 @@ export class CoinActionWithrawComponent implements OnInit {
 
   private async _loadProcessingTransaction() {
     try {
+      this.isLoadingTransaction = true;
       this.transactions = await this.walletService.walletTransaction({
         accountType: 'otc',
         type: 'send',
@@ -59,6 +62,7 @@ export class CoinActionWithrawComponent implements OnInit {
       this.transactions = this.transactions.filter(_data => {
         return _data.type === 'send';
       });
+      this.isLoadingTransaction = false;
     } catch (e) {
       console.error(e);
     }
@@ -72,9 +76,16 @@ export class CoinActionWithrawComponent implements OnInit {
       address: this.address,
       amount: this.amount,
       paypassword: this.paypassword,
+      tag: this.remark,
     };
     try {
-      await this.walletService.walletWidthdraw(_params);
+      let _result = await this.walletService.walletWidthdraw(_params);
+      if (_result && _result.success) {
+        this.address = '';
+        this.amount = '';
+        this.paypassword = '';
+        this.remark = '';
+      }
     } catch (e) {
       console.error(e);
     }

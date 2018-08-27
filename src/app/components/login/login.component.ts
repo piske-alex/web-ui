@@ -28,6 +28,12 @@ export class LoginComponent implements OnInit {
   async ngOnInit() {
     this.countryCode = '86';
 
+    let _accessToken = localStorage.getItem('access_token');
+    let _loginTimestamp = localStorage.getItem('login_timestamp');
+    if (_accessToken && Date.now() - _loginTimestamp < 1000 * 60 * 10) {
+      this.router.navigate(['/home']);
+    }
+
     try {
       this.countryCodes = await this.commonService.getCountryCodeList();
     } catch (e) {
@@ -62,7 +68,7 @@ export class LoginComponent implements OnInit {
       return alert('请输入手机号码!');
     }
 
-    if (!(/^\d+$/g.test(this.phone))) {
+    if (!(/^[\d]{6,15}$/g.test(this.phone))) {
       return alert('请输入正确的手机号码!');
     }
 
@@ -81,6 +87,7 @@ export class LoginComponent implements OnInit {
       let _userId = data && data.userid;
       if (_token) {
         localStorage.setItem('access_token', _token);
+        localStorage.setItem('login_timestamp', Date.now());
         localStorage.setItem('user_id', _userId);
         delete _params.password;
         this.router.navigate(['/my', {userId: _userId}])
@@ -89,6 +96,7 @@ export class LoginComponent implements OnInit {
       }
     }, error => {
       console.error('---------------------error: ', error);
+      this.password = '';
       alert('手机号或者密码错误');
     });
 

@@ -2,13 +2,28 @@
 
 .gz-transaction-list {
   background: $article_bg;
+  padding: 10px;
 
-  .gz-tl-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+  .gz-transaction-date {
+    height: 40px;
+    line-height: 40px;
     border-bottom: 1px solid $border_default;
+  }
 
+  .gz-list {
+    padding: 10px 0;
+
+    .gz-coin {
+      font-size: 18px;
+      font-weight: bold;
+
+      &.gz-coin-receive {
+        color: $font_green;
+      }
+
+      &.gz-coin-send {
+        color: $font_orange;
+      }
+    }
   }
 }

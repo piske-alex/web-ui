@@ -91,6 +91,10 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    if (!(/^[\d]{6,15}$/g.test(this.phone))) {
+      return alert('请输入正确的手机号码!');
+    }
+
     const _params = {
       countryCallingCode: this.countryCode,
       phone: this.phoneNo,

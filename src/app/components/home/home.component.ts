@@ -12,7 +12,7 @@ const $ = (<any>window).$;
 })
 export class HomeComponent implements OnInit {
 
-  coinPrice = [];
+  coinPrices = [];
   otcTransactions: any = [];
   scrollAdIndex = {
     ad: 0,
@@ -32,8 +32,12 @@ export class HomeComponent implements OnInit {
 
     this.commonService.getCoinRate('', '').then(data => {
       for (let coinType in data) {
-        this.coinPrice.push({
-          // TODO
+        const _data = data[coinType];
+        this.coinPrices.push({
+          coinType: coinType,
+          changePercent: (_data.change * 100).toFixed(2),
+          USD: _data.value.USD,
+          CNY: _data.value.CNY,
         });
       }
     }, error => {

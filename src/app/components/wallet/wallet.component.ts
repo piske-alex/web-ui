@@ -12,6 +12,8 @@ import { CommonService } from "../../providers/common/common.service";
 })
 export class WalletComponent implements OnInit {
 
+  isLoading = false;
+
   accountType: number = 2;
   mainCoin: any = {
     usableAmount: '0.00000000',
@@ -63,6 +65,7 @@ export class WalletComponent implements OnInit {
 
   private async loadAccount() {
     try {
+      this.isLoading = true;
       let _coins = await this.walletService.walletBalance({coin: '', accountType: 'otc'});
       this.coinList = [];
       for (let _coin in _coins) {
@@ -87,6 +90,8 @@ export class WalletComponent implements OnInit {
         };
         this.mainCoin.currencyAmount = (this.mainCoin.totalAmount * this.mainCoin.rate).toFixed(2);
       }
+
+      this.isLoading = false;
 
     } catch (e) {
       console.error(e);

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Country } from "../../models/common/Country";
 import { SelectCountryComponent } from "../element/select-country/select-country.component";
 import { LanguageService } from "../../providers/language/language.service";
@@ -25,6 +25,7 @@ let ScrollTimer;
 export class OtcComponent implements OnInit, OnDestroy {
   showAddList = false;
   isShowSearch = false;
+  isLoading = false;
   coinTypes: any;
 
   adList: TransactionListItem[];
@@ -55,6 +56,7 @@ export class OtcComponent implements OnInit, OnDestroy {
   scrollAdIndex = 0;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private commonService: CommonService,
               private adService: AdService,
               private languageService: LanguageService) {
@@ -63,11 +65,15 @@ export class OtcComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this._updateScroll('otc', 4, true);
 
-    this.filter.adType = '2'; // 1 出售, 2 购买
+    let _adType = this.route.snapshot.paramMap.get('adType');
+
+    this.filter.adType = _adType || '2'; // 1 出售, 2 购买
     this.filter.coinType = this.coinTypeCode;
     this.filter.countryCode = this.countryCode;
-    this.filter.currencyCode = this.currencyCode;
-    this.filter.payTypeCode = this.payTypeCode;
+    // this.filter.currencyCode = this.currencyCode;
+    // this.filter.payTypeCode = this.payTypeCode;
+    this.filter.currencyCode = '';
+    this.filter.payTypeCode = '';
 
     this.coinTypes = await this.commonService.getCoinTypeList();
 
@@ -104,7 +110,9 @@ export class OtcComponent implements OnInit, OnDestroy {
         limit: 1000,
         // userid: '',
       };
+      this.isLoading = true;
       const _result = await this.adService.listTransactionList(_params);
+      this.isLoading = false;
       this.adList = _result.list;
       this.adTotal = _result.total;
     } catch (e) {

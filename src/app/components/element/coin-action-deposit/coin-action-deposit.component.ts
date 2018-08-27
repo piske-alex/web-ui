@@ -14,6 +14,9 @@ export class CoinActionDepositComponent implements OnInit {
   isShowInnerHelp = false;
   helpContent: string = '';
 
+  isLoading = false;
+  isLoadingTransaction = false;
+
   coinAddress: string;
   coinTag: string;
   willReceiveTransactions: { "txid": string, "coin": string, "type": string, "amount": string, "confirm": number }[] = [];
@@ -35,7 +38,9 @@ export class CoinActionDepositComponent implements OnInit {
 
     this._loadWillReceiveTransaction();
     try {
+      this.isLoading = true;
       let _result = await this.walletService.walletAddress({coin: this.coinType, accountType: 'otc'});
+      this.isLoading = false;
       this.coinAddress = _result.address;
       this.coinTag = _result.tag;
 
@@ -56,6 +61,7 @@ export class CoinActionDepositComponent implements OnInit {
 
   private async _loadWillReceiveTransaction() {
     try {
+      this.isLoadingTransaction = true;
       this.willReceiveTransactions = await this.walletService.walletTransaction({
         accountType: 'otc',
         type: 'receive',
@@ -65,6 +71,7 @@ export class CoinActionDepositComponent implements OnInit {
       this.willReceiveTransactions = this.willReceiveTransactions.filter(_data => {
         return _data.type === 'receive';
       });
+      this.isLoadingTransaction = false;
     } catch (e) {
       console.error(e);
     }

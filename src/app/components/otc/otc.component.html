@@ -68,7 +68,8 @@
     </nav>
 
     <div class="gz-transaction-list">
-      <gz-list-transaction [transactionList]="adList" [adType]="filter.adType"></gz-list-transaction>
+      <gz-list-transaction *ngIf="!isLoading" [transactionList]="adList" [adType]="filter.adType"></gz-list-transaction>
+      <div class="loader" *ngIf="isLoading">Loading...</div>
     </div>
   </article>
 

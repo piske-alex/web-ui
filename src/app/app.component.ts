@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
   private language: string = localStorage.getItem('language') || 'zh-CN';
 
   constructor(private httpService: HttpService,
-    private router: Router,
-    private languageService: LanguageService) {
+              private router: Router,
+              private languageService: LanguageService) {
     // ###### change language
     // setTimeout(() => {
     //   this.language = 'en';
@@ -53,6 +53,16 @@ export class AppComponent implements OnInit {
     });
 
     this.languageService.initConfig(this.language);
+
+    this.router.navigate(['/home']);
+
+    setInterval(() => {
+      let _accessToken = localStorage.getItem('access_token');
+      let _loginTimestamp = localStorage.getItem('login_timestamp');
+      if (_accessToken && (!_loginTimestamp || Date.now() - _loginTimestamp > 1000 * 60 * 10)) {
+        localStorage.removeItem('access_token');
+      }
+    }, 1000);
   }
 
   goToLogin() {

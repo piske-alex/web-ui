@@ -135,6 +135,17 @@ article {
       align-items: center;
       padding: 10px;
       border-bottom: 1px solid $border_default;
+      text-align: left;
+
+      .gz-coin-type {
+        width: 50px;
+        min-width: 50px;
+        overflow: hidden;
+      }
+
+      .gz-coin-rate {
+        min-width: 120px;
+      }
 
       &:last-child {
         border: 0;
@@ -149,7 +160,6 @@ article {
   }
 
 }
-
 
 .gz-empty-foot {
   height: 70px;

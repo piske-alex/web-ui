@@ -37,42 +37,21 @@
           <!--<fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>-->
         </div>
       </div>
-      <div class="gz-coin-price">
-        <div>
+      <div class="gz-coin-price" *ngFor="let price of coinPrices">
+        <div class="gz-coin-type">
           <div>
-            <b>BTC</b>
-            <span>/</span>
-            <span>USDT</span>
+            <b>{{price.coinType}}</b>
           </div>
         </div>
-        <div>
-          <b>6004.12</b>
-          <span>6004.12</span>
+        <div class="gz-coin-rate">
+          <b>{{price.USD}} USD</b>
+          <span>{{price.CNY}} CNY</span>
         </div>
         <div>
-          <div class="btn gz-btn-price-up">
-            <b>-0.05%</b>
+          <div class="btn gz-btn-price-up" *ngIf="price.changePercent >= 0">
+            <b>{{price.changePercent}}%</b>
           </div>
-          <!--<div class="btn gz-btn-price-down">+0.99%</div>-->
-        </div>
-      </div>
-      <div class="gz-coin-price">
-        <div>
-          <div>
-            <b>BTC</b>
-            <span>/</span>
-            <span>USDT</span>
-          </div>
-        </div>
-        <div>
-          <b>6004.12</b>
-          <span>6004.12</span>
-        </div>
-        <div>
-          <!--<div class="btn gz-btn-price-up">-0.05%</div>-->
-          <div class="btn gz-btn-price-down">
-            <b>+0.99%</b>
-          </div>
+          <div class="btn gz-btn-price-down" *ngIf="price.changePercent < 0">{{price.changePercent}}%</div>
         </div>
       </div>
     </section>

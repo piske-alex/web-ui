@@ -1,4 +1,4 @@
-<div class="gz-action-withraw">
+<div class="gz-action-withraw gz-form">
   <div class="gz-action-withraw-row">
     <div class="gz-label">发送地址</div>
     <div class="gz-input">
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="gz-action-withraw-info">
-    最多可以发送{{coinBalance.balance}}{{coinType}}
+    最多可以发送{{coinBalance.balance | coinNumber}}{{coinType}}
   </div>
   <div class="gz-action-withraw-row gz-input">
     <input type="text" [(ngModel)]="remark" placeholder="备注(仅在交易明细展示)">
@@ -46,17 +46,20 @@
     </div>
     <div class="gz-link" (click)="refreshWillReceive()">刷新</div>
   </div>
-  <div class="gz-list" *ngFor="let transaction of transactions">
-    <div>
-      <span>TXID: </span>
-      <span>{{transaction.txid}}</span>
-    </div>
-    <div>
-      <span>发送数量: </span>
-      <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+  <div *ngIf="!isLoadingTransaction">
+    <div class="gz-list" *ngFor="let transaction of transactions">
+      <div>
+        <span>TXID: </span>
+        <span>{{transaction.txid}}</span>
+      </div>
+      <div>
+        <span>提取数量: </span>
+        <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+      </div>
     </div>
   </div>
 </div>
+<div class="loader" *ngIf="isLoadingTransaction">Loading...</div>
 
 
 <section class="gz-bg" *ngIf="isShowInnerHelp" (click)="hideInnerHelp()"></section>

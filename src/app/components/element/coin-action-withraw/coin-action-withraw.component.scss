@@ -33,6 +33,7 @@
   }
 
   .gz-btn-row {
+    width: 100%;
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -57,7 +58,7 @@
 
 .gz-process-list {
   margin-top: 10px;
-  background: #fff;
+  background: $article_bg;
 
   .gz-title {
     display: flex;
@@ -69,8 +70,10 @@
 
   .gz-list {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid $border_default;
+    word-break: break-all;
   }
 }

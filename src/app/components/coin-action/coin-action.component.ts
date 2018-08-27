@@ -48,7 +48,7 @@ export class CoinActionComponent implements OnInit {
   }
 
   goToTransactionList() {
-    this.router.navigate(['/transactionList', {}]);
+    this.router.navigate(['/transactionList', {coinType: this.coinType}]);
   }
 
   isDeposit() {
