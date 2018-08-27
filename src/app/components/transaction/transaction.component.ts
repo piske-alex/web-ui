@@ -104,7 +104,7 @@ export class TransactionComponent implements OnInit {
   }
 
   changePay() {
-    this.receiveAmount = this.payAmount / +this.data.rate;
+    this.receiveAmount = this.payAmount * +this.data.rate;
   }
 
   getLeftPlacehold() {

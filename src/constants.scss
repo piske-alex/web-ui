@@ -1,25 +1,26 @@
-$link_default_color: #717078;
-$link_active_color: #3F8EE1;
-$header_bg: #4796ED;
-$header_bg_up: #54A1ED;
+$link_default_color: #CACBD0;
+$link_active_color: #F1BD45;
+$header_bg: #212831;
+$header_bg_up: #212831;
 $header_height: 56px;
 
-$body_bg: #F2F6F9;
-$article_bg: #ffffff;
-$nav_bg: #ffffff;
-$input_bg: #ffffff;
+$body_bg: #14171C;
+$article_bg: #14171C;
+$nav_bg: #212831;
+$input_bg: #181E26;
+$placeholder-color: #878479;
 
-$border_default: #E8E8E8;
+$border_default: #3a404c;
 
-$head_font: #000;
+$head_font: #CACBD0;
 $sub_font_color: #7A7982;
 $content_font_color: #595861;
 $warn_font_color: #E67629;
 
-$btn_default_bg: #ffffff;
-$btn_default_font: #717078;
+$btn_default_bg: #14171C;
+$btn_default_font: #CACBD0;
 $btn_orange: #CC5824;
-$btn_primary: #4796ED;
+$btn_primary: #E9BC32;
 $btn_default: #717078;
 $btn_price-up: #72D29C;
 $btn_price-down: #E5695F;
@@ -37,8 +38,8 @@ $chat_template_height: 171px;
 
 $icon_color: #626678;
 
-$modal_item_bg: #ffffff;
-$modal_item_bg_active: #007bff;
+$modal_item_bg: #565656;
+$modal_item_bg_active: #D32E70;
 
 // ###### pc ######
 $pc_max_width: 1199.98px;

@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   password: string;
   resendSmsCodeDelay = 0;
 
+  passwordWarn = '';
+
   focusInput: string;
   isShowPassword: boolean;
   isAggreeTerms: boolean;
@@ -24,9 +26,9 @@ export class RegisterComponent implements OnInit {
   i18ns: any = {};
 
   constructor(private location: Location,
-    private router: Router,
-    private userService: UserService,
-    private commonService: CommonService) {
+              private router: Router,
+              private userService: UserService,
+              private commonService: CommonService) {
   }
 
   async ngOnInit() {
@@ -44,11 +46,19 @@ export class RegisterComponent implements OnInit {
 
   focus(inputName: string) {
     this.focusInput = inputName;
+
+    if (inputName === 'password') {
+      this.passwordWarn = '';
+    }
   }
 
   blur(inputName: string) {
     if (this.focusInput === inputName) {
       this.focusInput = '';
+    }
+
+    if (inputName === 'password') {
+      this._validatePassword();
     }
   }
 
@@ -69,13 +79,18 @@ export class RegisterComponent implements OnInit {
     }, 1000);
 
     try {
-      await this.commonService.sendSmsCode({ countryCallingCode: this.countryCode, phone: this.phoneNo });
+      await this.commonService.sendSmsCode({countryCallingCode: this.countryCode, phone: this.phoneNo});
     } catch (e) {
       console.error(e);
     }
   }
 
   async register() {
+
+    if (!this._validatePassword()) {
+      return;
+    }
+
     const _params = {
       countryCallingCode: this.countryCode,
       phone: this.phoneNo,
@@ -90,7 +105,7 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('user_id', _userId);
       localStorage.setItem('access_token', _token);
 
-      this.router.navigate(['/setNickName', { userId: _userId }]);
+      this.router.navigate(['/setNickName', {userId: _userId}]);
     } catch (e) {
       console.error(e);
     }
@@ -98,6 +113,18 @@ export class RegisterComponent implements OnInit {
     // // TODO delete
     // this.router.navigate(['/setNickName', {userId: '123'}]);
     // // TODO delete end.
+  }
+
+  private _validatePassword(): boolean {
+    this.password = this.password || '';
+    if (this.password.length < 8) {
+      this.passwordWarn = '请输入最少8位密码，其中(一个数字，一个小写英文字母，一个大写英文字母)!';
+    } else if (!/[A-Z]{1,}/g.test(this.password) || !/[a-z]{1,}/g.test(this.password) || !/[\d]{1,}/g.test(this.password)) {
+      this.passwordWarn = '密码至少包含一个数字，一个小写英文字母，一个大写英文字母!';
+    } else {
+      this.passwordWarn = '';
+    }
+    return this.passwordWarn.length === 0;
   }
 
 }

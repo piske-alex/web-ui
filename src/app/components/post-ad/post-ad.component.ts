@@ -237,6 +237,11 @@ export class PostAdComponent implements OnInit {
       return;
     }
 
+    const _remarkWarn = this._validateRemark();
+    if (_remarkWarn) {
+      return alert(_remarkWarn);
+    }
+
     // this.ad.adType = this.adTypeCode;
     // this.ad.coinType = this.coinTypeCode;
     // this.ad.country = this.countryCode;
@@ -264,6 +269,13 @@ export class PostAdComponent implements OnInit {
       console.error(e);
       alert(e && e.errMsg || this.i18ns.publishError);
     }
+  }
+
+  private _validateRemark(): string {
+    if (!this.ad.remark) {
+      return '请填写留言!';
+    }
+    return '';
   }
 
 }

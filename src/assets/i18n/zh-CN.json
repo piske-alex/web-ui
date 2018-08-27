@@ -33,8 +33,8 @@
     "currency": "请选择货币类型",
     "country": "请选择国家/地区",
     "coinType": "请选择币种",
-    "saleAd": "出售广告",
-    "buyAd": "购买广告"
+    "saleAd": "出售虚拟货币",
+    "buyAd": "购买虚拟货币"
   },
   "otc": {
     "saleAd": "发布出售广告",

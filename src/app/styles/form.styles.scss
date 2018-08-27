@@ -70,6 +70,10 @@
         margin-right: 10px;
       }
 
+      &::-webkit-input-placeholder {
+        color: $placeholder-color;
+      }
+
     }
 
     label {
