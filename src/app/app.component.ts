@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     setInterval(() => {
       let _accessToken = localStorage.getItem('access_token');
       let _loginTimestamp = localStorage.getItem('login_timestamp');
-      if (_accessToken && (!_loginTimestamp || Date.now() - _loginTimestamp > 1000 * 60 * 10)) {
+      if (_accessToken && (!_loginTimestamp || Date.now() - +_loginTimestamp > 1000 * 60 * 10)) {
         localStorage.removeItem('access_token');
       }
     }, 1000);

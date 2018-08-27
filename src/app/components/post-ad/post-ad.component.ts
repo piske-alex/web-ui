@@ -44,6 +44,8 @@ export class PostAdComponent implements OnInit {
 
   i18ns: any;
 
+  private _isSubmiting = false;
+
   @ViewChild(SelectAdTypeComponent)
   private selectAdTypeComponent;
 
@@ -233,6 +235,9 @@ export class PostAdComponent implements OnInit {
   }
 
   async publish() {
+    if (this._isSubmiting) {
+      return;
+    }
     if (!this.checkPrice()) {
       this.ad.price = null;
       return;
@@ -262,11 +267,13 @@ export class PostAdComponent implements OnInit {
     };
 
     try {
-      console.log(_params);
-      console.log(JSON.stringify(this.ad));
+      this._isSubmiting = true;
       const _result = await this.adService.publishOtcAd(_params);
+      setTimeout(() => {
+        this._isSubmiting = false;
+      }, 1000);
       // this.location.back();
-      this.router.navigate(['/otc', {adType: this.adTypeCode}]);
+      this.router.navigate(['/otc', {adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode}]);
     } catch (e) {
       console.error(e);
       alert(e && e.errMsg || this.i18ns.publishError);

@@ -161,5 +161,19 @@ export class AdService {
     });
   }
 
+  deleteAd(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.DELETE_AD, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 
 }

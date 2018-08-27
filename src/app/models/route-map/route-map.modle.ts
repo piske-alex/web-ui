@@ -49,6 +49,7 @@ export class RouteMap {
     AD: {
       PUBLISH_OTC_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc'),
       LIST_OTC_AD: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc'),
+      DELETE_AD: new RouteJson(RouteMap.METHODS.DELETE, RouteMap.API_URL_V1, '/otc'),
       GET_OTC_AD: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/detail'),
       TRANSACTION_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/order'),
       GET_ORDER: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/order'),

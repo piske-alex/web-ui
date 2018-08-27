@@ -27,7 +27,7 @@
                   [remark]="getRemark()"
   ></gz-user-detail>
 
-  <section class="gz-exchange">
+  <section class="gz-exchange" *ngIf="data.userId != userId">
     <div *ngIf="data.adType == '1'">{{i18ns.wantSale}}</div>
     <div *ngIf="data.adType == '2'">{{i18ns.wantBuy}}</div>
     <div *ngIf="data.adType == '2' && payAmount >= 0">{{getLeftPlacehold()}}</div>

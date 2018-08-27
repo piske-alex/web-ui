@@ -66,6 +66,16 @@ export class OtcComponent implements OnInit, OnDestroy {
     this._updateScroll('otc', 4, true);
 
     let _adType = this.route.snapshot.paramMap.get('adType');
+    let _coinType = this.route.snapshot.paramMap.get('coinType');
+    let _countryCode = this.route.snapshot.paramMap.get('countryCode');
+
+    if (_adType == '1') {
+      _adType = '2';
+    } else if (_adType == '2') {
+      _adType = '1';
+    }
+    this.coinTypeCode = _coinType || this.coinTypeCode;
+    this.countryCode = _countryCode || this.countryCode;
 
     this.filter.adType = _adType || '2'; // 1 出售, 2 购买
     this.filter.coinType = this.coinTypeCode;

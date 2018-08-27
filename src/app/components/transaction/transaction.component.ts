@@ -127,8 +127,15 @@ export class TransactionComponent implements OnInit {
     }
   }
 
-  obtained() {
-    // TODO 下架
+  async obtained() {
+    try {
+      let _result = await this.adService.deleteAd({adid: this.adId});
+      if (_result && _result.success) {
+        this.location.back();
+      }
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   edit() {

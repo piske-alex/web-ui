@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     let _accessToken = localStorage.getItem('access_token');
     let _loginTimestamp = localStorage.getItem('login_timestamp');
-    if (_accessToken && Date.now() - _loginTimestamp < 1000 * 60 * 10) {
+    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 10) {
       this.router.navigate(['/home']);
     }
 
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       let _userId = data && data.userid;
       if (_token) {
         localStorage.setItem('access_token', _token);
-        localStorage.setItem('login_timestamp', Date.now());
+        localStorage.setItem('login_timestamp', Date.now() + '');
         localStorage.setItem('user_id', _userId);
         delete _params.password;
         this.router.navigate(['/my', {userId: _userId}])
