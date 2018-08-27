@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod && docker login -u user -p password test-registry.lan:5000 && docker build -t test-registry.lan:5000/kcb-web-ui . && docker push test-registry.lan:5000/kcb-web-ui",
+    "build": "mkdir build && cp src/constants.black.scss src/constants.scss && ng build --prod --base-href=/dark/ && mv dist/coincola build/dark && cp src/constants.blue.scss src/constants.scss && ng build --prod --base-href=/light/ && mv dist/coincola build/light && docker login -u user -p password test-registry.lan:5000 && docker build -t test-registry.lan:5000/kcb-web-ui . && rm -rf build && docker push test-registry.lan:5000/kcb-web-ui",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prod-build": "ng build --prod && docker login -u pushuser -p pTa7=%E8aAUXMZsC registry.50network.com:5000 && docker build -t registry.50network.com:5000/kcb-web-ui . && docker push registry.50network.com:5000/kcb-web-ui"
+    "prod-build": "mkdir build && cp src/constants.black.scss src/constants.scss && ng build --prod --base-href=/dark/ && mv dist/coincola build/dark && cp src/constants.blue.scss src/constants.scss && ng build --prod --base-href=/light/ && mv dist/coincola build/light && docker login -u pushuser -p pTa7=%E8aAUXMZsC registry.50network.com:5000 && docker build -t registry.50network.com:5000/kcb-web-ui . && docker push registry.50network.com:5000/kcb-web-ui"
   },
   "private": true,
   "dependencies": {
