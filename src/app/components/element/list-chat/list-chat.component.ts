@@ -25,6 +25,9 @@ export class ListChatComponent implements OnInit {
   @Input()
   chatTitle;
 
+  @Input()
+  adId;
+
   constructor(private userService: UserService) {
   }
 
@@ -50,23 +53,40 @@ export class ListChatComponent implements OnInit {
   }
 
   private _login() {
-    console.log('this.user.username::', this.user.id);
-    this.realtime.createIMClient(this.user.id + '').then(chat => {
-      console.log('this.otherUser.username::', this.otherUser.id);
+    const _sp = '______';
+    this.realtime.createIMClient([this.user.id, this.adId].join(_sp)).then(chat => {
       this.conversation = chat.createConversation({
-        members: [this.otherUser.id + ''],
+        members: [[this.user.id, this.adId].join(_sp)],
         name: this.chatTitle,
         transient: false,
         unique: true,
+      }).then(conversation => {
+        conversation.queryMessages({
+          limit: 1000,
+        }).then(messages => {
+          // console.log('messages: ', messages);
+          messages.forEach(_data => {
+            // console.log('_data::', _data);
+            // console.log('_data.from::', _data.from);
+
+            const _froms = _data.from.split(_sp);
+
+            this.chatList.push({
+              content: _data._lctext,
+              isMe: _froms[0] == this.user.id,
+            });
+          });
+        }).catch(console.error.bind(console));
+        return conversation;
       });
       chat.on(AV.Event.MESSAGE, (message, conversation) => {
-        console.log('============message: ', message);
         // $('#chat').val($('#chat').val() + "\n" + message.from + ": " + message.text)
         this.chatList.push({
           content: message.text,
           isMe: false,
         });
       });
+
       return this.conversation;
     }).then(function (conversation) {
       // return conversation.send(new this.TextMessage($('#username').val() + ' online'));
@@ -77,12 +97,12 @@ export class ListChatComponent implements OnInit {
   send(message) {
     this.conversation.then((conversation) => {
       conversation.send(new AV.TextMessage(message));
-      console.log('-------------message: ', message);
       this.chatList.push({
         content: message,
         isMe: true,
       });
       // $('#chat').val($('#chat').val() + "\n" + $('#username').val() + ": " + $('#message').val())
+      return conversation;
     })
   }
 

@@ -54,15 +54,15 @@
   </section>
 
   <section class="gz-full-img">
-    <img alt="证件正面" [src]="frontImg.src" (click)="selectImg(frontImgFile)">
+    <img alt="证件正面" [src]="frontImg.src || '/assets/images/id_front.jpg'" (click)="selectImg(frontImgFile)">
     <input type="file" #frontImgFile (change)="imgChange($event, frontImg)">
   </section>
   <section class="gz-full-img">
-    <img alt="证件反面" [src]="backImg.src" (click)="selectImg(backImgFile)">
+    <img alt="证件反面" [src]="backImg.src || '/assets/images/id_back.jpg'" (click)="selectImg(backImgFile)">
     <input type="file" #backImgFile (change)="imgChange($event, backImg)">
   </section>
   <section class="gz-full-img">
-    <img alt="半身像" [src]="halfImg.src" (click)="selectImg(halfImgFile)">
+    <img alt="半身像" [src]="halfImg.src || '/assets/images/body_half.jpg'" (click)="selectImg(halfImgFile)">
     <input type="file" #halfImgFile (change)="imgChange($event, halfImg)">
   </section>
 

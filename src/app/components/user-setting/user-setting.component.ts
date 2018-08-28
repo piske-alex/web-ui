@@ -29,8 +29,8 @@ export class UserSettingComponent implements OnInit {
   }
 
   goToVerify() {
-    if (this.user.kycStatus == 'unverified') {
+    // if (this.user.kycStatus == 'unverified') {
       this.router.navigate(['/userRealCert']);
-    }
+    // }
   }
 }
