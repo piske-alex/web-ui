@@ -5,7 +5,7 @@
     <div class="gz-header">
       <div></div>
       <div class="btn-group gz-tab" role="group">
-        首页
+        <gz-i18n key="tabsPage.home"></gz-i18n>
       </div>
       <div></div>
     </div>
@@ -32,7 +32,9 @@
 
     <section class="gz-coin">
       <div class="gz-list-title">
-        <div>币币行情</div>
+        <div>
+          <gz-i18n key="home.coinPrice"></gz-i18n>
+        </div>
         <div>
           <!--<fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>-->
         </div>
@@ -62,8 +64,10 @@
         <li class="" *ngFor="let otcAds of otcTransactions">
       </ul>
       <div class="gz-ad-slide-img">
-        <div class="gz-list-title">
-          <div>场外交易</div>
+        <div class="gz-list-title" routerLink="/otc">
+          <div>
+            <gz-i18n key="home.otc"></gz-i18n>
+          </div>
           <div>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </div>
@@ -71,7 +75,7 @@
         <ul class="gz-ad-slide-imgs" *ngIf="otcTransactions.length > 0">
           <li *ngFor="let otcAds of otcTransactions">
             <div class="{{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds">
-              <div *ngIf="otcAd.avatar">
+              <div>
                 <img src="{{otcAd.avatar | avatar}}">
               </div>
               <div>{{otcAd.currencyAmount}} {{otcAd.currency}}</div>
@@ -80,8 +84,12 @@
               </div>
               <div *ngIf="otcAd.adType">
                 <div class="btn btn-primary" (click)="toTransaction(otcAd.id)">
-                  <span *ngIf="otcAd.adType == 'buy'">出售</span>
-                  <span *ngIf="otcAd.adType == 'sell'">购买</span>
+                  <span *ngIf="otcAd.adType == 'buy'">
+                    <gz-i18n key="common.sale"></gz-i18n>
+                  </span>
+                  <span *ngIf="otcAd.adType == 'sell'">
+                    <gz-i18n key="common.buy"></gz-i18n>
+                  </span>
                   <span>{{otcAd.coinType}}</span>
                 </div>
               </div>

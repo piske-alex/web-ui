@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { AdService } from "../../providers/ad/ad.service";
+import { LanguageService } from "../../providers/language/language.service";
 
 @Component({
   selector: 'gz-order-detail',
@@ -13,14 +14,21 @@ export class OrderDetailComponent implements OnInit {
   orderId: string;
   order: any = {};
 
+  i18ns: any = {};
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private location: Location,
+              private languageService: LanguageService,
               private adService: AdService) {
   }
 
   async ngOnInit() {
     this.orderId = this.route.snapshot.paramMap.get('orderId');
+
+    this.i18ns.waitPay = await this.languageService.get('otc.waitPay');
+    this.i18ns.minute = await this.languageService.get('otc.minute');
+    this.i18ns.second = await this.languageService.get('otc.second');
 
     this.order = await this.adService.getOrder({orderid: this.orderId});
 

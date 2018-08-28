@@ -7,8 +7,12 @@
         <span class="gz-pc-hide" *ngIf="country">{{country.name}}</span>
       </div>
       <div class="btn-group gz-tab" role="group">
-        <div class="btn btn-secondary {{isActiveAdType('2')}}" (click)="selectAdType('2')">我要购买</div>
-        <div class="btn btn-secondary {{isActiveAdType('1')}}" (click)="selectAdType('1')">我要出售</div>
+        <div class="btn btn-secondary {{isActiveAdType('2')}}" (click)="selectAdType('2')">
+          <gz-i18n key="otc.iBuy"></gz-i18n>
+        </div>
+        <div class="btn btn-secondary {{isActiveAdType('1')}}" (click)="selectAdType('1')">
+          <gz-i18n key="otc.iSell"></gz-i18n>
+        </div>
       </div>
       <div class="gz-pc-header-right">
         <div (click)="toSelectCountry()">
@@ -25,15 +29,15 @@
           <div class="popover-body">
             <div (click)="goToPostAd()">
               <fa-icon [icon]="['fas', 'edit']"></fa-icon>
-              发布广告
+              <gz-i18n key="otc.postAd"></gz-i18n>
             </div>
             <div (click)="goToMyAd()">
               <fa-icon [icon]="['fas', 'indent']"></fa-icon>
-              我的广告
+              <gz-i18n key="otc.myAd"></gz-i18n>
             </div>
             <div (click)="goToTrust()">
               <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
-              信任管理
+              <gz-i18n key="otc.trustAdmin"></gz-i18n>
             </div>
           </div>
         </div>
@@ -85,7 +89,7 @@
         <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="hideSearch()"></fa-icon>
       </div>
       <div class="gz-title">
-        搜索
+        <gz-i18n key="common.search"></gz-i18n>
       </div>
       <div></div>
     </div>

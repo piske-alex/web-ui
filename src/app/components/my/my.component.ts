@@ -16,8 +16,12 @@ export class MyComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.user = await this.userService.getDetail({});
-    localStorage.setItem('user_id', this.user.id);
+    let _userId = localStorage.getItem('user_id');
+
+    if (_userId) {
+      this.user = await this.userService.getDetail({});
+      localStorage.setItem('user_id', this.user.id);
+    }
   }
 
   goToSetting() {
@@ -25,15 +29,20 @@ export class MyComponent implements OnInit {
   }
 
   async logout() {
-    await this.userService.logout();
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('access_token');
+    if (confirm('确定要退出吗？')) {
+      await this.userService.logout();
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('login_timestamp');
+      localStorage.removeItem('access_token');
 
-    this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
+    }
   }
 
   setAvatar(avatarFile) {
-    avatarFile.click();
+    if (this.user && this.user.id) {
+      avatarFile.click();
+    }
   }
 
   async fileChange(event) {

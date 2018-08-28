@@ -97,6 +97,8 @@ export class HttpService {
   }
 
   gotoLogin() {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('login_timestamp');
     localStorage.removeItem('access_token');
     this.sendAuthMessage(false);
   }

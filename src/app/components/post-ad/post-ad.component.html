@@ -104,7 +104,12 @@
   <!--<p>溢价设置(市场参考价格44151.12CNY/BTC)</p>-->
   <!--</section>-->
   <section ng-if="currency && coinType">
-    <p>当前报价大概排在第一位(市场参考价格{{coinRate}}{{currencyCode}}/{{coinTypeCode}})</p>
+    <p>
+      <gz-i18n key="otc.currentPrice"></gz-i18n>
+      (
+      <gz-i18n key="otc.referencePrice"></gz-i18n>
+      {{coinRate}}{{currencyCode}}/{{coinTypeCode}})
+    </p>
   </section>
   <!-- <section class="gz-slid-row"> -->
   <!--<div class="gz-min-val">-99</div>-->

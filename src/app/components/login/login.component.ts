@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    // this.location.back();
+    this.router.navigate(['/my']);
   }
 
   focus(inputName: string) {
