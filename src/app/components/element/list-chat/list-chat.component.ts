@@ -54,9 +54,9 @@ export class ListChatComponent implements OnInit {
 
   private _login() {
     const _sp = '______';
-    this.realtime.createIMClient([this.user.id, this.adId].join(_sp)).then(chat => {
+    this.realtime.createIMClient(this.adId + '').then(chat => {
       this.conversation = chat.createConversation({
-        members: [[this.otherUserId, this.adId].join(_sp)],
+        members: [this.user.id + '', this.otherUserId + ''],
         name: this.chatTitle,
         transient: false,
         unique: true,
@@ -69,11 +69,9 @@ export class ListChatComponent implements OnInit {
             // console.log('_data::', _data);
             console.log('_data.from::', _data.from);
 
-            const _froms = _data.from.split(_sp);
-
             this.chatList.push({
               content: _data._lctext,
-              isMe: _froms[0] == this.user.id,
+              isMe: _data.from == this.user.id,
             });
           });
         }).catch(console.error.bind(console));
@@ -95,7 +93,7 @@ export class ListChatComponent implements OnInit {
   }
 
   send(message) {
-    this.conversation.then((conversation) => {
+    this.conversation && this.conversation.then((conversation) => {
       conversation.send(new AV.TextMessage(message));
       this.chatList.push({
         content: message,
