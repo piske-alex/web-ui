@@ -56,7 +56,7 @@ export class ListChatComponent implements OnInit {
     const _sp = '______';
     this.realtime.createIMClient([this.user.id, this.adId].join(_sp)).then(chat => {
       this.conversation = chat.createConversation({
-        members: [[this.user.id, this.adId].join(_sp)],
+        members: [[this.otherUserId, this.adId].join(_sp)],
         name: this.chatTitle,
         transient: false,
         unique: true,
@@ -64,10 +64,10 @@ export class ListChatComponent implements OnInit {
         conversation.queryMessages({
           limit: 1000,
         }).then(messages => {
-          // console.log('messages: ', messages);
+          console.log('messages: ', messages);
           messages.forEach(_data => {
             // console.log('_data::', _data);
-            // console.log('_data.from::', _data.from);
+            console.log('_data.from::', _data.from);
 
             const _froms = _data.from.split(_sp);
 
