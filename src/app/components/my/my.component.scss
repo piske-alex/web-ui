@@ -35,12 +35,18 @@
       padding: 20px 10px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid $border_default;
       margin-left: 10px;
 
       .gz-my-left {
         display: flex;
         justify-content: flex-start;
+        align-items: center;
+
+        img {
+          margin-right: 10px;
+        }
       }
 
       .gz-my-right {

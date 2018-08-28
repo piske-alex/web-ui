@@ -48,7 +48,8 @@ export class UserEmailComponent implements OnInit {
 
   async submit() {
     try {
-      let _result = await this.userService.bindEmail({email: this.email, verifyCode: this.emailVerifyCode});
+    // , verifyCode: this.emailVerifyCode
+      let _result = await this.userService.bindEmail({email: this.email});
       this.goBack();
     } catch (e) {
       console.error(e);

@@ -16,9 +16,10 @@ export class MyComponent implements OnInit {
   }
 
   async ngOnInit() {
-    let _userId = localStorage.getItem('user_id');
+    let _accessToken = localStorage.getItem('access_token');
+    let _loginTimestamp = localStorage.getItem('login_timestamp');
 
-    if (_userId) {
+    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 10) {
       this.user = await this.userService.getDetail({});
       localStorage.setItem('user_id', this.user.id);
     }

@@ -52,7 +52,7 @@ export class UserRealCertificationComponent implements OnInit {
   async submit() {
     let _params = {
       realName: this.realName,
-      realCardNo: this.realCardNo,
+      idNumber: this.realCardNo,
       agree: this.isSelectPromise,
       // countryCode: this.countryCode,
       frontPhotoName: this.frontImg.name,

@@ -30,7 +30,7 @@
       </div>
     </section>
 
-    <section class="gz-coin">
+    <section class="gz-coin" *ngIf="coinPrices.length > 0">
       <div class="gz-list-title">
         <div>
           <gz-i18n key="home.coinPrice"></gz-i18n>
@@ -49,17 +49,21 @@
           <b>{{price.USD}} USD</b>
           <span>{{price.CNY}} CNY</span>
         </div>
-        <div>
-          <div class="btn gz-btn-price-up" *ngIf="price.changePercent >= 0">
+        <div class="gz-coin-change">
+          <div class="gz-price-up" *ngIf="price.changePercent >= 0">
+            <img src="/assets/images/icon-up.png" alt="" class="gz-icon">
             <b>{{price.changePercent}}%</b>
           </div>
-          <div class="btn gz-btn-price-down" *ngIf="price.changePercent < 0">{{price.changePercent}}%</div>
+          <div class="gz-price-down" *ngIf="price.changePercent < 0">
+            <img src="/assets/images/icon-down.png" alt="" class="gz-icon">
+            {{price.changePercent}}%
+          </div>
         </div>
       </div>
     </section>
 
 
-    <section class="gz-ad-slide gz-ad-slide-homeotc">
+    <section class="gz-ad-slide gz-ad-slide-homeotc" *ngIf="otcTransactions.length > 0">
       <ul class="gz-ad-slide-circle">
         <li class="" *ngFor="let otcAds of otcTransactions">
       </ul>

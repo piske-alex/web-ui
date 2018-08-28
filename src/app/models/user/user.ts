@@ -18,7 +18,8 @@ export class User {
   deal_with_me_count: number; // 和我交易过的次数
   is_in_my_trust_list: boolean;
   is_in_my_black_list: boolean;
-  kycStatus: string; // pending
+  kycStatus: string; // unverified, pending, verified
+  emailStatus: string; // unverified, pending, verified
   payPass: boolean;
 
 }

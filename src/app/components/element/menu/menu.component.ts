@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   @Input()
-  activeNavName = 'otc';
+  activeNavName = 'home';
 
   constructor() {
   }

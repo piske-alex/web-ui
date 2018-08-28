@@ -1,6 +1,6 @@
 @import "../../constants";
 
-@media (max-width: $pc_max_width) {
+@media (max-width: $pc_screen_width) {
 
   .gz-main-page-menu {
     nav {
@@ -43,14 +43,27 @@
   }
 }
 
-@media (min-width: $pc_max_width) {
+@media (min-width: $pc_screen_width) {
   body {
 
     .gz-pc-hide {
       display: none;
     }
+
     .gz-pc-menu, .gz-pc-show {
       display: block !important;
+    }
+
+    .gz-pc-menu {
+      position: fixed;
+      top: 0;
+      max-width: $pc_max_width !important;
+      width: 100%;
+      z-index: 9999;
+
+      img {
+        display: none;
+      }
     }
 
     .gz-pc-header-right {
@@ -96,6 +109,7 @@
       }
 
       .gz-header-container {
+        margin-bottom: 50px;
 
         .gz-header {
           top: 50px !important;

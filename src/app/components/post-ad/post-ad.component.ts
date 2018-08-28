@@ -275,6 +275,7 @@ export class PostAdComponent implements OnInit {
       // this.location.back();
       this.router.navigate(['/otc', {adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode}]);
     } catch (e) {
+      this._isSubmiting = true;
       console.error(e);
       alert(e && e.errMsg || this.i18ns.publishError);
     }

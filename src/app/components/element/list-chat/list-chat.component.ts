@@ -114,14 +114,17 @@ export class ListChatComponent implements OnInit {
   }
 
   private _login() {
-    this.realtime.createIMClient(this.user.username).then(chat => {
+    console.log('this.user.username::', this.user.id);
+    this.realtime.createIMClient(this.user.id).then(chat => {
+      console.log('this.otherUser.username::', this.otherUser.id);
       this.conversation = chat.createConversation({
-        members: [this.otherUser.username],
+        members: [this.otherUser.id],
         name: this.chatTitle,
         transient: false,
         unique: true,
       });
       chat.on(AV.Event.MESSAGE, (message, conversation) => {
+        console.log('============message: ', message);
         // $('#chat').val($('#chat').val() + "\n" + message.from + ": " + message.text)
         this.chatList.push({
           content: message.text,

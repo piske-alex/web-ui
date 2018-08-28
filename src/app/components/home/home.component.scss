@@ -147,6 +147,13 @@ article {
         min-width: 120px;
       }
 
+      .gz-coin-change > div {
+        min-width: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
       &:last-child {
         border: 0;
       }
@@ -163,4 +170,12 @@ article {
 
 .gz-empty-foot {
   height: 70px;
+}
+
+.gz-price-up {
+  color: $btn_price-up;
+}
+
+.gz-price-down {
+  color: $btn_price-down;
 }

@@ -16,7 +16,7 @@
     <p>个人安全设置</p>
   </section>
   <section class="gz-my-group">
-    <div class="gz-my-row" routerLink="/userRealCert">
+    <div class="gz-my-row" (click)="goToVerify()">
       <div class="gz-my-left">
         <div>
           <!--<fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>-->
@@ -25,8 +25,9 @@
       </div>
       <div class="gz-my-right">
         <div>
-          <span *ngIf="!user.verified">未认证</span>
-          <span *ngIf="user.verified">已认证</span>
+          <span *ngIf="!user.kycStatus || user.kycStatus == 'unverified'">未认证</span>
+          <span *ngIf="user.kycStatus == 'verified'">已认证</span>
+          <span *ngIf="user.kycStatus == 'pending'">审核中</span>
           <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
         </div>
       </div>
@@ -71,8 +72,9 @@
       </div>
       <div class="gz-my-right">
         <div>
-          <span *ngIf="!user.email">未绑定</span>
-          <span *ngIf="user.email">已绑定</span>
+          <span *ngIf="!user.emailStatus || user.emailStatus == 'unverified'">未绑定</span>
+          <span *ngIf="user.emailStatus == 'verified'">已绑定</span>
+          <span *ngIf="user.emailStatus == 'pending'">未确认</span>
           <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
         </div>
       </div>

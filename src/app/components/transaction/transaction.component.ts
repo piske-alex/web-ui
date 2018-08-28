@@ -49,7 +49,6 @@ export class TransactionComponent implements OnInit {
 
     try {
       this.data = await this.adService.getOtcAdById({adid: this.adId});
-      console.log(this.data);
     } catch (e) {
       console.error(e);
     }
@@ -130,9 +129,7 @@ export class TransactionComponent implements OnInit {
   async obtained() {
     try {
       let _result = await this.adService.deleteAd({adid: this.adId});
-      if (_result && _result.success) {
-        this.location.back();
-      }
+      this.location.back();
     } catch (e) {
       console.error(e);
     }
