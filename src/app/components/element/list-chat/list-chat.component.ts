@@ -35,76 +35,12 @@ export class ListChatComponent implements OnInit {
       appKey: 'Pd10DELIIqFQkIkNJdv490IW',
       region: 'cn', // 美国节点为 "us"
     });
+
     this.user = await this.userService.getDetail({});
     this.otherUser = await this.userService.getDetail({userid: this.otherUserId});
 
     this._login();
 
-    // this.chatList = [
-    //   {
-    //     sendTime: Date.now(),
-    //     content: '你好，请问在吗？',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     content: '在，请问现在交易吗？',
-    //     headImg: '/favicon.ico',
-    //     isMe: false,
-    //   },
-    //   {
-    //     content: '你好，请问在吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     content: '你好，请问在吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     content: '在，请问现在交易吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
-    //     headImg: '/favicon.ico',
-    //     isMe: false,
-    //   },
-    //   {
-    //     sendTime: Date.now(),
-    //     content: '你好，请问在吗？',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     sendTime: Date.now(),
-    //     content: '你好，请问在吗？',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     content: '你好，请问在吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     sendTime: Date.now(),
-    //     content: '你好，请问在吗？',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     content: '在，请问现在交易吗？',
-    //     headImg: '/favicon.ico',
-    //     isMe: false,
-    //   },
-    //   {
-    //     content: '你好，请问在吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
-    //   {
-    //     content: '你好，请问在吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
-    //     headImg: '/favicon.ico',
-    //     isMe: true,
-    //   },
     //   {
     //     content: '在，请问现在交易吗？我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买我想购买',
     //     headImg: '/favicon.ico',
@@ -115,10 +51,10 @@ export class ListChatComponent implements OnInit {
 
   private _login() {
     console.log('this.user.username::', this.user.id);
-    this.realtime.createIMClient(this.user.id).then(chat => {
+    this.realtime.createIMClient(this.user.id + '').then(chat => {
       console.log('this.otherUser.username::', this.otherUser.id);
       this.conversation = chat.createConversation({
-        members: [this.otherUser.id],
+        members: [this.otherUser.id + ''],
         name: this.chatTitle,
         transient: false,
         unique: true,

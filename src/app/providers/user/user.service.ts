@@ -167,7 +167,7 @@ export class UserService {
 
   getDetail(params: any): Promise<User> {
     return new Promise((resolve, reject) => {
-      this.httpService.request(RouteMap.V1.USER.GET_DETAIL, params, true).then(data => {
+      this.httpService.request(RouteMap.V1.USER.GET_DETAIL, params).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {

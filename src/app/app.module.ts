@@ -133,7 +133,7 @@ const createTranslateLoader = function (http: HttpClient) {
   providers: [
     HttpService,
     RequestCache,
-    { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
     {provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent],
