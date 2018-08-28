@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 import { HelpCenterService } from "../../../providers/help-center/help-center.service";
 import { Router } from "@angular/router";
+import { DomSanitizer } from "@angular/platform-browser";
+
+const $ = (<any>window).$;
 
 @Component({
   selector: 'gz-help-center',
@@ -10,13 +13,22 @@ import { Router } from "@angular/router";
 })
 export class HelpCenterComponent implements OnInit {
 
-  helpList: any;
+  externalHelpUrl: any;
 
-  constructor(private location: Location, private router: Router, private helpCenterService: HelpCenterService) {
+  constructor(private location: Location,
+              private router: Router,
+              private helpCenterService: HelpCenterService,
+              private domSanitized: DomSanitizer) {
   }
 
   ngOnInit() {
-    window.location.href = 'https://kcb.zendesk.com/';
+    this.externalHelpUrl = 'https://kcb.zendesk.com/';
+
+    window.location.href = this.externalHelpUrl;
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

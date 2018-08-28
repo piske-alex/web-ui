@@ -18,8 +18,6 @@ export class MenuComponent implements OnInit {
 
   navTo(navName: string) {
     this.activeNavName = navName;
-
-    console.log(this.activeNavName);
   }
 
   isActiveNav(navName: string) {

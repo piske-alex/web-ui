@@ -1,3 +1,15 @@
 <header class="gz-header-container">
-
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      <gz-i18n key="common.help"></gz-i18n>
+    </div>
+    <div></div>
+  </div>
 </header>
+
+<article>
+  <!--<iframe [src]="externalHelpUrl" frameborder="0"></iframe>-->
+</article>
