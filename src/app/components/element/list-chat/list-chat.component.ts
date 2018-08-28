@@ -59,7 +59,7 @@ export class ListChatComponent implements OnInit {
       console.log('2: ', [this.user.id + '', this.otherUserId + '', this.adId + _sp + 'adId']);
       console.log('3: ', this.adId);
       this.conversation = chat.createConversation({
-        members: [this.user.id + '', this.otherUserId + '', this.adId + _sp + 'adId'],
+        members: [this.otherUserId + '', this.adId + _sp + 'adId'],
         name: this.adId + '',
         transient: false,
         unique: true,
