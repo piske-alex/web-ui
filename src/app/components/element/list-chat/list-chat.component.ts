@@ -58,9 +58,10 @@ export class ListChatComponent implements OnInit {
     this.realtime.createIMClient(this.user.id + '').then(chat => {
       console.log('2: ', [this.user.id + '', this.otherUserId + '', this.adId + _sp + 'adId']);
       console.log('3: ', this.adId);
+      const _adDesc = this.adId + _sp + 'adId';
       this.conversation = chat.createConversation({
-        members: [this.otherUserId + '', this.adId + _sp + 'adId'],
-        name: this.adId + '',
+        members: [this.otherUserId + '', _adDesc],
+        name: _adDesc,
         transient: false,
         unique: true,
       }).then(conversation => {
