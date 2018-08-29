@@ -14,6 +14,8 @@ export class ChatService {
 
   conservationObj: any = {};
 
+  receive: Function;
+
   constructor() {
     this.initChat();
   }
@@ -60,6 +62,9 @@ export class ChatService {
               sendTimestamp: _sendTimestamp,
               isMe: _from == this.user.id,
             });
+            if (this.receive) {
+              this.receive();
+            }
           });
         }).catch(console.error);
       } else {
@@ -145,6 +150,7 @@ export class ChatService {
             this.conservationObj[adId].conversation = conversation;
             this.conservationObj[adId].chatList = this.conservationObj[adId].chatList || [];
 
+            this.conservationObj[adId].chatList = [];
             (messages || []).forEach(message => {
               console.log('message:::::::', message);
               if (!message.getAttributes()) {

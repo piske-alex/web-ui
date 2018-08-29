@@ -36,18 +36,28 @@ export class ListChatComponent implements OnInit {
     this.chatService.initChat();
     this.chatService.loginChat();
 
-    setTimeout(async () => {
-      this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId);
-    }, 5000);
+    this.chatService.receive = () => {
+      this._updateScroll();
+    };
+
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId);
+    this._updateScroll();
   }
 
 
   async send(message) {
     try {
       this.chatList = await this.chatService.send(this.adId, this.adUserId, message);
+      this._updateScroll();
     } catch (e) {
       console.error(e);
     }
   }
 
+  private _updateScroll() {
+    document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
+    setTimeout(() => {
+      document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
+    }, 1000);
+  }
 }
