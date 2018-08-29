@@ -73,7 +73,11 @@ export class ForgetPasswordComponent implements OnInit {
       }
     }, 1000);
 
-    this.commonService.sendSmsCode({countryCallingCode: this.countryCode, phone: this.phoneNo});
+    this.commonService.sendSmsCode({
+      countryCallingCode: this.countryCode,
+      phone: this.phoneNo,
+      action: 'resetPassword',
+    });
   }
 
   async submit() {

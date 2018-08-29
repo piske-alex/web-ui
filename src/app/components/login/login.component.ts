@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
   countryCode: any;
   countryCodes: any = [];
   phone: string;
+  smsCode: string;
   password: string;
+  resendSmsCodeDelay = 0;
 
   focusInput: string;
   isShowPassword: boolean;
@@ -64,6 +66,25 @@ export class LoginComponent implements OnInit {
     this.isShowPassword = show;
   }
 
+  async sendSmsCode() {
+    this.resendSmsCodeDelay = 60;
+    const _delayInterval = setInterval(() => {
+      if (--this.resendSmsCodeDelay === 0) {
+        clearInterval(_delayInterval);
+      }
+    }, 1000);
+
+    try {
+      await this.commonService.sendSmsCode({
+        countryCallingCode: this.countryCode,
+        phone: this.phone,
+        action: 'login',
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   login() {
     if (!this.phone) {
       return alert('请输入手机号码!');
@@ -81,6 +102,7 @@ export class LoginComponent implements OnInit {
       countryCallingCode: this.countryCode,
       phone: this.phone,
       password: this.password,
+      verifyCode: this.smsCode,
     };
 
     this.httpService.request(RouteMap.V1.USER.LOGIN, _params).then(data => {
@@ -102,5 +124,6 @@ export class LoginComponent implements OnInit {
     });
 
   }
+
 
 }

@@ -67,7 +67,11 @@ export class UserTransactionPasswordComponent implements OnInit {
     }, 1000);
 
     try {
-      await this.commonService.sendSmsCode({countryCallingCode: this.countryCode, phone: this.phoneNo});
+      await this.commonService.sendSmsCode({
+        countryCallingCode: this.countryCode,
+        phone: this.phoneNo,
+        action: 'resetPayPassword',
+      });
     } catch (e) {
       console.error(e);
     }

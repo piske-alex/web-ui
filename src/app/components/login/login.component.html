@@ -33,6 +33,16 @@
     </div>
   </section>
   <section>
+    <div class="gz-label {{isFocus('smsCode')}}">请输入短信验证码</div>
+    <div style="position: relative;">
+      <input type="text" class="{{isFocus('smsCode')}}" placeholder="请输入短信验证码"
+             [(ngModel)]="smsCode"
+             (focus)="focus('smsCode')" (blur)="blur('smsCode')">
+      <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">获取验证码</div>
+      <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay">重新获取验证码({{resendSmsCodeDelay}})</div>
+    </div>
+  </section>
+  <section>
     <div class="gz-label {{isFocus('password')}}">请输入密码</div>
     <div class="gz-password">
       <input type="password" class="{{isFocus('password')}}" placeholder="请输入密码" [(ngModel)]="password" *ngIf="!isShowPassword"

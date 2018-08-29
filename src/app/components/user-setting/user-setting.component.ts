@@ -21,6 +21,14 @@ export class UserSettingComponent implements OnInit {
 
   async ngOnInit() {
     this.userId = localStorage.getItem('user_id');
+    try {
+      let _user = localStorage.getItem('user');
+      if (_user) {
+        this.user = JSON.parse(_user);
+      }
+    } catch (e) {
+      console.error(e);
+    }
     this.user = await this.userService.getDetail({id: this.userId});
   }
 
@@ -30,7 +38,7 @@ export class UserSettingComponent implements OnInit {
 
   goToVerify() {
     // if (this.user.kycStatus == 'unverified') {
-      this.router.navigate(['/userRealCert']);
+    this.router.navigate(['/userRealCert']);
     // }
   }
 }

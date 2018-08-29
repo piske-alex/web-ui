@@ -30,20 +30,9 @@ export class HomeComponent implements OnInit {
 
     this._updateScroll('ad', 4, true);
 
-    this.commonService.getCoinRate('', '').then(data => {
-      for (let coinType in data) {
-        const _data = data[coinType];
-        this.coinPrices.push({
-          coinType: coinType,
-          changePercent: (_data.change * 100).toFixed(2),
-          USD: _data.value.USD,
-          CNY: _data.value.CNY,
-        });
-      }
-    }, error => {
-      console.error(error);
-    });
-
+    this._loadCoinRate();
+    this._autoLoadData();
+    
     try {
       let _payTypes = await this.commonService.getPayTypeList();
       (_payTypes || []).forEach(_data => {
@@ -72,6 +61,24 @@ export class HomeComponent implements OnInit {
       this.autoScroll('homeotc', this.otcTransactions.length);
     }, 800);
 
+  }
+
+  private _loadCoinRate() {
+    this.commonService.getCoinRate('', '').then(data => {
+      let _coinPrices = [];
+      for (let coinType in data) {
+        const _data = data[coinType];
+        _coinPrices.push({
+          coinType: coinType,
+          changePercent: (_data.change * 100).toFixed(2),
+          USD: _data.value.USD,
+          CNY: _data.value.CNY,
+        });
+      }
+      this.coinPrices = _coinPrices;
+    }, error => {
+      console.error(error);
+    });
   }
 
   private _updateScroll(scrollName, scrollSize, isFullImg) {
@@ -117,6 +124,20 @@ export class HomeComponent implements OnInit {
       if (!/.*(\/home)(\/)?$/.test(location.href)) {
         clearInterval(_intervalName);
         clearInterval(_checkIntervalName);
+        return;
+      }
+    }, 100);
+  }
+
+  private _autoLoadData() {
+    const _loadDataIntervalName = setInterval(() => {
+      this._loadCoinRate();
+    }, 5000);
+
+    const _checkIntervalName = setInterval(() => {
+      if (!/.*(\/home)(\/)?$/.test(location.href)) {
+        clearInterval(_checkIntervalName);
+        clearInterval(_loadDataIntervalName);
         return;
       }
     }, 100);

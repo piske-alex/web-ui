@@ -31,7 +31,7 @@
   </section>
 
   <section>
-    <gz-list-chat *ngIf="data && data.userId" [adId]="adId" [otherUserId]="data.userId" [chatTitle]="getTitle()"></gz-list-chat>
+    <gz-list-chat *ngIf="data && data.userId" [adId]="adId" [adUserId]="data.userId" [chatTitle]="getTitle()"></gz-list-chat>
   </section>
 
   <section class="gz-empty-foot"></section>

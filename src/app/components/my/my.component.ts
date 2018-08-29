@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../../providers/user/user.service";
 import { User } from "../../models/user/user";
+import { ChatService } from "../../providers/chat/chat.service";
 
 @Component({
   selector: 'gz-my',
@@ -12,17 +13,34 @@ export class MyComponent implements OnInit {
 
   user: any = new User();
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private chatService: ChatService,
+              private userService: UserService) {
   }
 
   async ngOnInit() {
+
     let _accessToken = localStorage.getItem('access_token');
     let _loginTimestamp = localStorage.getItem('login_timestamp');
+
+    try {
+      let _user = localStorage.getItem('user');
+      if (_user) {
+        this.user = JSON.parse(_user);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    localStorage.removeItem('user');
 
     if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 10) {
       this.user = await this.userService.getDetail({});
       localStorage.setItem('user_id', this.user.id);
+      localStorage.setItem('user', JSON.stringify(this.user));
+      this.chatService.loginChat();
     }
+
   }
 
   goToSetting() {
@@ -33,6 +51,7 @@ export class MyComponent implements OnInit {
     if (confirm('确定要退出吗？')) {
       await this.userService.logout();
       localStorage.removeItem('user_id');
+      localStorage.removeItem('user');
       localStorage.removeItem('login_timestamp');
       localStorage.removeItem('access_token');
 
@@ -85,4 +104,5 @@ export class MyComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
+
 }

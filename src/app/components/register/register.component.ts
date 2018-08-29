@@ -79,7 +79,11 @@ export class RegisterComponent implements OnInit {
     }, 1000);
 
     try {
-      await this.commonService.sendSmsCode({countryCallingCode: this.countryCode, phone: this.phoneNo});
+      await this.commonService.sendSmsCode({
+        countryCallingCode: this.countryCode,
+        phone: this.phoneNo,
+        action: 'signup',
+      });
     } catch (e) {
       console.error(e);
     }

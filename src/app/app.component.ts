@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { HttpService } from './providers/http/http.service';
 import { LanguageService } from './providers/language/language.service';
+import { ChatService } from "./providers/chat/chat.service";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,12 @@ export class AppComponent implements OnInit {
 
   constructor(private httpService: HttpService,
               private router: Router,
+              private chatService: ChatService,
               private languageService: LanguageService) {
+
+    this.chatService.initChat();
+    this.chatService.loginChat();
+
     // ###### change language
     // setTimeout(() => {
     //   this.language = 'en';
@@ -61,6 +67,7 @@ export class AppComponent implements OnInit {
       let _loginTimestamp = localStorage.getItem('login_timestamp');
       if (_accessToken && (!_loginTimestamp || Date.now() - +_loginTimestamp > 1000 * 60 * 10)) {
         localStorage.removeItem('user_id');
+        localStorage.removeItem('user');
         localStorage.removeItem('login_timestamp');
         localStorage.removeItem('access_token');
       }
