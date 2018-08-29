@@ -43,7 +43,7 @@ export class ChatService {
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
-          chat.on(AV.Event.MESSAGE, function (message, conversation) {
+          chat.on(AV.Event.MESSAGE, (message, conversation) => {
             console.log('------------------message: ', message);
             let _from = message.from;
             var _adId = message.getAttributes().for;
@@ -61,8 +61,6 @@ export class ChatService {
               isMe: _from == this.user.id,
             });
           });
-          // }).then(function (conversation) {
-          // return conversation.send(new this.TextMessage($('#username').val() + ' online'));
         }).catch(console.error);
       } else {
         console.log('### >>> realtime or user is null');
