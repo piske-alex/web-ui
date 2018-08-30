@@ -24,6 +24,8 @@
     "transaction": "交易",
     "help": "帮助",
     "search": "搜索",
+    "setting": "设置",
+    "helpCenter": "帮助中心",
     "contact": "联系对方",
     "blackList": "屏蔽",
     "trust": "信任",
@@ -127,6 +129,9 @@
     "trustedMe": "信任我的人",
     "iBlackList": "我屏蔽的人",
     "trustManage": "信任管理",
+    "loginOrRegister": "登录/注册",
+    "loginDesc": "立刻登录可以查看更多内容",
+    "logout": "退出",
     "iDealWithHimCount": "我和他交易过${1}次"
   },
   "wallet": {

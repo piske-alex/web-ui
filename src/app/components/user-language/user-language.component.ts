@@ -3,6 +3,7 @@ import { CommonService } from "../../providers/common/common.service";
 import { Location } from "@angular/common";
 import { UserService } from "../../providers/user/user.service";
 import { LanguageService } from "../../providers/language/language.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'gz-user-language',
@@ -13,7 +14,8 @@ export class UserLanguageComponent implements OnInit {
 
   list: any[];
 
-  constructor(private commonService: CommonService,
+  constructor(private router: Router,
+              private commonService: CommonService,
               private userService: UserService,
               private languageService: LanguageService,
               private location: Location) {
@@ -33,7 +35,7 @@ export class UserLanguageComponent implements OnInit {
 
   async submit(data) {
     try {
-      this.languageService.initConfig('en-GB');
+      this.languageService.initConfig(data.code);
       let _result = await this.userService.setLanguage({code: data.code});
       // this.goBack();
     } catch (e) {
@@ -43,6 +45,7 @@ export class UserLanguageComponent implements OnInit {
     this.languageService.change(data.code);
     localStorage.setItem('language', data.code);
 
+    this.router.navigate(['/my']);
   }
 
 

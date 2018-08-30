@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LanguageService } from "../../../providers/language/language.service";
 
 @Component({
   selector: 'gz-menu',
@@ -10,7 +11,7 @@ export class MenuComponent implements OnInit {
   @Input()
   activeNavName = 'home';
 
-  constructor() {
+  constructor(private languageService: LanguageService) {
   }
 
   ngOnInit() {
@@ -22,6 +23,29 @@ export class MenuComponent implements OnInit {
 
   isActiveNav(navName: string) {
     return this.activeNavName === navName ? 'active' : '';
+  }
+
+  getHomeImg(navName) {
+    let _img = 'icon-' + navName;
+    if (this.activeNavName === navName) {
+      _img += '-active';
+    }
+
+    switch (this.languageService.language) {
+      case 'zh-CN':
+        _img += '.zh';
+        break;
+      case 'en-GB':
+        _img += '.en';
+        break;
+      case 'zh-HK':
+        _img += '.hk';
+        break;
+    }
+
+    _img += '.png';
+
+    return _img;
   }
 
 }

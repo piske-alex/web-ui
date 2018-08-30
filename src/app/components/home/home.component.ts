@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
     this._loadCoinRate();
     this._autoLoadData();
-    
+
     try {
       let _payTypes = await this.commonService.getPayTypeList();
       (_payTypes || []).forEach(_data => {
@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit {
   private _autoLoadData() {
     const _loadDataIntervalName = setInterval(() => {
       this._loadCoinRate();
-    }, 5000);
+    }, 1000);
 
     const _checkIntervalName = setInterval(() => {
       if (!/.*(\/home)(\/)?$/.test(location.href)) {
@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit {
         clearInterval(_loadDataIntervalName);
         return;
       }
-    }, 100);
+    }, 50);
   }
 
   toTransaction(adId: string) {

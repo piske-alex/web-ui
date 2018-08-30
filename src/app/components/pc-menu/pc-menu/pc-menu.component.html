@@ -1,0 +1,32 @@
+<nav class="gz-menu">
+  <ul class="nav">
+    <li class="nav-item" [class]="isActiveNav('home')" (click)="navTo('home')" routerLink="/home">
+      <img src="/assets/images/icon-home.png" alt="" class="gz-icon" *ngIf="isActiveNav('home')">
+      <img src="/assets/images/icon-home-in.png" alt="" class="gz-icon" *ngIf="!isActiveNav('home')">
+      <a class="nav-link active">
+        <gz-i18n key="tabsPage.home"></gz-i18n>
+      </a>
+    </li>
+    <li class="nav-item" [class]="isActiveNav('otc')" (click)="navTo('otc')" routerLink="/otc">
+      <img src="/assets/images/icon-dollar.png" alt="" class="gz-icon" *ngIf="isActiveNav('otc')">
+      <img src="/assets/images/icon-dollar-in.png" alt="" class="gz-icon" *ngIf="!isActiveNav('otc')">
+      <a class="nav-link active">
+        <gz-i18n key="tabsPage.otc"></gz-i18n>
+      </a>
+    </li>
+    <li class="nav-item" [class]="isActiveNav('wallet')" (click)="navTo('wallet')" routerLink="/wallet">
+      <img src="/assets/images/icon-wallet.png" alt="" class="gz-icon" *ngIf="isActiveNav('wallet')">
+      <img src="/assets/images/icon-wallet-in.png" alt="" class="gz-icon" *ngIf="!isActiveNav('wallet')">
+      <a class="nav-link">
+        <gz-i18n key="tabsPage.wallet"></gz-i18n>
+      </a>
+    </li>
+    <li class="nav-item" [class]="isActiveNav('my')" (click)="navTo('my')" routerLink="/my">
+      <img src="/assets/images/icon-user.png" alt="" class="gz-icon" *ngIf="isActiveNav('my')">
+      <img src="/assets/images/icon-user-in.png" alt="" class="gz-icon" *ngIf="!isActiveNav('my')">
+      <a class="nav-link">
+        <gz-i18n key="tabsPage.my"></gz-i18n>
+      </a>
+    </li>
+  </ul>
+</nav>

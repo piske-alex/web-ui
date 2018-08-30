@@ -60,6 +60,7 @@ import { AvatarPipe } from './pipes/avatar/avatar.pipe';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { HomeComponent } from './components/home/home.component';
 import { CoinNumberPipe } from './pipes/coin/coin-number.pipe';
+import { PcMenuComponent } from './components/pc-menu/pc-menu/pc-menu.component';
 
 library.add(fas);
 
@@ -115,6 +116,7 @@ const createTranslateLoader = function (http: HttpClient) {
     OrderDetailComponent,
     HomeComponent,
     CoinNumberPipe,
+    PcMenuComponent,
   ],
   imports: [
     BrowserModule,

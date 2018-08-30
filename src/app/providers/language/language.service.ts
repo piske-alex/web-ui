@@ -22,7 +22,8 @@ this.languageService.initConfig(this.language);
 })
 export class LanguageService {
 
-  list = ["zh-CN", "en-GB"];
+  language: string = 'zh-CN';
+  list = ["zh-CN", "en-GB", 'zh-HK'];
   isReady: boolean;
   private readySubject: Subject<boolean> = new Subject();
   private changeSubject: Subject<string> = new Subject();
@@ -43,6 +44,7 @@ export class LanguageService {
   }
 
   initConfig(language: string) {
+    this.language = language;
     this.isReady = false;
     this.translateService.addLangs(this.list);
     this.translateService.setDefaultLang(language);
