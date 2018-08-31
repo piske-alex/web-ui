@@ -112,6 +112,7 @@ export class RegisterComponent implements OnInit {
       const _token = _result.token;
       localStorage.setItem('user_id', _userId);
       localStorage.setItem('access_token', _token);
+      localStorage.setItem('login_timestamp', Date.now() + '');
 
       this.router.navigate(['/setNickName', {userId: _userId}]);
     } catch (e) {
