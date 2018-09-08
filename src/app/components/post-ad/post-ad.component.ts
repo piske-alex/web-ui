@@ -27,6 +27,7 @@ export class PostAdComponent implements OnInit {
   coinTypeCode = 'BTC';
   currencyCode = 'CNY';
   payTypeCode = 'AP';
+  payTypeNames = '';
 
   adId: string;
 
@@ -34,7 +35,7 @@ export class PostAdComponent implements OnInit {
   country: Country = new Country();
   coinType: CoinType = new CoinType();
   currency: Currency = new Currency();
-  payType: PayType = new PayType();
+  payType: PayType[];
   coinRate: number;
 
   ad: OtcAd = new OtcAd();
@@ -59,18 +60,22 @@ export class PostAdComponent implements OnInit {
   private selectPayTypeComponent;
 
   constructor(private location: Location,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private adService: AdService,
-              private languageService: LanguageService,
-              private commonService: CommonService) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private adService: AdService,
+    private languageService: LanguageService,
+    private commonService: CommonService) {
   }
 
   async ngOnInit() {
-
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.adId = this.activatedRoute.snapshot.paramMap.get('adId');
     if (this.adId) {
-      const _ad = await this.adService.getOtcAdById({adid: this.adId});
+      const _ad = await this.adService.getOtcAdById({ adid: this.adId });
       this.countryCode = _ad.country;
       this.adTypeCode = _ad.adType;
       this.coinTypeCode = _ad.transactionCoinType;
@@ -223,8 +228,15 @@ export class PostAdComponent implements OnInit {
 
   selectPayType(data) {
     if (data) {
-      this.payTypeCode = data.code;
-      this.payType = data;
+      this.payType = data || [];
+      const _payTypeCodes = [];
+      const _payTypeNames = [];
+      this.payType.forEach(_data => {
+        _payTypeCodes.push(_data.code);
+        _payTypeNames.push(_data.name);
+      });
+      this.payTypeCode = _payTypeCodes.join(',');
+      this.payTypeNames = _payTypeNames.join(',');
     }
   }
 
@@ -273,7 +285,7 @@ export class PostAdComponent implements OnInit {
         this._isSubmiting = false;
       }, 1000);
       // this.location.back();
-      this.router.navigate(['/otc', {adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode}]);
+      this.router.navigate(['/otc', { adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode }]);
     } catch (e) {
       this._isSubmiting = true;
       console.error(e);

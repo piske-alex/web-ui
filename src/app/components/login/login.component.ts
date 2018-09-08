@@ -4,6 +4,8 @@ import { HttpService } from '../../providers/http/http.service';
 import { RouteMap } from '../../models/route-map/route-map.modle';
 import { Router } from '@angular/router';
 import { CommonService } from '../../providers/common/common.service';
+import { UserService } from '../../providers/user/user.service';
+import { LanguageService } from '../../providers/language/language.service';
 
 @Component({
   selector: 'gz-login',
@@ -21,18 +23,28 @@ export class LoginComponent implements OnInit {
   focusInput: string;
   isShowPassword: boolean;
 
+  isLoading = false;
+
+  i18ns: any = {};
+
   constructor(private location: Location,
-              private router: Router,
-              private httpService: HttpService,
-              private commonService: CommonService) {
+    private router: Router,
+    private userService: UserService,
+    private httpService: HttpService,
+    private languageService: LanguageService,
+    private commonService: CommonService) {
   }
 
   async ngOnInit() {
     this.countryCode = '86';
+    this.i18ns.inputPhone = await this.languageService.get('user.inputPhone');
+    this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
+    this.i18ns.resendSmsCode = await this.languageService.get('user.resendSmsCode');
+    this.i18ns.inputPassword = await this.languageService.get('user.inputPassword');
 
-    let _accessToken = localStorage.getItem('access_token');
-    let _loginTimestamp = localStorage.getItem('login_timestamp');
-    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 10) {
+    const _accessToken = localStorage.getItem('access_token');
+    const _loginTimestamp = localStorage.getItem('login_timestamp');
+    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
       this.router.navigate(['/home']);
     }
 
@@ -98,29 +110,40 @@ export class LoginComponent implements OnInit {
       return alert('请输入密码!');
     }
 
-    let _params = {
+    this.isLoading = true;
+
+    const _params = {
       countryCallingCode: this.countryCode,
       phone: this.phone,
       password: this.password,
       verifyCode: this.smsCode,
     };
 
-    this.httpService.request(RouteMap.V1.USER.LOGIN, _params).then(data => {
-      let _token = data && data.token;
-      let _userId = data && data.userid;
+    this.httpService.request(RouteMap.V1.USER.LOGIN, _params).then(async (data) => {
+      const _token = data && data.token;
+      const _userId = data && data.userid;
       if (_token) {
         localStorage.setItem('access_token', _token);
         localStorage.setItem('login_timestamp', Date.now() + '');
         localStorage.setItem('user_id', _userId);
         delete _params.password;
-        this.router.navigate(['/my', {userId: _userId}])
+        this.router.navigate(['/my', { userId: _userId }])
       } else {
 
       }
+      const _user = await this.userService.getDetail({});
+      if (_user) {
+        localStorage.setItem('user', JSON.stringify(_user));
+        if (!_user.username) {
+          this.router.navigate(['setNickName', { userId: _user.id }]);
+        }
+      }
+      this.isLoading = false;
     }, error => {
       console.error('---------------------error: ', error);
       this.password = '';
       alert('手机号或者密码错误');
+      this.isLoading = false;
     });
 
   }

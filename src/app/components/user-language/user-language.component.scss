@@ -1,0 +1,11 @@
+.gz-coin-select {
+    .list-group-item {
+        color: #727275;
+
+        &.active {
+            color: #000000;
+            background: #FFFFFF;
+            border: 0;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { TransactionListItem } from "../../../models/ad/TransactionListItem";
+import { Router } from '@angular/router';
+import { TransactionListItem } from '../../../models/ad/TransactionListItem';
 
 @Component({
   selector: 'gz-list-transaction',
@@ -26,7 +26,11 @@ export class ListTransactionComponent implements OnInit {
   }
 
   toTransaction(data: TransactionListItem) {
-    this.router.navigate(['/transaction', {adId: data.adId || ''}])
+    this.router.navigate(['/transaction', { adId: data.adId || '' }]);
+  }
+
+  toUserDetail() {
+    this.router.navigate(['/user', { userId: this.userId, coinType: '' }]);
   }
 
 }

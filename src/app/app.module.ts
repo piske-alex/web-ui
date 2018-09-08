@@ -61,6 +61,7 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { HomeComponent } from './components/home/home.component';
 import { CoinNumberPipe } from './pipes/coin/coin-number.pipe';
 import { PcMenuComponent } from './components/pc-menu/pc-menu/pc-menu.component';
+import { SelectMultiComponent } from './components/element/select-multi/select-multi/select-multi.component';
 
 library.add(fas);
 
@@ -117,6 +118,7 @@ const createTranslateLoader = function (http: HttpClient) {
     HomeComponent,
     CoinNumberPipe,
     PcMenuComponent,
+    SelectMultiComponent,
   ],
   imports: [
     BrowserModule,

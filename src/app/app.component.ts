@@ -60,12 +60,15 @@ export class AppComponent implements OnInit {
 
     this.languageService.initConfig(this.language);
 
+    // TODO delete
+    return;
+
     this.router.navigate(['/home']);
 
     setInterval(() => {
-      let _accessToken = localStorage.getItem('access_token');
-      let _loginTimestamp = localStorage.getItem('login_timestamp');
-      if (_accessToken && (!_loginTimestamp || Date.now() - +_loginTimestamp > 1000 * 60 * 10)) {
+      const _accessToken = localStorage.getItem('access_token');
+      const _loginTimestamp = localStorage.getItem('login_timestamp');
+      if (_accessToken && (!_loginTimestamp || Date.now() - +_loginTimestamp > 1000 * 60 * 30)) {
         localStorage.removeItem('user_id');
         localStorage.removeItem('user');
         localStorage.removeItem('login_timestamp');

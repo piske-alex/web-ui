@@ -1,4 +1,4 @@
-<gz-select-single *ngIf="isShowSelect"
+<gz-select-multi *ngIf="isShowSelect"
                   [head]="selectHead" [keyField]="selectKey" [valueField]="selectValue"
                   [list]="list" [active]="data"
-                  (cancel)="selectCancel($event)" (done)="selectOne($event)"></gz-select-single>
+                  (cancel)="selectCancel($event)" (done)="selectMulti($event)"></gz-select-multi>

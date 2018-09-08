@@ -51,8 +51,5 @@ export class SetNicknameComponent implements OnInit {
       console.error(e);
     }
 
-    // // TODO delete
-    // this.router.navigate(['/my', {userId: this.userId}]);
-    // // TODO delete end.
   }
 }

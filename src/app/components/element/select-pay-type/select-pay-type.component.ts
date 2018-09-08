@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LanguageService } from "../../../providers/language/language.service";
-import { CommonService } from "../../../providers/common/common.service";
-import { Currency } from "../../../models/common/Currency";
+import { LanguageService } from '../../../providers/language/language.service';
+import { CommonService } from '../../../providers/common/common.service';
+import { Currency } from '../../../models/common/Currency';
 
 @Component({
   selector: 'gz-select-pay-type',
@@ -12,14 +12,15 @@ export class SelectPayTypeComponent implements OnInit {
 
   @Input()
   code: string;
-  data: Currency;
+
+  data: Currency[];
 
   list: Currency[];
 
   isShowSelect: boolean;
   selectHead: string;
-  selectKey: string = 'code';
-  selectValue: string = 'name';
+  selectKey = 'code';
+  selectValue = 'name';
 
   @Output()
   private done = new EventEmitter();
@@ -34,15 +35,26 @@ export class SelectPayTypeComponent implements OnInit {
       console.error(e);
     }
 
-    this.list && this.list.forEach(_data => {
-      if (_data.code === this.code) {
-        this.data = _data;
-        this.done.emit(_data);
+    this.list = this.list || [];
+
+    this._init();
+  }
+
+  private _init() {
+    const _selectedCodes = this.code.split(',').map(_data => {
+      return _data.trim();
+    });
+    this.data = [];
+    this.list.forEach(_data => {
+      if (_selectedCodes.includes(_data.code)) {
+        this.data.push(_data);
       }
     });
+    this.done.emit(this.data);
   }
 
   async toSelect() {
+    this._init();
     this.isShowSelect = true;
     this.selectHead = await this.languageService.get('select.currency');
   }
@@ -51,7 +63,7 @@ export class SelectPayTypeComponent implements OnInit {
     this.isShowSelect = false;
   }
 
-  selectOne(data) {
+  selectMulti(data) {
     this.isShowSelect = false;
     if (data) {
       this.data = data;

@@ -1,6 +1,6 @@
 <div class="gz-action-deposit">
   <div style="display: flex;">
-    向如下地址汇入 <span>BTC</span> 完成充值
+    向如下地址汇入 <span>{{coinType}}</span> 完成充值
     <div id="qrcode" (click)="showBigImg()"></div>
   </div>
   <div class="loader" *ngIf="isLoading">Loading...</div>
@@ -12,7 +12,7 @@
       注意事项
     </p>
     <p>
-      BTC地址只能充值BTC资产，任何冲入BTC地址的非{{coinType}}资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 BTC
+      {{coinType}}地址只能充值{{coinType}}资产，任何冲入{{coinType}}地址的非{{coinType}}资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 {{coinType}}
     </p>
   </div>
 </div>

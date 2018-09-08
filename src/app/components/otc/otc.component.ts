@@ -35,11 +35,12 @@ export class OtcComponent implements OnInit, OnDestroy {
   coinTypeCode = 'BTC';
   currencyCode = 'CNY';
   payTypeCode = 'AP';
+  payTypeNames = '';
 
   country: Country = new Country();
   coinType: CoinType = new CoinType();
   currency: Currency = new Currency();
-  payType: PayType = new PayType();
+  payType: PayType[];
 
   @ViewChild(SelectCountryComponent)
   private selectCountryComponent;
@@ -56,10 +57,10 @@ export class OtcComponent implements OnInit, OnDestroy {
   scrollAdIndex = 0;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private commonService: CommonService,
-              private adService: AdService,
-              private languageService: LanguageService) {
+    private route: ActivatedRoute,
+    private commonService: CommonService,
+    private adService: AdService,
+    private languageService: LanguageService) {
   }
 
   async ngOnInit() {
@@ -228,8 +229,15 @@ export class OtcComponent implements OnInit, OnDestroy {
 
   selectPayType(data) {
     if (data) {
-      this.payTypeCode = data.code;
-      this.payType = data;
+      this.payType = data || [];
+      const _payTypeCodes = [];
+      const _payTypeNames = [];
+      this.payType.forEach(_data => {
+        _payTypeCodes.push(_data.code);
+        _payTypeNames.push(_data.name);
+      });
+      this.payTypeCode = _payTypeCodes.join(',');
+      this.payTypeNames = _payTypeNames.join(',');
     }
   }
 
@@ -248,17 +256,17 @@ export class OtcComponent implements OnInit, OnDestroy {
 
   goToPostAd() {
     this.showAddList = false;
-    this.router.navigate(['/postAd'])
+    this.router.navigate(['/postAd']);
   }
 
   goToMyAd() {
     this.showAddList = false;
-    this.router.navigate(['/myAd'])
+    this.router.navigate(['/myAd']);
   }
 
   goToTrust() {
     this.showAddList = false;
-    this.router.navigate(['/trustList'])
+    this.router.navigate(['/trustList']);
   }
 
 

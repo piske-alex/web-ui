@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from "@angular/common";
-import { OtcAd } from "../../models/ad/OtcAd";
-import { LanguageService } from "../../providers/language/language.service";
-import { AdService } from "../../providers/ad/ad.service";
+import { Location } from '@angular/common';
+import { OtcAd } from '../../models/ad/OtcAd';
+import { LanguageService } from '../../providers/language/language.service';
+import { AdService } from '../../providers/ad/ad.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gz-my-ad',
@@ -12,15 +13,22 @@ import { AdService } from "../../providers/ad/ad.service";
 export class MyAdComponent implements OnInit {
 
   userId: string;
-  status: number = 1; // 1. 进行中， 10. 已下架
+  status = 1; // 1. 进行中， 10. 已下架
   list: OtcAd[] = [];
 
   constructor(private location: Location,
-              private languageService: LanguageService,
-              private adService: AdService) {
+    private router: Router,
+    private languageService: LanguageService,
+    private adService: AdService) {
   }
 
   ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.userId = localStorage.getItem('user_id');
     this.loadPublishAd();
   }
@@ -41,7 +49,7 @@ export class MyAdComponent implements OnInit {
 
   private async loadPublishAd() {
     try {
-      this.adService.listOtcAd({publishUserId: this.userId, status: this.status});
+      this.adService.listOtcAd({ publishUserId: this.userId, status: this.status });
     } catch (e) {
       console.error(e);
     }

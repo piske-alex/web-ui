@@ -24,9 +24,6 @@ export class CoinActionComponent implements OnInit {
     this.coinType = this.route.snapshot.paramMap.get('coinType');
     this.action = this.route.snapshot.paramMap.get('action');
 
-    console.log('this.coinType:::', this.coinType);
-    console.log('this.action:::', this.action);
-
     // try {
     //   this.coinBalance = await this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'});
     //   this.coinBalance.allBalance = (+this.coinBalance.balance + +this.coinBalance.locked).toFixed(8);

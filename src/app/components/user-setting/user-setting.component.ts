@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from "@angular/common";
-import { Router } from "@angular/router";
-import { UserService } from "../../providers/user/user.service";
-import { User } from "../../models/user/user";
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { UserService } from '../../providers/user/user.service';
+import { User } from '../../models/user/user';
 
 @Component({
   selector: 'gz-user-setting',
@@ -15,25 +15,26 @@ export class UserSettingComponent implements OnInit {
   user: User = new User();
 
   constructor(private location: Location,
-              private userService: UserService,
-              private router: Router) {
+    private userService: UserService,
+    private router: Router) {
   }
 
   async ngOnInit() {
     this.userId = localStorage.getItem('user_id');
     try {
-      let _user = localStorage.getItem('user');
+      const _user = localStorage.getItem('user');
       if (_user) {
         this.user = JSON.parse(_user);
       }
     } catch (e) {
       console.error(e);
     }
-    this.user = await this.userService.getDetail({id: this.userId});
+    this.user = await this.userService.getDetail({ id: this.userId });
   }
 
   goBack() {
-    this.location.back();
+    // this.location.back();
+    this.router.navigate(['/my']);
   }
 
   goToVerify() {

@@ -21,11 +21,11 @@ export class MyComponent implements OnInit {
 
   async ngOnInit() {
 
-    let _accessToken = localStorage.getItem('access_token');
-    let _loginTimestamp = localStorage.getItem('login_timestamp');
+    const _accessToken = localStorage.getItem('access_token');
+    const _loginTimestamp = localStorage.getItem('login_timestamp');
 
     try {
-      let _user = localStorage.getItem('user');
+      const _user = localStorage.getItem('user');
       if (_user) {
         this.user = JSON.parse(_user);
       }
@@ -34,7 +34,7 @@ export class MyComponent implements OnInit {
     }
     localStorage.removeItem('user');
 
-    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 10) {
+    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
       this.user = await this.userService.getDetail({});
       localStorage.setItem('user_id', this.user.id);
       localStorage.setItem('user', JSON.stringify(this.user));

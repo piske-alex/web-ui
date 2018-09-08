@@ -22,7 +22,7 @@
   <section class="gz-list-tr" *ngFor="let data of list">
     <div class="gz-list-tr-left">
       <div class="gz-list-tr-head">
-        <img src="{{data.headUrl}}" alt="">
+        <img src="{{data.avatar | avatar}}" alt="">
       </div>
       <div class="gz-list-tr-detail">
         <h3>{{data.username}}</h3>

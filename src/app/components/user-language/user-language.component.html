@@ -4,7 +4,7 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title">
-      选择币种
+      选择语言
     </div>
     <div></div>
   </div>
@@ -12,6 +12,6 @@
 
 <article class="gz-coin-select">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let data of list" (click)="submit(data)">{{data.name}}</li>
+    <li class="list-group-item {{data.code === language ? 'active': ''}}" *ngFor="let data of list" (click)="submit(data)">{{data.name}}</li>
   </ul>
 </article>

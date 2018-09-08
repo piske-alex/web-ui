@@ -23,10 +23,10 @@ export class TransactionComponent implements OnInit {
   adId: string;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private location: Location,
-              private adService: AdService,
-              private languageService: LanguageService) {
+    private route: ActivatedRoute,
+    private location: Location,
+    private adService: AdService,
+    private languageService: LanguageService) {
   }
 
   async ngOnInit() {
@@ -48,7 +48,7 @@ export class TransactionComponent implements OnInit {
     this.i18ns.transactionLimit = await this.languageService.get('otc.transactionLimit');
 
     try {
-      this.data = await this.adService.getOtcAdById({adid: this.adId});
+      this.data = await this.adService.getOtcAdById({ adid: this.adId });
     } catch (e) {
       console.error(e);
     }
@@ -61,11 +61,11 @@ export class TransactionComponent implements OnInit {
   }
 
   goToHelp() {
-    this.router.navigate(['/help', {type: 'sell'}])
+    this.router.navigate(['/help', { type: 'sell' }])
   }
 
   goToChat() {
-    this.router.navigate(['/chat', {adId: this.adId}])
+    this.router.navigate(['/chat', { adId: this.adId }])
   }
 
   getRemark() {
@@ -97,13 +97,25 @@ export class TransactionComponent implements OnInit {
   }
 
   async confirmTransaction() {
-    let _result = await this.adService.transaction({adid: this.data.adId, amount: this.payAmount});
-    let _orderId = _result.orderid;
-    this.router.navigate(['/orderDetail', {orderId: _orderId}]);
+    const _result = await this.adService.transaction({ adid: this.data.adId, amount: this.payAmount });
+    const _orderId = _result.orderid;
+    this.router.navigate(['/orderDetail', { orderId: _orderId }]);
   }
 
   changePay() {
-    this.receiveAmount = this.payAmount * +this.data.rate;
+    if (this.data.adType == '1') {
+      this.receiveAmount = +((this.payAmount / +this.data.rate).toFixed(8));
+    } else {
+      this.receiveAmount = +((this.payAmount * +this.data.rate).toFixed(2));
+    }
+  }
+
+  changeReceive() {
+    if (this.data.adType == '1') {
+      this.payAmount = +((this.receiveAmount * +this.data.rate).toFixed(2));
+    } else {
+      this.payAmount = +((this.receiveAmount / +this.data.rate).toFixed(8));
+    }
   }
 
   getLeftPlacehold() {
@@ -128,7 +140,7 @@ export class TransactionComponent implements OnInit {
 
   async obtained() {
     try {
-      let _result = await this.adService.deleteAd({adid: this.adId});
+      let _result = await this.adService.deleteAd({ adid: this.adId });
       this.location.back();
     } catch (e) {
       console.error(e);
@@ -136,7 +148,7 @@ export class TransactionComponent implements OnInit {
   }
 
   edit() {
-    this.router.navigate(['/postAd', {adId: this.adId || ''}])
+    this.router.navigate(['/postAd', { adId: this.adId || '' }])
   }
 
 }

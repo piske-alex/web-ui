@@ -32,13 +32,13 @@
     <div *ngIf="data.adType == '2'">{{i18ns.wantBuy}}</div>
     <div *ngIf="data.adType == '2' && payAmount >= 0">{{getLeftPlacehold()}}</div>
     <div class="gz-input-row">
-      <span *ngIf="data.adType == '1'">{{data.transactionCoinType}}</span>
-      <span *ngIf="data.adType == '2'">{{data.transactionCurrency}}</span>
+      <span *ngIf="data.adType == '2'">{{data.transactionCoinType}}</span>
+      <span *ngIf="data.adType == '1'">{{data.transactionCurrency}}</span>
       <input type="number" [(ngModel)]="payAmount" (keyup)="changePay()" [placeholder]="getLeftPlacehold()">
       <fa-icon [icon]="['fas', 'exchange-alt']"></fa-icon>
-      <span *ngIf="data.adType == '1'">{{data.transactionCurrency}}</span>
-      <span *ngIf="data.adType == '2'">{{data.transactionCoinType}}</span>
-      <input type="number" [(ngModel)]="receiveAmount" [placeholder]="getRightPlacehold()" disabled>
+      <span *ngIf="data.adType == '2'">{{data.transactionCurrency}}</span>
+      <span *ngIf="data.adType == '1'">{{data.transactionCoinType}}</span>
+      <input type="number" [(ngModel)]="receiveAmount" (keyup)="changeReceive()" [placeholder]="getRightPlacehold()">
     </div>
   </section>
 

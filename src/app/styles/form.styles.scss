@@ -91,7 +91,8 @@
         padding-left: 50px;
 
         select {
-          color: $link_default_color;
+          color: $select_font;
+          background: $select_bg;
           width: 100%;
         }
       }
@@ -106,7 +107,7 @@
         width: 80%;
 
         &.active {
-          color: #ffffff;
+          color: $btn_primary_font;
           background: $link_active_color;
           border: 1px solid $link_active_color;
         }

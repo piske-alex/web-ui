@@ -14,7 +14,7 @@ export class WalletComponent implements OnInit {
 
   isLoading = false;
 
-  accountType: number = 2;
+  accountType = 2;
   mainCoin: any = {
     usableAmount: '0.00000000',
     freezeAmount: '0.00000000',

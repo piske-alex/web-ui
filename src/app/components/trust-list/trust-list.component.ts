@@ -3,6 +3,7 @@ import { Location } from "@angular/common";
 import { User } from "../../models/user/user";
 import { LanguageService } from "../../providers/language/language.service";
 import { UserService } from "../../providers/user/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gz-trust-list',
@@ -11,18 +12,24 @@ import { UserService } from "../../providers/user/user.service";
 })
 export class TrustListComponent implements OnInit {
 
-  relationShip: number = 1;
+  relationShip = 1;
 
   list: User[] = [];
 
   i18ns: any = {};
 
   constructor(private location: Location,
-              private languageService: LanguageService,
-              private userService: UserService) {
+    private router: Router,
+    private languageService: LanguageService,
+    private userService: UserService) {
   }
 
   async ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
     this.i18ns.iDealWithHimCount = await this.languageService.get('user.iDealWithHimCount');
     this.i18ns.iTrusted = await this.languageService.get('user.iTrusted');
@@ -54,7 +61,7 @@ export class TrustListComponent implements OnInit {
 
   private async getUserList() {
     try {
-      this.list = await this.userService.getUserList({relationship: this.relationShip});
+      this.list = await this.userService.getUserList({ relationship: this.relationShip });
     } catch (e) {
       console.error(e);
     }

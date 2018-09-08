@@ -16,8 +16,6 @@ export const environment = {
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 export class EnvironmentConstant {
-  // public static API_URL = 'http://localhost:4200/api';
-  // public static API_URL = 'http://10.20.100.211:80/api';
   public static AVATAR = 'http://office.ddns.need.sh:8011/avatar';
   public static API_URL = 'http://office.ddns.need.sh:8011/api';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
