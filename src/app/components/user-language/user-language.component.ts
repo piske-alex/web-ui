@@ -38,7 +38,7 @@ export class UserLanguageComponent implements OnInit {
   async submit(data) {
     try {
       this.languageService.initConfig(data.code);
-      const _result = await this.userService.setLanguage({ code: data.code });
+      const _result = await this.userService.setLanguage({ language: data.code });
       // this.goBack();
     } catch (e) {
       console.error(e);
