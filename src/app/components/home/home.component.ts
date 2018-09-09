@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from "../../providers/common/common.service";
-import { AdService } from "../../providers/ad/ad.service";
-import { Router } from "@angular/router";
+import { CommonService } from '../../providers/common/common.service';
+import { AdService } from '../../providers/ad/ad.service';
+import { Router } from '@angular/router';
 
 const $ = (<any>window).$;
 
@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
   payTypeObj: any = {};
 
   constructor(private router: Router,
-              private commonService: CommonService,
-              private adService: AdService) {
+    private commonService: CommonService,
+    private adService: AdService) {
   }
 
   async ngOnInit() {
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     this._autoLoadData();
 
     try {
-      let _payTypes = await this.commonService.getPayTypeList();
+      const _payTypes = await this.commonService.getPayTypeList();
       (_payTypes || []).forEach(_data => {
         this.payTypeObj[_data.code] = _data;
       });
@@ -65,15 +65,17 @@ export class HomeComponent implements OnInit {
 
   private _loadCoinRate() {
     this.commonService.getCoinRate('', '').then(data => {
-      let _coinPrices = [];
-      for (let coinType in data) {
-        const _data = data[coinType];
-        _coinPrices.push({
-          coinType: coinType,
-          changePercent: (_data.change * 100).toFixed(2),
-          USD: _data.value.USD,
-          CNY: _data.value.CNY,
-        });
+      const _coinPrices = [];
+      for (const coinType in data) {
+        if (data[coinType] !== undefined) {
+          const _data = data[coinType];
+          _coinPrices.push({
+            coinType: coinType,
+            changePercent: (_data.change * 100).toFixed(2),
+            USD: _data.value.USD,
+            CNY: _data.value.CNY,
+          });
+        }
       }
       this.coinPrices = _coinPrices;
     }, error => {
@@ -132,7 +134,7 @@ export class HomeComponent implements OnInit {
   private _autoLoadData() {
     const _loadDataIntervalName = setInterval(() => {
       this._loadCoinRate();
-    }, 1000);
+    }, 5000);
 
     const _checkIntervalName = setInterval(() => {
       if (!/.*(\/home)(\/)?$/.test(location.href)) {
@@ -144,7 +146,7 @@ export class HomeComponent implements OnInit {
   }
 
   toTransaction(adId: string) {
-    this.router.navigate(['/transaction', {adId: adId || ''}])
+    this.router.navigate(['/transaction', { adId: adId || '' }]);
   }
 
 }
