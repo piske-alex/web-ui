@@ -26,9 +26,9 @@ export class RegisterComponent implements OnInit {
   i18ns: any = {};
 
   constructor(private location: Location,
-              private router: Router,
-              private userService: UserService,
-              private commonService: CommonService) {
+    private router: Router,
+    private userService: UserService,
+    private commonService: CommonService) {
   }
 
   async ngOnInit() {
@@ -114,8 +114,11 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('access_token', _token);
       localStorage.setItem('login_timestamp', Date.now() + '');
 
-      this.router.navigate(['/setNickName', {userId: _userId}]);
+      this.router.navigate(['/setNickName', { userId: _userId }]);
     } catch (e) {
+      if (e.error.success === false && e.error.errmsg !== undefined) {
+        alert(e.error.errmsg);
+      }
       console.error(e);
     }
 

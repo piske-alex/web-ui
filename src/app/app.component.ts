@@ -63,18 +63,18 @@ export class AppComponent implements OnInit {
     // TODO delete
     return;
 
-    this.router.navigate(['/home']);
+    // this.router.navigate(['/home']);
 
-    setInterval(() => {
-      const _accessToken = localStorage.getItem('access_token');
-      const _loginTimestamp = localStorage.getItem('login_timestamp');
-      if (_accessToken && (!_loginTimestamp || Date.now() - +_loginTimestamp > 1000 * 60 * 30)) {
-        localStorage.removeItem('user_id');
-        localStorage.removeItem('user');
-        localStorage.removeItem('login_timestamp');
-        localStorage.removeItem('access_token');
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   const _accessToken = localStorage.getItem('access_token');
+    //   const _loginTimestamp = localStorage.getItem('login_timestamp');
+    //   if (_accessToken && (!_loginTimestamp || Date.now() - +_loginTimestamp > 1000 * 60 * 30)) {
+    //     localStorage.removeItem('user_id');
+    //     localStorage.removeItem('user');
+    //     localStorage.removeItem('login_timestamp');
+    //     localStorage.removeItem('access_token');
+    //   }
+    // }, 1000);
   }
 
   goToLogin() {

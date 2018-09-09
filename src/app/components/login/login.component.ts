@@ -142,7 +142,11 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.error('---------------------error: ', error);
       this.password = '';
-      alert('手机号或者密码错误');
+      if (error.error.success === false && error.error.errmsg !== undefined) {
+        alert(error.error.errmsg);
+      } else {
+        alert('手机号或者密码错误');
+      }
       this.isLoading = false;
     });
 

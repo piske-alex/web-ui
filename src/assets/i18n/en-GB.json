@@ -1,5 +1,6 @@
 {
   "tabsPage": {
+    "home": "首页",
     "otc": "OTC",
     "wallet": "WALLET",
     "my": "ME"
@@ -22,10 +23,21 @@
     "limitAmount": "Limit",
     "transaction": "Transaction",
     "help": "Help",
+    "search": "搜索",
+    "setting": "设置",
+    "login": "登录",
+    "forgetPassword": "忘记密码",
+    "registry": "注册",
+    "country": "国家/地区",
+    "helpCenter": "帮助中心",
     "contact": "Contact",
     "blackList": "Black List",
     "trust": "Trust List",
     "cancel": "Cancel"
+  },
+  "home": {
+    "coinPrice": "币市行程",
+    "otc": "场外交易"
   },
   "select": {
     "adType": "Please select an Ad type",
@@ -36,6 +48,11 @@
     "buyAd": "Buy Ad"
   },
   "otc": {
+    "iBuy": "我要购买",
+    "iSell": "我要出售",
+    "postAd": "发布广告",
+    "myAd": "我的广告",
+    "trustAdmin": "信任管理",
     "saleAd": "Post sale Ad",
     "buyAd": "Post purchase Ad",
     "walletNotEnough": "Your wallet has insufficient balance",
@@ -43,6 +60,22 @@
     "adWarning_1": "Publishing a trade ad is free",
     "adWarning_2": "Each completed transaction is subject to a 0.7% fee",
     "adWarning_3": "At least 0.05BTC is requied in the wallet for the ad a display properly",
+    "currentPrice": "当前报价",
+    "referencePrice": "市场参考价格",
+    "order": "订单",
+    "orderDelay15Min": "将在托管中保存15分钟，逾期未付款交易将自动取消。",
+    "seller": "卖家",
+    "buyer": "买家",
+    "orderNo": "订单编号",
+    "amount": "总额",
+    "count": "数量",
+    "price": "单价",
+    "cancelTransaction": "取消交易",
+    "markPay": "标记付款",
+    "markReceive": "标记收款",
+    "waitPay": "待付款",
+    "minute": "分",
+    "second": "秒",
     "adType": "Ad type",
     "coinType": "Please select a Cryptocurrency",
     "country": "Country/Region",
@@ -100,6 +133,14 @@
     "trustedMe": "Trust my people",
     "iBlackList": "The person I am blocking",
     "trustManage": "Trust management",
+    "loginOrRegister": "登录/注册",
+    "loginDesc": "立刻登录可以查看更多内容",
+    "logout": "退出",
+    "inputPhone": "请输入手机号",
+    "inputSmsCode": "请输入短信验证码",
+    "inputPassword": "请输入密码",
+    "resendSmsCode": "重新获取验证码",
+    "sendSmsCode": "获取验证码",
     "iDealWithHimCount": "I have traded with him for${1}times"
   },
   "wallet": {
@@ -111,5 +152,6 @@
     "usable": "Available",
     "freeze": "Freeze",
     "selectCoin": "Select a Cryptocurrency"
+    "depositWillReceiveHelp": "<p>温馨提示</p><p>在${coinTYpe}网络接收${coinTYpe}通常需要10分钟，我们会在收到${coinTYpe}网络1个确认后给您入帐。最低存入金额为0.01${coinTYpe}， 我们不会处理少于该金额的${coinTYpe}存入请求，在平台内互相转账是实时到账且免费的。</p>"
   }
 }
