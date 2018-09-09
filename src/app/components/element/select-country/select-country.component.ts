@@ -31,6 +31,9 @@ export class SelectCountryComponent implements OnInit {
   async ngOnInit() {
     try {
       this.list = await this.commonService.getCountryList();
+      for (const c of this.list) {
+        c.name = await this.languageService.get('countryName.' + c.code);
+      }
     } catch (e) {
       console.error(e);
     }

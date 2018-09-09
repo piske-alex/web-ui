@@ -151,7 +151,13 @@
     "withraw": "Transfer Funds",
     "usable": "Available",
     "freeze": "Freeze",
-    "selectCoin": "Select a Cryptocurrency"
+    "selectCoin": "Select a Cryptocurrency",
     "depositWillReceiveHelp": "<p>温馨提示</p><p>在${coinTYpe}网络接收${coinTYpe}通常需要10分钟，我们会在收到${coinTYpe}网络1个确认后给您入帐。最低存入金额为0.01${coinTYpe}， 我们不会处理少于该金额的${coinTYpe}存入请求，在平台内互相转账是实时到账且免费的。</p>"
+  },
+  "countryName": {
+    "CN": "中国",
+    "HK": "中国香港",
+    "UK": "英国",
+    "SG": "新加坡"
   }
 }

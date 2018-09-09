@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from "@ngx-translate/core";
-import { Observable, Subject } from "rxjs/index";
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subject } from 'rxjs/index';
 
 
 /*
@@ -22,8 +22,8 @@ this.languageService.initConfig(this.language);
 })
 export class LanguageService {
 
-  language: string = 'zh-CN';
-  list = ["zh-CN", "en-GB", 'zh-HK'];
+  language = 'zh-CN';
+  list = ['zh-CN', 'en-GB', 'zh-HK'];
   isReady: boolean;
   private readySubject: Subject<boolean> = new Subject();
   private changeSubject: Subject<string> = new Subject();
