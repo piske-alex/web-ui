@@ -145,6 +145,7 @@ export class LoginComponent implements OnInit {
       if (error.error.success === false && error.error.errmsg !== undefined) {
         alert(error.error.errmsg);
       } else {
+        this.resendSmsCodeDelay = 1;
         alert('手机号或者密码错误');
       }
       this.isLoading = false;
