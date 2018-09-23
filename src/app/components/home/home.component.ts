@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
 
+
     this._updateScroll('ad', 4, true);
 
     this._loadCoinRate();
@@ -60,6 +61,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.autoScroll('homeotc', this.otcTransactions.length);
     }, 800);
+
 
   }
 

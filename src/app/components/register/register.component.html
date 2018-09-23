@@ -4,7 +4,7 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title">
-      注册
+      <gz-i18n key="common.registry"></gz-i18n>
     </div>
     <div></div>
   </div>
@@ -12,7 +12,7 @@
 
 <article class="gz-register gz-form">
   <section class="gz-country">
-    <div style="min-width: 60px;">国家/地区</div>
+    <div style="min-width: 60px;"><gz-i18n key="common.country"></gz-i18n></div>
     <div class="gz-country-select">
       <select [(ngModel)]="countryCode">
         <option *ngFor="let cc of countryCodes" value="{{cc.code}}">
@@ -25,30 +25,33 @@
     </div>
   </section>
   <section>
-    <div class="gz-label {{isFocus('phoneNo')}}">请输入手机号</div>
+    <div class="gz-label {{isFocus('phoneNo')}}"><gz-i18n key="user.inputPhone"></gz-i18n></div>
     <div>
-      <input type="text" class="{{isFocus('phoneNo')}}" placeholder="请输入手机号"
+      <input type="text" class="{{isFocus('phoneNo')}}" 
              [(ngModel)]="phoneNo"
-             (focus)="focus('phoneNo')" (blur)="blur('phoneNo')">
+             (focus)="focus('phoneNo')" (blur)="blur('phoneNo')"
+             placeholder="{{this.i18ns.inputPhone}}" >
     </div>
   </section>
   <section>
-    <div class="gz-label {{isFocus('smsCode')}}">请输入短信验证码</div>
+    <div class="gz-label {{isFocus('smsCode')}}"><gz-i18n key="user.inputSmsCode"></gz-i18n></div>
     <div style="position: relative;">
-      <input type="text" class="{{isFocus('smsCode')}}" placeholder="请输入短信验证码"
+      <input type="text" class="{{isFocus('smsCode')}}" 
              [(ngModel)]="smsCode"
-             (focus)="focus('smsCode')" (blur)="blur('smsCode')">
-      <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">获取验证码</div>
-      <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay">重新获取验证码({{resendSmsCodeDelay}})</div>
+             (focus)="focus('smsCode')" (blur)="blur('smsCode')"
+             placeholder="{{this.i18ns.inputSmsCode}}"
+             >
+      <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()"><gz-i18n key="user.sendSmsCode"></gz-i18n></div>
+      <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay"><gz-i18n key="user.resendSmsCode"></gz-i18n>({{resendSmsCodeDelay}})</div>
     </div>
   </section>
   <section>
-    <div class="gz-label {{isFocus('password')}}">设置登录密码</div>
+    <div class="gz-label {{isFocus('password')}}"><gz-i18n key="user.inputPassword"></gz-i18n></div>
     <div class="gz-password">
-      <input type="password" class="{{isFocus('password')}}" placeholder="设置登录密码"
+      <input type="password" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}"
              [(ngModel)]="password" *ngIf="!isShowPassword"
              (focus)="focus('password')" (blur)="blur('password')">
-      <input type="text" class="{{isFocus('password')}}" placeholder="设置登录密码"
+      <input type="text" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}"
              [(ngModel)]="password" *ngIf="isShowPassword"
              (focus)="focus('password')" (blur)="blur('password')">
       <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
@@ -58,9 +61,9 @@
   </section>
   <section class="gz-agree-terms">
     <input type="checkbox" id="isAggreeTerms" [(ngModel)]="isAggreeTerms">
-    <label for="isAggreeTerms">已经阅读并同意 <span class="gz-active">《KoinExchange 服务条款》</span></label>
+    <label for="isAggreeTerms"><gz-i18n key="register.read_agreement"></gz-i18n> <span class="gz-active"><gz-i18n key="register.agreement_name"></gz-i18n></span></label>
   </section>
   <section class="gz-submit">
-    <div class="btn gz-circle active" (click)="register()">下一步</div>
+    <div class="btn gz-circle active" (click)="register()"><gz-i18n key="register.next_step"></gz-i18n></div>
   </section>
 </article>

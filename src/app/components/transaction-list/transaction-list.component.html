@@ -4,7 +4,7 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title">
-      交易明细({{coinType}})
+      <gz-i18n key="transaction.trans_detail"></gz-i18n>({{coinType}})
     </div>
     <div></div>
   </div>
@@ -15,15 +15,15 @@
     <div class="gz-transaction-date">{{date}}</div>
     <div class="gz-list" *ngFor="let transaction of transactions[date]">
       <div class="gz-coin gz-coin-{{transaction.type}}">
-        <span *ngIf="transaction.type === 'receive'">接收</span>
-        <span *ngIf="transaction.type === 'send'">发送</span>
-        <span>数量: </span>
+        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_receive"></gz-i18n></span>
+        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_send"></gz-i18n></span>
+        <span><gz-i18n key="transaction.trans_coin_number"></gz-i18n>: </span>
         <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
       </div>
       <div>
-        <span *ngIf="transaction.type === 'receive'">转入</span>
-        <span *ngIf="transaction.type === 'send'">转出</span>
-        <span>地址: </span>
+        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_in"></gz-i18n></span>
+        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_out"></gz-i18n></span>
+        <span><gz-i18n key="transaction.trans_address"></gz-i18n>: </span>
         <span>{{transaction.address}}</span>
       </div>
       <div>
@@ -31,7 +31,7 @@
         <span>{{transaction.txid}}</span>
       </div>
       <div>
-        <span>到账时间:</span>
+        <span><gz-i18n key="transaction.trans_confirm_time"></gz-i18n>:</span>
         <span>{{transaction.confirmTime}}</span>
       </div>
     </div>

@@ -7,23 +7,23 @@
       OTC {{coinType}}
     </div>
     <div (click)="goToTransactionList()">
-      明细
+      <gz-i18n key="coin.detail"></gz-i18n>
     </div>
   </div>
 </header>
 
 <article class="gz-wallet gz-coin-action">
   <section class="gz-wallet-summery">
-    <div class="gz-title">总资产</div>
+    <div class="gz-title"><gz-i18n key="coin.total_assets"></gz-i18n></div>
     <div class="gz-amount">{{coinBalance.allBalance}} {{coinType}}</div>
     <!--<div class="gz-currency">≈0.00 CNY</div>-->
     <div class="gz-wallet-coin-detail">
       <div class="">
-        <div>可用资产({{coinType}})</div>
+        <div><gz-i18n key="coin.balance"></gz-i18n>({{coinType}})</div>
         <div>{{coinBalance.balance}}</div>
       </div>
       <div class="">
-        <div>冻结资产({{coinType}})</div>
+        <div><gz-i18n key="coin.locked"></gz-i18n>({{coinType}})</div>
         <div>{{coinBalance.locked}}</div>
       </div>
     </div>
@@ -31,8 +31,8 @@
 
   <section class="gz-full-tab">
     <nav class="nav">
-      <a [class]="'nav-link ' + (isDeposit() ? 'active': '')" (click)="toDeposit()">充币</a>
-      <a [class]="'nav-link ' + (isWithraw() ? 'active': '')" (click)="toWithraw()">提币</a>
+      <a [class]="'nav-link ' + (isDeposit() ? 'active': '')" (click)="toDeposit()"><gz-i18n key="coin.Deposit"></gz-i18n></a>
+      <a [class]="'nav-link ' + (isWithraw() ? 'active': '')" (click)="toWithraw()"><gz-i18n key="coin.Withraw"></gz-i18n></a>
       <!--<a [class]="'nav-link ' + (isTransfer() ? 'active': '')" (click)="toTransfer()">资产划转</a>-->
     </nav>
   </section>

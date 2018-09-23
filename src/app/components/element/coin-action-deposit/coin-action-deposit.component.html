@@ -1,6 +1,6 @@
 <div class="gz-action-deposit">
   <div style="display: flex;">
-    向如下地址汇入 <span>{{coinType}}</span> 完成充值
+    <gz-i18n key="element_coin_deposit.to_address_recharge"></gz-i18n>
     <div id="qrcode" (click)="showBigImg()"></div>
   </div>
   <div class="loader" *ngIf="isLoading">Loading...</div>
@@ -9,10 +9,10 @@
   </div>
   <div class="gz-notice">
     <p>
-      注意事项
+      <gz-i18n key="element_coin_deposit.attention"></gz-i18n>
     </p>
-    <p>
-      {{coinType}}地址只能充值{{coinType}}资产，任何冲入{{coinType}}地址的非{{coinType}}资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 {{coinType}}
+    <p>     
+      <gz-i18n key="element_coin_deposit.attention_info"></gz-i18n>
     </p>
   </div>
 </div>
@@ -20,27 +20,27 @@
 <div class="gz-process-list">
   <div class="gz-title">
     <div>
-      <span>即将到账的转账</span>
+      <span><gz-i18n key="element_coin_deposit.start_trans"></gz-i18n></span>
       <span (click)="showInnerHelp()">
         <fa-icon class="gz-active" [icon]="['fas', 'question-circle']"></fa-icon>
       </span>
     </div>
-    <div class="gz-link" (click)="refreshWillReceive()">刷新</div>
+    <div class="gz-link" (click)="refreshWillReceive()"><gz-i18n key="element_coin_deposit.refresh"></gz-i18n></div>
   </div>
   <div *ngIf="!isLoadingTransaction">
     <div class="gz-list" *ngFor="let transaction of willReceiveTransactions">
       <div>
-        <span>TXID: </span>
+        <span><gz-i18n key="element_coin_deposit.txid"></gz-i18n>: </span>
         <span>{{transaction.txid}}</span>
       </div>
       <div>
-        <span>发送数量: </span>
+        <span><gz-i18n key="element_coin_deposit.send_coin_number"></gz-i18n>: </span>
         <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
       </div>
     </div>
   </div>
 </div>
-<div class="loader" *ngIf="isLoadingTransaction">Loading...</div>
+<div class="loader" *ngIf="isLoadingTransaction"><gz-i18n key="element_coin_deposit.loading"></gz-i18n></div>
 
 <div class="gz-full-screen" *ngIf="isShowBigImg">
   <div class="gz-full-screen-bg" *ngIf="isShowBigImg" (click)="hideBigImg()"></div>

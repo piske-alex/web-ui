@@ -6,7 +6,7 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title">
-      绑定邮箱
+      <gz-i18n key="user_email.set_email"></gz-i18n>
     </div>
     <div></div>
   </div>
@@ -14,11 +14,11 @@
 
 <article class="gz-form">
   <section>
-    <p>绑定邮箱用于消息提醒和相关安全操作，保护和帮助您完成交易</p>
+    <p><gz-i18n key="user_email.tip"></gz-i18n></p>
   </section>
   <section>
     <div>
-      <input type="text" [(ngModel)]="email" placeholder="请输入邮箱">
+      <input type="email" [(ngModel)]="email" placeholder="{{this.i18ns.input_email}}">
     </div>
   </section>
 
@@ -33,7 +33,7 @@
 
   <section class="gz-submit">
     <div class="btn btn-outline-blue gz-circle" (click)="submit()">
-      提交
+      <gz-i18n key="user_email.submit"></gz-i18n>
     </div>
   </section>
 

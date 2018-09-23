@@ -1,19 +1,54 @@
 <section class="gz-list-tr" *ngFor="let data of transactionList">
   <div class="gz-list-tr-left">
     <div class="gz-list-tr-head">
-      <img src="{{data.userHeadUrl | avatar}}" (click)="toUserDetail()">
-      <div class="btn btn-outline-orange gz-sm" *ngIf="data.isRealUser">已实名</div>
+      <img src="{{data.userHeadUrl | avatar}}" (click)="toUserDetail(data.userId)">
+      <div class="btn btn-outline-orange gz-sm" *ngIf="data.isRealUser">
+        <gz-i18n key="element_list_trans.real_cert_valid"></gz-i18n>
+      </div>
     </div>
     <div class="gz-list-tr-detail">
-      <h3>{{data.username}}&nbsp;<span class="btn btn-success gz-sm" *ngIf="data.isAccessBankTransfer">银行转账</span></h3>
-      <div>交易 {{data.transactionCount || 0}} | 好评 {{data.praiseCount || ''}} | 信任 {{data.trustCount || 0}}</div>
-      <div>限额 {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
+      <div  class="float_left">{{data.username}}</div>
+        <div class="float_left">
+          <img src="/assets/images/pay_ap.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_ap"> 
+          &nbsp;
+          <img src="/assets/images/pay_wp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_wp"> 
+          &nbsp;
+          <img src="/assets/images/pay_pp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_pp"> 
+          &nbsp;
+          <img src="/assets/images/pay_bt.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_bt">
+          &nbsp;
+        </div>
+        <!-- <span class="btn btn-success gz-sm" *ngIf="data.is_payment_ap">
+          <gz-i18n key="element_list_trans.ap_alipay"></gz-i18n>
+        </span>
+
+      <span class="btn btn-success gz-sm" *ngIf="data.is_payment_wp">
+        <gz-i18n key="element_list_trans.wp_wechatpay"></gz-i18n>
+      </span>
+
+      <span class="btn btn-success gz-sm" *ngIf="data.is_payment_pp">
+        <gz-i18n key="element_list_trans.pp_paypal"></gz-i18n>
+      </span>
+
+      <span class="btn btn-success gz-sm" *ngIf="data.is_payment_bt">
+        <gz-i18n key="element_list_trans.bt_bank_transfer"></gz-i18n>
+      </span> -->
+      
+      <div>
+        <gz-i18n key="element_list_trans.trans"></gz-i18n> {{data.transactionCount || 0}} 
+        | 
+        <gz-i18n key="element_list_trans.praise"></gz-i18n> {{data.praiseCount || ''}} 
+        | 
+        <gz-i18n key="element_list_trans.trust"></gz-i18n> {{data.trustCount || 0}}
+      </div>
+      <div>
+        <gz-i18n key="element_list_trans.limit_amount"></gz-i18n> {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
     </div>
   </div>
   <div class="gz-list-tr-right">
     <div class="gz-currency-large">{{data.rate}} {{data.transactionCurrency}}</div>
-    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '1'">出售 BTC</div>
-    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '2'">购买 BTC</div>
-    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId == userId">编辑</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '1'"><gz-i18n key="element_list_trans.sell_btc"></gz-i18n>{{data.transactionCoinType}}</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '2'"><gz-i18n key="element_list_trans.buy_btc"></gz-i18n>{{data.transactionCoinType}}</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId == userId"><gz-i18n key="element_list_trans.edit"></gz-i18n></div>
   </div>
 </section>

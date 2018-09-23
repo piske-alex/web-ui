@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { CommonService } from '../../providers/common/common.service';
 import { UserService } from '../../providers/user/user.service';
+import { LanguageService } from '../../providers/language/language.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,16 +29,21 @@ export class RegisterComponent implements OnInit {
   constructor(private location: Location,
     private router: Router,
     private userService: UserService,
+    private languageService: LanguageService,
     private commonService: CommonService) {
   }
 
   async ngOnInit() {
     this.countryCode = '86';
+
     try {
       this.countryCodes = await this.commonService.getCountryCodeList();
     } catch (e) {
       console.error(e);
     }
+    this.i18ns.inputPhone = await this.languageService.get('user.inputPhone');
+    this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
+    this.i18ns.inputPassword = await this.languageService.get('user.inputPassword');
   }
 
   goBack() {
@@ -97,6 +103,10 @@ export class RegisterComponent implements OnInit {
 
     if (!(/^[\d]{6,15}$/g.test(this.phoneNo))) {
       return alert('请输入正确的手机号码!');
+    }
+
+    if (!this.isAggreeTerms) {
+      return alert('请阅读并同意服务条款');
     }
 
     const _params = {

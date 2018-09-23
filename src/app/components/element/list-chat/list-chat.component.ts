@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from "../../../models/user/user";
-import { UserService } from "../../../providers/user/user.service";
-import { ChatService } from "../../../providers/chat/chat.service";
+import { User } from '../../../models/user/user';
+import { UserService } from '../../../providers/user/user.service';
+import { ChatService } from '../../../providers/chat/chat.service';
 
 @Component({
   selector: 'gz-list-chat',
@@ -40,14 +40,23 @@ export class ListChatComponent implements OnInit {
       this._updateScroll();
     };
 
-    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId);
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.user.id);
     this._updateScroll();
+    setInterval(() => {
+      this.refreshchatlist() ;
+    }, 1000);
+
+  }
+
+  async refreshchatlist() {
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.user.id);
+      this._updateScroll();
   }
 
 
   async send(message) {
     try {
-      this.chatList = await this.chatService.send(this.adId, this.adUserId, message);
+      this.chatList = await this.chatService.send(this.adId, this.adUserId, this.user.id, message);
       this._updateScroll();
     } catch (e) {
       console.error(e);

@@ -54,6 +54,7 @@ export class UserDetailComponent implements OnInit {
 
     try {
       this.data = await this.userService.getDetail({userid: this.userId});
+
     } catch (e) {
       console.error(e);
     }

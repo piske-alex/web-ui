@@ -29,8 +29,8 @@ export class ListTransactionComponent implements OnInit {
     this.router.navigate(['/transaction', { adId: data.adId || '' }]);
   }
 
-  toUserDetail() {
-    this.router.navigate(['/user', { userId: this.userId, coinType: '' }]);
+  toUserDetail(adUserId: string) {
+    this.router.navigate(['/user', { userId: adUserId, coinType: '' }]);
   }
 
 }

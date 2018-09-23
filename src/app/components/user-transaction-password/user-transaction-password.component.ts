@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from "@angular/common";
-import { UserService } from "../../providers/user/user.service";
-import { CommonService } from "../../providers/common/common.service";
+import { Location } from '@angular/common';
+import { UserService } from '../../providers/user/user.service';
+import { LanguageService } from '../../providers/language/language.service';
+import { CommonService } from '../../providers/common/common.service';
 
 @Component({
   selector: 'gz-user-transaction-password',
@@ -24,6 +25,7 @@ export class UserTransactionPasswordComponent implements OnInit {
 
   constructor(private location: Location,
               private commonService: CommonService,
+              private languageService: LanguageService,
               private userService: UserService) {
   }
 
@@ -34,6 +36,15 @@ export class UserTransactionPasswordComponent implements OnInit {
     } catch (e) {
       console.error(e);
     }
+
+    this.i18ns.inputPhone = await this.languageService.get('user.inputPhone');
+    this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
+    this.i18ns.resendSmsCode = await this.languageService.get('user.resendSmsCode');
+    this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
+    this.i18ns.inputValidPhone = await this.languageService.get('user.inputValidPhone');
+    this.i18ns.err_phone_or_password = await this.languageService.get('user.err_phone_or_password');
+    this.i18ns.err_gettoken_fail = await this.languageService.get('user.err_gettoken_fail');
+    this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
   }
 
   goBack() {

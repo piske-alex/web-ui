@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SelectCountryComponent } from "../element/select-country/select-country.component";
-import { Country } from "../../models/common/Country";
-import { UserService } from "../../providers/user/user.service";
-import { Router } from "@angular/router";
-import { Location } from "@angular/common";
+import { SelectCountryComponent } from '../element/select-country/select-country.component';
+import { Country } from '../../models/common/Country';
+import { UserService } from '../../providers/user/user.service';
+import { LanguageService } from '../../providers/language/language.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'gz-user-real-certification',
@@ -23,15 +24,24 @@ export class UserRealCertificationComponent implements OnInit {
 
   country: Country = new Country();
 
+  i18ns: any = {};
+
   @ViewChild(SelectCountryComponent)
   private selectCountryComponent;
 
   constructor(private router: Router,
               private location: Location,
+              private languageService: LanguageService,
               private userService: UserService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.i18ns.input_name = await this.languageService.get('user_real_cert.input_name');
+    this.i18ns.input_cardno = await this.languageService.get('user_real_cert.input_cardno');
+    this.i18ns.card_front = await this.languageService.get('user_real_cert.card_front');
+    this.i18ns.card_back = await this.languageService.get('user_real_cert.card_back');
+    this.i18ns.bust = await this.languageService.get('user_real_cert.bust');
+
   }
 
   goBack() {

@@ -30,7 +30,7 @@
         <span>{{user.transaction_count}}</span>
         <span>|</span>
         <span><gz-i18n key="otc.praiseCount"></gz-i18n></span>
-        <span>{{user.positive_count}}%</span>
+        <span>{{user.positive_count  === 0 ? 100 : data.positive_count }}%</span>
         <span>|</span>
         <span><gz-i18n key="common.trust"></gz-i18n></span>
         <span>{{user.trust_count}}</span>

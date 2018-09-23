@@ -31,6 +31,7 @@ export class SelectPayTypeComponent implements OnInit {
   async ngOnInit() {
     try {
       this.list = await this.commonService.getPayTypeList();
+      // console.log(this.list);
     } catch (e) {
       console.error(e);
     }

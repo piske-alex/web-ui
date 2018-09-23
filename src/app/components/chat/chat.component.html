@@ -16,18 +16,18 @@
 
   <section class="gz-transaction-detail">
     <div class="gz-transaction-detail-left">
-      <h3>报价: {{data.rate}} CNY</h3>
-      <p>限额: {{data.limitMinAmount}} - {{data.limitMaxAmount}} CNY</p>
+      <h3><gz-i18n key="chat.quote_price"></gz-i18n>: {{data.rate}} CNY</h3>
+      <p><gz-i18n key="chat.limit"></gz-i18n>: {{data.limitMinAmount}} - {{data.limitMaxAmount}} CNY</p>
     </div>
     <div>
       <div class="btn btn-outline-blue gz-circle" (click)="transaction()">
-        {{data.adType == '2' ? '出售' : '购买'}}
+        {{data.adType == '2' ? this.i18ns.sell : this.i18ns.buy }}
       </div>
     </div>
   </section>
 
   <section class="gz-info">
-    <p>未下单前，只能通过对话模板进行交流</p>
+    <p><gz-i18n key="chat.info_chat_via_temp"></gz-i18n></p>
   </section>
 
   <section>

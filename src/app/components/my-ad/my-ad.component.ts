@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class MyAdComponent implements OnInit {
 
   userId: string;
-  status = 1; // 1. 进行中， 10. 已下架
+  status = 'active'; // old 1. 进行中， 10. 已下架   new status = (active=在架，hidden=下架)
   list: OtcAd[] = [];
 
   constructor(private location: Location,
@@ -38,18 +38,33 @@ export class MyAdComponent implements OnInit {
   }
 
   selectProcessing() {
-    this.status = 1;
+    this.status = 'active';
     this.loadPublishAd();
   }
 
   selectObtained() {
-    this.status = 10;
+    this.status = 'hidden';
     this.loadPublishAd();
   }
 
   private async loadPublishAd() {
+    const _params = {
+      type: 'buy', // 'buy'
+      country: '',
+      coin: '',
+      currency: '',
+      payment: '',
+      offset: 0,
+      limit: 1000,
+      userId: this.userId,
+      status: this.status,
+    };
+
     try {
-      this.adService.listOtcAd({ publishUserId: this.userId, status: this.status });
+      // this.adService.listOtcAd({ userId: this.userId, status: this.status });
+      // this.isLoading = true;
+      this.list =  await this.adService.listOtcAd(_params);
+      // this.isLoading = false;
     } catch (e) {
       console.error(e);
     }

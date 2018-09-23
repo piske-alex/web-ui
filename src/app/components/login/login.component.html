@@ -35,8 +35,9 @@
       <gz-i18n key="user.inputPhone"></gz-i18n>
     </div>
     <div>
-      <input type="text" class="{{isFocus('phone')}}" placeholder="{{i18ns.inputPhone}}"[(ngModel)]="phone"
-      (focus)="focus('password')" (blur)="blur('password')">
+      <input type="text" class="{{isFocus('phone')}}" placeholder="{{i18ns.inputPhone}}" [(ngModel)]="phone"
+     
+      (focus)="focus('phone')" (blur)="blur('phone')">
     </div>
   </section>
   <section>
@@ -74,4 +75,4 @@
   </section>
 </article>
 
-<div class="loader" *ngIf="isLoading">Loading...</div>
+<div class="loader" *ngIf="isLoading"><gz-i18n key="common.loading"></gz-i18n></div>

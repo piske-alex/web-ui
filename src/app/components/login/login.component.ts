@@ -41,6 +41,10 @@ export class LoginComponent implements OnInit {
     this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
     this.i18ns.resendSmsCode = await this.languageService.get('user.resendSmsCode');
     this.i18ns.inputPassword = await this.languageService.get('user.inputPassword');
+    this.i18ns.inputValidPhone = await this.languageService.get('user.inputValidPhone');
+    this.i18ns.err_phone_or_password = await this.languageService.get('user.err_phone_or_password');
+    this.i18ns.err_gettoken_fail = await this.languageService.get('user.err_gettoken_fail');
+    this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
 
     const _accessToken = localStorage.getItem('access_token');
     const _loginTimestamp = localStorage.getItem('login_timestamp');
@@ -99,15 +103,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (!this.phone) {
-      return alert('请输入手机号码!');
+      return alert(this.i18ns.inputPhone);
     }
 
     if (!(/^[\d]{6,15}$/g.test(this.phone))) {
-      return alert('请输入正确的手机号码!');
+      return alert(this.i18ns.inputValidPhone);
     }
 
     if (!this.password) {
-      return alert('请输入密码!');
+      return alert(this.i18ns.inputPassword);
     }
 
     this.isLoading = true;
@@ -121,22 +125,46 @@ export class LoginComponent implements OnInit {
 
     this.httpService.request(RouteMap.V1.USER.LOGIN, _params).then(async (data) => {
       const _token = data && data.token;
-      const _userId = data && data.userid;
       if (_token) {
-        localStorage.setItem('access_token', _token);
-        localStorage.setItem('login_timestamp', Date.now() + '');
-        localStorage.setItem('user_id', _userId);
-        delete _params.password;
-        this.router.navigate(['/my', { userId: _userId }])
+          localStorage.setItem('access_token', _token);
+          localStorage.setItem('login_timestamp', Date.now() + '');
+          delete _params.password;
+          // const _user = await this.userService.getDetail({});
+          // if (_user) {
+          //   localStorage.setItem('user_id', _user.id);
+          //   localStorage.setItem('user', JSON.stringify(_user));
+          //   if (!_user.username) {
+          //     this.router.navigate(['setNickName', { userId: _user.id }]);
+          //   }
+          //   this.router.navigate(['/my', { userId: _user.id }]);
+          // } else {
+          //   alert(this.i18ns.err_getuserdetail_fail);
+          //   this.isLoading = false;
+          // }
+          this.userService.getDetail({}).then(async (data_user) => {
+            const _user = data_user;
+            if (_user) {
+              localStorage.setItem('user_id', _user.id);
+              localStorage.setItem('user', JSON.stringify(_user));
+              if (!_user.username) {
+                this.router.navigate(['setNickName', { userId: _user.id }]);
+              }
+              this.router.navigate(['/my', { userId: _user.id }]);
+            } else {
+              alert(this.i18ns.err_getuserdetail_fail);
+              this.isLoading = false;
+            }
+          }, error_getuserdetail => {
+            console.error('---------------------error_getuserdetail: ', error_getuserdetail);
+            if (error_getuserdetail.status === 403 && error_getuserdetail.error.userGroup === 'guest') {
+              this.router.navigate(['setNickName', { userId: '' }]);
+            } else {
+              alert(error_getuserdetail.message);
+            }
+            this.isLoading = false;
+          });
       } else {
-
-      }
-      const _user = await this.userService.getDetail({});
-      if (_user) {
-        localStorage.setItem('user', JSON.stringify(_user));
-        if (!_user.username) {
-          this.router.navigate(['setNickName', { userId: _user.id }]);
-        }
+          alert(this.i18ns.err_gettoken_fail);
       }
       this.isLoading = false;
     }, error => {
@@ -146,12 +174,13 @@ export class LoginComponent implements OnInit {
         alert(error.error.errmsg);
       } else {
         this.resendSmsCodeDelay = 1;
-        alert('手机号或者密码错误');
+        alert(this.i18ns.err_phone_or_password);
       }
       this.isLoading = false;
     });
 
   }
+
 
 
 }

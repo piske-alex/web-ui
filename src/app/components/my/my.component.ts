@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { UserService } from "../../providers/user/user.service";
-import { User } from "../../models/user/user";
-import { ChatService } from "../../providers/chat/chat.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../providers/user/user.service';
+import { User } from '../../models/user/user';
+import { ChatService } from '../../providers/chat/chat.service';
 
 @Component({
   selector: 'gz-my',

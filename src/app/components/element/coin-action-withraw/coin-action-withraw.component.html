@@ -1,65 +1,64 @@
 <div class="gz-action-withraw gz-form">
   <div class="gz-action-withraw-row">
-    <div class="gz-label">发送地址</div>
+    <div class="gz-label"><gz-i18n key="element_coin_withraw.send_address"></gz-i18n></div>
     <div class="gz-input">
-      <input type="text" [(ngModel)]="address" placeholder="请输入{{coinType}}地址">
+      <input type="text" [(ngModel)]="address" placeholder="{{this.i18ns.input_address}}">
     </div>
   </div>
   <div class="gz-action-withraw-row">
-    <div class="gz-label">{{coinType}}数量</div>
+    <div class="gz-label">{{coinType}}<gz-i18n key="element_coin_withraw.coin_amount"></gz-i18n></div>
     <div class="gz-input">
-      <input type="number" [(ngModel)]="amount" placeholder="请输入数量">
+      <input type="number" [(ngModel)]="amount" placeholder="{{this.i18ns.input_amount}}">
     </div>
   </div>
   <div class="gz-action-withraw-info">
-    最多可以发送{{coinBalance.balance | coinNumber}}{{coinType}}
+    <gz-i18n key="element_coin_withraw.max_send"></gz-i18n>{{coinBalance.balance | coinNumber}}{{coinType}}
   </div>
   <div class="gz-action-withraw-row gz-input">
-    <input type="text" [(ngModel)]="remark" placeholder="备注(仅在交易明细展示)">
+    <input type="text" [(ngModel)]="remark" placeholder="{{this.i18ns.remark}}">
   </div>
   <div class="gz-action-withraw-row">
-    <div class="gz-label">交易密码</div>
+    <div class="gz-label"><gz-i18n key="element_coin_withraw.trans_password"></gz-i18n></div>
     <div class="gz-input">
-      <input type="password" [(ngModel)]="paypassword" placeholder="请输入资金交易密码">
+      <input type="password" [(ngModel)]="paypassword" placeholder="{{this.i18ns.input_trans_password}}">
     </div>
   </div>
   <div class="gz-notice">
     <p>
-      注意事项
+      <gz-i18n key="element_coin_withraw.notice"></gz-i18n>
     </p>
-    <p>
-      {{coinType}}地址只能向{{coinType}}地址发送资产，如果向非{{coinType}}地址发送资产将不可找回。{{coinType}}网络转账费为0.0005 {{coinType}}，最低传出金额为 0.01
-      {{coinType}}
+    <p>      
+      <gz-i18n key="element_coin_withraw.notice_info"></gz-i18n>
     </p>
   </div>
   <div class="gz-btn-row">
     <!--active-->
-    <div class="btn btn-primary gz-circle" (click)="submit()">确认发送</div>
+    <div class="btn btn-primary gz-circle" (click)="submit()"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
   </div>
 </div>
 
 <div class="gz-process-list">
   <div class="gz-title">
     <div>
-      <span>正在处理中的转账</span>
+      <span><gz-i18n key="element_coin_withraw.trans_in_processing"></gz-i18n></span>
       <span class="gz-active" (click)="showInnerHelp()"><fa-icon [icon]="['fas', 'question-circle']"></fa-icon></span>
     </div>
-    <div class="gz-link" (click)="refreshWillReceive()">刷新</div>
+    <div class="gz-link" (click)="refreshWillReceive()"><gz-i18n key="element_coin_withraw.refresh"></gz-i18n></div>
   </div>
   <div *ngIf="!isLoadingTransaction">
     <div class="gz-list" *ngFor="let transaction of transactions">
       <div>
-        <span>TXID: </span>
+        <span><gz-i18n key="element_coin_withraw.txid"></gz-i18n>: </span>
         <span>{{transaction.txid}}</span>
       </div>
       <div>
-        <span>提取数量: </span>
+        <span><gz-i18n key="element_coin_withraw.withraw_amount"></gz-i18n>: </span>
         <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
       </div>
     </div>
   </div>
 </div>
-<div class="loader" *ngIf="isLoadingTransaction">Loading...</div>
+<div class="loader" *ngIf="isLoadingTransaction"><gz-i18n key="element_coin_withraw.loading"></gz-i18n></div>
 
 
 <section class="gz-bg" *ngIf="isShowInnerHelp" (click)="hideInnerHelp()"></section>

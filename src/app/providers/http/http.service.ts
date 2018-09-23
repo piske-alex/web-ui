@@ -80,8 +80,8 @@ export class HttpService {
             if (isLoading) {
               this.closeLoading();
             }
-
-            if (error && error.status == 401) {
+            // console.log('---------------------error_http res status: ', error);
+            if (error && error.status === 401) {
               // 如果是401
               this.gotoLogin();
               resolve({success: false, message: error.error || '请先登录!'});

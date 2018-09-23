@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from "../../providers/common/common.service";
-import { Location } from "@angular/common";
-import { UserService } from "../../providers/user/user.service";
+import { CommonService } from '../../providers/common/common.service';
+import { Location } from '@angular/common';
+import { UserService } from '../../providers/user/user.service';
+import { LanguageService } from '../../providers/language/language.service';
 
 @Component({
   selector: 'gz-user-email',
@@ -14,13 +15,17 @@ export class UserEmailComponent implements OnInit {
   emailVerifyCode: string;
   focusInput: string;
   resendEmailVerifyCodeDelay: number;
+  i18ns: any = {};
 
   constructor(private commonService: CommonService,
               private userService: UserService,
+              private languageService: LanguageService,
               private location: Location) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.i18ns.input_email = await this.languageService.get('user_email.input_email');
+    this.i18ns.input_valid_email = await this.languageService.get('user_email.input_valid_email');
   }
 
   goBack() {
@@ -47,10 +52,28 @@ export class UserEmailComponent implements OnInit {
   }
 
   async submit() {
+    if (!this.email) {
+      return alert(this.i18ns.input_email);
+    }
+
+    if (!(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/g.test(this.email))) {
+      return alert(this.i18ns.input_valid_email);
+    }
+
     try {
-    // , verifyCode: this.emailVerifyCode
-      let _result = await this.userService.bindEmail({email: this.email});
-      this.goBack();
+      // , verifyCode: this.emailVerifyCode
+      // let _result = await this.userService.bindEmail({email: this.email});
+      this.userService.bindEmail({email: this.email}).then(async (data) => {
+          alert('绑定Email成功');
+          this.goBack();
+      }, error => {
+        console.error('----------------bindEmail-----error: ', error);
+        if (error.error.success === false && error.error.errmsg !== undefined) {
+          alert(error.error.errmsg);
+        } else {
+          alert('绑定Email失败');
+        }
+      });
     } catch (e) {
       console.error(e);
     }

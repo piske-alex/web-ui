@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionListItem } from "../../../models/ad/TransactionListItem";
-import { LanguageService } from "../../../providers/language/language.service";
-import { Router } from "@angular/router";
+import { TransactionListItem } from '../../../models/ad/TransactionListItem';
+import { LanguageService } from '../../../providers/language/language.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gz-list-ad',

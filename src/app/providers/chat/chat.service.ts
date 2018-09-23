@@ -52,10 +52,13 @@ export class ChatService {
             var _avatar = message.getAttributes().avatar;
             var _sendTimestamp = message.getAttributes().sendTimestamp;
             var _text = message.text;
-            this.conservationObj[_adId] = this.conservationObj[_adId] || {};
-            this.conservationObj[_adId].conversation = conversation;
-            this.conservationObj[_adId].chatList = this.conservationObj[_adId].chatList || [];
-            this.conservationObj[_adId].chatList.push({
+
+            const chat_union_ids = String(this.user.id) + '_' + String(_from) ;
+
+            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+            this.conservationObj[chat_union_ids].conversation = conversation;
+            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+            this.conservationObj[chat_union_ids].chatList.push({
               from: _from,
               content: _text,
               avatar: _avatar,
@@ -78,15 +81,17 @@ export class ChatService {
     }
   }
 
-  getConversation(adId, adUserId): any {
+  getConversation(adId, adUserId, currentLoginUserId): any {
     return new Promise((resolve, reject) => {
-      let _conservationObj = this.conservationObj[adId];
+      const chat_union_ids = String(currentLoginUserId) + '_' + String(adUserId) ;
+
+      let _conservationObj = this.conservationObj[chat_union_ids];
       let _conversation = _conservationObj && _conservationObj.conversation || null;
       if (!_conversation) {
         console.log('### >>> conversion not found, create conservation now......');
         _conversation = this.chat.createConversation({
           members: [String(adUserId)],
-          name: String(adId),
+          name: String(chat_union_ids),
           transient: false,
           unique: true,
         }).then(conversation => {
@@ -100,11 +105,11 @@ export class ChatService {
     });
   }
 
-  send(adId, adUserId, message): Promise<any> {
+  send(adId, adUserId, currentLoginUserId, message): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
-        let conversation: any = await this.getConversation(adId, adUserId);
-
+        let conversation: any = await this.getConversation(adId, adUserId, currentLoginUserId);
+        const chat_union_ids = String(currentLoginUserId) + '_' + String(adUserId) ;
         if (conversation) {
           console.log('### >>> send message ...');
 
@@ -116,17 +121,17 @@ export class ChatService {
           });
           conversation.send(_textMessage);
 
-          this.conservationObj[adId] = this.conservationObj[adId] || {};
-          this.conservationObj[adId].conversation = conversation;
-          this.conservationObj[adId].chatList = this.conservationObj[adId].chatList || [];
-          this.conservationObj[adId].chatList.push({
+          this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+          this.conservationObj[chat_union_ids].conversation = conversation;
+          this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+          this.conservationObj[chat_union_ids].chatList.push({
             from: String(this.user.id),
             content: message,
             avatar: this.user.avatar || '',
             sendTimestamp: Date.now(),
             isMe: true,
           });
-          resolve(this.conservationObj[adId].chatList);
+          resolve(this.conservationObj[chat_union_ids].chatList);
           return conversation;
         } else {
           console.log('### >>> not found conversaction or create failed!!!');
@@ -139,18 +144,20 @@ export class ChatService {
     });
   }
 
-  updateChatList(adId, adUserId): Promise<any> {
+  updateChatList(adId, adUserId, currentLoginUserId): Promise<any> {
     return new Promise(async (resolve, reject) => {
-      let conversation = await this.getConversation(adId, adUserId);
+      let conversation = await this.getConversation(adId, adUserId, currentLoginUserId);
       if (conversation) {
         conversation.queryMessages({limit: 1000})
           .then(messages => {
 
-            this.conservationObj[adId] = this.conservationObj[adId] || {};
-            this.conservationObj[adId].conversation = conversation;
-            this.conservationObj[adId].chatList = this.conservationObj[adId].chatList || [];
+            const chat_union_ids = String(currentLoginUserId) + '_' + String(adUserId) ;
 
-            this.conservationObj[adId].chatList = [];
+            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+            this.conservationObj[chat_union_ids].conversation = conversation;
+            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+
+            this.conservationObj[chat_union_ids].chatList = [];
             (messages || []).forEach(message => {
               console.log('message:::::::', message);
               if (!message.getAttributes()) {
@@ -163,7 +170,7 @@ export class ChatService {
               var _sendTimestamp = message.getAttributes().sendTimestamp;
               var _text = message.text;
 
-              this.conservationObj[adId].chatList.push({
+              this.conservationObj[chat_union_ids].chatList.push({
                 from: _from,
                 content: _text,
                 avatar: _avatar,
@@ -172,7 +179,7 @@ export class ChatService {
               });
             });
 
-            resolve(this.conservationObj[adId].chatList);
+            resolve(this.conservationObj[chat_union_ids].chatList);
             return conversation;
           }).catch(console.error.bind(console));
       }

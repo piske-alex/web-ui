@@ -2,8 +2,17 @@
   <div class="gz-list-tr-left">
     <div class="gz-list-tr-detail">
       <h3>
-        {{i18ns.bid}}: {{data.rate}} {{data.currency}} <span
-        class="btn btn-success gz-sm">银行转账</span>
+        {{i18ns.bid}}: {{data.rate}} {{data.currency}} 
+
+        <img src="/assets/images/pay_ap.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_ap"> 
+          &nbsp;
+          <img src="/assets/images/pay_wp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_wp"> 
+          &nbsp;
+          <img src="/assets/images/pay_pp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_pp"> 
+          &nbsp;
+          <img src="/assets/images/pay_bt.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_bt">
+          &nbsp;
+        
       </h3>
       <div>{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.currency}}</div>
     </div>

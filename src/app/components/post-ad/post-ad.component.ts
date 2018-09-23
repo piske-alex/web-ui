@@ -280,14 +280,26 @@ export class PostAdComponent implements OnInit {
 
     try {
       this._isSubmiting = true;
-      const _result = await this.adService.publishOtcAd(_params);
-      setTimeout(() => {
-        this._isSubmiting = false;
-      }, 1000);
-      // this.location.back();
-      this.router.navigate(['/otc', { adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode }]);
+      // const _result = await this.adService.publishOtcAd(_params);
+      await this.adService.publishOtcAd(_params).then(async (data) => {
+        const _result = data;
+        setTimeout(() => {
+          this._isSubmiting = false;
+        }, 1000);
+        // this.location.back();
+        this.router.navigate(['/otc', { adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode }]);
+      }, error => {
+        console.error('---------------------error_publishOtcAd: ', error);
+        if (error.status === 403 && error.error.userGroup === 'user') {
+          alert('受限功能，请先通过实名认证');
+          this._isSubmiting = false;
+        } else {
+          alert(error.message);
+          this._isSubmiting = false;
+        }
+      });
     } catch (e) {
-      this._isSubmiting = true;
+      this._isSubmiting = false;
       console.error(e);
       alert(e && e.errMsg || this.i18ns.publishError);
     }

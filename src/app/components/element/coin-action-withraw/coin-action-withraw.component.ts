@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WalletService } from "../../../providers/wallet/wallet.service";
-import { LanguageService } from "../../../providers/language/language.service";
+import { WalletService } from '../../../providers/wallet/wallet.service';
+import { LanguageService } from '../../../providers/language/language.service';
 
 @Component({
   selector: 'gz-coin-action-withraw',
@@ -19,6 +19,7 @@ export class CoinActionWithrawComponent implements OnInit {
   amount: number | string;
   remark: string;
   paypassword: string;
+ 
 
   coinBalance: { balance: string, locked: string, total: string } = {
     balance: '0.00000000',
@@ -38,6 +39,10 @@ export class CoinActionWithrawComponent implements OnInit {
   async ngOnInit() {
 
     this.i18ns.withrawProcessingHelp = await this.languageService.get('wallet.withrawProcessingHelp');
+    this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
+    this.i18ns.remark = await this.languageService.get('element_coin_withraw.remark');
+    this.i18ns.input_trans_password = await this.languageService.get('element_coin_withraw.input_trans_password');
+    this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
 
     this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
       data.total = (+data.balance + +data.locked).toFixed(8);

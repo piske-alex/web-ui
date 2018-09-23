@@ -22,6 +22,10 @@ export class TransactionListItem {
   country: string;
   rate: string;
   payType: string;
+  is_payment_ap: boolean;
+  is_payment_wp: boolean;
+  is_payment_pp: boolean;
+  is_payment_bt: boolean;
 
 
   constructor() {
@@ -45,6 +49,12 @@ export class TransactionListItem {
     _item.transactionCurrency = obj.currency;
     _item.rate = obj.rate;
     _item.payType = obj.payment[0];
+
+    const payments = (obj.payment as string[]).join(',');
+    _item.is_payment_ap = (payments.indexOf('AP') > -1 ? true : false);
+    _item.is_payment_wp = (payments.indexOf('WP') > -1 ? true : false);
+    _item.is_payment_pp = (payments.indexOf('PP') > -1 ? true : false);
+    _item.is_payment_bt = (payments.indexOf('BT') > -1 ? true : false);
     _item.limitMinAmount = obj.amount && obj.amount.min;
     _item.limitMaxAmount = obj.amount && obj.amount.max;
     if (obj.type == 'sell') {
