@@ -6,7 +6,7 @@ export class User {
   email: string;
   verified: number;
   avatar: string;
-  languageCode: string;
+  language: string;
   transactionPassword: string;
 
   transaction_count: number; // 交易次数
