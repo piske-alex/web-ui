@@ -29,6 +29,7 @@ export class PostAdComponent implements OnInit {
   payTypeCode = 'AP';
   payTypeNames = '';
 
+  userId: string;
   adId: string;
 
   adType: any = {};
@@ -73,6 +74,13 @@ export class PostAdComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
+
+    this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    
     this.adId = this.activatedRoute.snapshot.paramMap.get('adId');
     if (this.adId) {
       const _ad = await this.adService.getOtcAdById({ adid: this.adId });
@@ -91,7 +99,13 @@ export class PostAdComponent implements OnInit {
     this.i18ns.publishError = await this.languageService.get('otc.publishError');
     this.i18ns.priceWarn_1 = await this.languageService.get('otc.price_warn_1');
     this.i18ns.priceWarn_2 = await this.languageService.get('otc.price_warn_2');
+    this.i18ns.onlyRealUser = await this.languageService.get('otc.onlyRealUser');
+    this.i18ns.input_remark = await this.languageService.get('otc.input_remark');
 
+    this.i18ns.input_price = await this.languageService.get('otc.input_price');
+    this.i18ns.input_minCount = await this.languageService.get('otc.input_minCount');
+    this.i18ns.input_maxCount = await this.languageService.get('otc.input_maxCount');
+    this.i18ns.input_maxCountMoreThanMin = await this.languageService.get('otc.input_maxCountMoreThanMin');
   }
 
   goBack() {
@@ -250,14 +264,15 @@ export class PostAdComponent implements OnInit {
     if (this._isSubmiting) {
       return;
     }
-    if (!this.checkPrice()) {
-      this.ad.price = null;
-      return;
-    }
 
     const _remarkWarn = this._validateRemark();
     if (_remarkWarn) {
       return alert(_remarkWarn);
+    }
+
+    if (!this.checkPrice()) {
+      this.ad.price = null;
+      return;
     }
 
     // this.ad.adType = this.adTypeCode;
@@ -291,7 +306,7 @@ export class PostAdComponent implements OnInit {
       }, error => {
         console.error('---------------------error_publishOtcAd: ', error);
         if (error.status === 403 && error.error.userGroup === 'user') {
-          alert('受限功能，请先通过实名认证');
+          alert(this.i18ns.onlyRealUser);
           this._isSubmiting = false;
         } else {
           alert(error.message);
@@ -306,8 +321,20 @@ export class PostAdComponent implements OnInit {
   }
 
   private _validateRemark(): string {
+    if (!this.ad.price || this.ad.price <= 0) {
+      return this.i18ns.input_price;
+    }
+    if (!this.ad.minCount ||  this.ad.minCount <= 0) {
+      return this.i18ns.input_minCount;
+    }
+    if (!this.ad.maxCount ||  this.ad.maxCount <= 0) {
+      return this.i18ns.input_maxCount;
+    }
+    if (this.ad.maxCount < this.ad.minCount) {
+      return this.i18ns.input_maxCountMoreThanMin;
+    }
     if (!this.ad.remark) {
-      return '请填写留言!';
+      return this.i18ns.input_remark;
     }
     return '';
   }

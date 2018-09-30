@@ -1,0 +1,42 @@
+<header class="gz-header-container">
+    <div class="gz-header">
+      <div>
+        <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+      </div>
+      <div class="gz-title">
+        广告相应的订单
+      </div>
+      <div></div>
+    </div>
+  </header>
+  <section>
+    adInfo
+    <div>
+        <div class="gz-list-td-adtype" *ngIf="this.adType=='1'">{{this.i18ns.sale}}</div>
+        <div class="gz-list-td-adtype" *ngIf="this.adType=='2'">{{this.i18ns.buy}}</div>
+    </div>
+  </section>
+  <section class="gz-list-tr" *ngFor="let data of orders">
+      <div class="gz-list-tr-left">
+          
+          <div class="gz-list-td">orderId: {{data.id}} </div>
+          <div class="gz-list-td">orderStatus: {{data.status}} </div>
+          <div class="gz-list-td">userid: {{data.userid}} </div>
+        <div class="gz-list-tr-detail">          
+         
+          <div class="gz-list-td">amount: {{data.amount}} </div>
+          <div class="gz-list-td">create_time: {{i18ns.create_time}} </div>
+        </div>
+      </div>
+      <div class="gz-list-tr-right">
+        <div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '2'" (click)="toOrderDetail2(data)">
+          order detail2
+        </div>
+        <div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '1'" (click)="toOrderDetail1(data)">
+          order detail1
+        </div>
+      </div>
+    </section>
+    
+
+  

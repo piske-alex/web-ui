@@ -4,6 +4,8 @@ import { OtcAd } from '../../models/ad/OtcAd';
 import { LanguageService } from '../../providers/language/language.service';
 import { AdService } from '../../providers/ad/ad.service';
 import { Router } from '@angular/router';
+import { TransactionListItem } from '../../models/ad/TransactionListItem';
+
 
 @Component({
   selector: 'gz-my-ad',
@@ -14,7 +16,8 @@ export class MyAdComponent implements OnInit {
 
   userId: string;
   status = 'active'; // old 1. 进行中， 10. 已下架   new status = (active=在架，hidden=下架)
-  list: OtcAd[] = [];
+  list: TransactionListItem[] = [];
+  i18ns: any = {};
 
   constructor(private location: Location,
     private router: Router,
@@ -22,14 +25,21 @@ export class MyAdComponent implements OnInit {
     private adService: AdService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const _accessToken = localStorage.getItem('access_token');
     if (!_accessToken) {
       this.router.navigate(['/login']);
       return;
     }
 
+
+    this.i18ns.confirm_obtained = await this.languageService.get('transaction.confirm_obtained');
+
     this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.loadPublishAd();
   }
 
@@ -49,21 +59,23 @@ export class MyAdComponent implements OnInit {
 
   private async loadPublishAd() {
     const _params = {
-      type: 'buy', // 'buy'
+      type: '', // 'sell buy'
       country: '',
       coin: '',
       currency: '',
       payment: '',
       offset: 0,
       limit: 1000,
-      userId: this.userId,
-      status: this.status,
+      userid: this.userId,
+      status: this.status
     };
 
     try {
       // this.adService.listOtcAd({ userId: this.userId, status: this.status });
       // this.isLoading = true;
-      this.list =  await this.adService.listOtcAd(_params);
+      let _result = await this.adService.listTransactionList(_params);
+      this.list = _result.list;
+      console.log('myads', this.list);
       // this.isLoading = false;
     } catch (e) {
       console.error(e);
@@ -94,5 +106,7 @@ export class MyAdComponent implements OnInit {
     // ];
     // // TODO delete end.
   }
+
+
 
 }

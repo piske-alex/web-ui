@@ -9,13 +9,13 @@
     <div class="gz-list-tr-detail">
       <div  class="float_left">{{data.username}}</div>
         <div class="float_left">
-          <img src="/assets/images/pay_ap.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_ap"> 
+          <img src="/assets/images/pay_ap.jpg" title="{{this.i18ns.ap_alipay}}" alt="{{this.i18ns.ap_alipay}}"  class="gz-icon" *ngIf="data.is_payment_ap"> 
           &nbsp;
-          <img src="/assets/images/pay_wp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_wp"> 
+          <img src="/assets/images/pay_wp.jpg" title="{{this.i18ns.wp_wechatpay}}" alt="{{this.i18ns.wp_wechatpay}}"  class="gz-icon" *ngIf="data.is_payment_wp"> 
           &nbsp;
-          <img src="/assets/images/pay_pp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_pp"> 
+          <img src="/assets/images/pay_pp.jpg" title="{{this.i18ns.pp_paypal}}" alt="{{this.i18ns.pp_paypal}}"  class="gz-icon" *ngIf="data.is_payment_pp"> 
           &nbsp;
-          <img src="/assets/images/pay_bt.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_bt">
+          <img src="/assets/images/pay_bt.jpg" title="{{this.i18ns.bt_bank_transfer}}" alt="{{this.i18ns.bt_bank_transfer}}"  class="gz-icon" *ngIf="data.is_payment_bt">
           &nbsp;
         </div>
         <!-- <span class="btn btn-success gz-sm" *ngIf="data.is_payment_ap">
@@ -47,8 +47,9 @@
   </div>
   <div class="gz-list-tr-right">
     <div class="gz-currency-large">{{data.rate}} {{data.transactionCurrency}}</div>
-    <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '1'"><gz-i18n key="element_list_trans.sell_btc"></gz-i18n>{{data.transactionCoinType}}</div>
+    <div class="btn btn-primary gz-circle" (click)="toTransactionB(data)" *ngIf="data.userId != userId && adType == '1'"><gz-i18n key="element_list_trans.sell_btc"></gz-i18n>{{data.transactionCoinType}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '2'"><gz-i18n key="element_list_trans.buy_btc"></gz-i18n>{{data.transactionCoinType}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId == userId"><gz-i18n key="element_list_trans.edit"></gz-i18n></div>
+    <!-- <div class="btn btn-primary gz-circle" (click)="toAdOrders(data)" *ngIf="data.userId == userId"><gz-i18n key="element_list_trans.ad_orders"></gz-i18n></div> -->
   </div>
 </section>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LanguageService } from "../../../providers/language/language.service";
+import { LanguageService } from '../../../providers/language/language.service';
 
 @Component({
   selector: 'gz-select-during-time',
@@ -21,6 +21,8 @@ export class SelectDuringTimeComponent implements OnInit {
   endTitle: string;
   startTimeCode: number;
   endTimeCode: number;
+
+  i18ns: any = {};
 
   @Output()
   private done = new EventEmitter();
@@ -71,7 +73,7 @@ export class SelectDuringTimeComponent implements OnInit {
     }
 
     this.times.push({code: 24, name: `23:59`});
-    this.times.push({code: 25, name: `关闭`});
+    this.times.push({code: 25, name:  await this.languageService.get('common.close')});
 
     this.done.emit(this.openTimes);
 

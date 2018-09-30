@@ -61,9 +61,27 @@
   </section>
   <section class="gz-agree-terms">
     <input type="checkbox" id="isAggreeTerms" [(ngModel)]="isAggreeTerms">
-    <label for="isAggreeTerms"><gz-i18n key="register.read_agreement"></gz-i18n> <span class="gz-active"><gz-i18n key="register.agreement_name"></gz-i18n></span></label>
+    <label for="isAggreeTerms"><gz-i18n key="register.read_agreement"></gz-i18n> <span class="gz-active" (click)="showServiceItems()"><gz-i18n key="register.agreement_name"></gz-i18n></span></label>
   </section>
   <section class="gz-submit">
     <div class="btn gz-circle active" (click)="register()"><gz-i18n key="register.next_step"></gz-i18n></div>
   </section>
 </article>
+
+<section class="">
+  <div class="gz-popup" *ngIf="isShowConfirm">
+    <div class="gz-popup-content" style="opacity: 1;border: 1px solid #777">
+      <h3><gz-i18n key="register.agreement_name"></gz-i18n></h3>
+      <div class="gz-popup-row" style="min-height:300px">
+        <div [innerHTML]="serv_items_en" *ngIf="language == 'en-GB'" class="gz-div-overflow"></div>
+        <div [innerHTML]="serv_items_simp" *ngIf="language == 'zh-CN'" class="gz-div-overflow"></div>
+        <div [innerHTML]="serv_items_trad" *ngIf="language == 'zh-HK'" class="gz-div-overflow"></div>
+      </div>
+      <div class="gz-popup-btn-row">
+        <div (click)="cancelDialog()">
+          {{i18ns.confirm}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -43,6 +43,12 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.remark = await this.languageService.get('element_coin_withraw.remark');
     this.i18ns.input_trans_password = await this.languageService.get('element_coin_withraw.input_trans_password');
     this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
+    this.i18ns.input_address = this.i18ns.input_address.replace(/\$\{coinType\}/g, this.coinType);
+
+    this.i18ns.send_address = await this.languageService.get('element_coin_withraw.send_address');
+    this.i18ns.notice_info = await this.languageService.get('element_coin_withraw.notice_info');
+    this.i18ns.send_address = this.i18ns.send_address.replace(/\$\{coinType\}/g, this.coinType);
+    this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{coinType\}/g, this.coinType);
 
     this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
       data.total = (+data.balance + +data.locked).toFixed(8);

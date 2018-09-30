@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from "@angular/common";
-import { ActivatedRoute } from "@angular/router";
-import { UserService } from "../../providers/user/user.service";
-import { User } from "../../models/user/user";
-import { LanguageService } from "../../providers/language/language.service";
-import { AdService } from "../../providers/ad/ad.service";
-import { Deal } from "../../models/ad/Deal";
-import { TransactionListItem } from "../../models/ad/TransactionListItem";
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../providers/user/user.service';
+import { User } from '../../models/user/user';
+import { LanguageService } from '../../providers/language/language.service';
+import { AdService } from '../../providers/ad/ad.service';
+import { Deal } from '../../models/ad/Deal';
+import { TransactionListItem } from '../../models/ad/TransactionListItem';
 
 @Component({
   selector: 'gz-user',

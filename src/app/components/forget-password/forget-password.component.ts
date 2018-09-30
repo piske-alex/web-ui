@@ -48,7 +48,10 @@ export class ForgetPasswordComponent implements OnInit {
     this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
     this.i18ns.resendSmsCode = await this.languageService.get('user.resendSmsCode');
     this.i18ns.set_login_password = await this.languageService.get('forget_password.set_login_password');
+    this.i18ns.input_login_password = await this.languageService.get('forget_password.input_login_password');
     this.i18ns.inputValidPhone = await this.languageService.get('user.inputValidPhone');
+    this.i18ns.setting_password_relogin = await this.languageService.get('user.setting_password_relogin');
+    this.i18ns.setting_password_fail = await this.languageService.get('user.setting_password_fail');
   }
 
   goBack() {
@@ -91,8 +94,20 @@ export class ForgetPasswordComponent implements OnInit {
 
   async submit() {
 
+    if (!this.phoneNo) {
+      return alert(this.i18ns.inputPhone);
+    }
+
     if (!(/^[\d]{6,15}$/g.test(this.phoneNo))) {
-      return alert('请输入正确的手机号码!');
+      return alert(this.i18ns.inputValidPhone);
+    }
+
+    if (!this.smsCode) {
+      return alert(this.i18ns.inputSmsCode);
+    }
+
+    if (!this.password) {
+      return alert(this.i18ns.input_login_password);
     }
 
     let _params = {
@@ -104,7 +119,7 @@ export class ForgetPasswordComponent implements OnInit {
       // await this.userService.forgetPassword(_params);
       try {
         this.userService.forgetPassword(_params).then(async (data) => {
-            alert('修改密码成功,请重新登录');
+            alert(this.i18ns.setting_password_relogin);
             await this.userService.logout();
             localStorage.removeItem('user_id');
             localStorage.removeItem('user');
@@ -112,11 +127,11 @@ export class ForgetPasswordComponent implements OnInit {
             localStorage.removeItem('access_token');
             this.router.navigate(['/login']);
         }, error => {
-          console.error('----------------bindEmail-----error: ', error);
+          console.error('----------------forgetPassword-----error: ', error);
           if (error.error.success === false && error.error.errmsg !== undefined) {
             alert(error.error.errmsg);
           } else {
-            alert('绑定Email失败');
+            alert(this.i18ns.setting_password_fail);
           }
         });
 

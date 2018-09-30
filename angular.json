@@ -24,14 +24,16 @@
             "styles": [
               "src/constants.scss",
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/swiper/css/swiper.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/davidshimjs-qrcodejs/qrcode.min.js",
               "node_modules/leancloud-storage/dist/av.js",
               "node_modules/leancloud-realtime/dist/realtime.browser.min.js",
-              "node_modules/leancloud-realtime-plugin-typed-messages/dist/typed-messages.min.js"
+              "node_modules/leancloud-realtime-plugin-typed-messages/dist/typed-messages.min.js",
+              "src/assets/swiper/js/swiper.min.js"
             ]
           },
           "configurations": {

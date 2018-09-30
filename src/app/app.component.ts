@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { HttpService } from './providers/http/http.service';
 import { LanguageService } from './providers/language/language.service';
-import { ChatService } from "./providers/chat/chat.service";
+import { ChatService } from './providers/chat/chat.service';
 
 @Component({
   selector: 'app-root',

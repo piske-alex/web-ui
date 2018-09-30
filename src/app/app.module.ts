@@ -62,6 +62,18 @@ import { HomeComponent } from './components/home/home.component';
 import { CoinNumberPipe } from './pipes/coin/coin-number.pipe';
 import { PcMenuComponent } from './components/pc-menu/pc-menu/pc-menu.component';
 import { SelectMultiComponent } from './components/element/select-multi/select-multi/select-multi.component';
+import { AdOrdersComponent } from './components/ad-orders/ad-orders.component';
+import { MyTransComponent } from './components/my-trans/my-trans.component';
+import { ListAdMyComponent } from './components/element/list-ad-my/list-ad-my.component';
+import { ListTradeComponent } from './components/element/list-trade/list-trade.component';
+import { OrderDetailBComponent } from './components/order-detail-b/order-detail-b.component';
+import { TransactionBComponent } from './components/transaction-b/transaction-b.component';
+import { BtcFormatPipe } from './pipes/btcFormat/btc-format.pipe';
+import { AdShowComponent } from './components/ad-show/ad-show.component';
+import { CnyFormatPipe } from './pipes/cnyFormat/cny-format.pipe';
+import { SwiperSlideComponent } from './components/element/swiper-slide/swiper-slide.component';
+
+
 
 library.add(fas);
 
@@ -119,6 +131,18 @@ const createTranslateLoader = function (http: HttpClient) {
     CoinNumberPipe,
     PcMenuComponent,
     SelectMultiComponent,
+    AdOrdersComponent,
+    MyTransComponent,
+    ListAdMyComponent,
+    ListTradeComponent,
+    OrderDetailBComponent,
+    TransactionBComponent,
+    BtcFormatPipe,
+    AdShowComponent,
+    CnyFormatPipe,
+    SwiperSlideComponent,
+
+
   ],
   imports: [
     BrowserModule,

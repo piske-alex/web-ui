@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit {
   chatTemplates: any[];
   adId: string;
   i18ns: any = {};
+  currentLoginUserId: string;
 
   @ViewChild(ListChatComponent)
   private listChatComponent;
@@ -31,12 +32,13 @@ export class ChatComponent implements OnInit {
   }
 
   async ngOnInit() {
-
+    this.currentLoginUserId = localStorage.getItem('user_id');
     this.adId = this.route.snapshot.paramMap.get('adId');
     this.data = await this.adService.getOtcAdById({adid: this.adId});
 
     this.i18ns.sell = await this.languageService.get('chat.sell');
     this.i18ns.buy = await this.languageService.get('chat.buy');
+    this.i18ns.order = await this.languageService.get('chat.order');
     this.i18ns.chat_template_1 = await this.languageService.get('chat.chat_template_1');
     this.i18ns.chat_template_2 = await this.languageService.get('chat.chat_template_2');
     this.i18ns.chat_template_3 = await this.languageService.get('chat.chat_template_3');
@@ -55,14 +57,24 @@ export class ChatComponent implements OnInit {
   }
 
   goToHelp() {
-    this.router.navigate(['/help', {type: 'sell'}])
+    this.router.navigate(['/help', {type: 'sell'}]);
   }
 
   getTitle() {
     if (this.data && this.data.transactionCoinType) {
-      return `${this.data.transactionCoinType}   ${this.data.adType === '2' ? '出售' : '购买'}  订单(${this.data.username})`;
+      let desc = '';
+      desc = desc + `${this.data.transactionCoinType}`;
+      if (this.data.adType === '2') {
+        desc = desc + `${this.i18ns.sell}`;
+      } else {
+        desc = desc + `${this.i18ns.buy}`;
+      }
+      desc = desc + `${this.i18ns.order}`;
+      desc = desc + `(${this.data.username})`;
+      return desc;
+      //return `${this.data.transactionCoinType}   ${this.data.adType === '2' ? '出售' : '购买'}  订单(${this.data.username})`;
     } else {
-      return '订单';
+      return this.i18ns.order;
     }
   }
 

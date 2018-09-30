@@ -1,0 +1,24 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      <gz-i18n key="otc.myTradeTitle"></gz-i18n>
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-my-ad">
+  <section class="gz-full-tab">
+    <nav class="nav">
+      <a class="nav-link {{status == 'active' ? 'active' : ''}}" (click)="selectProcessing()"><gz-i18n key="my_trade.myBuy"></gz-i18n></a>
+      <a class="nav-link {{status == 'hidden' ? 'active' : ''}}" (click)="selectObtained()"><gz-i18n key="my_trade.mySell"></gz-i18n></a>
+    </nav>
+  </section>
+
+  <section class="gz-list-trade">
+    <gz-list-trade [tradelist]="list"></gz-list-trade>
+  </section>
+</article>

@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { Country } from "../../models/common/Country";
-import { SelectCountryComponent } from "../element/select-country/select-country.component";
-import { LanguageService } from "../../providers/language/language.service";
-import { CommonService } from "../../providers/common/common.service";
-import { AdService } from "../../providers/ad/ad.service";
-import { TransactionListItem } from "../../models/ad/TransactionListItem";
-import { PayType } from "../../models/common/PayType";
-import { Currency } from "../../models/common/Currency";
-import { CoinType } from "../../models/common/CoinType";
-import { SelectCoinTypeComponent } from "../element/select-coin-type/select-coin-type.component";
-import { SelectPayTypeComponent } from "../element/select-pay-type/select-pay-type.component";
-import { SelectCurrencyComponent } from "../element/select-currency/select-currency.component";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Country } from '../../models/common/Country';
+import { SelectCountryComponent } from '../element/select-country/select-country.component';
+import { LanguageService } from '../../providers/language/language.service';
+import { CommonService } from '../../providers/common/common.service';
+import { AdService } from '../../providers/ad/ad.service';
+import { TransactionListItem } from '../../models/ad/TransactionListItem';
+import { PayType } from '../../models/common/PayType';
+import { Currency } from '../../models/common/Currency';
+import { CoinType } from '../../models/common/CoinType';
+import { SelectCoinTypeComponent } from '../element/select-coin-type/select-coin-type.component';
+import { SelectPayTypeComponent } from '../element/select-pay-type/select-pay-type.component';
+import { SelectCurrencyComponent } from '../element/select-currency/select-currency.component';
 
 const $ = (<any>window).$;
 
@@ -124,6 +124,15 @@ export class OtcComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       const _result = await this.adService.listTransactionList(_params);
       this.isLoading = false;
+      // this.adList = _result.list.sort((obj1, obj2) => {
+      //   if (obj1.rate > obj2.rate) {
+      //       return 1;
+      //   }
+      //   if (obj1.rate < obj2.rate) {
+      //       return -1;
+      //   }
+      //   return 0;
+      // });
       this.adList = _result.list;
       this.adTotal = _result.total;
     } catch (e) {
@@ -263,6 +272,12 @@ export class OtcComponent implements OnInit, OnDestroy {
     this.showAddList = false;
     this.router.navigate(['/myAd']);
   }
+
+  goToMyTrans() {
+    this.showAddList = false;
+    this.router.navigate(['/myTrans']);
+  }
+
 
   goToTrust() {
     this.showAddList = false;

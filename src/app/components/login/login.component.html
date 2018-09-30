@@ -37,38 +37,41 @@
     <div>
       <input type="text" class="{{isFocus('phone')}}" placeholder="{{i18ns.inputPhone}}" [(ngModel)]="phone"
      
-      (focus)="focus('phone')" (blur)="blur('phone')">
+      (focus)="focus('phone')" (blur)="blur('phone')" >
     </div>
   </section>
   <section>
-    <div class="gz-label {{isFocus('smsCode')}}">{{i18ns.inputSmsCode}}</div>
-    <div style="position: relative;">
-      <input type="text" class="{{isFocus('smsCode')}}" placeholder="{{i18ns.inputSmsCode}}"
-             [(ngModel)]="smsCode"
-             (focus)="focus('smsCode')" (blur)="blur('smsCode')">
-      <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">
-        <gz-i18n key="user.sendSmsCode"></gz-i18n>
+      <div class="gz-label {{isFocus('smsCode')}}">{{i18ns.inputSmsCode}}</div>
+      <div style="position: relative;">
+        <input type="text" class="{{isFocus('smsCode')}}" placeholder="{{i18ns.inputSmsCode}}"
+               [(ngModel)]="smsCode"
+               (focus)="focus('smsCode')" (blur)="blur('smsCode')">
+        <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">
+          <gz-i18n key="user.sendSmsCode"></gz-i18n>
+        </div>
+        <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay">{{i18ns.resendSmsCode}}({{resendSmsCodeDelay}})</div>
       </div>
-      <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay">{{i18ns.resendSmsCode}}({{resendSmsCodeDelay}})</div>
-    </div>
-  </section>
+    </section>
   <section>
-    <div class="gz-label {{isFocus('password')}}">
-      <gz-i18n key="user.inputPassword"></gz-i18n>
-    </div>
-    <div class="gz-password">
-      <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword"
-          (focus)="focus('password')" (blur)="blur('password')">
-      <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
-          (blur)="blur('password')">
-      <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
-      <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
-    </div>
-  </section>
+      <div class="gz-label {{isFocus('password')}}">
+        <gz-i18n key="user.inputPassword"></gz-i18n>
+      </div>
+      <div class="gz-password">
+        <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword"
+            (focus)="focus('password')" (blur)="blur('password')">
+        <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
+            (blur)="blur('password')">
+        <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
+        <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
+      </div>
+    </section>
+  
+
   <section class="gz-submit">
     <div class="btn gz-circle active" (click)="login()">
       <gz-i18n key="common.login"></gz-i18n>
     </div>
+
   </section>
   <section class="gz-forget-paaswd" routerLink="/forgetPassword">
     <gz-i18n key="common.forgetPassword"></gz-i18n>

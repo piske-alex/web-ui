@@ -11,7 +11,7 @@ import { CommonService } from "../../providers/common/common.service";
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit {
-
+  userId: string;
   isLoading = false;
 
   accountType = 2;
@@ -35,6 +35,11 @@ export class WalletComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
     this.i18ns.title = await this.languageService.get('wallet.title');
     this.i18ns.cointEqualsCurrency = await this.languageService.get('wallet.cointEqualsCurrency');

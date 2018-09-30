@@ -10,6 +10,7 @@
     "limit":"限额",
     "sell":"出售",
     "buy":"购买",
+    "order":"订单",
     "chat_template_1":"你好，请问在吗？",
     "chat_template_2":"你好，请问可以及时付款吗？",
     "chat_template_3":"你好，请问付款跟实名是一致的吗？",
@@ -53,14 +54,15 @@
     "blackList": "屏蔽",
     "trust": "信任",
     "cancel": "取消",
+    "close": "关闭",
     "save":"保存",
     "confirm":"确认",
     "loading":"加载中..."
   },
   "element_coin_deposit":{
-    "to_address_recharge":"向如下地址汇入 <span>{{coinType}}</span> 完成充值",
+    "to_address_recharge":"向如下地址汇入${coinType}完成充值",
     "attention":"注意事项",
-    "attention_info":" {{coinType}}地址只能充值{{coinType}}资产，任何充入{{coinType}}地址的非{{coinType}}资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 {{coinType}}",
+    "attention_info":" ${coinType}地址只能充值${coinType}资产，任何充入${coinType}地址的非${coinType}资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 ${coinType}",
     "start_trans":"即将到账的转账",
     "refresh":"刷新",
     "send_coin_number":"发送数量",
@@ -78,7 +80,7 @@
   },
   "element_coin_withraw":{
     "send_address":"发送地址",
-    "input_address":"请输入{{coinType}}地址",
+    "input_address":"请输入${coinType}地址",
     "coin_amount":"数量",
     "input_amount":"请输入数量",
     "max_send":"最多可以发送",
@@ -86,34 +88,36 @@
     "trans_password":"交易密码",
     "input_trans_password":"请输入资金交易密码",
     "notice":"注意事项",
-    "notice_info":"{{coinType}}地址只能向{{coinType}}地址发送资产，如果向非{{coinType}}地址发送资产将不可找回。{{coinType}}网络转账费为0.0005 {{coinType}}，最低传出金额为 0.01{{coinType}}",
+    "notice_info":"${coinType}地址只能向${coinType}地址发送资产，如果向非${coinType}地址发送资产将不可找回。${coinType}网络转账费为0.0005 ${coinType}，最低传出金额为 0.01 ${coinType}",
     "confirm_send":"确认发送",
     "trans_in_processing":"正在处理中的转账",
     "refresh":"刷新",
     "withraw_amount":"提取数量",
     "txid":"TXID",
-    "loading":"Loading..."
+    "loading":"加载中..."
   },
   "element_list_ad": {
     "bank_trans": "银行转账"
   },
   "element_list_trans": {
     "real_cert_valid": "已实名",
-    "ap_alipay": "AliPay",
-    "wp_wechatpay": "WechatPay",
+    "ap_alipay": "支付寶支付",
+    "wp_wechatpay": "微信支付",
     "pp_paypal": "PayPal",
-    "bt_bank_transfer": "Bank Transfer",
+    "bt_bank_transfer": "銀行轉帳",
     "trans": "交易",
     "praise": "好评",
     "trust": "信任",
     "limit_amount": "限额",
-    "sell_btc": "出售 ",
-    "buy_btc": "购买 ",
-    "edit": "编辑"
+    "sell_btc": "出售",
+    "buy_btc": "购买",
+    "edit": "编辑",
+    "ad_orders": "订单"    
   },
   "forget_password":{
     "forget_password":"找回密码",
     "set_login_password":"设置登录密码",
+    "input_login_password":"请输入登录密码",
     "finish":"完成"
   },
   "help": {
@@ -141,6 +145,7 @@
     "iSell": "我要出售",
     "postAd": "发布广告",
     "myAd": "我的广告",
+    "myTrans": "我的交易",
     "trustAdmin": "信任管理",
     "saleAd": "发布出售广告",
     "buyAd": "发布购买广告",
@@ -163,6 +168,7 @@
     "markPay": "标记付款",
     "markReceive": "标记收款",
     "waitPay": "待付款",
+    "pay_timeout": "付款超时",
     "minute": "分",
     "second": "秒",
     "adType": "广告类型",
@@ -194,6 +200,7 @@
     "openTimeFail_1": "开始时间不能晚于结束时间",
     "publishError": "广告发布失败，请稍后重试!",
     "listError": "广告列表获取失败，请稍后重试!",
+    "input_remark": "请填写留言!",
     "wantBuy": "你想购买多少？",
     "wantSale": "你想出售多少？",
     "saleWarn_1": "交易提醒",
@@ -201,7 +208,7 @@
     "saleWarn_3": "2. 请通过平台进行沟通约定，并保存好相关聊天记录。",
     "saleWarn_4": "3. 如遇到交易纠纷，请通过平台\"帮助\"解决问题。",
     "remarkDesc_1": "请说明有关您交易的相关要求，以便卖家下单前先行查看，例如：",
-    "remarkDesc_2": "1. 下单后请即刻告诉我你的收款方式",
+    "remarkDesc_2": "1. 下单后请即时告诉我你的收款方式",
     "remarkDesc_3": "2. 请务必确认您提供的收款账号是否正确",
     "remarkDesc_4": "3. 付款需要点时间，我会及时如约付款，请耐心等候。",
     "price_warn_1": "你现在所设的价格少于市场价 10%",
@@ -213,7 +220,18 @@
     "post_ad_help_5": "<p>最高价</p><p>广告最高可交易的价格，可帮助您在价格剧烈波动保持稳定的盈利，比如最高价为1000，市场价处于1000以上时，您的广告将依旧以1000的价格展示。</p>",
     "post_ad_help_6": "<p>最低价</p><p>广告最低可交易的价格，可帮助您在价格剧烈波动保持稳定的盈利，比如最低价为12000，市场价处于1000以下时，您的广告将依旧以12000的价格展示。</p>",
     "post_ad_help_7": "<p>一次交易的最低的交易限制</p>",
-    "post_ad_help_8": "<p>您需要提供一种最有效的方式，并填写详细的收款信息，方便买家/卖家与您交易</p>"
+    "post_ad_help_8": "<p>您需要提供一种最有效的方式，并填写详细的收款信息，方便买家/卖家与您交易</p>",
+    "input_minCount":"请输入最小量 , 且大于0",
+    "input_maxCount":"请输入最大量 , 且大于0",
+    "input_maxCountMoreThanMin":"最大量应大于最小量",
+    "input_price":"请输入交易价格 , 且大于0",
+    "trade_time":"交易时间",
+    "collect_time":"收币时间",
+    "myTradeTitle":"我的交易"
+  },
+  "my_trade": {
+    "myBuy": "我的买单",
+    "mySell": "我的卖单"
   },
   "user": {
     "hisPublishAd": "他发布的广告",
@@ -230,11 +248,16 @@
     "inputPassword": "请输入密码",
     "resendSmsCode": "重新获取验证码",
     "sendSmsCode": "获取验证码",
+    "invalid_verification_code": "无效验证码",
     "iDealWithHimCount": "我和他交易过${1}次",
     "set_nickname":"设置昵称",
     "input_nickname":"请输入昵称",
+    "confirm_logout": "确定要退出吗？",
     "inputValidPhone": "请输入正确的手机号码",
+    
     "err_phone_or_password": "手机号或者密码错误",
+    "setting_password_relogin": "修改密码成功,请重新登录",
+    "setting_password_fail": "修改密码失败",
     "err_gettoken_fail":"服务器端处理失败，获取到的_token是undefined",
     "err_getuserdetail_fail":"服务器端getUserDetail处理失败"
   },
@@ -243,6 +266,8 @@
     "tip":"绑定邮箱用于消息提醒和相关安全操作，保护和帮助您完成交易",
     "input_email":"请输入邮箱",
     "input_valid_email":"请输入有效邮箱",
+    "bind_email_success":"绑定邮箱成功",
+    "bind_email_failure":"绑定邮箱失败",
     "submit":"提交"
   },
   "user_real_cert": {
@@ -252,6 +277,10 @@
     "card_front":"证件正面",
     "card_back":"证件反面",
     "bust":"半身像",
+    "input_card_front":"请选择证件正面",
+    "input_card_back":"请选择证件反面",
+    "input_bust":"请选择半身像",
+    "checked_promise":"请选择我承诺",
     "promise":"我承诺提交的信息属于本人所有，不存在盗用他人证件的行为。",
     "submit":"提交"
   },
@@ -269,7 +298,8 @@
     "set_phone":"绑定手机",
     "phone_verified":"已绑定手机",
     "set_email":"绑定邮箱",
-    "email_unverified":"未绑定",
+    "email_not_setting":"未绑定",
+    "email_unverified":"审核中",
     "email_verified":"已绑定",
     "email_pending":"未确认",
     "login_password":"登录密码",
@@ -277,7 +307,7 @@
     "language":"语言",
     "lang_en":"English",
     "lang_zh_cn":"简体中文",
-    "lang_hk":"繁體"
+    "lang_hk":"繁体中文"
   },
   "user_trans_password": {
     "trans_password": "资金密码",
@@ -287,11 +317,20 @@
   },
   "register": {
     "read_agreement": "已经阅读并同意",
-    "agreement_name":"《KoinExchange 服务条款》",
+    "agreement_name": "《KoinExchange 服务条款》",
+    "read_and_agree": "请阅读并同意服务条款",
+    "password_valid_warn_1": "请输入最少8位密码，其中(一个数字，一个小写英文字母，一个大写英文字母)!",
+    "password_valid_warn_2": "密码至少包含一个数字，一个小写英文字母，一个大写英文字母!",
+    "serv_items":"<p>温馨提示</p><p>欢迎你阅读本条款, 具体内容是...</p>",
     "next_step":"下一步"
   },
   "transaction": {
+    "input_x_amount": "请输入{BuyOrSell}的金额",
+    "min_x_amount": "最少{BuyOrSell}数量为{Amount}",
+    "max_x_amount": "最大{BuyOrSell}数量为{Amount}",
+    "input_x_number": "请输入{BuyOrSell}的数量",
     "obtained": "下架",
+    "confirm_obtained": "确定下架吗？",
     "order_confirm":"下单确认",
     "order_warn":"提醒：请确认价格再下单",
     "cancel_order":"放弃",
@@ -302,10 +341,16 @@
     "trans_out":"转出",
     "trans_coin_number":"数量",
     "trans_address":"地址",
+    "confirm_sell":"确认出售",
+    "confirm_buy":"确认购买",
+    "cancel_sell":"放弃出售",
+    "cancel_buy":"放弃购买",
     "trans_confirm_time":"到账时间"
   },
   "trust": {
     "praise": "好评",
+    "cancel_trust": "取消信任",
+    "cancel_black": "取消屏蔽",
     "trust":"信任"
   },
   "wallet": {

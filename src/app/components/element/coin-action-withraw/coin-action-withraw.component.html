@@ -1,8 +1,8 @@
 <div class="gz-action-withraw gz-form">
   <div class="gz-action-withraw-row">
-    <div class="gz-label"><gz-i18n key="element_coin_withraw.send_address"></gz-i18n></div>
+    <div class="gz-label">{{this.i18ns.send_address}}</div>
     <div class="gz-input">
-      <input type="text" [(ngModel)]="address" placeholder="{{this.i18ns.input_address}}">
+      <input type="text" class="gz-input" [(ngModel)]="address" placeholder="{{this.i18ns.input_address}}">
     </div>
   </div>
   <div class="gz-action-withraw-row">
@@ -28,7 +28,7 @@
       <gz-i18n key="element_coin_withraw.notice"></gz-i18n>
     </p>
     <p>      
-      <gz-i18n key="element_coin_withraw.notice_info"></gz-i18n>
+      {{this.i18ns.notice_info}}
     </p>
   </div>
   <div class="gz-btn-row">

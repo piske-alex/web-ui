@@ -41,7 +41,10 @@ export class UserRealCertificationComponent implements OnInit {
     this.i18ns.card_front = await this.languageService.get('user_real_cert.card_front');
     this.i18ns.card_back = await this.languageService.get('user_real_cert.card_back');
     this.i18ns.bust = await this.languageService.get('user_real_cert.bust');
-
+    this.i18ns.input_card_front = await this.languageService.get('user_real_cert.input_card_front');
+    this.i18ns.input_card_back = await this.languageService.get('user_real_cert.input_card_back');
+    this.i18ns.input_bust = await this.languageService.get('user_real_cert.input_bust');
+    this.i18ns.checked_promise = await this.languageService.get('user_real_cert.checked_promise');
   }
 
   goBack() {
@@ -60,6 +63,25 @@ export class UserRealCertificationComponent implements OnInit {
   }
 
   async submit() {
+    if (!this.realName) {
+      return alert(this.i18ns.input_name);
+    }
+    if (!this.realCardNo) {
+      return alert(this.i18ns.input_cardno);
+    }
+    if (!this.frontImg.name) {
+      return alert(this.i18ns.input_card_front);
+    }
+    if (!this.backImg.name) {
+      return alert(this.i18ns.input_card_back);
+    }
+    if (!this.halfImg.name) {
+      return alert(this.i18ns.input_bust);
+    }
+    if (!this.isSelectPromise) {
+      return alert(this.i18ns.checked_promise);
+    }
+
     let _params = {
       realName: this.realName,
       idNumber: this.realCardNo,
@@ -73,11 +95,14 @@ export class UserRealCertificationComponent implements OnInit {
       halfPhoto: this._toUploadB64(this.halfImg.src),
     };
 
+    console.log('real-cert para',_params);
+
     try {
       let _result = await this.userService.realCertifiation(_params);
       this.goBack();
     } catch (e) {
       console.error(e);
+      alert(e.error);
     }
   }
 

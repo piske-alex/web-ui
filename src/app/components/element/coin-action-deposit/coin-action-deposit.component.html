@@ -1,9 +1,9 @@
 <div class="gz-action-deposit">
   <div style="display: flex;">
-    <gz-i18n key="element_coin_deposit.to_address_recharge"></gz-i18n>
+    {{this.i18ns.to_address_recharge}}
     <div id="qrcode" (click)="showBigImg()"></div>
   </div>
-  <div class="loader" *ngIf="isLoading">Loading...</div>
+  <div class="loader" *ngIf="isLoading"><gz-i18n key="common.loading"></gz-i18n></div>
   <div class="gz-action-address" *ngIf="!isLoading">
     {{coinAddress}}
   </div>
@@ -12,7 +12,7 @@
       <gz-i18n key="element_coin_deposit.attention"></gz-i18n>
     </p>
     <p>     
-      <gz-i18n key="element_coin_deposit.attention_info"></gz-i18n>
+      {{this.i18ns.attention_info}}
     </p>
   </div>
 </div>

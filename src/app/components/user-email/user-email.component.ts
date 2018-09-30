@@ -26,6 +26,8 @@ export class UserEmailComponent implements OnInit {
   async ngOnInit() {
     this.i18ns.input_email = await this.languageService.get('user_email.input_email');
     this.i18ns.input_valid_email = await this.languageService.get('user_email.input_valid_email');
+    this.i18ns.bind_email_success = await this.languageService.get('user_email.bind_email_success');
+    this.i18ns.bind_email_failure = await this.languageService.get('user_email.bind_email_failure');
   }
 
   goBack() {
@@ -64,14 +66,14 @@ export class UserEmailComponent implements OnInit {
       // , verifyCode: this.emailVerifyCode
       // let _result = await this.userService.bindEmail({email: this.email});
       this.userService.bindEmail({email: this.email}).then(async (data) => {
-          alert('绑定Email成功');
+          alert(this.i18ns.bind_email_success);
           this.goBack();
       }, error => {
         console.error('----------------bindEmail-----error: ', error);
         if (error.error.success === false && error.error.errmsg !== undefined) {
           alert(error.error.errmsg);
         } else {
-          alert('绑定Email失败');
+          alert(this.i18ns.bind_email_failure);
         }
       });
     } catch (e) {

@@ -15,16 +15,16 @@
 <article class="gz-wallet gz-coin-action">
   <section class="gz-wallet-summery">
     <div class="gz-title"><gz-i18n key="coin.total_assets"></gz-i18n></div>
-    <div class="gz-amount">{{coinBalance.allBalance}} {{coinType}}</div>
+    <div class="gz-amount">{{coinBalance.allBalance | btcFormat }} {{coinType}}</div>
     <!--<div class="gz-currency">≈0.00 CNY</div>-->
     <div class="gz-wallet-coin-detail">
       <div class="">
         <div><gz-i18n key="coin.balance"></gz-i18n>({{coinType}})</div>
-        <div>{{coinBalance.balance}}</div>
+        <div>{{coinBalance.balance | btcFormat}}</div>
       </div>
       <div class="">
         <div><gz-i18n key="coin.locked"></gz-i18n>({{coinType}})</div>
-        <div>{{coinBalance.locked}}</div>
+        <div>{{coinBalance.locked | btcFormat}}</div>
       </div>
     </div>
   </section>

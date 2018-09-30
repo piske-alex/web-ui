@@ -32,6 +32,19 @@
     <div class="gz-list-tr-right">
       <div>{{getDealWithHimDesc(data)}}</div>
     </div>
+    <div class="gz-list-tr-right">
+
+        <div class="btn btn-primary" *ngIf="relationShip == 1" (click)="cancelTrustList(data.id)">
+            <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+            {{this.i18ns.cancel_trust}}
+          </div>
+          
+      <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.id)">
+        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+        {{this.i18ns.cancel_black}}
+      </div>
+      
+    </div>
   </section>
 
 </article>

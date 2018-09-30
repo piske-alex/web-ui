@@ -4,6 +4,7 @@ import { RouteMap } from '../../models/route-map/route-map.modle';
 import { Currency } from '../../models/common/Currency';
 import { Country } from '../../models/common/Country';
 import { CoinType } from '../../models/common/CoinType';
+import { TradeItem } from '../../models/common/TradeItem';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,32 @@ export class CommonService {
 
   constructor(private httpService: HttpService) {
   }
+
+  listMyTradeList(params): Promise<TradeItem[]> {
+    return new Promise((resolve, reject) => {
+      if (this.cache['myTradeList'] !== undefined) {
+        resolve(this.cache['myTradeList']);
+      } else {
+        this.httpService.request(RouteMap.V1.AD.GET_ORDER, params).then(data => {
+          if (data && data.success) {
+            //this.cache['myTradeList'] = data.data; 
+            let _result = [];
+            if (data.data && data.data.length > 0) {
+              _result = data.data.map(_data => {
+                return TradeItem.newInstance(_data);
+              });
+            }
+            resolve(_result);
+          } else {
+            reject(data.errMsg);
+          }
+        }, error => {
+          reject(error);
+        });
+      }
+    });
+  }
+
 
   getCountryList(): Promise<Country[]> {
     return new Promise((resolve, reject) => {

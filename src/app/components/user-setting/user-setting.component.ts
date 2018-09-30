@@ -21,6 +21,10 @@ export class UserSettingComponent implements OnInit {
 
   async ngOnInit() {
     this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
     try {
       const _user = localStorage.getItem('user');
       if (_user) {
@@ -38,8 +42,15 @@ export class UserSettingComponent implements OnInit {
   }
 
   goToVerify() {
-    // if (this.user.kycStatus == 'unverified') {
-    this.router.navigate(['/userRealCert']);
-    // }
+     if (!this.user.kycStatus  || this.user.kycStatus === 'unverified' ) {
+      this.router.navigate(['/userRealCert']);
+     }
   }
+
+  goToBindEmail() {
+    if (!this.user.emailStatus || this.user.emailStatus === 'unset') {
+      this.router.navigate(['/userEmail']);
+    }
+ }
+
 }

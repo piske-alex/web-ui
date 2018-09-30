@@ -4,12 +4,12 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title" *ngIf="data.adType == '1'">
-      <span>{{i18ns.buy}}</span>
+      <span>{{i18ns.buy}} </span>
       <span>{{data.transactionCoinType}}</span>
     </div>
     <div class="gz-title" *ngIf="data.adType == '2'">
-      <span>{{i18ns.sale}}</span>
-      <span>{{data.transactionCurrency}}</span>
+      <span>{{i18ns.sale}} </span>
+      <span>{{data.transactionCoinType}}</span>
     </div>
     <div></div>
     <!--<div (click)="goToHelp()">{{i18ns.help}}</div>-->
@@ -30,14 +30,14 @@
    <section class="gz-exchange">
       <gz-i18n key="otc.payType"></gz-i18n>
       
-      <img src="/assets/images/pay_ap.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_ap"> 
-          &nbsp;
-          <img src="/assets/images/pay_wp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_wp"> 
-          &nbsp;
-          <img src="/assets/images/pay_pp.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_pp"> 
-          &nbsp;
-          <img src="/assets/images/pay_bt.jpg" alt=""  class="gz-icon" *ngIf="data.is_payment_bt">
-          &nbsp;
+      <img src="/assets/images/pay_ap.jpg" title="{{this.i18ns.ap_alipay}}" alt="{{this.i18ns.ap_alipay}}"  class="gz-icon" *ngIf="data.is_payment_ap"> 
+      &nbsp;
+      <img src="/assets/images/pay_wp.jpg" title="{{this.i18ns.wp_wechatpay}}" alt="{{this.i18ns.wp_wechatpay}}"  class="gz-icon" *ngIf="data.is_payment_wp"> 
+      &nbsp;
+      <img src="/assets/images/pay_pp.jpg" title="{{this.i18ns.pp_paypal}}" alt="{{this.i18ns.pp_paypal}}"  class="gz-icon" *ngIf="data.is_payment_pp"> 
+      &nbsp;
+      <img src="/assets/images/pay_bt.jpg" title="{{this.i18ns.bt_bank_transfer}}" alt="{{this.i18ns.bt_bank_transfer}}"  class="gz-icon" *ngIf="data.is_payment_bt">
+      &nbsp;
   </section> 
   
   
@@ -49,15 +49,16 @@
     <div class="gz-input-row">
       <span *ngIf="data.adType == '2'">{{data.transactionCoinType}}</span>
       <span *ngIf="data.adType == '1'">{{data.transactionCurrency}}</span>
-      <input type="number" [(ngModel)]="payAmount"
-      (keypress) = "onlyInputFloatPay(event)"
-      (keyup)="changePay()" [placeholder]="getLeftPlacehold()">
+
+      <input type="text" [(ngModel)]="payAmount"
+      #payAmountVars
+      (keyup)="onKeyPress_Pay(payAmountVars.value)" [placeholder]="getLeftPlacehold()">
       <fa-icon [icon]="['fas', 'exchange-alt']"></fa-icon>
       <span *ngIf="data.adType == '2'">{{data.transactionCurrency}}</span>
       <span *ngIf="data.adType == '1'">{{data.transactionCoinType}}</span>
-      <input type="number" [(ngModel)]="receiveAmount"
-       (keypress) = "onlyInputFloatReceive(event)"
-       (keyup)="changeReceive()" [placeholder]="getRightPlacehold()">
+      <input type="text" [(ngModel)]="receiveAmount"
+      #receiveAmountVars
+       (keyup)="onKeyPress_Recevice(receiveAmountVars.value)" [placeholder]="getRightPlacehold()">
     </div>
   </section>
 
@@ -97,25 +98,25 @@
     </div>
     <div class="gz-popup-row">
       <div><gz-i18n key="otc.amount"></gz-i18n></div>
-      <div>{{payAmount}} {{data.transactionCurrency}}</div>
+      <div *ngIf="this.data.adType === '1'" >{{payAmount  | number:"0.2"}} {{data.transactionCurrency}}</div>
+      <div *ngIf="this.data.adType === '2'" >{{payAmount  | number:"0.8"}} {{data.transactionCurrency}}</div>
     </div>
     <div class="gz-popup-row">
       <div><gz-i18n key="otc.count"></gz-i18n></div>
-      <div>{{receiveAmount}} {{data.transactionCoinType}}</div>
+      <div *ngIf="this.data.adType === '1'" >{{receiveAmount | number:"0.8"}} {{data.transactionCoinType}}</div>
+      <div *ngIf="this.data.adType === '2'" >{{receiveAmount | number:"0.2"}} {{data.transactionCoinType}}</div>
     </div>
     <div>
       <div class="gz-warn"><gz-i18n key="transaction.order_warn"></gz-i18n></div>
     </div>
     <div class="gz-popup-btn-row">
       <div (click)="cancelTransaction()">
-        {{i18ns.confirm}}
-        <span *ngIf="data.adType == '1'">{{i18ns.buy}}</span>
-        <span *ngIf="data.adType == '2'">{{i18ns.sale}}</span>
+        <span *ngIf="data.adType == '1'">{{i18ns.cancel_buy}}</span>
+        <span *ngIf="data.adType == '2'">{{i18ns.cancel_sell}}</span>
       </div>
-      <div (click)="confirmTransaction()">
-        {{i18ns.confirm}}
-        <span *ngIf="data.adType == '1'">{{i18ns.buy}}</span>
-        <span *ngIf="data.adType == '2'">{{i18ns.sale}}</span>
+      <div (click)="confirmTransaction()">        
+        <span *ngIf="data.adType == '1'">{{i18ns.confirm_buy}}</span>
+        <span *ngIf="data.adType == '2'">{{i18ns.confirm_sell}}</span>
       </div>
     </div>
   </div>

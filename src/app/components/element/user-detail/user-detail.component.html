@@ -15,10 +15,10 @@
         <fa-icon [icon]="['fas', 'plus']"></fa-icon>
         {{i18ns.blackList}}
       </div>
-      <div class="btn btn-primary" *ngIf="data.is_in_my_black_list" (click)="cancelBlackList()">
+      <!-- <div class="btn btn-primary" *ngIf="data.is_in_my_black_list" (click)="cancelBlackList()">
         <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
         {{i18ns.cancel}}{{i18ns.blackList}}
-      </div>
+      </div> -->
       <div class="btn btn-primary" *ngIf="!data.is_in_my_trust_list" (click)="addTrustList()">
         <fa-icon [icon]="['fas', 'plus']"></fa-icon>
         {{i18ns.trust}}
@@ -43,7 +43,7 @@
       <div>{{i18ns.trustCount}}</div>
     </div>
     <div>
-      <h3>{{data.positive_count === 0 ? 100 : data.positive_count}}%</h3>
+      <h3>{{data.positive_count}}%</h3>
       <div>{{i18ns.praiseCount}}</div>
     </div>
     <!--<div>-->

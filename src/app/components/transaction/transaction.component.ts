@@ -32,6 +32,10 @@ export class TransactionComponent implements OnInit {
 
   async ngOnInit() {
     this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.adId = this.route.snapshot.paramMap.get('adId');
 
     this.i18ns.contact = await this.languageService.get('common.contact');
@@ -48,6 +52,23 @@ export class TransactionComponent implements OnInit {
     this.i18ns.adRemark = await this.languageService.get('otc.adRemark');
     this.i18ns.transactionLimit = await this.languageService.get('otc.transactionLimit');
     this.i18ns.transactionLimit = await this.languageService.get('otc.transactionLimit');
+    this.i18ns.onlyRealUser = await this.languageService.get('otc.onlyRealUser');
+
+    this.i18ns.input_x_amount = await this.languageService.get('transaction.input_x_amount');
+    this.i18ns.min_x_amount = await this.languageService.get('transaction.min_x_amount');
+    this.i18ns.max_x_amount = await this.languageService.get('transaction.max_x_amount');
+    this.i18ns.input_x_number = await this.languageService.get('transaction.input_x_number');
+    this.i18ns.confirm_obtained = await this.languageService.get('transaction.confirm_obtained');
+
+    this.i18ns.confirm_sell = await this.languageService.get('transaction.confirm_sell');
+    this.i18ns.confirm_buy = await this.languageService.get('transaction.confirm_buy');
+    this.i18ns.cancel_sell = await this.languageService.get('transaction.cancel_sell');
+    this.i18ns.cancel_buy = await this.languageService.get('transaction.cancel_buy');
+
+    this.i18ns.ap_alipay = await this.languageService.get('element_list_trans.ap_alipay');
+    this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
+    this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
+    this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
@@ -64,11 +85,11 @@ export class TransactionComponent implements OnInit {
   }
 
   goToHelp() {
-    this.router.navigate(['/help', { type: 'sell' }])
+    this.router.navigate(['/help', { type: 'sell' }]);
   }
 
   goToChat() {
-    this.router.navigate(['/chat', { adId: this.adId }])
+    this.router.navigate(['/chat', { adId: this.adId }]);
   }
 
   getRemark() {
@@ -80,18 +101,30 @@ export class TransactionComponent implements OnInit {
   }
 
   async transaction() {
-    if (this.data.adType === '1') {
-      let _payDes = '买入';
+    
+    // if (this.data.adType === '1') {
+      let _payDes = this.i18ns.buy;
       if (!this.payAmount) {
-        alert('请输入' + _payDes + '金额');
-      } else if (this.payAmount < this.data.limitMinAmount) {
-        alert('最少' + _payDes + '数量为' + this.data.limitMinAmount);
-      } else if (this.payAmount > this.data.limitMaxAmount) {
-        alert('最大' + _payDes + '数量为' + this.data.limitMaxAmount);
+        let inputAmount = this.i18ns.input_x_amount ;
+        inputAmount = inputAmount.replace('{BuyOrSell}', _payDes);
+        alert(inputAmount);
+      } else if (this.payAmount < Number(this.data.limitMinAmount)) {
+        let minAmount = this.i18ns.min_x_amount ;
+        minAmount = minAmount.replace('{BuyOrSell}', _payDes);
+        minAmount = minAmount.replace('{Amount}', this.data.limitMinAmount);
+        alert(minAmount );
+      } else if (this.payAmount > Number(this.data.limitMaxAmount)) {
+        let maxAmount = this.i18ns.max_x_amount ;
+        maxAmount = maxAmount.replace('{BuyOrSell}', _payDes);
+        maxAmount = maxAmount.replace('{Amount}', this.data.limitMaxAmount);
+        alert(maxAmount);
       } else {
         this.isShowConfirm = true;
       }
-    }
+
+      // this.payAmount = Number(this.payAmount.toFixed(2));
+      // this.receiveAmount = Number(this.receiveAmount.toFixed(8));
+    // }
   }
 
   cancelTransaction() {
@@ -107,11 +140,12 @@ export class TransactionComponent implements OnInit {
     this.adService.transaction({ adid: this.data.adId, amount: this.payAmount }).then(async (data) => {
       const _result = data;
       const _orderId = _result.orderid;
-      this.router.navigate(['/orderDetail', { orderId: _orderId }]);
+      // console.log("order", _result);
+      this.router.navigate(['/orderDetail', { orderId: _orderId, adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
     }, error => {
       console.error('---------------------error_transaction: ', error);
       if (error.status === 403 && error.error.userGroup === 'user') {
-        alert('受限功能，请先通过实名认证');
+        alert(this.i18ns.onlyRealUser);
       } else {
         alert(error.message);
       }
@@ -138,7 +172,9 @@ export class TransactionComponent implements OnInit {
 
   getLeftPlacehold() {
     if (this.data.adType === '2') {
-      return `请输入卖出金额`;
+      let inputAmount = this.i18ns.input_x_amount ;
+        inputAmount = inputAmount.replace('{BuyOrSell}', this.i18ns.sale);
+      return inputAmount;
     } else if (this.data.adType === '1') {
       return `${this.data.limitMinAmount}-${this.data.limitMaxAmount}`;
     } else {
@@ -148,16 +184,20 @@ export class TransactionComponent implements OnInit {
 
   getRightPlacehold() {
     if (this.data.adType === '2') {
-      return `请输入卖出数量`;
+      let inputNumber = this.i18ns.input_x_number ;
+          inputNumber = inputNumber.replace('{BuyOrSell}', this.i18ns.sale);
+      return inputNumber;
     } else if (this.data.adType === '1') {
-      return `请输入买入的数量`;
+      let inputNumber = this.i18ns.input_x_number ;
+          inputNumber = inputNumber.replace('{BuyOrSell}', this.i18ns.buy);
+      return inputNumber;
     } else {
       return '';
     }
   }
 
   async obtained() {
-    if (confirm('确定下架吗？')) {
+    if (confirm(this.i18ns.confirm_obtained)) {
       try {
         let _result = await this.adService.deleteAd({ adid: this.adId });
         this.location.back();
@@ -171,53 +211,26 @@ export class TransactionComponent implements OnInit {
     this.router.navigate(['/postAd', { adId: this.adId || '' }])
   }
 
-
-
-  onlyInputFloatPay(e) {
-    let evt = (e) ? e : window.event;
-    let key = (evt.keyCode) ? evt.keyCode : evt.which;
-  
-    let objValue = String( this.payAmount);
-  
-    if ((objValue.indexOf(".") !== -1 && key === 46)) {
-      
-        return false;
+  onKeyPress_Pay(value: any) {
+    if (this.data.adType === '1') {
+      this.payAmount = this.changeValidNumber(value,  2, 9);
+    } else {
+      this.payAmount = this.changeValidNumber(value,  8, 6);
     }
-
-    if (isNaN(this.payAmount)) {
-      this.payAmount = 0;
-      return  false;
-    }
-
-    this.payAmount = this.changeValidNumber(objValue, 2, 9);
- 
+    this.changePay();
   }
 
-  onlyInputFloatReceive(e) {
-    let evt = (e) ? e : window.event;
-    let key = (evt.keyCode) ? evt.keyCode : evt.which;
-  
-    let objValue = String( this.receiveAmount);
-
-    if (isNaN(this.receiveAmount)) {
-      this.receiveAmount = 0;
-      return  false;
+  onKeyPress_Recevice(value: any) {
+    if (this.data.adType === '1') {
+    this.receiveAmount = this.changeValidNumber(value,  8, 6);
+    } else {
+      this.receiveAmount = this.changeValidNumber(value,  2, 9);
     }
-  
-    if ((objValue.indexOf(".") !== -1 && key === 46)) {
-         console.log(objValue);
-        return false;
-    }
-
-    
-
-    this.receiveAmount = this.changeValidNumber(objValue,  6, 9);
- 
+    this.changeReceive();
   }
 
   changeValidNumber(objValue,  point , integerLen) {
     let tmpVal = objValue;
-
     // 先把非数字的都替换掉，除了数字和. 
     tmpVal = tmpVal.replace(/[^\d\.]/g, '');
     // 必须保证第一个为数字而不是. 
@@ -232,7 +245,7 @@ export class TransactionComponent implements OnInit {
     const p6 = /(\.+)(\d+)(\.+)/g; // 屏蔽1....234.的情况
     tmpVal = tmpVal.replace(p6, '$1$2'); // 屏蔽最后一位的.
 
-    point = point - 1;
+    //point = point - 1;
 
     if (point != undefined && !isNaN(point) && point == 0) { // 如果没有小数位,则不输入小数点
         tmpVal = tmpVal.replace(/\./g, '');
@@ -240,6 +253,7 @@ export class TransactionComponent implements OnInit {
 
     if (point != undefined && !isNaN(point) && point > 0) {
         var ind = tmpVal.indexOf(".");
+        
         if (ind != -1) {
             point = parseInt(point);
             tmpVal = tmpVal.substring(0, ind + 1 + point);
@@ -258,8 +272,9 @@ export class TransactionComponent implements OnInit {
         }
     }
 
+    //if(tmpVal !=""&&tmpVal!= undefined && !isNaN(tmpVal))
+    //  tmpVal = parseFloat(tmpVal);
     return tmpVal;
 }
-
 
 }

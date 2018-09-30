@@ -15,8 +15,8 @@
 <article class="gz-wallet">
   <section class="gz-wallet-summery" *ngIf="!isLoading">
     <div class="gz-title">{{i18ns.cointEqualsCurrency}}</div>
-    <div class="gz-amount">{{mainCoin.usableAmount}} {{mainCoin.coinType}}</div>
-    <div class="gz-currency">≈{{mainCoin.currencyAmount}} {{mainCoin.currency}}</div>
+    <!-- <div class="gz-amount">{{mainCoin.usableAmount}} {{mainCoin.coinType}}</div> -->
+    <div class="gz-currency">≈{{mainCoin.currencyAmount | cnyFormat}} {{mainCoin.currency}}</div>
     <div class="gz-wallet-action">
       <div class="btn gz-circle" (click)="goToCoinActionDeposit()">{{i18ns.deposit}}</div>
       <div class="btn gz-circle" (click)="goToCoinActionWithraw()">{{i18ns.withraw}}</div>
@@ -38,8 +38,8 @@
       <div class="gz-coin-detail">
         <div>{{data.coinType}}</div>
         <div class="gz-coin-amount">
-          <div>{{i18ns.usable}} {{data.usableAmount}}</div>
-          <div>{{i18ns.freeze}} {{data.freezeAmount}}</div>
+          <div>{{i18ns.usable}} {{data.usableAmount | btcFormat}}</div>
+          <div>{{i18ns.freeze}} {{data.freezeAmount | btcFormat}}</div>
         </div>
       </div>
       <div>

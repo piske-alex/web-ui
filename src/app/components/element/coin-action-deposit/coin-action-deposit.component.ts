@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WalletService } from "../../../providers/wallet/wallet.service";
-import { LanguageService } from "../../../providers/language/language.service";
+import { WalletService } from '../../../providers/wallet/wallet.service';
+import { LanguageService } from '../../../providers/language/language.service';
 
 const QRCode = (<any>window).QRCode;
 
@@ -33,8 +33,12 @@ export class CoinActionDepositComponent implements OnInit {
   async ngOnInit() {
 
     this.i18ns.depositWillReceiveHelp = await this.languageService.get('wallet.depositWillReceiveHelp');
+    this.i18ns.to_address_recharge = await this.languageService.get('element_coin_deposit.to_address_recharge');
+    this.i18ns.attention_info = await this.languageService.get('element_coin_deposit.attention_info');
 
     this.i18ns.depositWillReceiveHelp = this.i18ns.depositWillReceiveHelp.replace(/\$\{coinTYpe\}/g, this.coinType);
+    this.i18ns.to_address_recharge = this.i18ns.to_address_recharge.replace(/\$\{coinType\}/g, this.coinType);
+    this.i18ns.attention_info = this.i18ns.attention_info.replace(/\$\{coinType\}/g, this.coinType);
 
     this._loadWillReceiveTransaction();
     try {

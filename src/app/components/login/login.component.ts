@@ -7,10 +7,12 @@ import { CommonService } from '../../providers/common/common.service';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 
+
 @Component({
   selector: 'gz-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
+
 })
 export class LoginComponent implements OnInit {
   countryCode: any;
@@ -45,6 +47,9 @@ export class LoginComponent implements OnInit {
     this.i18ns.err_phone_or_password = await this.languageService.get('user.err_phone_or_password');
     this.i18ns.err_gettoken_fail = await this.languageService.get('user.err_gettoken_fail');
     this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
+    this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
+
+    this.i18ns.btcCount = 12345678.001;
 
     const _accessToken = localStorage.getItem('access_token');
     const _loginTimestamp = localStorage.getItem('login_timestamp');
@@ -57,6 +62,8 @@ export class LoginComponent implements OnInit {
     } catch (e) {
       console.error(e);
     }
+
+
   }
 
   goBack() {
@@ -108,6 +115,10 @@ export class LoginComponent implements OnInit {
 
     if (!(/^[\d]{6,15}$/g.test(this.phone))) {
       return alert(this.i18ns.inputValidPhone);
+    }
+
+    if (!this.smsCode) {
+      return alert(this.i18ns.inputSmsCode);
     }
 
     if (!this.password) {
@@ -171,7 +182,11 @@ export class LoginComponent implements OnInit {
       console.error('---------------------error: ', error);
       this.password = '';
       if (error.error.success === false && error.error.errmsg !== undefined) {
-        alert(error.error.errmsg);
+        if (error.error.errmsg === 'Invalid verification code') {
+          alert(this.i18ns.invalid_verification_code);
+        } else {
+          alert(error.error.errmsg);
+        }
       } else {
         this.resendSmsCodeDelay = 1;
         alert(this.i18ns.err_phone_or_password);

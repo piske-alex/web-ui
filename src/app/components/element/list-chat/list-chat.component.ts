@@ -12,8 +12,8 @@ export class ListChatComponent implements OnInit {
 
   chatList: any[] = [];
 
-  user: User;
-  otherUser: User;
+  adUser: User;
+  anotherUser: User;
 
   @Input()
   adUserId;
@@ -24,14 +24,18 @@ export class ListChatComponent implements OnInit {
   @Input()
   adId;
 
+  @Input()
+  anotherUserId;
+
   constructor(private userService: UserService,
               private chatService: ChatService) {
   }
 
   async ngOnInit() {
-
-    this.user = await this.userService.getDetail({});
-    this.otherUser = await this.userService.getDetail({userid: this.adUserId});
+    console.log('list-chat anotherUserId', this.anotherUserId);
+    console.log('list-chat adUserId', this.adUserId);
+    this.anotherUser = await this.userService.getDetail({userid: this.anotherUserId});
+    this.adUser = await this.userService.getDetail({userid: this.adUserId});
 
     this.chatService.initChat();
     this.chatService.loginChat();
@@ -40,23 +44,23 @@ export class ListChatComponent implements OnInit {
       this._updateScroll();
     };
 
-    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.user.id);
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId);
     this._updateScroll();
-    setInterval(() => {
-      this.refreshchatlist() ;
-    }, 1000);
+    // setInterval(() => {
+    //   this.refreshchatlist() ;
+    // }, 1000);
 
   }
 
   async refreshchatlist() {
-    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.user.id);
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId);
       this._updateScroll();
   }
 
 
   async send(message) {
     try {
-      this.chatList = await this.chatService.send(this.adId, this.adUserId, this.user.id, message);
+      this.chatList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId, message);
       this._updateScroll();
     } catch (e) {
       console.error(e);
@@ -64,9 +68,9 @@ export class ListChatComponent implements OnInit {
   }
 
   private _updateScroll() {
-    document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
-    setTimeout(() => {
-      document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
-    }, 1000);
+    // document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
+    // setTimeout(() => {
+    //   document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
+    // }, 1000);
   }
 }

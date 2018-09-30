@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from "@angular/common";
-import { User } from "../../models/user/user";
-import { LanguageService } from "../../providers/language/language.service";
-import { UserService } from "../../providers/user/user.service";
+import { Location } from '@angular/common';
+import { User } from '../../models/user/user';
+import { LanguageService } from '../../providers/language/language.service';
+import { UserService } from '../../providers/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./trust-list.component.scss']
 })
 export class TrustListComponent implements OnInit {
-
+  userId: string;
   relationShip = 1;
 
   list: User[] = [];
@@ -31,12 +31,21 @@ export class TrustListComponent implements OnInit {
       return;
     }
 
+    this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.i18ns.iDealWithHimCount = await this.languageService.get('user.iDealWithHimCount');
     this.i18ns.iTrusted = await this.languageService.get('user.iTrusted');
     this.i18ns.trustedMe = await this.languageService.get('user.trustedMe');
     this.i18ns.iBlackList = await this.languageService.get('user.iBlackList');
     this.i18ns.trustManage = await this.languageService.get('user.trustManage');
     this.i18ns.transaction = await this.languageService.get('common.transaction');
+
+    this.i18ns.cancel_trust = await this.languageService.get('trust.cancel_trust');
+    this.i18ns.cancel_black = await this.languageService.get('trust.cancel_black');
 
     this.getUserList();
   }
@@ -62,10 +71,33 @@ export class TrustListComponent implements OnInit {
   private async getUserList() {
     try {
       this.list = await this.userService.getUserList({ relationship: this.relationShip });
+      console.log('getUserList', this.list);
     } catch (e) {
       console.error(e);
     }
 
   }
+
+
+
+  async cancelBlackList(anotherUserId: string) {
+    try {
+      let _result = await this.userService.addBlackList({userid: anotherUserId, action: 'remove'});
+      this.getUserList();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async cancelTrustList(anotherUserId: string) {
+    try {
+      let _result = await this.userService.addTrustList({userid: anotherUserId, action: 'remove'});
+      this.getUserList();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+
 
 }
