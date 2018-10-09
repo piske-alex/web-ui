@@ -23,7 +23,7 @@ app-build:
   stage: build
   artifacts:
     paths:
-      - build/
+      - dist/
   script:
     - npm install
     - npm run build
@@ -33,6 +33,7 @@ docker:
   image: docker:latest
   services:
     - docker:dind
+  cache: {}
   script:
     - docker login -u ${DEV_REGISTRY_USER} -p ${DEV_REGISTRY_PASS} ${DEV_REGISTRY_URL}
     - docker build -t ${DEV_REGISTRY_URL}/kcb-web-ui .
@@ -41,5 +42,7 @@ docker:
 app-deploy:
   stage: deploy
   image: cdrx/rancher-gitlab-deploy
+  cache: {}
+  dependencies: []
   script:
     - upgrade --stack kcb --service kcb-web-ui
