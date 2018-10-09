@@ -5,6 +5,7 @@ image: node:latest
 stages:
   - build
 #  - test
+  - docker
   - deploy
   
 # Pick zero or more services to be used on all builds.
