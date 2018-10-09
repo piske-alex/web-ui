@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod && docker login -u user -p password test-registry.lan:5000 && docker build -t test-registry.lan:5000/kcb-web-ui . && rm -rf build && docker push test-registry.lan:5000/kcb-web-ui",
+    "build": "ng build --prod && docker login -u user -p password registry-kcb.alpha-beta.tech && docker build -t registry-kcb.alpha-beta.tech/kcb-web-ui . && rm -rf build && docker push registry-kcb.alpha-beta.tech/kcb-web-ui",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
