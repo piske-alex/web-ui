@@ -24,3 +24,9 @@ app-build:
   stage: build
   script:
     - npm run build
+    
+app-deploy:
+  stage: deploy
+  image: cdrx/rancher-gitlab-deploy
+  script:
+    - upgrade --stack kcb --service kcb-web-ui
