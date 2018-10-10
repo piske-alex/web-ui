@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../providers/common/common.service';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private httpService: HttpService,
     private languageService: LanguageService,
-    private commonService: CommonService) {
+    private commonService: CommonService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -110,19 +112,19 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (!this.phone) {
-      return alert(this.i18ns.inputPhone);
+      return this.dialogService.alert(this.i18ns.inputPhone);
     }
 
     if (!(/^[\d]{6,15}$/g.test(this.phone))) {
-      return alert(this.i18ns.inputValidPhone);
+      return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
     if (!this.smsCode) {
-      return alert(this.i18ns.inputSmsCode);
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
     if (!this.password) {
-      return alert(this.i18ns.inputPassword);
+      return this.dialogService.alert(this.i18ns.inputPassword);
     }
 
     this.isLoading = true;
@@ -140,18 +142,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('access_token', _token);
           localStorage.setItem('login_timestamp', Date.now() + '');
           delete _params.password;
-          // const _user = await this.userService.getDetail({});
-          // if (_user) {
-          //   localStorage.setItem('user_id', _user.id);
-          //   localStorage.setItem('user', JSON.stringify(_user));
-          //   if (!_user.username) {
-          //     this.router.navigate(['setNickName', { userId: _user.id }]);
-          //   }
-          //   this.router.navigate(['/my', { userId: _user.id }]);
-          // } else {
-          //   alert(this.i18ns.err_getuserdetail_fail);
-          //   this.isLoading = false;
-          // }
+
           this.userService.getDetail({}).then(async (data_user) => {
             const _user = data_user;
             if (_user) {
@@ -162,7 +153,7 @@ export class LoginComponent implements OnInit {
               }
               this.router.navigate(['/my', { userId: _user.id }]);
             } else {
-              alert(this.i18ns.err_getuserdetail_fail);
+              this.dialogService.alert(this.i18ns.err_getuserdetail_fail);
               this.isLoading = false;
             }
           }, error_getuserdetail => {
@@ -170,12 +161,12 @@ export class LoginComponent implements OnInit {
             if (error_getuserdetail.status === 403 && error_getuserdetail.error.userGroup === 'guest') {
               this.router.navigate(['setNickName', { userId: '' }]);
             } else {
-              alert(error_getuserdetail.message);
+              this.dialogService.alert(error_getuserdetail.message);
             }
             this.isLoading = false;
           });
       } else {
-          alert(this.i18ns.err_gettoken_fail);
+        this.dialogService.alert(this.i18ns.err_gettoken_fail);
       }
       this.isLoading = false;
     }, error => {
@@ -183,13 +174,13 @@ export class LoginComponent implements OnInit {
       this.password = '';
       if (error.error.success === false && error.error.errmsg !== undefined) {
         if (error.error.errmsg === 'Invalid verification code') {
-          alert(this.i18ns.invalid_verification_code);
+          this.dialogService.alert(this.i18ns.invalid_verification_code);
         } else {
-          alert(error.error.errmsg);
+          this.dialogService.alert(error.error.errmsg);
         }
       } else {
         this.resendSmsCodeDelay = 1;
-        alert(this.i18ns.err_phone_or_password);
+        this.dialogService.alert(this.i18ns.err_phone_or_password);
       }
       this.isLoading = false;
     });

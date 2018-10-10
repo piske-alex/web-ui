@@ -4,6 +4,7 @@ import { CommonService } from '../../providers/common/common.service';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { Router } from '@angular/router';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-register',
@@ -29,14 +30,15 @@ export class RegisterComponent implements OnInit {
   isShowConfirm: boolean;
   serv_items_en: string;
   serv_items_simp: string;
-  serv_items_trad:string;
+  serv_items_trad: string;
   language: string;
 
   constructor(private location: Location,
     private router: Router,
     private userService: UserService,
     private languageService: LanguageService,
-    private commonService: CommonService) {
+    private commonService: CommonService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -47,7 +49,6 @@ export class RegisterComponent implements OnInit {
     } catch (e) {
       console.error(e);
     }
-    
 
     this.i18ns.inputPhone = await this.languageService.get('user.inputPhone');
     this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
@@ -57,7 +58,7 @@ export class RegisterComponent implements OnInit {
     this.i18ns.password_valid_warn_1 = await this.languageService.get('register.password_valid_warn_1');
     this.i18ns.password_valid_warn_2 = await this.languageService.get('register.password_valid_warn_2');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
-    //this.serv_items = await this.languageService.get('register.serv_items');
+    // this.serv_items = await this.languageService.get('register.serv_items');
 
     this.language = this.getLanguageDefault();
     this.serv_items_simp = this._simplifiedChinese();
@@ -124,19 +125,19 @@ export class RegisterComponent implements OnInit {
   async register() {
 
     if (!this.phoneNo) {
-      return alert(this.i18ns.inputPhone);
+      return this.dialogService.alert(this.i18ns.inputPhone);
     }
 
     if (!(/^[\d]{6,15}$/g.test(this.phoneNo))) {
-      return alert(this.i18ns.inputValidPhone);
+      return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
     if (!this.smsCode) {
-      return alert(this.i18ns.inputSmsCode);
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
     if (!this.password) {
-      return alert(this.i18ns.inputPassword);
+      return this.dialogService.alert(this.i18ns.inputPassword);
     }
 
     if (!this._validatePassword()) {
@@ -144,7 +145,7 @@ export class RegisterComponent implements OnInit {
     }
 
     if (!this.isAggreeTerms) {
-      return alert(this.i18ns.read_and_agree);
+      return this.dialogService.alert(this.i18ns.read_and_agree);
     }
 
     const _params = {
@@ -165,7 +166,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/setNickName', { userId: _userId }]);
     } catch (e) {
       if (e.error.success === false && e.error.errmsg !== undefined) {
-        alert(e.error.errmsg);
+        this.dialogService.alert(e.error.errmsg);
       }
       console.error(e);
     }
@@ -175,7 +176,7 @@ export class RegisterComponent implements OnInit {
     // // TODO delete end.
   }
 
-  public getLanguageDefault(): string{
+  public getLanguageDefault(): string {
     let defWebSiteLang = localStorage.getItem("language");
     if(defWebSiteLang && defWebSiteLang!== "")
       return defWebSiteLang;
@@ -199,7 +200,7 @@ export class RegisterComponent implements OnInit {
     return this.passwordWarn.length === 0;
   }
 
-  private _simplifiedChinese(): string{
+  private _simplifiedChinese(): string {
     return `<p>
     通过使用本网站，注册KoinExchange帐户或使用我们的任何其他KoinExchange服务，您同意接受并遵守条款和使用条款。在使用本网站或任何KoinExchange服务之前，请仔细阅读完整的使用条款。本使用条款中使用的“KoinExchange”是指可盈可乐有限公司，包括但不限于其所有者，董事，投资者，员工或其他相关方。根据上下文，“KoinExchange”也可以指服务，产品，网站，内容或其他材料（统称为“KoinExchange服务”）。若您不接受以下条款，请您立即停止注册或主动停止使用本网站的服务。根据您所居住的国家/地区，您可能无法使用本网站的所有功能。您有责任遵守您访问本网站和服务的居住国家和/或国家/地区的这些规则和法律。请注意，KoinExchange有权对本协议进行修改，恕不另行通知补发，请您定期查看本条款，因为您继续使用该网站将被视为是不可撤销的接受任何修订。本条款不涉及KoinExchange用户与其他用户之间因比特币交易而产生的法律关系及法律纠纷。
   </p>

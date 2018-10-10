@@ -14,6 +14,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { CommonService } from '../../providers/common/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-post-ad',
@@ -65,7 +66,8 @@ export class PostAdComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private adService: AdService,
     private languageService: LanguageService,
-    private commonService: CommonService) {
+    private commonService: CommonService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -80,7 +82,7 @@ export class PostAdComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    
+
     this.adId = this.activatedRoute.snapshot.paramMap.get('adId');
     if (this.adId) {
       const _ad = await this.adService.getOtcAdById({ adid: this.adId });
@@ -157,9 +159,22 @@ export class PostAdComponent implements OnInit {
   checkPrice() {
     const _rate = this.ad.price / this.coinRate;
     if (_rate < 0.9) {
-      return window.confirm(this.i18ns.priceWarn_1);
+      this.dialogService.confirm({ content: this.i18ns.priceWarn_1 }).subscribe(res => {
+        if (res) {
+          this.doPublish();
+        } else {
+          return false;
+        }
+      });
+
     } else if (_rate > 1.1) {
-      return window.confirm(this.i18ns.priceWarn_2);
+      this.dialogService.confirm({ content: this.i18ns.priceWarn_2 }).subscribe(res => {
+        if (res) {
+          this.doPublish();
+        } else {
+          return false;
+        }
+      });
     }
     return true;
   }
@@ -267,14 +282,16 @@ export class PostAdComponent implements OnInit {
 
     const _remarkWarn = this._validateRemark();
     if (_remarkWarn) {
-      return alert(_remarkWarn);
+      return this.dialogService.alert(_remarkWarn);
     }
 
     if (!this.checkPrice()) {
       this.ad.price = null;
       return;
     }
+  }
 
+  async doPublish() {
     // this.ad.adType = this.adTypeCode;
     // this.ad.coinType = this.coinTypeCode;
     // this.ad.country = this.countryCode;
@@ -306,17 +323,17 @@ export class PostAdComponent implements OnInit {
       }, error => {
         console.error('---------------------error_publishOtcAd: ', error);
         if (error.status === 403 && error.error.userGroup === 'user') {
-          alert(this.i18ns.onlyRealUser);
+          this.dialogService.alert(this.i18ns.onlyRealUser);
           this._isSubmiting = false;
         } else {
-          alert(error.message);
+          this.dialogService.alert(error.message);
           this._isSubmiting = false;
         }
       });
     } catch (e) {
       this._isSubmiting = false;
       console.error(e);
-      alert(e && e.errMsg || this.i18ns.publishError);
+      this.dialogService.alert(e && e.errMsg || this.i18ns.publishError);
     }
   }
 

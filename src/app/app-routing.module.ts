@@ -30,6 +30,8 @@ import { MyTransComponent } from './components/my-trans/my-trans.component';
 import { TransactionBComponent } from './components/transaction-b/transaction-b.component';
 import { OrderDetailBComponent } from './components/order-detail-b/order-detail-b.component';
 import { AdShowComponent } from './components/ad-show/ad-show.component';
+import { MyMsgComponent } from './components/my-msg/my-msg.component';
+import { ChatingComponent } from './components/chating/chating.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -63,6 +65,8 @@ const routes: Routes = [
   {path: 'transactionB', component: TransactionBComponent},
   {path: 'orderDetailB', component: OrderDetailBComponent},
   {path: 'adShow', component: AdShowComponent},
+  {path: 'myMsg', component: MyMsgComponent},
+  {path: 'chating', component: ChatingComponent},
 ];
 
 @NgModule({

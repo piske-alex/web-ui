@@ -27,6 +27,9 @@ export class ListChatComponent implements OnInit {
   @Input()
   anotherUserId;
 
+  @Input()
+  orderId;
+
   constructor(private userService: UserService,
               private chatService: ChatService) {
   }
@@ -37,14 +40,16 @@ export class ListChatComponent implements OnInit {
     this.anotherUser = await this.userService.getDetail({userid: this.anotherUserId});
     this.adUser = await this.userService.getDetail({userid: this.adUserId});
 
-    this.chatService.initChat();
-    this.chatService.loginChat();
+    this.orderId = 0;
 
-    this.chatService.receive = () => {
-      this._updateScroll();
-    };
+    // this.chatService.initChat();
+    // this.chatService.loginChat();
 
-    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId);
+    // this.chatService.receive = () => {
+    //   this._updateScroll();
+    // };
+
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId,this.orderId);
     this._updateScroll();
     // setInterval(() => {
     //   this.refreshchatlist() ;
@@ -53,14 +58,14 @@ export class ListChatComponent implements OnInit {
   }
 
   async refreshchatlist() {
-    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId);
+    this.chatList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId,this.orderId);
       this._updateScroll();
   }
 
 
   async send(message) {
     try {
-      this.chatList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId, message);
+      this.chatList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId,this.orderId, message);
       this._updateScroll();
     } catch (e) {
       console.error(e);

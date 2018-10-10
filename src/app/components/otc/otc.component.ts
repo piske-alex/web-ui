@@ -137,7 +137,6 @@ export class OtcComponent implements OnInit, OnDestroy {
       this.adTotal = _result.total;
     } catch (e) {
       console.error(e);
-      // alert(e && e.errMsbg || this.i18ns.listError);
     }
 
   }
@@ -282,6 +281,11 @@ export class OtcComponent implements OnInit, OnDestroy {
   goToTrust() {
     this.showAddList = false;
     this.router.navigate(['/trustList']);
+  }
+
+  goToMyMsg() {
+    this.showAddList = false;
+    this.router.navigate(['/myMsg']);
   }
 
 

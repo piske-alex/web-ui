@@ -57,7 +57,10 @@
     "close": "关闭",
     "save":"保存",
     "confirm":"确认",
-    "loading":"加载中..."
+    "loading":"加载中...",
+    "alert_title":"提示",
+    "alert_ok":"确定",
+    "confirm_title":"确认"
   },
   "element_coin_deposit":{
     "to_address_recharge":"向如下地址汇入${coinType}完成充值",
@@ -165,8 +168,11 @@
     "count": "数量",
     "price": "单价",
     "cancelTransaction": "取消交易",
+    "confirm_cancelTransaction": "确认取消交易?",
     "markPay": "标记付款",
     "markReceive": "标记收款",
+    "confirm_markPay": "确认标记付款?",
+    "confirm_markReceive": "确认标记收款?",
     "waitPay": "待付款",
     "pay_timeout": "付款超时",
     "minute": "分",
@@ -204,7 +210,7 @@
     "wantBuy": "你想购买多少？",
     "wantSale": "你想出售多少？",
     "saleWarn_1": "交易提醒",
-    "saleWarn_2": "1. 交易前请详细了解卖家的交易信息。",
+    "saleWarn_2": "1. 交易前请详细了解对方的交易信息。",
     "saleWarn_3": "2. 请通过平台进行沟通约定，并保存好相关聊天记录。",
     "saleWarn_4": "3. 如遇到交易纠纷，请通过平台\"帮助\"解决问题。",
     "remarkDesc_1": "请说明有关您交易的相关要求，以便卖家下单前先行查看，例如：",
@@ -227,6 +233,9 @@
     "input_price":"请输入交易价格 , 且大于0",
     "trade_time":"交易时间",
     "collect_time":"收币时间",
+    "markDispute":"标记争议",
+    "confirm_markDispute":"确认标记争议?",
+    "myMsg":"我的消息",
     "myTradeTitle":"我的交易"
   },
   "my_trade": {
@@ -328,7 +337,9 @@
     "input_x_amount": "请输入{BuyOrSell}的金额",
     "min_x_amount": "最少{BuyOrSell}数量为{Amount}",
     "max_x_amount": "最大{BuyOrSell}数量为{Amount}",
-    "input_x_number": "请输入{BuyOrSell}的数量",
+    "input_x_number": "请输入{BuyOrSell}的数量",    
+    "minAmt": "最少{BuyOrSell}金额为{Amount}",
+    "maxAmt": "最大{BuyOrSell}金额为{Amount}",
     "obtained": "下架",
     "confirm_obtained": "确定下架吗？",
     "order_confirm":"下单确认",

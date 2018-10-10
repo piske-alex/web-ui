@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../../providers/language/language.service';
+import { DialogService } from '../../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-select-during-time',
@@ -29,7 +30,7 @@ export class SelectDuringTimeComponent implements OnInit {
 
   private openTimeFail_1: string;
 
-  constructor(private languageService: LanguageService) {
+  constructor(private languageService: LanguageService, private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -94,7 +95,7 @@ export class SelectDuringTimeComponent implements OnInit {
       let _time1 = data[0];
       let _time2 = data[1];
       if (_time1.code < 25 && _time1.code > _time2.code) {
-        return alert(this.openTimeFail_1);
+        return this.dialogService.alert(this.openTimeFail_1);
       } else {
         this.selectOpenTime.start = _time1.name;
         this.selectOpenTime.end = _time2.name;

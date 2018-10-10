@@ -48,13 +48,14 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
   initSwiper() {
     this.mySwiper = new Swiper('.swiper-container', {
       slidesPerView: 'auto',
-      freeMode: true,
+      //freeMode: true,
       observer:true,//修改swiper自己或子元素时，自动初始化swiper
       observeParents:true,//修改swiper的父元素时，自动初始化swiper
       
       autoplay: true,
+      autoplayDisableOnInteraction:false,
       speed: 3000,
-      grabCursor: true,// 开启鼠标的抓手状态
+      //grabCursor: true,// 开启鼠标的抓手状态
       loop: true,
       pagination : '.swiper-pagination',
       paginationClickable :true,

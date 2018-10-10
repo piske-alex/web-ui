@@ -72,20 +72,31 @@
     <div>{{order.ad_data.legal_currency_rate}} {{order.ad_data.legal_currency}}</div>
   </section>
 
-  <section class="gz-row-btn" *ngIf="timeout">
+  <section class="gz-row-btn">
     <div class="btn btn-default gz-circle" (click)="cancelOrder()">
       <gz-i18n key="otc.cancelTransaction"></gz-i18n>
+    </div>
+    <div class="btn btn-primary gz-circle" *ngIf="this.isAdOwner" (click)="sellMarkDispute()">
+      <gz-i18n key="otc.markDispute"></gz-i18n>
     </div>
     <div class="btn btn-primary gz-circle" *ngIf="this.isAdOwner" (click)="sellOrder()">
       <gz-i18n key="otc.markReceive"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner" (click)="payOrder()">
+    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner && isShowBuyDispute" (click)="buyMarkDispute()">
+      <gz-i18n key="otc.markDispute"></gz-i18n>
+    </div>
+    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner && isShowBuyPay" (click)="payOrder()">
       <gz-i18n key="otc.markPay"></gz-i18n>
     </div>
   </section>
 
   <div class="div_list_chat">
-      <gz-list-chat *ngIf="adId" [adId]="adId" [adUserId]="adUserId" [anotherUserId]="anotherUserId" [chatTitle]="Order"></gz-list-chat>
+      <gz-list-chating *ngIf="adId" 
+      [adId]="adId" 
+      [orderId]="orderId" 
+      [adUserId]="adUserId" 
+      [anotherUserId]="anotherUserId" 
+      [chatTitle]="Order"></gz-list-chating>
   </div>
 
   <footer>

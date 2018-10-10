@@ -57,7 +57,10 @@
     "close": "Close",
     "save":"Save",
     "confirm":"Confirm",
-    "loading":"Loading..."
+    "loading":"Loading...",
+    "alert_title":"Information",
+    "alert_ok":"OK",
+    "confirm_title":"Confirm"
   },
   "element_coin_deposit":{
     "to_address_recharge":"Import to the following address ${coinType} Complete recharge",
@@ -165,8 +168,11 @@
     "count": "Quantity",
     "price": "Price",
     "cancelTransaction": "Cancel the deal",
+    "confirm_cancelTransaction": "Cancel the deal",
     "markPay": "Mark payment",
     "markReceive": "Mark receipt",
+    "confirm_markPay": "Confirm mark payment?",
+    "confirm_markReceive": "Confirm mark receipt?",
     "waitPay": "Pending payment",
     "pay_timeout": "Payment timeout",    
     "minute": "Minute",
@@ -204,7 +210,7 @@
     "wantBuy": "How much do you want to buy?",
     "wantSale": "How much do you want to sell?",
     "saleWarn_1": "Transaction Reminder",
-    "saleWarn_2": "1. Please learn more about the seller's transaction information before trading.",
+    "saleWarn_2": "1. Please learn more about the other's transaction information before trading.",
     "saleWarn_3": "2. Please communicate through the platform and save the relevant chat history.",
     "saleWarn_4": "3. If you encounter a transaction dispute, please solve the problem through the platform \"Help\".",
     "remarkDesc_1": "Please describe the relevant requirements for your transaction so that the seller can check it before placing an order, for example:",
@@ -227,6 +233,9 @@
     "input_price":"请输入交易价格 , 且大于0",
     "trade_time":"交易时间",
     "collect_time":"收币时间",
+    "markDispute":"标记争议",
+    "confirm_markDispute":"确认标记争议?",
+    "myMsg":"我的消息",
     "myTradeTitle":"我的交易"
   },
   "my_trade": {
@@ -328,6 +337,8 @@
     "min_x_amount": "The minimum of {BuyOrSell}is{Amount}",
     "max_x_amount": "The maximum number of {BuyOrSell}is{Amount}",
     "input_x_number": "Please enter the number of {BuyOrSell}",
+    "minAmt": "最少{BuyOrSell}金额为{Amount}",
+    "maxAmt": "最大{BuyOrSell}金额为{Amount}",
     "obtained": "Discontinued",
     "confirm_obtained": "Are you sure discontinue?",
     "order_confirm":"Order confirmation",

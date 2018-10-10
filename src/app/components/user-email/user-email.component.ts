@@ -3,6 +3,7 @@ import { CommonService } from '../../providers/common/common.service';
 import { Location } from '@angular/common';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-user-email',
@@ -20,7 +21,8 @@ export class UserEmailComponent implements OnInit {
   constructor(private commonService: CommonService,
               private userService: UserService,
               private languageService: LanguageService,
-              private location: Location) {
+              private location: Location,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -55,25 +57,24 @@ export class UserEmailComponent implements OnInit {
 
   async submit() {
     if (!this.email) {
-      return alert(this.i18ns.input_email);
+      return this.dialogService.alert(this.i18ns.input_email);
     }
 
     if (!(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/g.test(this.email))) {
-      return alert(this.i18ns.input_valid_email);
+      return this.dialogService.alert(this.i18ns.input_valid_email);
     }
 
     try {
       // , verifyCode: this.emailVerifyCode
       // let _result = await this.userService.bindEmail({email: this.email});
       this.userService.bindEmail({email: this.email}).then(async (data) => {
-          alert(this.i18ns.bind_email_success);
+        this.dialogService.alert(this.i18ns.bind_email_success);
           this.goBack();
       }, error => {
-        console.error('----------------bindEmail-----error: ', error);
         if (error.error.success === false && error.error.errmsg !== undefined) {
-          alert(error.error.errmsg);
+          this.dialogService.alert(error.error.errmsg);
         } else {
-          alert(this.i18ns.bind_email_failure);
+          this.dialogService.alert(this.i18ns.bind_email_failure);
         }
       });
     } catch (e) {

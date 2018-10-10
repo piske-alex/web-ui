@@ -1,0 +1,32 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      {{this.i18ns.myMsg}}
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article *ngIf="this.chatDlgList  && chatDlgList?.length > 0" >
+    <section class="gz-list-tr" *ngFor="let data of chatDlgList">
+        <div class="gz-list-tr-left">
+            
+            <!-- <div class="gz-list-td">with: {{data?.lastMessage?.from}} </div> -->
+            <div class="gz-list-td">members: {{data?.members[0]}} , {{data?.members[1]}} </div>
+            <div class="gz-list-td">ad: {{data?.lastMessage?._lcattrs?.for}} </div>
+            <div class="gz-list-td">unreadCount: {{data?.unreadMessagesCount}} </div>
+            <div class="gz-list-td">last time: {{data?.lastMessageAt | date: 'MM-dd HH:mm:ss'}} </div>
+            
+        </div>
+        <div class="gz-list-tr-right">
+          <div class="btn btn-outline-blue gz-circle" (click)="toOrderDetail(data?.lastMessage)">
+             detail
+          </div>
+
+        </div>
+    </section>
+    
+</article>

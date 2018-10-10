@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-transaction',
@@ -27,7 +28,8 @@ export class TransactionComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private adService: AdService,
-    private languageService: LanguageService) {
+    private languageService: LanguageService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -97,27 +99,27 @@ export class TransactionComponent implements OnInit {
   }
 
   getLeftTopTxt() {
-    return this.i18ns.transactionLimit + ' ' + this.data.limitMinAmount + '~' + this.data.limitMaxAmount + ' ' + this.data.transactionCurrency;
+    return this.i18ns.transactionLimit + ' ' + this.data.limitMinAmount
+    + '~' + this.data.limitMaxAmount + ' ' + this.data.transactionCurrency;
   }
 
   async transaction() {
-    
     // if (this.data.adType === '1') {
       let _payDes = this.i18ns.buy;
       if (!this.payAmount) {
         let inputAmount = this.i18ns.input_x_amount ;
         inputAmount = inputAmount.replace('{BuyOrSell}', _payDes);
-        alert(inputAmount);
+        this.dialogService.alert(inputAmount);
       } else if (this.payAmount < Number(this.data.limitMinAmount)) {
         let minAmount = this.i18ns.min_x_amount ;
         minAmount = minAmount.replace('{BuyOrSell}', _payDes);
         minAmount = minAmount.replace('{Amount}', this.data.limitMinAmount);
-        alert(minAmount );
+        this.dialogService.alert(minAmount );
       } else if (this.payAmount > Number(this.data.limitMaxAmount)) {
         let maxAmount = this.i18ns.max_x_amount ;
         maxAmount = maxAmount.replace('{BuyOrSell}', _payDes);
         maxAmount = maxAmount.replace('{Amount}', this.data.limitMaxAmount);
-        alert(maxAmount);
+        this.dialogService.alert(maxAmount);
       } else {
         this.isShowConfirm = true;
       }
@@ -141,13 +143,14 @@ export class TransactionComponent implements OnInit {
       const _result = data;
       const _orderId = _result.orderid;
       // console.log("order", _result);
-      this.router.navigate(['/orderDetail', { orderId: _orderId, adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
+      this.router.navigate(['/orderDetail', { orderId: _orderId,
+        adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
     }, error => {
       console.error('---------------------error_transaction: ', error);
       if (error.status === 403 && error.error.userGroup === 'user') {
-        alert(this.i18ns.onlyRealUser);
+        this.dialogService.alert(this.i18ns.onlyRealUser);
       } else {
-        alert(error.message);
+        this.dialogService.alert(error.message);
       }
     });
 
@@ -197,14 +200,19 @@ export class TransactionComponent implements OnInit {
   }
 
   async obtained() {
-    if (confirm(this.i18ns.confirm_obtained)) {
-      try {
-        let _result = await this.adService.deleteAd({ adid: this.adId });
-        this.location.back();
-      } catch (e) {
-        console.error(e);
+    this.dialogService.confirm({ content: this.i18ns.confirm_obtained }).subscribe(async res => {
+      // 返回结果
+      if (res) {
+        try {
+          let _result = await this.adService.deleteAd({ adid: this.adId });
+          this.location.back();
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+          return;
       }
-    }
+    });
   }
 
   edit() {
@@ -231,13 +239,13 @@ export class TransactionComponent implements OnInit {
 
   changeValidNumber(objValue,  point , integerLen) {
     let tmpVal = objValue;
-    // 先把非数字的都替换掉，除了数字和. 
+    // 先把非数字的都替换掉，除了数字和
     tmpVal = tmpVal.replace(/[^\d\.]/g, '');
-    // 必须保证第一个为数字而不是. 
+    // 必须保证第一个为数字而不是
     tmpVal = tmpVal.replace(/^\./g, '');
-    // 保证只有出现一个.而没有多个. 
+    // 保证只有出现一个.而没有多个
     tmpVal = tmpVal.replace(/\.{2,}/g, '');
-    // 保证.只出现一次，而不能出现两次以上 
+    // 保证.只出现一次，而不能出现两次以上
     tmpVal = tmpVal.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
     // 开头多余2个0，只保留一个 000.5 => 0.5
     tmpVal = tmpVal.replace(/^(0{2,})/, "0");
@@ -245,15 +253,12 @@ export class TransactionComponent implements OnInit {
     const p6 = /(\.+)(\d+)(\.+)/g; // 屏蔽1....234.的情况
     tmpVal = tmpVal.replace(p6, '$1$2'); // 屏蔽最后一位的.
 
-    //point = point - 1;
-
     if (point != undefined && !isNaN(point) && point == 0) { // 如果没有小数位,则不输入小数点
         tmpVal = tmpVal.replace(/\./g, '');
     }
 
     if (point != undefined && !isNaN(point) && point > 0) {
         var ind = tmpVal.indexOf(".");
-        
         if (ind != -1) {
             point = parseInt(point);
             tmpVal = tmpVal.substring(0, ind + 1 + point);
@@ -271,9 +276,6 @@ export class TransactionComponent implements OnInit {
             tmpVal = tmpVal.substr(0, integerLen);
         }
     }
-
-    //if(tmpVal !=""&&tmpVal!= undefined && !isNaN(tmpVal))
-    //  tmpVal = parseFloat(tmpVal);
     return tmpVal;
 }
 

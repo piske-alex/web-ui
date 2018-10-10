@@ -1,0 +1,54 @@
+@import "../../../../constants";
+
+.mat-dialog-title-close:hover{
+    cursor: pointer;
+}
+.confirm-dialog-operate{
+    margin-bottom: 0;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+.confirm-dialog-cancel{
+    margin-left: 20px;
+}
+
+.align_right{
+    float: right;
+    
+}
+
+.bold{
+    font-weight: bold;
+}
+
+// /deep/ .mat-dialog-container { 
+//     padding:15px;
+// }
+
+/deep/ .mat-dialog-container {
+    padding-top: 10px;
+    padding-bottom: 2px;
+    font-size: small;
+  }
+
+.confirm-dialog-operate_top {
+    margin-top: 0px;    
+}
+
+.div_content_top_bottom {
+    border-top: 1px solid rgb(210, 210, 210);
+    border-bottom: 1px solid rgb(210, 210, 210);
+    min-height: 60px;
+}
+
+.dialog_title {
+    font-size:18px;
+    margin-bottom: 4px;
+    width: 150px;
+    float: left;
+}
+
+.float_right {
+    float: right;
+}

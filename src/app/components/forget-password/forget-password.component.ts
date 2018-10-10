@@ -4,6 +4,7 @@ import { CommonService } from '../../providers/common/common.service';
 import { UserService } from '../../providers/user/user.service';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-forget-password',
@@ -27,7 +28,9 @@ export class ForgetPasswordComponent implements OnInit {
               private router: Router,
               private userService: UserService,
               private languageService: LanguageService,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              private dialogService: DialogService
+              ) {
   }
 
   async ngOnInit() {
@@ -95,19 +98,19 @@ export class ForgetPasswordComponent implements OnInit {
   async submit() {
 
     if (!this.phoneNo) {
-      return alert(this.i18ns.inputPhone);
+      return this.dialogService.alert(this.i18ns.inputPhone);
     }
 
     if (!(/^[\d]{6,15}$/g.test(this.phoneNo))) {
-      return alert(this.i18ns.inputValidPhone);
+      return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
     if (!this.smsCode) {
-      return alert(this.i18ns.inputSmsCode);
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
     if (!this.password) {
-      return alert(this.i18ns.input_login_password);
+      return this.dialogService.alert(this.i18ns.input_login_password);
     }
 
     let _params = {
@@ -119,7 +122,7 @@ export class ForgetPasswordComponent implements OnInit {
       // await this.userService.forgetPassword(_params);
       try {
         this.userService.forgetPassword(_params).then(async (data) => {
-            alert(this.i18ns.setting_password_relogin);
+          this.dialogService.alert(this.i18ns.setting_password_relogin);
             await this.userService.logout();
             localStorage.removeItem('user_id');
             localStorage.removeItem('user');
@@ -129,9 +132,9 @@ export class ForgetPasswordComponent implements OnInit {
         }, error => {
           console.error('----------------forgetPassword-----error: ', error);
           if (error.error.success === false && error.error.errmsg !== undefined) {
-            alert(error.error.errmsg);
+            this.dialogService.alert(error.error.errmsg);
           } else {
-            alert(this.i18ns.setting_password_fail);
+            this.dialogService.alert(this.i18ns.setting_password_fail);
           }
         });
 

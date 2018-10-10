@@ -4,7 +4,7 @@
       <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
     </div>
     <div class="gz-title" *ngIf="data.adType == '2'">
-      <span>{{i18ns.sale}}</span>
+      <span>{{i18ns.sale}} </span>
       <span>{{data.transactionCoinType}}</span>
     </div>
     <div></div>
@@ -94,13 +94,13 @@
     </div>
     <div class="gz-popup-row">
       <div><gz-i18n key="otc.amount"></gz-i18n></div>
-      <div *ngIf="this.data.adType === '1'" >{{payAmount  | number:"0.2"}} {{data.transactionCurrency}}</div>
-      <div *ngIf="this.data.adType === '2'" >{{payAmount  | number:"0.8"}} {{data.transactionCurrency}}</div>
+      <div *ngIf="this.data.adType === '1'" >{{receiveAmount  | number:"0.8"}} {{data.transactionCurrency}}</div>
+      <div *ngIf="this.data.adType === '2'" >{{receiveAmount  | number:"0.2"}} {{data.transactionCurrency}}</div>
     </div>
     <div class="gz-popup-row">
       <div><gz-i18n key="otc.count"></gz-i18n></div>
-      <div *ngIf="this.data.adType === '1'" >{{receiveAmount | number:"0.8"}} {{data.transactionCoinType}}</div>
-      <div *ngIf="this.data.adType === '2'" >{{receiveAmount | number:"0.2"}} {{data.transactionCoinType}}</div>
+      <div *ngIf="this.data.adType === '1'" >{{payAmount | number:"0.2"}} {{data.transactionCoinType}}</div>
+      <div *ngIf="this.data.adType === '2'" >{{payAmount | number:"0.8"}} {{data.transactionCoinType}}</div>
     </div>
     <div>
       <div class="gz-warn"><gz-i18n key="transaction.order_warn"></gz-i18n></div>

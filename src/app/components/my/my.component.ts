@@ -4,6 +4,7 @@ import { UserService } from '../../providers/user/user.service';
 import { User } from '../../models/user/user';
 import { ChatService } from '../../providers/chat/chat.service';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-my',
@@ -19,13 +20,12 @@ export class MyComponent implements OnInit {
               private route: ActivatedRoute,
               private chatService: ChatService,
               private languageService: LanguageService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
-
-
-
+    console.log('current publish date: 2018-10-09');
     const _accessToken = localStorage.getItem('access_token');
     const _loginTimestamp = localStorage.getItem('login_timestamp');
 
@@ -41,7 +41,7 @@ export class MyComponent implements OnInit {
       this.userId = localStorage.getItem('user_id');
       if (!this.userId) {
         this.isHadLogin = false;
-        
+
         localStorage.removeItem('user_id');
         localStorage.removeItem('user');
         localStorage.removeItem('login_timestamp');
@@ -60,6 +60,7 @@ export class MyComponent implements OnInit {
       this.user = await this.userService.getDetail({});
       localStorage.setItem('user_id', this.user.id);
       localStorage.setItem('user', JSON.stringify(this.user));
+      this.chatService.initChat();
       this.chatService.loginChat();
     }
 
@@ -70,15 +71,20 @@ export class MyComponent implements OnInit {
   }
 
   async logout() {
-    if (confirm(this.i18ns.confirm_logout)) {
-      await this.userService.logout();
-      localStorage.removeItem('user_id');
-      localStorage.removeItem('user');
-      localStorage.removeItem('login_timestamp');
-      localStorage.removeItem('access_token');
+    this.dialogService.confirm({ content: this.i18ns.confirm_logout }).subscribe(async res => {
+      // 返回结果
+      if (res) {
+        await this.userService.logout();
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('user');
+        localStorage.removeItem('login_timestamp');
+        localStorage.removeItem('access_token');
+        this.router.navigate(['/home']);
+      } else {
+          return;
+      }
+    });
 
-      this.router.navigate(['/home']);
-    }
   }
 
   setAvatar(avatarFile) {

@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { TransactionListItem } from '../../../models/ad/TransactionListItem';
 import { LanguageService } from '../../../providers/language/language.service';
 import { Router } from '@angular/router';
 import { AdService } from '../../../providers/ad/ad.service';
+import { DialogService } from '../../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-list-ad-my',
@@ -17,6 +18,9 @@ export class ListAdMyComponent implements OnInit {
   @Input()
   adStatus: string;
 
+  @Output()
+  refreshButtonClicked = new EventEmitter();
+
   i18ns: any = {};
 
   public refList: any;
@@ -24,9 +28,10 @@ export class ListAdMyComponent implements OnInit {
 
   constructor(private router: Router,
     private languageService: LanguageService,
-    private adService: AdService
+    private adService: AdService,
+    private dialogService: DialogService
     ) {
-      
+
   }
 
   async ngOnInit() {
@@ -55,15 +60,23 @@ export class ListAdMyComponent implements OnInit {
   }
 
   async obtained(data: TransactionListItem) {
-    if (confirm(this.i18ns.confirm_obtained)) {
-      try {
-        let _result = await this.adService.deleteAd({ adid: data.adId || '' });
-        //this.refList();
-        this.router.navigate(['/myAd']);
-      } catch (e) {
-        console.error(e);
+    this.dialogService.confirm({ content: this.i18ns.confirm_obtained }).subscribe( async res =>  {
+      // 返回结果
+      if (res) {
+        try {
+          await this.adService.deleteAd({ adid: data.adId || '' }).then( () => {
+            this.refreshButtonClicked.emit();
+          });
+          // this.router.navigate(['/myAd']);
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+          return;
       }
-    }
+    });
   }
+
+
 
 }

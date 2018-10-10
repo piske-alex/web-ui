@@ -43,6 +43,10 @@
               <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
               <gz-i18n key="otc.trustAdmin"></gz-i18n>
             </div>
+            <div (click)="goToMyMsg()">
+              <fa-icon [icon]="['fas', 'indent']"></fa-icon>
+              <gz-i18n key="otc.myMsg"></gz-i18n>
+            </div>
           </div>
         </div>
       </div>
@@ -50,22 +54,8 @@
   </header>
 
   <article>
-    <section class="gz-ad-slide gz-ad-slide-otc">
-      <ul class="gz-ad-slide-circle">
-        <li class="gz-active"></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <div class="gz-ad-slide-img">
-        <ul class="gz-ad-slide-imgs">
-          <li><img src="./assets/images/1.jpg"></li>
-          <li><img src="./assets/images/2.jpg"></li>
-          <li><img src="./assets/images/3.jpg"></li>
-          <li><img src="./assets/images/4.jpg"></li>
-        </ul>
-      </div>
-    </section>
+    <app-swiper-slide >
+    </app-swiper-slide>
     <nav>
       <ul class="nav">
         <li class="nav-item {{filter.coinType === type.code ? 'active' : ''}}" *ngFor="let type of coinTypes"

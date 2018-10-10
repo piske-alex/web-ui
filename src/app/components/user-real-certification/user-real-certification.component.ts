@@ -5,6 +5,7 @@ import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-user-real-certification',
@@ -32,7 +33,8 @@ export class UserRealCertificationComponent implements OnInit {
   constructor(private router: Router,
               private location: Location,
               private languageService: LanguageService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -64,22 +66,22 @@ export class UserRealCertificationComponent implements OnInit {
 
   async submit() {
     if (!this.realName) {
-      return alert(this.i18ns.input_name);
+      return this.dialogService.alert(this.i18ns.input_name);
     }
     if (!this.realCardNo) {
-      return alert(this.i18ns.input_cardno);
+      return this.dialogService.alert(this.i18ns.input_cardno);
     }
     if (!this.frontImg.name) {
-      return alert(this.i18ns.input_card_front);
+      return this.dialogService.alert(this.i18ns.input_card_front);
     }
     if (!this.backImg.name) {
-      return alert(this.i18ns.input_card_back);
+      return this.dialogService.alert(this.i18ns.input_card_back);
     }
     if (!this.halfImg.name) {
-      return alert(this.i18ns.input_bust);
+      return this.dialogService.alert(this.i18ns.input_bust);
     }
     if (!this.isSelectPromise) {
-      return alert(this.i18ns.checked_promise);
+      return this.dialogService.alert(this.i18ns.checked_promise);
     }
 
     let _params = {
@@ -102,7 +104,7 @@ export class UserRealCertificationComponent implements OnInit {
       this.goBack();
     } catch (e) {
       console.error(e);
-      alert(e.error);
+      this.dialogService.alert(e.error);
     }
   }
 
@@ -130,7 +132,7 @@ export class UserRealCertificationComponent implements OnInit {
         resolve({
           b64img: (<any>re.target).result,
           fileInfo: fileInfo,
-        })
+        });
       };
       reader.readAsDataURL(file);
     });

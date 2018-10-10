@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'app-transaction-b',
@@ -27,7 +28,8 @@ export class TransactionBComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private adService: AdService,
-    private languageService: LanguageService) {
+    private languageService: LanguageService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -60,6 +62,9 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.input_x_number = await this.languageService.get('transaction.input_x_number');
     this.i18ns.confirm_obtained = await this.languageService.get('transaction.confirm_obtained');
 
+    this.i18ns.minAmt = await this.languageService.get('transaction.minAmt');
+    this.i18ns.maxAmt = await this.languageService.get('transaction.maxAmt');
+
     this.i18ns.confirm_sell = await this.languageService.get('transaction.confirm_sell');
     this.i18ns.confirm_buy = await this.languageService.get('transaction.confirm_buy');
     this.i18ns.cancel_sell = await this.languageService.get('transaction.cancel_sell');
@@ -72,7 +77,6 @@ export class TransactionBComponent implements OnInit {
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
-
     } catch (e) {
       console.error(e);
     }
@@ -101,23 +105,22 @@ export class TransactionBComponent implements OnInit {
   }
 
   async transaction() {
-    
     // if (this.data.adType === '1') {
       let _payDes = this.i18ns.buy;
-      if (!this.payAmount) {
+      if (!this.receiveAmount) {
         let inputAmount = this.i18ns.input_x_amount ;
         inputAmount = inputAmount.replace('{BuyOrSell}', _payDes);
-        alert(inputAmount);
-      } else if (this.payAmount < Number(this.data.limitMinAmount)) {
-        let minAmount = this.i18ns.min_x_amount ;
+        this.dialogService.alert(inputAmount);
+      } else if (this.receiveAmount < Number(this.data.limitMinAmount)) {
+        let minAmount = this.i18ns.minAmt ;
         minAmount = minAmount.replace('{BuyOrSell}', _payDes);
         minAmount = minAmount.replace('{Amount}', this.data.limitMinAmount);
-        alert(minAmount );
-      } else if (this.payAmount > Number(this.data.limitMaxAmount)) {
-        let maxAmount = this.i18ns.max_x_amount ;
+        this.dialogService.alert(minAmount );
+      } else if (this.receiveAmount > Number(this.data.limitMaxAmount)) {
+        let maxAmount = this.i18ns.maxAmt ;
         maxAmount = maxAmount.replace('{BuyOrSell}', _payDes);
         maxAmount = maxAmount.replace('{Amount}', this.data.limitMaxAmount);
-        alert(maxAmount);
+        this.dialogService.alert(maxAmount);
       } else {
         this.isShowConfirm = true;
       }
@@ -137,17 +140,18 @@ export class TransactionBComponent implements OnInit {
     // const _result = await this.adService.transaction({ adid: this.data.adId, amount: this.payAmount });
     // const _orderId = _result.orderid;
     // this.router.navigate(['/orderDetail', { orderId: _orderId }]);
-    this.adService.transaction({ adid: this.data.adId, amount: this.payAmount }).then(async (data) => {
+    this.adService.transaction({ adid: this.data.adId, amount: this.receiveAmount , btccnt: this.payAmount }).then(async (data) => {
       const _result = data;
       const _orderId = _result.orderid;
       // console.log("order", _result);
-      this.router.navigate(['/orderDetailB', { orderId: _orderId, adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
+      this.router.navigate(['/orderDetailB', { orderId: _orderId,
+        adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
     }, error => {
       console.error('---------------------error_transaction: ', error);
       if (error.status === 403 && error.error.userGroup === 'user') {
-        alert(this.i18ns.onlyRealUser);
+        this.dialogService.alert(this.i18ns.onlyRealUser);
       } else {
-        alert(error.message);
+        this.dialogService.alert(error.message);
       }
     });
 
@@ -164,18 +168,24 @@ export class TransactionBComponent implements OnInit {
 
   getLeftPlacehold() {
     if (this.data.adType === '2') {
-      let inputAmount = this.i18ns.input_x_amount ;
+      let inputAmount = this.i18ns.input_x_number ;
         inputAmount = inputAmount.replace('{BuyOrSell}', this.i18ns.sale);
       return inputAmount;
-    }  else {
+    } else if (this.data.adType === '1') {
+      return `${this.data.limitMinAmount}-${this.data.limitMaxAmount}`;
+    } else {
       return '';
     }
   }
 
   getRightPlacehold() {
     if (this.data.adType === '2') {
-      let inputNumber = this.i18ns.input_x_number ;
+      let inputNumber = this.i18ns.input_x_amount ;
           inputNumber = inputNumber.replace('{BuyOrSell}', this.i18ns.sale);
+      return inputNumber;
+    } else if (this.data.adType === '1') {
+      let inputNumber = this.i18ns.input_x_amount ;
+          inputNumber = inputNumber.replace('{BuyOrSell}', this.i18ns.buy);
       return inputNumber;
     } else {
       return '';
@@ -183,14 +193,19 @@ export class TransactionBComponent implements OnInit {
   }
 
   async obtained() {
-    if (confirm(this.i18ns.confirm_obtained)) {
-      try {
-        let _result = await this.adService.deleteAd({ adid: this.adId });
-        this.location.back();
-      } catch (e) {
-        console.error(e);
+    this.dialogService.confirm({ content: this.i18ns.confirm_obtained }).subscribe(async res => {
+      // 返回结果
+      if (res) {
+        try {
+          let _result = await this.adService.deleteAd({ adid: this.adId });
+          this.location.back();
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+          return;
       }
-    }
+    });
   }
 
   edit() {

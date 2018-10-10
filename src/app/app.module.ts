@@ -10,6 +10,9 @@ import { CachingInterceptor } from './caching-interceptor.service';
 import { HttpAuthInterceptorService } from './providers/http/http-auth-interceptor.service';
 import { HttpService } from './providers/http/http.service';
 
+import {MatDialogModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -72,6 +75,11 @@ import { BtcFormatPipe } from './pipes/btcFormat/btc-format.pipe';
 import { AdShowComponent } from './components/ad-show/ad-show.component';
 import { CnyFormatPipe } from './pipes/cnyFormat/cny-format.pipe';
 import { SwiperSlideComponent } from './components/element/swiper-slide/swiper-slide.component';
+import { MyMsgComponent } from './components/my-msg/my-msg.component';
+import { ChatingComponent } from './components/chating/chating.component';
+import { ListChatingComponent } from './components/element/list-chating/list-chating.component';
+import { ConfirmDialogComponent } from './components/element/confirm-dialog/confirm-dialog.component';
+import { AlertDialogComponent } from './components/element/alert-dialog/alert-dialog.component';
 
 
 
@@ -141,11 +149,18 @@ const createTranslateLoader = function (http: HttpClient) {
     AdShowComponent,
     CnyFormatPipe,
     SwiperSlideComponent,
+    MyMsgComponent,
+    ChatingComponent,
+    ListChatingComponent,
+    ConfirmDialogComponent,
+    AlertDialogComponent,
 
 
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -157,6 +172,10 @@ const createTranslateLoader = function (http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+  ],
+  entryComponents: [
+    ConfirmDialogComponent,
+    AlertDialogComponent
   ],
   providers: [
     HttpService,

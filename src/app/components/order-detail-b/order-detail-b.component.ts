@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { LanguageService } from '../../providers/language/language.service';
-import { ListChatComponent } from '../element/list-chat/list-chat.component';
+import { ListChatingComponent } from '../element/list-chating/list-chating.component';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 
 @Component({
@@ -23,15 +24,18 @@ export class OrderDetailBComponent implements OnInit {
   anotherUserId: string;
   isAdOwner: boolean;
   timeout: boolean;
+  isShowBuyPay: boolean;
+  isShowBuyDispute: boolean;
 
-  @ViewChild(ListChatComponent)
-  private listChatComponent;
+  @ViewChild(ListChatingComponent)
+  private listChatingComponent;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private location: Location,
               private languageService: LanguageService,
-              private adService: AdService) {
+              private adService: AdService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -40,10 +44,13 @@ export class OrderDetailBComponent implements OnInit {
     this.adUserId = this.route.snapshot.paramMap.get('adUserId');
     this.anotherUserId = this.route.snapshot.paramMap.get('anotherUserId');
     const currentLoginUserId = localStorage.getItem('user_id');
+
     if (currentLoginUserId === this.adUserId) {
       this.isAdOwner = true;
+      this.isShowBuyPay = true;
     } else {
       this.isAdOwner = false;
+      this.isShowBuyPay = false;
     }
 
     this.orderId = this.route.snapshot.paramMap.get('orderId');
@@ -59,15 +66,22 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.minute = await this.languageService.get('otc.minute');
     this.i18ns.second = await this.languageService.get('otc.second');
     this.i18ns.pay_timeout = await this.languageService.get('otc.pay_timeout');
-
+    this.i18ns.confirm_markPay = await this.languageService.get('otc.confirm_markPay');
+    this.i18ns.confirm_markReceive = await this.languageService.get('otc.confirm_markReceive');
+    this.i18ns.confirm_mark_dispute = await this.languageService.get('otc.confirm_mark_dispute');
+    this.i18ns.confirm_cancelTransaction = await this.languageService.get('otc.confirm_cancelTransaction');
+    
+    this.isShowBuyDispute = false;
     this.timeout = true;
 
-    let createTime : Date = new Date(this.order.create_time * 1000);
+    let createTime: Date = new Date(this.order.create_time * 1000);
     let createTimePlap = createTime.getTime();
     createTime.setTime(createTimePlap + 1000 * 60 * 15);
     this.go(createTime);
 
-    //document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight ;
+    setTimeout(() => {
+      document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
+    }, 2000);
   }
 
   goBack() {
@@ -95,52 +109,122 @@ export class OrderDetailBComponent implements OnInit {
       window.clearInterval(this._ordertimer);
       this._ordertimer = null;
       this.timeout = false;
-
+      this.isShowBuyPay = false;
     }
  }
  checkTime(i) { // 将0-9的数字前面加上0，例1变为01
     if (i < 10) {
-    i = "0" + i;
+    i = '0' + i;
     }
     return i;
  }
 
   go(v) {
     let date1 = new Date(), data2 = v;
-    if(data2<date1)return; // 设置的时间小于现在时间退出
-    this._ordertimer = setInterval(()=>{this.leftTimer(data2)}, 1000);
+    if (data2 < date1) {
+      return; // 设置的时间小于现在时间退出
+    }
+    this._ordertimer = setInterval(() => {this.leftTimer(data2)} , 1000);
   }
 
   async cancelOrder() {
-    await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit'});
-    this.location.back();
-    this.location.back();
+    this.dialogService.confirm({ content: this.i18ns.confirm_cancelTransaction }).subscribe(async res => {
+      if (res) {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit'}).then(async (data) => {
+          this.location.back();
+          this.location.back();
+        }, err => {
+          this.dialogService.alert(err.error);
+        });
+      } else {
+          return;
+      }
+    });
     // action
     // cancel_submit   payment_submit   seller_confirm  dispute_submit
     // force_confirm   force_cancel
   }
 
   async payOrder() {
-    await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit'});
-    this.location.back();
-    this.location.back();
+    this.dialogService.confirm({ content: this.i18ns.confirm_markPay }).subscribe(async res => {
+      if (res) {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit'}).then(async (data) => {
+          this.isShowBuyDispute = true;
+          this.isShowBuyPay = false;
+        }, err => {
+          this.dialogService.alert(err.error);
+        });
+        // this.location.back();
+        // this.location.back();
+      } else {
+          return;
+      }
+    });
   }
 
   async sellOrder() {
-    await this.adService.updateOrderStatus({orderid: this.orderId, action: 'seller_confirm'});
-    this.location.back();
-    this.location.back();
+    this.dialogService.confirm({ content: this.i18ns.confirm_markReceive }).subscribe(async res => {
+      if (res) {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'seller_confirm'}).then(async (data) => {
+          this.location.back();
+          this.location.back();
+        }, err => {
+          this.dialogService.alert(err.error);
+        });
+      } else {
+          return;
+      }
+    });
   }
 
-  async sendChatMsg() {
-    console.log('chatmsg', this.chatmsg);
-    if (!this.chatmsg) {
-      //alert('请输入');
-    } else {
-      this.listChatComponent.send(this.chatmsg);
-      document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
-      document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
+  async sellMarkDispute() {
+    this.dialogService.confirm({ content: this.i18ns.confirm_mark_dispute }).subscribe(async res => {
+      if (res) {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+          this.location.back();
+          this.location.back();
+        }, err => {
+          this.dialogService.alert(err.error);
+        });
+      } else {
+          return;
+      }
+    });
+    // action
+    // cancel_submit   payment_submit   seller_confirm  dispute_submit
+    // force_confirm   force_cancel
+  }
 
+  async buyMarkDispute() {
+    this.dialogService.confirm({ content: this.i18ns.confirm_mark_dispute }).subscribe(async res => {
+      if (res) {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+          this.location.back();
+          this.location.back();
+        }, err => {
+          this.dialogService.alert(err.error);
+        });
+      } else {
+          return;
+      }
+    });
+    // action
+    // cancel_submit   payment_submit   seller_confirm  dispute_submit
+    // force_confirm   force_cancel
+  }
+
+
+  async sendChatMsg() {
+    if (!this.chatmsg) {
+
+    } else {
+      this.listChatingComponent.send(this.chatmsg);
+      document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
+      // document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
+
+      setTimeout(() => {
+        document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
+      }, 1000);
       this.chatmsg = '';
     }
 

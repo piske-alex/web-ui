@@ -16,8 +16,12 @@ export const environment = {
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 export class EnvironmentConstant {
-  public static AVATAR = 'http://office.ddns.need.sh:8011/avatar';
-  public static API_URL = 'http://office.ddns.need.sh:8011/api';
+  // public static AVATAR = 'http://office.ddns.need.sh:8011/avatar';
+  // public static API_URL = 'http://office.ddns.need.sh:8011/api';
+  // public static AVATAR = 'https://www.koin-exchange.com/avatar';
+  // public static API_URL = 'https://www.koin-exchange.com/api';
+   public static AVATAR = 'https://kcb.alpha-beta.tech/avatar';
+   public static API_URL = 'https://kcb.alpha-beta.tech/api';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
 
 }

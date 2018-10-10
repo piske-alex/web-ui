@@ -18,7 +18,7 @@
         <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_receive"></gz-i18n></span>
         <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_send"></gz-i18n></span>
         <span><gz-i18n key="transaction.trans_coin_number"></gz-i18n>: </span>
-        <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+        <span>{{transaction.amount | btcFormat}}{{transaction.coin}}</span>
       </div>
       <div>
         <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_in"></gz-i18n></span>

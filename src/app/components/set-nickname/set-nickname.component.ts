@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogService } from '../../providers/dialog/Dialog.service';
 
 @Component({
   selector: 'gz-set-nickname',
@@ -22,7 +23,8 @@ export class SetNicknameComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private languageService: LanguageService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -50,7 +52,7 @@ export class SetNicknameComponent implements OnInit {
 
   async submit() {
     if (!this.nickname) {
-      return alert(this.i18ns.input_nickname);
+      return this.dialogService.alert(this.i18ns.input_nickname);
     }
 
     try {

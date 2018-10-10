@@ -72,7 +72,7 @@ export class ChatComponent implements OnInit {
       desc = desc + `${this.i18ns.order}`;
       desc = desc + `(${this.data.username})`;
       return desc;
-      //return `${this.data.transactionCoinType}   ${this.data.adType === '2' ? '出售' : '购买'}  订单(${this.data.username})`;
+      // return `${this.data.transactionCoinType}   ${this.data.adType === '2' ? '出售' : '购买'}  订单(${this.data.username})`;
     } else {
       return this.i18ns.order;
     }

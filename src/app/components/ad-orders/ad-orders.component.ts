@@ -65,13 +65,16 @@ export class AdOrdersComponent implements OnInit {
 
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   toOrderDetail1(order: any) {
-      console.log('order detail', order);
       this.router.navigate(['/orderDetail', { orderId: order.id, adId: this.adId, adUserId: this.adUserId, anotherUserId: order.userid }]);
   }
 
   toOrderDetail2(order: any) {
-
+    this.router.navigate(['/orderDetailB', { orderId: order.id, adId: this.adId, adUserId: this.adUserId, anotherUserId: order.userid }]);
   }
 
 }
