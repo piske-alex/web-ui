@@ -25,7 +25,7 @@ export class AdOrdersComponent implements OnInit {
   anotherUserId: string;
 
   adType: string;
-  goBack: any;
+
 
 
   constructor(private router: Router,
