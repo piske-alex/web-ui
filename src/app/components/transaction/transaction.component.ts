@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-transaction',

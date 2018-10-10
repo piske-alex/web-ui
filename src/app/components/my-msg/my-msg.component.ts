@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../providers/language/language.service';
 import { ChatService } from '../../providers/chat/chat.service';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 import { AdService } from '../../providers/ad/ad.service';
 
 

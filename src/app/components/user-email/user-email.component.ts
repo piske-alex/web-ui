@@ -3,7 +3,7 @@ import { CommonService } from '../../providers/common/common.service';
 import { Location } from '@angular/common';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-user-email',

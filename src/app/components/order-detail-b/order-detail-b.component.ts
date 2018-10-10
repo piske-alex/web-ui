@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { ListChatingComponent } from '../element/list-chating/list-chating.component';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 
 @Component({
@@ -70,7 +70,7 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.confirm_markReceive = await this.languageService.get('otc.confirm_markReceive');
     this.i18ns.confirm_mark_dispute = await this.languageService.get('otc.confirm_mark_dispute');
     this.i18ns.confirm_cancelTransaction = await this.languageService.get('otc.confirm_cancelTransaction');
-    
+
     this.isShowBuyDispute = false;
     this.timeout = true;
 

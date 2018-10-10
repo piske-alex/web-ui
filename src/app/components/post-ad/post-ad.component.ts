@@ -14,7 +14,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { CommonService } from '../../providers/common/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-post-ad',

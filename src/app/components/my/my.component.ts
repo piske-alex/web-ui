@@ -4,7 +4,7 @@ import { UserService } from '../../providers/user/user.service';
 import { User } from '../../models/user/user';
 import { ChatService } from '../../providers/chat/chat.service';
 import { LanguageService } from '../../providers/language/language.service';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-my',

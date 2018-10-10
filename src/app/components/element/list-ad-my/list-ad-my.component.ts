@@ -3,7 +3,7 @@ import { TransactionListItem } from '../../../models/ad/TransactionListItem';
 import { LanguageService } from '../../../providers/language/language.service';
 import { Router } from '@angular/router';
 import { AdService } from '../../../providers/ad/ad.service';
-import { DialogService } from '../../../providers/dialog/Dialog.service';
+import { DialogService } from '../../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-list-ad-my',

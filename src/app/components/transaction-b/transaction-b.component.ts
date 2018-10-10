@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'app-transaction-b',
@@ -163,7 +163,7 @@ export class TransactionBComponent implements OnInit {
 
   changeReceive() {
       this.payAmount = +((this.receiveAmount / +this.data.rate).toFixed(8));
-    
+
   }
 
   getLeftPlacehold() {
@@ -224,13 +224,13 @@ export class TransactionBComponent implements OnInit {
 
   changeValidNumber(objValue,  point , integerLen) {
     let tmpVal = objValue;
-    // 先把非数字的都替换掉，除了数字和. 
+    // 先把非数字的都替换掉，除了数字和.
     tmpVal = tmpVal.replace(/[^\d\.]/g, '');
-    // 必须保证第一个为数字而不是. 
+    // 必须保证第一个为数字而不是.
     tmpVal = tmpVal.replace(/^\./g, '');
-    // 保证只有出现一个.而没有多个. 
+    // 保证只有出现一个.而没有多个.
     tmpVal = tmpVal.replace(/\.{2,}/g, '');
-    // 保证.只出现一次，而不能出现两次以上 
+    // 保证.只出现一次，而不能出现两次以上
     tmpVal = tmpVal.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
     // 开头多余2个0，只保留一个 000.5 => 0.5
     tmpVal = tmpVal.replace(/^(0{2,})/, "0");
@@ -246,7 +246,7 @@ export class TransactionBComponent implements OnInit {
 
     if (point != undefined && !isNaN(point) && point > 0) {
         var ind = tmpVal.indexOf(".");
-        
+
         if (ind != -1) {
             point = parseInt(point);
             tmpVal = tmpVal.substring(0, ind + 1 + point);

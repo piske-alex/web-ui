@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../models/user/user';
 import { UserService } from '../../../providers/user/user.service';
 import { ChatService } from '../../../providers/chat/chat.service';
-import { DialogService } from '../../../providers/dialog/Dialog.service';
+import { DialogService } from '../../../providers/dialog/dialog.service';
 
 const AV = (<any>window).AV;
 

@@ -4,7 +4,7 @@ import { CommonService } from '../../providers/common/common.service';
 import { UserService } from '../../providers/user/user.service';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../providers/language/language.service';
-import { DialogService } from '../../providers/dialog/Dialog.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-forget-password',
