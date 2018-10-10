@@ -57,7 +57,7 @@ export class MyAdComponent implements OnInit {
     this.loadPublishAd();
   }
 
-  private async loadPublishAd() {
+ async loadPublishAd() {
     const _params = {
       type: '', // 'sell buy'
       country: '',

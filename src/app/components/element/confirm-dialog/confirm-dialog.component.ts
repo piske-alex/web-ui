@@ -11,9 +11,9 @@ import { LanguageService } from '../../../providers/language/language.service';
 export class ConfirmDialogComponent implements OnInit {
   i18ns: any = {};
 
-  config: {};
+  config: any;
 
-    constructor(private matDialogRef: MatDialogRef<ConfirmDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any
+    constructor(public matDialogRef: MatDialogRef<ConfirmDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any
     , private languageService: LanguageService) {
         this.config = data;
     }

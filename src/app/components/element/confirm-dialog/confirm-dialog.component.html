@@ -1,11 +1,11 @@
 <div class="clearfix">
-  <div class="pull-left bold dialog_title" md-dialog-title>{{ config.title || this.i18ns.confirm_title  }}</div>
+  <div class="pull-left bold dialog_title" md-dialog-title>{{ config?.title || this.i18ns.confirm_title  }}</div>
   <div class="float_right mat-dialog-title-close" (click)="matDialogRef.close(false)" >
     <fa-icon [icon]="['fas', 'window-close']"></fa-icon>
     </div>
 </div>
-<div mat-dialog-content class="div_content_top_bottom">{{ config.content }}</div>
+<div mat-dialog-content class="div_content_top_bottom">{{ config?.content }}</div>
 <div mat-dialog-actions class="confirm-dialog-operate float_right confirm-dialog-operate_top">
-  <button mat-raised-button color="primary" (click)="matDialogRef.close(true)">{{ config.button || this.i18ns.confirm }}</button>
+  <button mat-raised-button color="primary" (click)="matDialogRef.close(true)">{{ config?.button || this.i18ns.confirm }}</button>
   <button mat-raised-button (click)="matDialogRef.close(false)" class="confirm-dialog-cancel">{{this.i18ns.cancel}}</button>
 </div>

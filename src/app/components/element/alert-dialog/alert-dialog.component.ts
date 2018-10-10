@@ -13,9 +13,9 @@ export class AlertDialogComponent implements OnInit {
 
   i18ns: any = {};
 
-  config: {};
+  config: any;
 
-  constructor(private matDialogRef: MatDialogRef<AlertDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any
+  constructor(public matDialogRef: MatDialogRef<AlertDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any
   , private languageService: LanguageService) {
       this.config = data;
   }
