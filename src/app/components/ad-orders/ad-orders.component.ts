@@ -14,7 +14,7 @@ import { LanguageService } from '../../providers/language/language.service';
 export class AdOrdersComponent implements OnInit {
 
   data: TransactionListItem = new TransactionListItem();
-  orders: any = {};
+  orders: any ;
 
   i18ns: any = {};
   userId: string;

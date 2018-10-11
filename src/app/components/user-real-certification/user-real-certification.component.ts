@@ -38,6 +38,12 @@ export class UserRealCertificationComponent implements OnInit {
   }
 
   async ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.i18ns.input_name = await this.languageService.get('user_real_cert.input_name');
     this.i18ns.input_cardno = await this.languageService.get('user_real_cert.input_cardno');
     this.i18ns.card_front = await this.languageService.get('user_real_cert.card_front');

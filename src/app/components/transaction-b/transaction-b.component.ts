@@ -93,7 +93,9 @@ export class TransactionBComponent implements OnInit {
   }
 
   goToChat() {
-    this.router.navigate(['/chat', { adId: this.adId }]);
+    this.router.navigate(['/chat', { adId: this.adId,
+      adUserId: this.data.userId, anotherUserId: this.userId
+    }]);
   }
 
   getRemark() {
@@ -101,7 +103,8 @@ export class TransactionBComponent implements OnInit {
   }
 
   getLeftTopTxt() {
-    return this.i18ns.transactionLimit + ' ' + this.data.limitMinAmount + '~' + this.data.limitMaxAmount + ' ' + this.data.transactionCurrency;
+    return this.i18ns.transactionLimit + ' ' + this.data.limitMinAmount
+    + '~' + this.data.limitMaxAmount + ' ' + this.data.transactionCurrency;
   }
 
   async transaction() {

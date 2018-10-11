@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { DialogService } from '../../providers/dialog/dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gz-user-email',
@@ -22,10 +23,17 @@ export class UserEmailComponent implements OnInit {
               private userService: UserService,
               private languageService: LanguageService,
               private location: Location,
+              private router: Router,
               private dialogService: DialogService) {
   }
 
   async ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.i18ns.input_email = await this.languageService.get('user_email.input_email');
     this.i18ns.input_valid_email = await this.languageService.get('user_email.input_valid_email');
     this.i18ns.bind_email_success = await this.languageService.get('user_email.bind_email_success');

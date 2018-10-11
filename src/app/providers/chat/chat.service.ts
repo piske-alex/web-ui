@@ -36,7 +36,7 @@ export class ChatService {
   }
 
   loginChat() {
-    console.log('### >>> loginChat:::', this.isLogin);
+    // console.log('### >>> loginChat:::', this.isLogin);
     if (this.isLogin) {
       return;
     }
@@ -46,12 +46,12 @@ export class ChatService {
         this.user = JSON.parse(_user);
         this.currentLoginUserId = this.user.id;
 
-        console.log('### >>> create im client:::', this.user.id);
+        // console.log('### >>> create im client:::', this.user.id);
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
           chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            console.log('------------------message: ', message);
+            // console.log('------------------message: ', message);
             const _from = message.from;
             const _adId = message.getAttributes().for;
             const _adUserId = message.getAttributes().adUserId;
@@ -94,7 +94,7 @@ export class ChatService {
   }
 
   loginChatTest(loginUserId: number) {
-    console.log('### >>> loginChat:::', this.isLogin);
+    // console.log('### >>> loginChat:::', this.isLogin);
     if (this.isLogin) {
       return;
     }
@@ -104,12 +104,12 @@ export class ChatService {
         this.user = JSON.parse(_user);
         this.currentLoginUserId = this.user.id;
 
-        console.log('### >>> create im client:::', this.user.id);
+        // console.log('### >>> create im client:::', this.user.id);
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
           chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            console.log('------------------message: ', message);
+            // console.log('------------------message: ', message);
             const _from = message.from;
             const _adId = message.getAttributes().for;
             const _adUserId = message.getAttributes().adUserId;
@@ -137,7 +137,7 @@ export class ChatService {
               isMe: _from == this.user.id,
             });
 
-            console.log('conservationObj======', this.conservationObj);
+            // console.log('conservationObj======', this.conservationObj);
             if (this.receive) {
               this.receive();
             }
@@ -177,7 +177,7 @@ export class ChatService {
       const _conservationObj = this.conservationObj[chat_union_ids];
       let _conversation = _conservationObj && _conservationObj.conversation || null;
       if (!_conversation) {
-        console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
+        // console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
          _conversation =
         this.chat.createConversation({
           members: [String(adUserId), String(anotherUserId)],
@@ -202,7 +202,7 @@ export class ChatService {
       this.currentLoginUserId = this.user.id;
 
       return new Promise((resolve, reject) => {
-        console.log('currentLoginUserId11', this.currentLoginUserId);
+        // console.log('currentLoginUserId11', this.currentLoginUserId);
 
          this.chat.getQuery()
         .containsMembers([String(this.currentLoginUserId)])
@@ -230,7 +230,7 @@ export class ChatService {
 
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])
-            .limit(50)
+            .limit(100)
             .withLastMessagesRefreshed(true)
             // .contains('topic', this.chat_topic_keyword)
             .find()
@@ -263,7 +263,7 @@ export class ChatService {
           chat_union_ids = String(anotherUserId) + '_' + String(adUserId) + '_' + String(adId) ;
         }
         if (conversation) {
-          console.log('### >>> send message ...', chat_union_ids);
+          // console.log('### >>> send message ...', chat_union_ids);
 
           const _textMessage = new AV.TextMessage(message);
           _textMessage.setAttributes({
@@ -276,7 +276,7 @@ export class ChatService {
             sendTimestamp: Date.now(),
           });
           conversation.send(_textMessage);
-          console.log('### >>> send message ...', _textMessage);
+          // console.log('### >>> send message ...', _textMessage);
           this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
           this.conservationObj[chat_union_ids].conversation = conversation;
           this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
@@ -288,7 +288,7 @@ export class ChatService {
             isMe: true,
           });
           resolve(this.conservationObj[chat_union_ids].chatList);
-          console.log('### >>> send message ...end');
+          // console.log('### >>> send message ...end');
           return conversation;
         } else {
           console.log('### >>> not found conversaction or create failed!!!');
@@ -339,15 +339,15 @@ export class ChatService {
                 isMe: _from == this.user.id,
               });
             });
-            console.log('message::conversation:::::', conversation);
-            console.log('message::count:::::', messages.length);
-            console.log('message::this.user.id:::::', this.user.id);
+            // console.log('message::conversation:::::', conversation);
+            // console.log('message::count:::::', messages.length);
+            // console.log('message::this.user.id:::::', this.user.id);
 
             resolve(this.conservationObj[chat_union_ids].chatList);
 
             // 进入到对话页面时标记其为已读
             conversation.read().then(function(conversation2) {
-              console.log('对话已标记为已读');
+              // console.log('对话已标记为已读');
             }).catch(console.error.bind(console));
 
              return conversation;

@@ -4,7 +4,6 @@ import { TradeItem } from '../../models/common/TradeItem';
 import { LanguageService } from '../../providers/language/language.service';
 import { CommonService } from '../../providers/common/common.service';
 import { Router } from '@angular/router';
-//import { ListTradeComponent } from '../element/list-trade/list-trade.component';
 
 @Component({
   selector: 'gz-my-trans',
@@ -16,10 +15,8 @@ export class MyTransComponent implements OnInit {
   userId: string;
   status = 'active'; // old 1. 进行中， 10. 已下架   new status = (active=在架，hidden=下架)
   list: TradeItem[] = [];
-  adType: string; //buy sell
+  adType: string; // buy sell
 
-  //@ViewChild(ListTradeComponent)
-  //private listTradeComponent;
 
   constructor(private location: Location,
     private router: Router,
@@ -39,8 +36,8 @@ export class MyTransComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    
-    this.adType = "buy";
+
+    this.adType = 'buy';
     this.loadTrade();
   }
 
@@ -50,13 +47,13 @@ export class MyTransComponent implements OnInit {
 
   selectProcessing() {
     this.status = 'active';
-    this.adType = "buy";
+    this.adType = 'buy';
     this.loadTrade();
   }
 
   selectObtained() {
     this.status = 'hidden';
-    this.adType = "sell";
+    this.adType = 'sell';
     this.loadTrade();
   }
 

@@ -21,17 +21,17 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
     let urlParam: UrlParam;
     urlParam = new UrlParam();
     urlParam.imageUrl = "./assets/images/1.jpg";
-    urlParam.linkUrl = "./adShow";
+    urlParam.linkUrl = "['/adShow']";
     this.slides.push(urlParam);
 
     urlParam = new UrlParam();
     urlParam.imageUrl = "./assets/images/2.jpg";
-    urlParam.linkUrl = "./adShow";
+    urlParam.linkUrl = "['/adShow']";
     this.slides.push(urlParam);
 
     urlParam = new UrlParam();
     urlParam.imageUrl = "./assets/images/3.jpg";
-    urlParam.linkUrl = "./adShow";
+    urlParam.linkUrl = "['/adShow']";
     this.slides.push(urlParam);
 
 
@@ -47,8 +47,8 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
 
   initSwiper() {
     this.mySwiper = new Swiper('.swiper-container', {
-      slidesPerView: 'auto',
-      //freeMode: true,
+      //slidesPerView: 'auto',
+      freeMode: true,
       observer:true,//修改swiper自己或子元素时，自动初始化swiper
       observeParents:true,//修改swiper的父元素时，自动初始化swiper
       
@@ -61,6 +61,8 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
       paginationClickable :true,
 
     });
+    this.mySwiper.startAutoplay();
+    console.log('aa')
   }
 
 }

@@ -67,7 +67,7 @@ export class MyAdComponent implements OnInit {
       offset: 0,
       limit: 1000,
       userid: this.userId,
-      status: this.status
+      status: this.status // 'active hidden'
     };
 
     try {

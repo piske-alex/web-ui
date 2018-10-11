@@ -7,7 +7,7 @@
         
 
       <h3>
-        {{i18ns.bid}}: {{data.rate}} {{data.currency}} 
+        {{i18ns.bid}}: {{data.rate}} {{data.transactionCurrency}} 
 
         <img src="/assets/images/pay_ap.jpg" title="{{this.i18ns.ap_alipay}}" alt="{{this.i18ns.ap_alipay}}"  class="gz-icon" *ngIf="data.is_payment_ap"> 
           &nbsp;
@@ -19,7 +19,7 @@
           &nbsp;
         
       </h3>
-      <div>{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.currency}}</div>
+      <div>{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
     </div>
   </div>
   <div class="gz-list-tr-right">

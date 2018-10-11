@@ -350,7 +350,7 @@ export class PostAdComponent implements OnInit {
     if (this.ad.maxCount < this.ad.minCount) {
       return this.i18ns.input_maxCountMoreThanMin;
     }
-    if (!this.ad.remark) {
+    if (!this.ad.remark || this.ad.remark.trim() == "") {
       return this.i18ns.input_remark;
     }
     return '';

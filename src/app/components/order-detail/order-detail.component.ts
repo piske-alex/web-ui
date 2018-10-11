@@ -23,8 +23,12 @@ export class OrderDetailComponent implements OnInit {
   anotherUserId: string;
   isAdOwner: boolean;
   timeout: boolean;
+
+  isShowCancel: boolean;
   isShowBuyPay: boolean;
   isShowBuyDispute: boolean;
+  isShowSellDispute: boolean;
+  isShowSellConfirm: boolean;
 
   @ViewChild(ListChatingComponent)
   private listChatingComponent;
@@ -47,9 +51,16 @@ export class OrderDetailComponent implements OnInit {
     if (currentLoginUserId === this.adUserId) {
       this.isAdOwner = true;
       this.isShowBuyPay = false;
+      this.isShowBuyDispute = false;
+      this.isShowSellDispute = true;
+      this.isShowSellConfirm = true;
+
     } else {
       this.isAdOwner = false;
       this.isShowBuyPay = true;
+      this.isShowBuyDispute = true;
+      this.isShowSellDispute = false;
+      this.isShowSellConfirm = false;
     }
 
     this.orderId = this.route.snapshot.paramMap.get('orderId');
@@ -57,6 +68,44 @@ export class OrderDetailComponent implements OnInit {
     try {
       this.order = await this.adService.getOrder({orderid: this.orderId});
       console.log('this.order', this.order);
+      if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
+        if (this.order.payment_status == '1') { // had paid
+          if (this.isAdOwner) { // sell
+            this.isShowCancel = false;
+            this.isShowBuyPay = false;
+            this.isShowBuyDispute = false;
+            this.isShowSellDispute = true;
+            this.isShowSellConfirm = true;
+          } else { // buy
+            this.isShowCancel = false;
+            this.isShowBuyPay = false;
+            this.isShowBuyDispute = true;
+            this.isShowSellDispute = false;
+            this.isShowSellConfirm = false;
+          }
+        } else { // not paid
+          if (this.isAdOwner) { // sell
+            this.isShowCancel = true;
+            this.isShowBuyPay = false;
+            this.isShowBuyDispute = false;
+            this.isShowSellDispute = true;
+            this.isShowSellConfirm = true;
+          } else { // buy
+            this.isShowCancel = true;
+            this.isShowBuyPay = true;
+            this.isShowBuyDispute = false;
+            this.isShowSellDispute = false;
+            this.isShowSellConfirm = false;
+          }
+        }
+      } else { //  finish, canceled, dispute
+        this.isShowCancel = false;
+        this.isShowBuyPay = false;
+        this.isShowBuyDispute = false;
+        this.isShowSellDispute = false;
+        this.isShowSellConfirm = false;
+      }
+
     } catch (e) {
       console.error(e);
     }
@@ -67,10 +116,10 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.pay_timeout = await this.languageService.get('otc.pay_timeout');
     this.i18ns.confirm_markPay = await this.languageService.get('otc.confirm_markPay');
     this.i18ns.confirm_markReceive = await this.languageService.get('otc.confirm_markReceive');
-    this.i18ns.confirm_mark_dispute = await this.languageService.get('otc.confirm_mark_dispute');
+    this.i18ns.confirm_markDispute = await this.languageService.get('otc.confirm_markDispute');
     this.i18ns.confirm_cancelTransaction = await this.languageService.get('otc.confirm_cancelTransaction');
 
-    this.isShowBuyDispute = false;
+
     this.timeout = true;
 
     let createTime: Date = new Date(this.order.create_time * 1000);
@@ -150,6 +199,7 @@ export class OrderDetailComponent implements OnInit {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit'}).then(async (data) => {
           this.isShowBuyDispute = true;
           this.isShowBuyPay = false;
+          this.isShowCancel = false;
         }, err => {
           this.dialogService.alert(err.error);
         });

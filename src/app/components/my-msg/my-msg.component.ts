@@ -27,6 +27,13 @@ export class MyMsgComponent implements OnInit {
     ) {}
 
   async ngOnInit() {
+
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.i18ns.myMsg = await this.languageService.get('otc.myMsg');
 
     this.getUnReadCount();
@@ -53,15 +60,19 @@ export class MyMsgComponent implements OnInit {
 
     await this.adService.getOtcAdById({ adid: tempAdId }).then((adData) => {
       if ( adData.adType === '1') { // sell
-        if (tempOrderId === undefined || tempOrderId === 0) {
-          this.router.navigate(['/transaction', { adId: tempAdId || '' }]);
+        if (tempOrderId == undefined || tempOrderId == 0) {
+          // this.router.navigate(['/transaction', { adId: tempAdId || '' }]);
+          this.router.navigate(['/chat', { adId: tempAdId,
+             adUserId: tempAdUserId, anotherUserId: tempAnotherUserId  }]);
         } else {
           this.router.navigate(['/orderDetail', { orderId: tempOrderId,
             adId: tempAdId, adUserId: tempAdUserId, anotherUserId: tempAnotherUserId }]);
         }
       } else { // buy
-        if (tempOrderId === undefined || tempOrderId === 0) {
-          this.router.navigate(['/transactionB', { adId: tempAdId || '' }]);
+        if (tempOrderId == undefined || tempOrderId == 0) {
+          // this.router.navigate(['/transactionB', { adId: tempAdId || '' }]);
+          this.router.navigate(['/chat', { adId: tempAdId,
+            adUserId: tempAdUserId, anotherUserId: tempAnotherUserId }]);
         } else {
           this.router.navigate(['/orderDetailB', { orderId: tempOrderId,
             adId: tempAdId, adUserId: tempAdUserId, anotherUserId: tempAnotherUserId }]);

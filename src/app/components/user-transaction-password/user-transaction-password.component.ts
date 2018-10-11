@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { CommonService } from '../../providers/common/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gz-user-transaction-password',
@@ -26,10 +27,17 @@ export class UserTransactionPasswordComponent implements OnInit {
   constructor(private location: Location,
               private commonService: CommonService,
               private languageService: LanguageService,
+              private router: Router,
               private userService: UserService) {
   }
 
   async ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.countryCode = '86';
     try {
       this.countryCodes = await this.commonService.getCountryCodeList();

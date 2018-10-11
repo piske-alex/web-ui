@@ -229,7 +229,7 @@
     "post_ad_help_8": "<p>您需要提供一种最有效的方式，并填写详细的收款信息，方便买家/卖家与您交易</p>",
     "input_minCount":"请输入最小量 , 且大于0",
     "input_maxCount":"请输入最大量 , 且大于0",
-    "input_maxCountMoreThanMin":"最大量应大于最小量",
+    "input_maxCountMoreThanMin":"最小量不应该大于最大量",
     "input_price":"请输入交易价格 , 且大于0",
     "trade_time":"交易时间",
     "collect_time":"收币时间",

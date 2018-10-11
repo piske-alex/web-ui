@@ -91,7 +91,9 @@ export class TransactionComponent implements OnInit {
   }
 
   goToChat() {
-    this.router.navigate(['/chat', { adId: this.adId }]);
+    this.router.navigate(['/chat', { adId: this.adId,
+      adUserId: this.data.userId, anotherUserId: this.userId
+    }]);
   }
 
   getRemark() {

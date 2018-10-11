@@ -23,6 +23,12 @@ export class UserLanguageComponent implements OnInit {
   }
 
   async ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    
     this.language = localStorage.getItem('language');
     try {
       this.list = await this.commonService.getLanguage();

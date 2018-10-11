@@ -20,7 +20,7 @@
       <p><gz-i18n key="chat.limit"></gz-i18n>: {{data.limitMinAmount}} - {{data.limitMaxAmount}} CNY</p>
     </div>
     <div>
-      <div class="btn btn-outline-blue gz-circle" (click)="transaction()">
+      <div class="btn btn-outline-blue gz-circle" (click)="transaction()" *ngIf="this.currentLoginUserId != this.adUserId">
         {{data.adType == '2' ? this.i18ns.sell : this.i18ns.buy }}
       </div>
     </div>
@@ -30,12 +30,15 @@
     <p><gz-i18n key="chat.info_chat_via_temp"></gz-i18n></p>
   </section>
 
-  <section>
-    <gz-list-chat *ngIf="data && data.userId"
-     [adId]="adId" [adUserId]="data.userId" 
-     [anotherUserId]="currentLoginUserId"
-     [chatTitle]="getTitle()"></gz-list-chat>
-  </section>
+
+  <div class="div_list_chat">
+    <gz-list-chating *ngIf="adId" 
+    [adId]="adId" 
+    [orderId]="0" 
+    [adUserId]="adUserId" 
+    [anotherUserId]="anotherUserId" 
+    [chatTitle]="getTitle()"></gz-list-chating>
+  </div>
 
   <section class="gz-empty-foot"></section>
 </article>

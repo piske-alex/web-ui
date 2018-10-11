@@ -13,7 +13,9 @@
     </div>
   </div>
 </header>
-
+<div style="display:none;">
+    <input type="password"/>
+  </div>
 <article class="gz-login gz-form" *ngIf="!isLoading">
   <section class="gz-country">
     <div style="min-width: 60px;">
@@ -57,6 +59,7 @@
         <gz-i18n key="user.inputPassword"></gz-i18n>
       </div>
       <div class="gz-password">
+          <input type="text" style="display:none;" />
         <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword"
             (focus)="focus('password')" (blur)="blur('password')">
         <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
