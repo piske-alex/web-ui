@@ -4,40 +4,50 @@
         <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
       </div>
       <div class="gz-title">
-        广告相应的订单
+        {{this.i18ns.ad_orders_title}}
       </div>
       <div></div>
     </div>
   </header>
   <section>
-    adInfo
-    <div>
-        <div class="gz-list-td-adtype" *ngIf="this.adType=='1'">{{this.i18ns.sale}}</div>
-        <div class="gz-list-td-adtype" *ngIf="this.adType=='2'">{{this.i18ns.buy}}</div>
+    <div class="div_ad_info">
+      <div><gz-i18n key="my_ad.ad_info"></gz-i18n></div>
+      <div>          
+          <div class="gz-list-td-adtype" *ngIf="this.adType == '1'"><gz-i18n key="otc.adType"></gz-i18n>: {{this.i18ns.sale}}</div>
+          <div class="gz-list-td-adtype" *ngIf="this.adType == '2'"><gz-i18n key="otc.adType"></gz-i18n>: {{this.i18ns.buy}}</div>
+      </div>
+      <div>
+          <gz-i18n key="my_ad.ad_coin_type"></gz-i18n>: {{this.adData.transactionCoinType}}
+      </div>
+        
     </div>
   </section>
   <section class="gz-list-tr" *ngFor="let data of orders">
       <div class="gz-list-tr-left">
           
-          <div class="gz-list-td">orderId: {{data.id}} </div>
-          <div class="gz-list-td">orderStatus: {{data.status}} </div>
-          <div class="gz-list-td">userid: {{data.userid}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_id}}: {{data.id}} </div>
+          <div class="gz-list-td" *ngIf="data.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} </div>
+          <div class="gz-list-td" *ngIf="data.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} </div>
+          <div class="gz-list-td" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} </div>
+          <div class="gz-list-td" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_user_id}}: {{data.userid}} </div>
                
          
-          <div class="gz-list-td">amount: {{data.amount}} </div>
-          <div class="gz-list-td">create_time: {{data.create_time  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_amount}}: {{data.amount}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_create_time}}: {{data.create_time  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
           <div class="gz-list-tr-detail">   
         </div>
       </div>
       <div class="gz-list-tr-right">
         <div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '2'" (click)="toOrderDetail2(data)">
-          order detail
+          {{this.i18ns.order_detail}}
         </div>
         <div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '1'" (click)="toOrderDetail1(data)">
-          order detail
+          {{this.i18ns.order_detail}}
         </div>
       </div>
     </section>
+    <div class="align_center" *ngIf="!orders">{{this.i18ns.has_no_order}}</div>
     
 
   

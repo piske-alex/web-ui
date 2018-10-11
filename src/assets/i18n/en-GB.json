@@ -132,7 +132,26 @@
   },
   "my_ad": {
     "processing": "Processing",
-    "obtained": "Has been removed"
+    "obtained": "Has been removed",
+    "ad_info": "广告信息",
+    "ad_coin_type": "币种",
+    "goto_order": "交易信息",
+    "has_no_order": "没有交易信息",
+    "order_id": "id",
+    "order_status": "状态",
+    "order_status_unfinish": "unfinish 未完成",
+    "order_status_finish": "finish 已完成",
+    "order_status_canceled": "canceled 已取消",
+    "order_status_dispute": "dispute 标记争议",
+    "order_status_buypay_status_0": "买家未付款",
+    "order_status_buypay_status_1": "买家已付款",
+    "order_status_sellconfirm_status_0": "卖家未确认收款",
+    "order_status_sellconfirm_status_1": "卖家已确认收款",
+    "order_user_id": "交易对方",
+    "order_amount": "amount",
+    "order_create_time": "create time",
+    "order_detail": "detail",
+    "ad_orders_title": "Transaction list"
   },
   "select": {
     "adType": "Please select an Ad type",
@@ -164,7 +183,7 @@
     "seller": "Seller",
     "buyer": "Buyer",
     "orderNo": "Order number",
-    "amount": "Total quantity",
+    "amount": "Total amount",
     "count": "Quantity",
     "price": "Price",
     "cancelTransaction": "Cancel the deal",
@@ -237,6 +256,12 @@
     "confirm_markDispute":"Confirm mark dispute?",
     "myMsg":"我的消息",
     "myTradeTitle":"我的交易"
+  },
+  "my_msg": {
+    "chat_with_members": "对话框成员",
+    "unread_count": "未读数量",
+    "last_msg_time": "最近会话时间",
+    "goto_detail": "进入对话"
   },
   "my_trade": {
     "myBuy": "我的买单",
@@ -330,12 +355,13 @@
     "password_valid_warn_1": "Please enter a minimum of 8 digits of password, where(a number, a lowercase English letter, an uppercase English letter)!",
     "password_valid_warn_2": "The password contains at least one number, one lowercase English letter, one uppercase English letter!",
     "serv_items":"<p></p><p></p>",
+    "phone_number_used": "phone number have been used",
     "next_step":"Next"
   },
   "transaction": {
     "input_x_amount": "Please enter the amount of {BuyOrSell}",
-    "min_x_amount": "The minimum of {BuyOrSell}is{Amount}",
-    "max_x_amount": "The maximum number of {BuyOrSell}is{Amount}",
+    "min_x_amount": "The minimum of {BuyOrSell} is {Amount}",
+    "max_x_amount": "The maximum number of {BuyOrSell} is {Amount}",
     "input_x_number": "Please enter the number of {BuyOrSell}",
     "minAmt": "最少{BuyOrSell}金额为{Amount}",
     "maxAmt": "最大{BuyOrSell}金额为{Amount}",

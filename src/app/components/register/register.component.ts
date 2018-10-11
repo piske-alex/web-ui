@@ -59,6 +59,7 @@ export class RegisterComponent implements OnInit {
     this.i18ns.password_valid_warn_2 = await this.languageService.get('register.password_valid_warn_2');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
     // this.serv_items = await this.languageService.get('register.serv_items');
+    this.i18ns.phone_number_used = await this.languageService.get('register.phone_number_used');
 
     this.language = this.getLanguageDefault();
     this.serv_items_simp = this._simplifiedChinese();
@@ -96,7 +97,7 @@ export class RegisterComponent implements OnInit {
     this.isShowPassword = show;
   }
 
-  showServiceItems(){
+  showServiceItems() {
     this.isShowConfirm = true;
   }
   cancelDialog() {
@@ -166,7 +167,11 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/setNickName', { userId: _userId }]);
     } catch (e) {
       if (e.error.success === false && e.error.errmsg !== undefined) {
-        this.dialogService.alert(e.error.errmsg);
+        if (e.error.errmsg == 'phone number have been used') {
+          this.dialogService.alert(this.i18ns.phone_number_used);
+        } else {
+          this.dialogService.alert(e.error.errmsg);
+        }
       }
       console.error(e);
     }

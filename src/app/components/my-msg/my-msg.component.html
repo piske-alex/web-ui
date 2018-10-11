@@ -15,15 +15,15 @@
         <div class="gz-list-tr-left">
             
             <!-- <div class="gz-list-td">with: {{data?.lastMessage?.from}} </div> -->
-            <div class="gz-list-td">members: {{data?.members[0]}} , {{data?.members[1]}} </div>
+            <div class="gz-list-td">{{this.i18ns.chat_with_members}}: {{data?.members[0]}} , {{data?.members[1]}} </div>
             <!-- <div class="gz-list-td">ad: {{data?.lastMessage?._lcattrs?.for}} </div> -->
-            <div class="gz-list-td">unreadCount: {{data?.unreadMessagesCount}} </div>
-            <div class="gz-list-td">last time: {{data?.lastMessageAt | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
+            <div class="gz-list-td">{{this.i18ns.unread_count}}: {{data?.unreadMessagesCount}} </div>
+            <div class="gz-list-td">{{this.i18ns.last_msg_time}}: {{data?.lastMessageAt | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
             
         </div>
         <div class="gz-list-tr-right">
           <div class="btn btn-outline-blue gz-circle" (click)="toOrderDetail(data?.lastMessage)">
-             detail
+              {{this.i18ns.goto_detail}}
           </div>
 
         </div>

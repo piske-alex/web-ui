@@ -4,6 +4,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { Router } from '@angular/router';
 
 const $ = (<any>window).$;
+declare let Swiper: any;
 
 @Component({
   selector: 'gz-home',
@@ -21,6 +22,8 @@ export class HomeComponent implements OnInit {
 
   payTypeObj: any = {};
 
+  mySwiper: any;
+
   constructor(private router: Router,
     private commonService: CommonService,
     private adService: AdService) {
@@ -29,7 +32,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
 
 
-    this._updateScroll('ad', 4, true);
+    //this._updateScroll('ad', 4, true);
 
     this._loadCoinRate();
     this._autoLoadData();
@@ -56,13 +59,35 @@ export class HomeComponent implements OnInit {
       console.error(e);
     }
 
-    this._updateScroll('homeotc', this.otcTransactions.length, false);
-    this.autoScroll('ad', 4);
+    //this._updateScroll('homeotc', this.otcTransactions.length, false);
+    //this.autoScroll('ad', 4);
+    //setTimeout(() => {
+    //  this.autoScroll('homeotc', this.otcTransactions.length);
+    //}, 800);
+
     setTimeout(() => {
-      this.autoScroll('homeotc', this.otcTransactions.length);
-    }, 800);
+      this.initSwiper();
+    }, 20);
 
+  }
 
+  initSwiper() {
+    this.mySwiper = new Swiper('.footcs', {
+      //slidesPerView: 'auto',
+      freeMode: true,
+      observer:true,//修改swiper自己或子元素时，自动初始化swiper
+      observeParents:true,//修改swiper的父元素时，自动初始化swiper
+      
+      //autoResize:true,
+      autoplay: true,
+      autoplayDisableOnInteraction:false,
+      speed: 3000,
+      //grabCursor: true,// 开启鼠标的抓手状态
+      loop: true,
+      pagination : '.footcsPagination',
+      paginationClickable :true,
+
+    });
   }
 
   private _loadCoinRate() {

@@ -23,12 +23,12 @@
   .gz-list-tr-left {
     display: flex;
     justify-content: left;
-    width:100%
+    width:90%
   }
 
   .gz-list-tr-detail {
     margin-left: 10px;
-    width:80%;
+    width:90%;
   }
 
   .gz-list-tr-right, .gz-list-tr-head, .gz-list-tr-detail {
@@ -61,6 +61,9 @@
   }
   .gz-list-cell_15{
     flex-basis:150px
+  }
+  .gz-list-cell_17{
+    flex-basis:170px
   }
   .gz-list-cell_20{
     flex-basis:200px

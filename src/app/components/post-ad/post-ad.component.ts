@@ -291,13 +291,11 @@ export class PostAdComponent implements OnInit {
       this._isSubmiting = false;
 
       return;
-    } else {
-      this.doPublish();
-
     }
   }
 
   async doPublish() {
+
 
     // this.ad.adType = this.adTypeCode;
     // this.ad.coinType = this.coinTypeCode;
@@ -342,6 +340,9 @@ export class PostAdComponent implements OnInit {
       console.error(e);
       this.dialogService.alert(e && e.errMsg || this.i18ns.publishError);
     }
+
+
+   
   }
 
   private _validateRemark(): string {

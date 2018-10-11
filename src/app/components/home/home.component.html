@@ -80,9 +80,9 @@
 
 
     <section class="gz-ad-slide gz-ad-slide-homeotc" *ngIf="otcTransactions.length > 0">
-      <ul class="gz-ad-slide-circle">
+      <!--<ul class="gz-ad-slide-circle swiper-pagination footcsPagination">
         <li class="" *ngFor="let otcAds of otcTransactions">
-      </ul>
+      </ul>-->
       <div class="gz-ad-slide-img">
         <div class="gz-list-title" routerLink="/otc">
           <div>
@@ -92,30 +92,35 @@
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </div>
         </div>
-        <ul class="gz-ad-slide-imgs" *ngIf="otcTransactions.length > 0">
-          <li *ngFor="let otcAds of otcTransactions">
-            <div class="{{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds">
-              <div>
-                <img src="{{otcAd.avatar | avatar}}">
-              </div>
-              <div>{{otcAd.currencyAmount}} {{otcAd.currency}}</div>
-              <div>
-                <div *ngIf="payTypeObj[otcAd.payType]">{{payTypeObj[otcAd.payType].name}}</div>
-              </div>
-              <div *ngIf="otcAd.adType">
-                <div class="btn btn-primary" (click)="toTransaction(otcAd.id)">
-                  <span *ngIf="otcAd.adType == 'buy'">
-                    <gz-i18n key="common.sale"></gz-i18n>
-                  </span>
-                  <span *ngIf="otcAd.adType == 'sell'">
-                    <gz-i18n key="common.buy"></gz-i18n>
-                  </span>
-                  <span>{{otcAd.coinType}}</span>
+
+        <div class="swiper-container footcs">
+          <ul class="gz-ad-slide-imgs swiper-wrapper" *ngIf="otcTransactions.length > 0">
+            <li class="swiper-slide" *ngFor="let otcAds of otcTransactions">
+              <div class="{{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds">
+                <div>
+                  <img src="{{otcAd.avatar | avatar}}">
+                </div>
+                <div>{{otcAd.currencyAmount}} {{otcAd.currency}}</div>
+                <div>
+                  <div *ngIf="payTypeObj[otcAd.payType]">{{payTypeObj[otcAd.payType].name}}</div>
+                </div>
+                <div *ngIf="otcAd.adType">
+                  <div class="btn btn-primary" (click)="toTransaction(otcAd.id)">
+                    <span *ngIf="otcAd.adType == 'buy'">
+                      <gz-i18n key="common.sale"></gz-i18n>
+                    </span>
+                    <span *ngIf="otcAd.adType == 'sell'">
+                      <gz-i18n key="common.buy"></gz-i18n>
+                    </span>
+                    <span>{{otcAd.coinType}}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+          <div class="swiper-pagination footcsPagination"></div>
+        </div>
+
       </div>
     </section>
   </article>

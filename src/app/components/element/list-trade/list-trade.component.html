@@ -4,16 +4,30 @@
       <img src="{{data.userHeadUrl | avatar}}" (click)="toUserDetail(data.userid)">
     </div>
     <div class="gz-list-tr-detail">
-      <div  class="gz-list-cell_10 float_left">{{data.username}}</div>
+      <div class="gz-list-cell_15" *ngIf="data.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} </div>
+      <div class="gz-list-cell_15" *ngIf="data.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} </div>
+      <div class="gz-list-cell_15" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} </div>
+      <div class="gz-list-cell_15" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} </div>
+
+      <!--<div  class="gz-list-cell_10 float_left">{{data.username}}</div>-->
       <div class="gz-list-cell_10 float_left"><span>{{i18ns.currency}}: </span><span>{{data.tradeCurrency}}</span></div>
       <div class="gz-list-cell_10 float_left"><span>{{i18ns.count}}: </span><span>{{data.transactionCount || ''}}</span></div>
       <div class="gz-list-cell_10 float_left"><span>{{i18ns.price}}: </span><span>{{data.price || ''}} {{data.currency || ''}}</span></div>
-      <div class="gz-list-cell_20 float_left"><span>{{i18ns.trade_time}}: </span><span>{{data.tradeTime | date: 'MM:dd:HH:mm:ss'}}</span></div>
-      <div class="gz-list-cell_20 float_left"><span>{{i18ns.collect_time}}: </span><span>{{data.collectTime | date: 'MM:dd:HH:mm:ss'}}</span></div>
+      <div class="gz-list-cell_17 float_left"><span>{{i18ns.trade_time}}: </span><span>{{data.paymentTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+      <div class="gz-list-cell_17 float_left"><span>{{i18ns.collect_time}}: </span><span>{{data.confirmTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+
     </div>
   </div>
   
   <div class="gz-list-tr-right">
+        <div class="btn btn-outline-blue gz-circle" (click)="toOrderDetail2(data)">
+          {{this.i18ns.order_detail}}
+        </div>
+        <!--<div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '1'" (click)="toOrderDetail1(data)">
+          {{this.i18ns.order_detail}}
+        </div>-->
+
+
     <!-- <div _ngcontent-c5="" class="btn btn-primary gz-circle">
       <gz-i18n _ngcontent-c5="" key="element_list_trans.edit" _nghost-c2="" ng-reflect-key="element_list_trans.edit">好评</gz-i18n>
     </div> -->

@@ -1,14 +1,13 @@
 <section class="gz-list-tr" *ngFor="let data of list">
   <div class="gz-list-tr-left">
-      <div class="gz-list-td-adtype" *ngIf="data.adType=='1'">{{this.i18ns.sale}}</div>
-      <div class="gz-list-td-adtype" *ngIf="data.adType=='2'">{{this.i18ns.buy}}</div>
-      <div class="gz-list-td-cointype ">{{data.transactionCoinType}}</div>
-    <div class="gz-list-tr-detail">
-        
-
-      <h3>
-        {{i18ns.bid}}: {{data.rate}} {{data.transactionCurrency}} 
-
+    <div class="gz-list-cell_20 float_left pt10">
+        <div class="gz-list-td-adtype float_left" *ngIf="data.adType=='1'">{{this.i18ns.sale}}</div>
+        <div class="gz-list-td-adtype float_left" *ngIf="data.adType=='2'">{{this.i18ns.buy}}</div>
+        <div class="gz-list-td-cointype float_left">{{data.transactionCoinType}}</div>
+    </div>
+    <div class="gz-list-cell_15 float_left pt10"><span class="sh3"> {{i18ns.bid}}: {{data.rate}} {{data.transactionCurrency}} </span></div>
+    <div class="gz-list-cell_20 float_left">
+      
         <img src="/assets/images/pay_ap.jpg" title="{{this.i18ns.ap_alipay}}" alt="{{this.i18ns.ap_alipay}}"  class="gz-icon" *ngIf="data.is_payment_ap"> 
           &nbsp;
           <img src="/assets/images/pay_wp.jpg" title="{{this.i18ns.wp_wechatpay}}" alt="{{this.i18ns.wp_wechatpay}}"  class="gz-icon" *ngIf="data.is_payment_wp"> 
@@ -18,9 +17,8 @@
           <img src="/assets/images/pay_bt.jpg" title="{{this.i18ns.bt_bank_transfer}}" alt="{{this.i18ns.bt_bank_transfer}}"  class="gz-icon" *ngIf="data.is_payment_bt">
           &nbsp;
         
-      </h3>
-      <div>{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
     </div>
+    <div class="gz-list-cell_30 float_left pt10">{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
   </div>
   <div class="gz-list-tr-right">
     <div class="btn btn-outline-blue gz-circle" *ngIf="data.adType == '2'" (click)="toTransaction(data)">

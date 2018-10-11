@@ -26,7 +26,7 @@ export class DialogService {
 }
 
 public confirm(contentOrConfig: any, title?: string): Observable<any> {
-    console.log('confirm---enter---111');
+    // console.log('confirm---enter---111');
     // 设置dialog的属性，宽度，高度，内容等。
     let config = new MatDialogConfig();
     config = {

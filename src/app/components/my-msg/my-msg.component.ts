@@ -35,6 +35,10 @@ export class MyMsgComponent implements OnInit {
     }
 
     this.i18ns.myMsg = await this.languageService.get('otc.myMsg');
+    this.i18ns.chat_with_members = await this.languageService.get('my_msg.chat_with_members');
+    this.i18ns.unread_count = await this.languageService.get('my_msg.unread_count');
+    this.i18ns.last_msg_time = await this.languageService.get('my_msg.last_msg_time');
+    this.i18ns.goto_detail = await this.languageService.get('my_msg.goto_detail');
 
     this.getUnReadCount();
   }

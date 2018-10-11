@@ -75,7 +75,7 @@ export class MyAdComponent implements OnInit {
       // this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
       this.list = _result.list;
-      console.log('myads', this.list);
+      // console.log('myads', this.list);
       // this.isLoading = false;
     } catch (e) {
       console.error(e);

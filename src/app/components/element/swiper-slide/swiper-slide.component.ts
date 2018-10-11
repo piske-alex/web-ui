@@ -46,7 +46,7 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
   }
 
   initSwiper() {
-    this.mySwiper = new Swiper('.swiper-container', {
+    this.mySwiper = new Swiper('.adSwiperHeader', {
       //slidesPerView: 'auto',
       freeMode: true,
       observer:true,//修改swiper自己或子元素时，自动初始化swiper
@@ -57,12 +57,10 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
       speed: 3000,
       //grabCursor: true,// 开启鼠标的抓手状态
       loop: true,
-      pagination : '.swiper-pagination',
+      pagination : '.adSwiperHeaderPagination',
       paginationClickable :true,
 
     });
-    this.mySwiper.startAutoplay();
-    console.log('aa')
   }
 
 }

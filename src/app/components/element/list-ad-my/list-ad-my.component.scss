@@ -44,4 +44,38 @@
     color: $sub_font_color;
 
   }
+
+  .gz-list-tr-detail {
+    align-items: left;
+    color: $sub_font_color;
+  }
+}
+
+
+.gz-list-cell_10{
+  flex-basis:100px
+}
+.gz-list-cell_15{
+  flex-basis:150px
+}
+.gz-list-cell_20{
+  flex-basis:200px
+}
+.gz-list-cell_25{
+  flex-basis:250px
+}
+.gz-list-cell_30{
+  flex-basis:300px
+}
+.float_left{
+  float: left;
+}
+
+.pt10{
+  padding-top:10px;
+}
+
+.sh3{
+  font-weight:600;
+  font-size: small;
 }

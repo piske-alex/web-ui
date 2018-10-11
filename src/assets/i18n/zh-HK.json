@@ -132,7 +132,26 @@
   },
   "my_ad": {
     "processing": "進行中",
-    "obtained": "已下架"
+    "obtained": "已下架",
+    "ad_info": "广告信息",
+    "goto_order": "交易信息",
+    "ad_coin_type": "币种",
+    "has_no_order": "没有交易信息",
+    "order_id": "id",
+    "order_status": "状态",
+    "order_status_unfinish": "unfinish 未完成",
+    "order_status_finish": "finish 已完成",
+    "order_status_canceled": "canceled 已取消",
+    "order_status_dispute": "dispute 标记争议",
+    "order_status_buypay_status_0": "买家未付款",
+    "order_status_buypay_status_1": "买家已付款",
+    "order_status_sellconfirm_status_0": "卖家未确认收款",
+    "order_status_sellconfirm_status_1": "卖家已确认收款",
+    "order_user_id": "交易对方",
+    "order_amount": "金额",
+    "order_create_time": "创建时间",
+    "order_detail": "详情",
+    "ad_orders_title": "交易清單"
   },
   "select": {
     "adType": "請選擇廣告類型",
@@ -238,6 +257,12 @@
     "myMsg":"我的消息",
     "myTradeTitle":"我的交易"
   },
+  "my_msg": {
+    "chat_with_members": "对话框成员",
+    "unread_count": "未读数量",
+    "last_msg_time": "最近会话时间",
+    "goto_detail": "进入对话"
+  },
   "my_trade": {
     "myBuy": "我的买单",
     "mySell": "我的卖单"
@@ -330,6 +355,7 @@
     "password_valid_warn_1": "請輸入最少8位密碼，其中(一個數字，一個小寫英文字母，一個大寫英文字母)!",
     "password_valid_warn_2": "密碼至少包含一個數字，一個小寫英文字母，一個大寫英文字母!",
     "serv_items":"<p></p><p></p>",
+    "phone_number_used": "電話號碼已被注册",
     "next_step":"下一步"
   },
   "trust": {
