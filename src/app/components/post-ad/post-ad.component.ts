@@ -157,6 +157,7 @@ export class PostAdComponent implements OnInit {
   }
 
   checkPrice() {
+
     const _rate = this.ad.price / this.coinRate;
     if (_rate < 0.9) {
       this.dialogService.confirm({ content: this.i18ns.priceWarn_1 }).subscribe(res => {
@@ -287,11 +288,17 @@ export class PostAdComponent implements OnInit {
 
     if (!this.checkPrice()) {
       this.ad.price = null;
+      this._isSubmiting = false;
+
       return;
+    } else {
+      this.doPublish();
+
     }
   }
 
   async doPublish() {
+
     // this.ad.adType = this.adTypeCode;
     // this.ad.coinType = this.coinTypeCode;
     // this.ad.country = this.countryCode;
