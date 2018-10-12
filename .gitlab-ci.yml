@@ -36,8 +36,8 @@ docker:
   cache: {}
   script:
     - docker login -u ${DEV_REGISTRY_USER} -p ${DEV_REGISTRY_PASS} ${DEV_REGISTRY_URL}
-    - docker build -t ${DEV_REGISTRY_URL}/kcb-web-ui .
-    - docker push ${DEV_REGISTRY_URL}/kcb-web-ui
+    - docker build -t ${DEV_REGISTRY_URL}/${DEV_IMAGE} .
+    - docker push ${DEV_REGISTRY_URL}/${DEV_IMAGE}
 
 app-deploy:
   stage: deploy
@@ -45,4 +45,4 @@ app-deploy:
   cache: {}
   dependencies: []
   script:
-    - upgrade --stack kcb --service kcb-web-ui
+    - upgrade --stack ${DEV_STACK} --service ${DEV_SERVICE}
