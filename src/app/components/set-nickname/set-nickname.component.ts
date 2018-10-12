@@ -5,6 +5,7 @@ import { LanguageService } from '../../providers/language/language.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../../providers/dialog/dialog.service';
 
+
 @Component({
   selector: 'gz-set-nickname',
   templateUrl: './set-nickname.component.html',
@@ -28,6 +29,12 @@ export class SetNicknameComponent implements OnInit {
   }
 
   async ngOnInit() {
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.userId = this.route.snapshot.paramMap.get('userId');
     this.i18ns.input_nickname = await this.languageService.get('user.input_nickname');
   }
@@ -51,7 +58,7 @@ export class SetNicknameComponent implements OnInit {
   }
 
   async submit() {
-    if (!this.nickname) {
+    if (!this.nickname || this.nickname.trim() == '') {
       return this.dialogService.alert(this.i18ns.input_nickname);
     }
 

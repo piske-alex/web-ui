@@ -203,7 +203,7 @@ export class ChatService {
 
       return new Promise((resolve, reject) => {
         // console.log('currentLoginUserId11', this.currentLoginUserId);
-
+        
          this.chat.getQuery()
         .containsMembers([String(this.currentLoginUserId)])
         .limit(50)
@@ -227,6 +227,38 @@ export class ChatService {
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
+
+          chat.on(AV.Event.MESSAGE, (message, conversation) => {
+            // console.log('------------------message: ', message);
+            const _from = message.from;
+            const _adId = message.getAttributes().for;
+            const _adUserId = message.getAttributes().adUserId;
+            const _anotherUserId = message.getAttributes().anotherUserId;
+            const _avatar = message.getAttributes().avatar;
+            const _sendTimestamp = message.getAttributes().sendTimestamp;
+            const _text = message.text;
+
+            let chat_union_ids = '';
+            if (Number(_adUserId) > Number(_anotherUserId)) {
+              chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
+            } else {
+              chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
+            }
+
+            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+            this.conservationObj[chat_union_ids].conversation = conversation;
+            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+            this.conservationObj[chat_union_ids].chatList.push({
+              from: _from,
+              content: _text,
+              avatar: _avatar,
+              sendTimestamp: _sendTimestamp,
+              isMe: _from == this.user.id,
+            });
+            if (this.receive) {
+              this.receive();
+            }
+          });
 
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])

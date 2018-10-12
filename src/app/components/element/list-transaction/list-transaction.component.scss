@@ -32,8 +32,8 @@
   .gz-list-tr-right, .gz-list-tr-head, .gz-list-tr-detail {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
     padding: 10px 0;
 
     .btn {
@@ -55,19 +55,19 @@
   }
 
   .gz-list-cell_10{
-    flex-basis:100px
+    flex-basis:10%
   }
   .gz-list-cell_15{
-    flex-basis:150px
+    flex-basis:15%
   }
   .gz-list-cell_20{
-    flex-basis:200px
+    flex-basis:20%
   }
   .gz-list-cell_25{
-    flex-basis:250px
+    flex-basis:25%
   }
   .gz-list-cell_30{
-    flex-basis:300px
+    flex-basis:30%
   }
 }
 

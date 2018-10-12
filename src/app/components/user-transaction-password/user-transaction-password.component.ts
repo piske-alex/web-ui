@@ -4,6 +4,7 @@ import { UserService } from '../../providers/user/user.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { CommonService } from '../../providers/common/common.service';
 import { Router } from '@angular/router';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-user-transaction-password',
@@ -28,7 +29,8 @@ export class UserTransactionPasswordComponent implements OnInit {
               private commonService: CommonService,
               private languageService: LanguageService,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -97,14 +99,35 @@ export class UserTransactionPasswordComponent implements OnInit {
   }
 
   async submit() {
+    if (!this.phoneNo) {
+      return this.dialogService.alert(this.i18ns.inputPhone);
+    }
+
+    if (!(/^[\d]{6,15}$/g.test(this.phoneNo))) {
+      return this.dialogService.alert(this.i18ns.inputValidPhone);
+    }
+
+    if (!this.smsCode) {
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
+    }
+
+    if (!this.password) {
+      return this.dialogService.alert(this.i18ns.input_trans_password);
+    }
     try {
-      let _result = await this.userService.setTransactionPassword({
+       this.userService.setTransactionPassword({
         verifyCode: this.smsCode,
         password: this.password
-      });
-      this.goBack();
+      }).then( async (data) => {
+        this.goBack();
+        }, errorRes => {
+          console.log('ssss', errorRes);
+          this.dialogService.alert(errorRes.error.errmsg);
+        }
+      );
     } catch (e) {
-      console.error(e);
+
+      return this.dialogService.alert(e.error);
     }
 
     // // TODO delete

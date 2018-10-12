@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="gz-list-tr-right"  *ngIf='data.userId != userId'>
-    <div class="gz-currency-large">{{data.rate}} {{data.transactionCurrency}}</div>
+    <div class="gz-currency-large gz-list-cell_30">{{data.rate}} {{data.transactionCurrency}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransactionB(data)" *ngIf="data.userId != userId && adType == '1'"><gz-i18n key="element_list_trans.sell_btc"></gz-i18n>{{data.transactionCoinType}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '2'"><gz-i18n key="element_list_trans.buy_btc"></gz-i18n>{{data.transactionCoinType}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId == userId"><gz-i18n key="element_list_trans.edit"></gz-i18n></div>

@@ -54,16 +54,41 @@
   </section>
 
   <section class="gz-full-img">
+    <div class="inputFileWrapper">
+      <label for="">
+        <input type="file" #frontImgFile (change)="imgChange($event, frontImg)">
+          <span class="custorm-style">
+              <span class="left-button" (click)="selectImg(frontImgFile)">{{this.i18ns.card_front}}</span>
+              <span class="right-text"  (click)="selectImg(frontImgFile)">{{frontImg.name}}</span>
+          </span>
+      </label>
+    </div>
     <img alt="{{this.i18ns.card_front}}" [src]="frontImg.src || '/assets/images/id_front.jpg'" (click)="selectImg(frontImgFile)">
-    <input type="file" #frontImgFile (change)="imgChange($event, frontImg)">
+  </section>
+
+  <section class="gz-full-img">
+      <div class="inputFileWrapper">
+          <label for="">
+              <input type="file" #backImgFile (change)="imgChange($event, backImg)">
+              <span class="custorm-style">
+                  <span class="left-button" (click)="selectImg(backImgFile)">{{this.i18ns.card_back}}</span>
+                  <span class="right-text"  (click)="selectImg(backImgFile)">{{backImg.name}}</span>
+              </span>
+          </label>
+        </div>
+        <img alt="{{this.i18ns.card_back}}" [src]="backImg.src || '/assets/images/id_back.jpg'" (click)="selectImg(backImgFile)">
   </section>
   <section class="gz-full-img">
-    <img alt="{{this.i18ns.card_back}}" [src]="backImg.src || '/assets/images/id_back.jpg'" (click)="selectImg(backImgFile)">
-    <input type="file" #backImgFile (change)="imgChange($event, backImg)">
-  </section>
-  <section class="gz-full-img">
-    <img alt="{{this.i18ns.bust}}" [src]="halfImg.src || '/assets/images/body_half.jpg'" (click)="selectImg(halfImgFile)">
-    <input type="file" #halfImgFile (change)="imgChange($event, halfImg)">
+      <div class="inputFileWrapper">
+          <label for="">
+              <input type="file" #halfImgFile (change)="imgChange($event, halfImg)">
+              <span class="custorm-style">
+                  <span class="left-button" (click)="selectImg(halfImgFile)">{{this.i18ns.bust}}</span>
+                  <span class="right-text"  (click)="selectImg(halfImgFile)">{{halfImg.name}}</span>
+              </span>
+          </label>
+        </div>
+      <img alt="{{this.i18ns.bust}}" [src]="halfImg.src || '/assets/images/body_half.jpg'" (click)="selectImg(halfImgFile)">
   </section>
 
   <section class="gz-agree">

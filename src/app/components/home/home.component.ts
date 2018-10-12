@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
 
     try {
       this.otcTransactions = await this.adService.otcTrending({});
+      // console.log('otcTransactions', this.otcTransactions);
       (this.otcTransactions || []).forEach(_data => {
         _data = _data || [];
         const _len = _data.length;
@@ -81,7 +82,7 @@ export class HomeComponent implements OnInit {
       //autoResize:true,
       autoplay: true,
       autoplayDisableOnInteraction:false,
-      speed: 3000,
+      speed: 10000,
       //grabCursor: true,// 开启鼠标的抓手状态
       loop: true,
       pagination : '.footcsPagination',

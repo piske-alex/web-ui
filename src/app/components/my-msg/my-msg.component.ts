@@ -5,6 +5,7 @@ import { LanguageService } from '../../providers/language/language.service';
 import { ChatService } from '../../providers/chat/chat.service';
 import { DialogService } from '../../providers/dialog/dialog.service';
 import { AdService } from '../../providers/ad/ad.service';
+import { concat } from 'rxjs';
 
 
 @Component({
@@ -49,7 +50,37 @@ export class MyMsgComponent implements OnInit {
 
   async getUnReadCount() {
     await this.chatService.loginAndGetChatDialogList().then((data) => {
-      this.chatDlgList = data;
+      let list1: Array<any> = new Array();
+      let list2: Array<any> = new Array();
+      for (const item of data) {
+        if (item.unreadMessagesCount == 0 ) {
+          list2.push(item);
+        } else {
+          list1.push(item);
+        }
+      }
+
+      list1 = list1.sort((obj1, obj2) => {
+        if (obj1.lastMessageAt > obj2.lastMessageAt) {
+            return -1;
+        }
+        if (obj1.lastMessageAt < obj2.lastMessageAt) {
+            return 1;
+        }
+        return 0;
+      });
+
+      list2 = list2.sort((obj1, obj2) => {
+        if (obj1.lastMessageAt > obj2.lastMessageAt) {
+            return -1;
+        }
+        if (obj1.lastMessageAt < obj2.lastMessageAt) {
+            return 1;
+        }
+        return 0;
+      });
+
+      this.chatDlgList = list1.concat(list2);
     });
   }
 

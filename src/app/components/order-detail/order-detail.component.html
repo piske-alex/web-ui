@@ -19,15 +19,15 @@
       {{delayDesc}}
     </h3>
 
-    <p>
+    <p *ngIf="!this.isStop">
       <gz-i18n key="otc.orderDelay15Min"></gz-i18n>
     </p>
   </section>
 
-  <div class="gz-list-td" *ngIf="this.order?.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} </div>
-  <div class="gz-list-td" *ngIf="this.order?.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} </div>
-  <div class="gz-list-td" *ngIf="this.order?.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} </div>
-  <div class="gz-list-td" *ngIf="this.order?.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} </div>
+  <div class="gz-list-td" *ngIf="this.order?.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} {{this.payStatus}}</div>
+  <div class="gz-list-td" *ngIf="this.order?.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} {{this.payStatus}}</div>
+  <div class="gz-list-td" *ngIf="this.order?.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} {{this.payStatus}}</div>
+  <div class="gz-list-td" *ngIf="this.order?.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} {{this.payStatus}}</div>
 
 
   <section class="gz-row gz-row-1" *ngIf="this.isAdOwner">

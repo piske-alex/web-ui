@@ -2,7 +2,8 @@
 
 .gz-transaction {
   padding: 0;
-
+  padding-bottom: 50px;
+  
   section {
     padding: 10px;
   }
@@ -48,6 +49,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #212831;
 
   .gz-concat {
     padding-left: 20px;

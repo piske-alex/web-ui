@@ -255,6 +255,7 @@
     "markDispute":"標記爭議",
     "confirm_markDispute":"確認標記爭議?",
     "myMsg":"我的消息",
+    "not_trans_as_ad_hidden": "廣告已下架，不支持交易。",
     "myTradeTitle":"我的交易"
   },
   "my_msg": {

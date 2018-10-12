@@ -23,6 +23,8 @@ export class OrderDetailComponent implements OnInit {
   anotherUserId: string;
   isAdOwner: boolean;
   timeout: boolean;
+  isStop: boolean;
+  payStatus: string;
 
   isShowCancel: boolean;
   isShowBuyPay: boolean;
@@ -47,6 +49,7 @@ export class OrderDetailComponent implements OnInit {
     this.adUserId = this.route.snapshot.paramMap.get('adUserId');
     this.anotherUserId = this.route.snapshot.paramMap.get('anotherUserId');
     const currentLoginUserId = localStorage.getItem('user_id');
+    this.isStop = false;
 
     if (currentLoginUserId === this.adUserId) {
       this.isAdOwner = true;
@@ -70,6 +73,7 @@ export class OrderDetailComponent implements OnInit {
       console.log('this.order', this.order);
       if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
         if (this.order.payment_status == '1') { // had paid
+          this.stopInterval();
           if (this.isAdOwner) { // sell
             this.isShowCancel = false;
             this.isShowBuyPay = false;
@@ -126,6 +130,10 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
 
+    let noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
+    let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
+    this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
+
     this.timeout = true;
 
     let createTime: Date = new Date(this.order.create_time * 1000);
@@ -174,6 +182,7 @@ export class OrderDetailComponent implements OnInit {
  }
 
   stopInterval(){
+    this.isStop = true;
     this.delayDesc = "";
     if(this._ordertimer != null){
       window.clearInterval(this._ordertimer);
@@ -186,6 +195,9 @@ export class OrderDetailComponent implements OnInit {
     if (data2 < date1) {
       return; // 设置的时间小于现在时间退出
     }
+    if(this.isStop == true)
+      return;
+
     this._ordertimer = setInterval(() => {this.leftTimer(data2)} , 1000);
   }
 
@@ -215,6 +227,7 @@ export class OrderDetailComponent implements OnInit {
           this.isShowBuyPay = false;
           this.isShowCancel = false;
           this.stopInterval();
+          this.payStatus = await this.languageService.get('my_ad.order_status_buypay_status_1') ;
         }, err => {
           this.dialogService.alert(err.error);
         });

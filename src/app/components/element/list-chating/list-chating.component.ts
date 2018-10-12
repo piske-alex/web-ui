@@ -79,6 +79,12 @@ export class ListChatingComponent implements OnInit {
   }
 
   private _updateScroll() {
+    document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
+      // document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
+
+      setTimeout(() => {
+        document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
+      }, 1000);
     //  document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
     //  setTimeout(() => {
     //    document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;

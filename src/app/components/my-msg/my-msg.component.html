@@ -17,7 +17,9 @@
             <!-- <div class="gz-list-td">with: {{data?.lastMessage?.from}} </div> -->
             <div class="gz-list-td">{{this.i18ns.chat_with_members}}: {{data?.members[0]}} , {{data?.members[1]}} </div>
             <!-- <div class="gz-list-td">ad: {{data?.lastMessage?._lcattrs?.for}} </div> -->
-            <div class="gz-list-td">{{this.i18ns.unread_count}}: {{data?.unreadMessagesCount}} </div>
+            <div class="gz-list-td">{{this.i18ns.unread_count}}: {{data?.unreadMessagesCount}}
+              <img alt='' src="/assets/images/unread.png" *ngIf="data?.unreadMessagesCount != 0">
+            </div>
             <div class="gz-list-td">{{this.i18ns.last_msg_time}}: {{data?.lastMessageAt | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
             
         </div>

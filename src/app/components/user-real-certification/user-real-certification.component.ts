@@ -156,6 +156,9 @@ export class UserRealCertificationComponent implements OnInit {
         imgObj.src = _result.b64img;
         let _fileInfo = _result.fileInfo;
         imgObj.name = _fileInfo.name;
+
+        
+
       } catch (e) {
         console.error(e);
       }
