@@ -73,26 +73,6 @@ export class UserComponent implements OnInit {
     } catch (e) {
       console.error(e);
     }
-
-    // // TODO delete
-    // this.dealWithMeList = [
-    //   {
-    //     adId: 'adId',
-    //     adType: 'adType',
-    //     adUserId: 'adUserId',
-    //     adUsername: 'adUsername',
-    //     adAmount: '50000',
-    //     adCurrency: 'HKY',
-    //     adCoinType: '',
-    //     dealUserId: 'dealUserId',
-    //     dealUsername: 'dealUsername',
-    //     dealAmount: '100',
-    //     dealCurrency: '',
-    //     dealCoinType: 'BTC',
-    //
-    //   }
-    // ];
-    // // TODO delete end.
   }
 
   selectPublish() {

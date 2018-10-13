@@ -71,10 +71,10 @@ export class UserRealCertificationComponent implements OnInit {
   }
 
   async submit() {
-    if (!this.realName) {
+    if (!this.realName || this.realName.trim() == '') {
       return this.dialogService.alert(this.i18ns.input_name);
     }
-    if (!this.realCardNo) {
+    if (!this.realCardNo || this.realCardNo.trim() == '') {
       return this.dialogService.alert(this.i18ns.input_cardno);
     }
     if (!this.frontImg.name) {
@@ -103,10 +103,10 @@ export class UserRealCertificationComponent implements OnInit {
       halfPhoto: this._toUploadB64(this.halfImg.src),
     };
 
-    console.log('real-cert para',_params);
+    console.log('real-cert para', _params);
 
     try {
-      let _result = await this.userService.realCertifiation(_params);
+      this.userService.realCertifiation(_params);
       this.goBack();
     } catch (e) {
       console.error(e);
@@ -156,9 +156,6 @@ export class UserRealCertificationComponent implements OnInit {
         imgObj.src = _result.b64img;
         let _fileInfo = _result.fileInfo;
         imgObj.name = _fileInfo.name;
-
-        
-
       } catch (e) {
         console.error(e);
       }

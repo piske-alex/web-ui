@@ -357,7 +357,7 @@
     "password_valid_warn_1": "请输入最少8位密码，其中(一个数字，一个小写英文字母，一个大写英文字母)!",
     "password_valid_warn_2": "密码至少包含一个数字，一个小写英文字母，一个大写英文字母!",
     "serv_items":"<p>温馨提示</p><p>欢迎你阅读本条款, 具体内容是...</p>",
-    "phone_number_used": "电话号码已被注册",
+    "phone_number_used": "手机号已被注册",
     "next_step":"下一步"
   },
   "transaction": {

@@ -71,10 +71,11 @@ export class OrderDetailBComponent implements OnInit {
 
     try {
       this.order = await this.adService.getOrder({orderid: this.orderId});
-      console.log('this.order', this.order);
+      // console.log('this.order', this.order);
       if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
         if (this.order.payment_status == '1') { // had paid
           this.stopInterval();
+          this.isStop = true;
           if (!this.isAdOwner) { // sell
             this.isShowCancel = false;
             this.isShowBuyPay = false;
@@ -110,6 +111,7 @@ export class OrderDetailBComponent implements OnInit {
         this.isShowSellDispute = false;
         this.isShowSellConfirm = false;
         this.stopInterval();
+        this.isStop = true;
       }
     } catch (e) {
       console.error(e);

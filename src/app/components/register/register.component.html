@@ -28,7 +28,7 @@
     <div class="gz-label {{isFocus('phoneNo')}}"><gz-i18n key="user.inputPhone"></gz-i18n></div>
     <div>
       <input type="text" class="{{isFocus('phoneNo')}}" 
-             [(ngModel)]="phoneNo"
+             [(ngModel)]="phoneNo" maxlength="15"
              (focus)="focus('phoneNo')" (blur)="blur('phoneNo')"
              placeholder="{{this.i18ns.inputPhone}}" >
     </div>
@@ -37,7 +37,7 @@
     <div class="gz-label {{isFocus('smsCode')}}"><gz-i18n key="user.inputSmsCode"></gz-i18n></div>
     <div style="position: relative;">
       <input type="text" class="{{isFocus('smsCode')}}" 
-             [(ngModel)]="smsCode"
+             [(ngModel)]="smsCode" maxlength="6"
              (focus)="focus('smsCode')" (blur)="blur('smsCode')"
              placeholder="{{this.i18ns.inputSmsCode}}"
              >
@@ -49,10 +49,10 @@
     <div class="gz-label {{isFocus('password')}}"><gz-i18n key="user.inputPassword"></gz-i18n></div>
     <div class="gz-password">
       <input type="password" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}"
-             [(ngModel)]="password" *ngIf="!isShowPassword"
+             [(ngModel)]="password" *ngIf="!isShowPassword" maxlength="40"
              (focus)="focus('password')" (blur)="blur('password')">
       <input type="text" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}"
-             [(ngModel)]="password" *ngIf="isShowPassword"
+             [(ngModel)]="password" *ngIf="isShowPassword" maxlength="40"
              (focus)="focus('password')" (blur)="blur('password')">
       <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
       <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>

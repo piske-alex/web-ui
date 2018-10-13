@@ -16,8 +16,8 @@ export class TransactionBComponent implements OnInit {
   data: TransactionListItem = new TransactionListItem();
 
   i18ns: any = {};
-  payAmount: number;
-  receiveAmount: number;
+  payAmount: any;
+  receiveAmount: any;
   isShowConfirm: boolean;
 
   userId: string;
@@ -272,5 +272,17 @@ export class TransactionBComponent implements OnInit {
     //  tmpVal = parseFloat(tmpVal);
     return tmpVal;
 }
+
+
+onblur_pay() {
+  this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
+  this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+}
+
+onblur_receive() {
+  this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
+  this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+}
+
 
 }

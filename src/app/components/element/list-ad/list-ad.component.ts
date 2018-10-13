@@ -19,7 +19,7 @@ export class ListAdComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log('list-ads ', this.list);
+    // console.log('list-ads ', this.list);
     this.i18ns.bid = await this.languageService.get('common.bid');
     this.i18ns.limitAmount = await this.languageService.get('common.limitAmount');
     this.i18ns.buy = await this.languageService.get('common.buy');
@@ -32,7 +32,7 @@ export class ListAdComponent implements OnInit {
   }
 
   toTransaction(data: TransactionListItem) {
-    this.router.navigate(['/transaction', {adId: data.adId || ''}])
+    this.router.navigate(['/transaction', {adId: data.adId || ''}]);
   }
 
 }

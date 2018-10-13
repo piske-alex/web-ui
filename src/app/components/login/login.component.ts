@@ -51,8 +51,6 @@ export class LoginComponent implements OnInit {
     this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
     this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
 
-    this.i18ns.btcCount = 12345678.001;
-
     const _accessToken = localStorage.getItem('access_token');
     const _loginTimestamp = localStorage.getItem('login_timestamp');
     if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
@@ -149,7 +147,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('user_id', _user.id);
               localStorage.setItem('user', JSON.stringify(_user));
               if (!_user.username) {
-                this.router.navigate(['setNickName', { userId: _user.id }]);
+                this.router.navigate(['setNickName', { userId: _user.id || '' }]);
               }
               this.router.navigate(['/my', { userId: _user.id }]);
             } else {
@@ -160,6 +158,8 @@ export class LoginComponent implements OnInit {
             console.error('---------------------error_getuserdetail: ', error_getuserdetail);
             if (error_getuserdetail.status === 403 && error_getuserdetail.error.userGroup === 'guest') {
               this.router.navigate(['setNickName', { userId: '' }]);
+            } else if (error_getuserdetail.message == 'Unauthorized' ) {
+              this.router.navigate(['setNickName', { }]);
             } else {
               this.dialogService.alert(error_getuserdetail.message);
             }
@@ -173,14 +173,15 @@ export class LoginComponent implements OnInit {
       console.error('---------------------error: ', error);
       this.password = '';
       if (error.error.success === false && error.error.errmsg !== undefined) {
-        if (error.error.errmsg === 'Invalid verification code') {
+        if (error.error.errmsg == 'Invalid verification code') {
           this.dialogService.alert(this.i18ns.invalid_verification_code);
         } else {
           this.dialogService.alert(error.error.errmsg);
         }
       } else {
         this.resendSmsCodeDelay = 1;
-        this.dialogService.alert(this.i18ns.err_phone_or_password);
+        console.log ('error', error.error );
+        this.dialogService.alert(error.error); // this.i18ns.err_phone_or_password
       }
       this.isLoading = false;
     });

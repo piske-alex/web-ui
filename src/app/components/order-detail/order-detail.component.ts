@@ -74,6 +74,7 @@ export class OrderDetailComponent implements OnInit {
       if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
         if (this.order.payment_status == '1') { // had paid
           this.stopInterval();
+          this.isStop = true;
           if (this.isAdOwner) { // sell
             this.isShowCancel = false;
             this.isShowBuyPay = false;
@@ -109,6 +110,7 @@ export class OrderDetailComponent implements OnInit {
         this.isShowSellDispute = false;
         this.isShowSellConfirm = false;
         this.stopInterval();
+        this.isStop = true;
       }
 
     } catch (e) {

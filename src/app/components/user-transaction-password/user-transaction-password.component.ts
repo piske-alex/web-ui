@@ -55,6 +55,7 @@ export class UserTransactionPasswordComponent implements OnInit {
     this.i18ns.err_phone_or_password = await this.languageService.get('user.err_phone_or_password');
     this.i18ns.err_gettoken_fail = await this.languageService.get('user.err_gettoken_fail');
     this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
+    this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
   }
 
   goBack() {
@@ -120,9 +121,21 @@ export class UserTransactionPasswordComponent implements OnInit {
         password: this.password
       }).then( async (data) => {
         this.goBack();
-        }, errorRes => {
-          console.log('ssss', errorRes);
-          this.dialogService.alert(errorRes.error.errmsg);
+        }, e => {
+          console.log('ssss', e);
+          console.log('ssss', e.error);
+          const errRes = e.error;
+          console.log('errRes.error.name', errRes.error.name);
+          if (errRes.success == false && errRes.error.name != undefined) {
+            if (errRes.error.name == 'VerifyCodeError') {
+              this.dialogService.alert(this.i18ns.invalid_verification_code);
+            } else {
+              this.dialogService.alert(errRes.error.message);
+            }
+          } else {
+            this.resendSmsCodeDelay = 1;
+            this.dialogService.alert(this.i18ns.err_phone_or_password);
+          }
         }
       );
     } catch (e) {

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { UserService } from "../../../providers/user/user.service";
-import { LanguageService } from "../../../providers/language/language.service";
+import { Router } from '@angular/router';
+import { UserService } from '../../../providers/user/user.service';
+import { LanguageService } from '../../../providers/language/language.service';
+import { DialogService } from '../../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-user-detail',
@@ -39,7 +40,8 @@ export class UserDetailComponent implements OnInit {
 
   constructor(private router: Router,
               private languageService: LanguageService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -82,6 +84,7 @@ export class UserDetailComponent implements OnInit {
       this.data.is_in_my_black_list = true;
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
   }
 
@@ -91,6 +94,7 @@ export class UserDetailComponent implements OnInit {
       this.data.is_in_my_trust_list = true;
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
   }
 
@@ -100,6 +104,7 @@ export class UserDetailComponent implements OnInit {
       this.data.is_in_my_black_list = false;
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
   }
 
@@ -109,6 +114,7 @@ export class UserDetailComponent implements OnInit {
       this.data.is_in_my_trust_list = false;
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
   }
 }

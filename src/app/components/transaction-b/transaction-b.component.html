@@ -47,13 +47,13 @@
       <span *ngIf="data.adType == '1'">{{data.transactionCurrency}}</span>
 
       <input type="text" [(ngModel)]="payAmount"
-      #payAmountVars
+      #payAmountVars (blur)="onblur_pay()"
       (keyup)="onKeyPress_Pay(payAmountVars.value)" [placeholder]="getLeftPlacehold()">
       <fa-icon [icon]="['fas', 'exchange-alt']"></fa-icon>
       <span *ngIf="data.adType == '2'">{{data.transactionCurrency}}</span>
       <span *ngIf="data.adType == '1'">{{data.transactionCoinType}}</span>
       <input type="text" [(ngModel)]="receiveAmount"
-      #receiveAmountVars
+      #receiveAmountVars (blur)="onblur_receive()"
        (keyup)="onKeyPress_Recevice(receiveAmountVars.value)" [placeholder]="getRightPlacehold()">
     </div>
   </section>
@@ -68,7 +68,7 @@
 </article>
 
 <footer>
-  <div class="gz-concat" (click)="goToChat()">
+  <div class="gz-concat" (click)="goToChat()" *ngIf='data.userId != userId'>
     <fa-icon [icon]="['fas', 'comment-dots']"></fa-icon>
     {{i18ns.contact}}
   </div>

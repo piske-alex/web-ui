@@ -4,6 +4,7 @@ import { User } from '../../models/user/user';
 import { LanguageService } from '../../providers/language/language.service';
 import { UserService } from '../../providers/user/user.service';
 import { Router } from '@angular/router';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-trust-list',
@@ -21,7 +22,8 @@ export class TrustListComponent implements OnInit {
   constructor(private location: Location,
     private router: Router,
     private languageService: LanguageService,
-    private userService: UserService) {
+    private userService: UserService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -71,9 +73,10 @@ export class TrustListComponent implements OnInit {
   private async getUserList() {
     try {
       this.list = await this.userService.getUserList({ relationship: this.relationShip });
-      console.log('getUserList', this.list);
+      // console.log('getUserList', this.list);
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
 
   }
@@ -86,6 +89,7 @@ export class TrustListComponent implements OnInit {
       this.getUserList();
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
   }
 
@@ -95,6 +99,7 @@ export class TrustListComponent implements OnInit {
       this.getUserList();
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
   }
 

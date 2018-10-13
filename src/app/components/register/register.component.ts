@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit {
     this.i18ns.confirm = await this.languageService.get('common.confirm');
     // this.serv_items = await this.languageService.get('register.serv_items');
     this.i18ns.phone_number_used = await this.languageService.get('register.phone_number_used');
+    this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
 
     this.language = this.getLanguageDefault();
     this.serv_items_simp = this._simplifiedChinese();
@@ -169,7 +170,9 @@ export class RegisterComponent implements OnInit {
       if (e.error.success === false && e.error.errmsg !== undefined) {
         if (e.error.errmsg == 'phone number have been used') {
           this.dialogService.alert(this.i18ns.phone_number_used);
-        } else {
+        } else if (e.error.errmsg == 'Invalid verification code') {
+          this.dialogService.alert(this.i18ns.invalid_verification_code);
+        }  else {
           this.dialogService.alert(e.error.errmsg);
         }
       }

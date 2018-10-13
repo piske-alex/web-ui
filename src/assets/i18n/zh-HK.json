@@ -356,7 +356,7 @@
     "password_valid_warn_1": "請輸入最少8位密碼，其中(一個數字，一個小寫英文字母，一個大寫英文字母)!",
     "password_valid_warn_2": "密碼至少包含一個數字，一個小寫英文字母，一個大寫英文字母!",
     "serv_items":"<p></p><p></p>",
-    "phone_number_used": "電話號碼已被注册",
+    "phone_number_used": "手機號已被注册",
     "next_step":"下一步"
   },
   "trust": {

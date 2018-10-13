@@ -63,10 +63,12 @@ export class SetNicknameComponent implements OnInit {
     }
 
     try {
-      await this.userService.setNickname({username: this.nickname});
-      this.router.navigate(['/my', {userId: this.userId}]);
+      this.userService.setNickname({username: this.nickname}).then( (data) => {
+        this.router.navigate(['/my', {userId: this.userId}]);
+      });
     } catch (e) {
       console.error(e);
+      this.dialogService.alert(e.error);
     }
 
   }
