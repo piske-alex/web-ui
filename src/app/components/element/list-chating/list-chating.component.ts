@@ -44,8 +44,13 @@ export class ListChatingComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // console.log('list-chat anotherUserId', this.anotherUserId);
-    // console.log('list-chat adUserId', this.adUserId);
+    console.log('adUser', this.adUserId);
+    console.log('anotherUser', this.anotherUserId);
+    this.adUser = await this.userService.getDetail({ id: this.adUserId });
+    this.anotherUser = await this.userService.getDetail({ id: this.anotherUserId });
+
+    console.log('adUser', this.adUser);
+     console.log('anotherUser', this.anotherUser);
 
     setTimeout(() => {
       this.refreshchatlist();
@@ -65,7 +70,8 @@ export class ListChatingComponent implements OnInit {
     try {
       // this.chatingList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId, message);
       // this._updateScroll();
-      this.chatService.send(this.adId, this.adUserId, this.anotherUserId, this.orderId, message)
+      this.chatService.send(this.adId, this.adUserId, this.anotherUserId, this.orderId, message,
+        this.adUser.username, this.anotherUser.username)
       .then(async (data) => {
         this.chatingList = data;
         this._updateScroll();

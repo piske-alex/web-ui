@@ -49,7 +49,9 @@ export class MyMsgComponent implements OnInit {
   }
 
   async getUnReadCount() {
-    await this.chatService.loginAndGetChatDialogList().then((data) => {
+    this.chatService.loginAndGetChatDialogList().then(async(data) => {
+
+      console.log('my msg data', data);
       let list1: Array<any> = new Array();
       let list2: Array<any> = new Array();
       for (const item of data) {

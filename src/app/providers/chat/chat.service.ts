@@ -21,7 +21,7 @@ export class ChatService {
 
   constructor() {
     this.initChat();
-    this.chat_topic_keyword = 'koin';
+    this.chat_topic_keyword = 'dev01';
   }
 
   initChat() {
@@ -202,13 +202,13 @@ export class ChatService {
       this.currentLoginUserId = this.user.id;
 
       return new Promise((resolve, reject) => {
-        // console.log('currentLoginUserId11', this.currentLoginUserId);
-        
+         console.log('currentLoginUserId11', this.currentLoginUserId);
+
          this.chat.getQuery()
         .containsMembers([String(this.currentLoginUserId)])
         .limit(50)
         .withLastMessagesRefreshed(true)
-        // .contains('topic', this.chat_topic_keyword)
+       .contains('topic', this.chat_topic_keyword)
         .find()
         .then(function(conversations) {
           resolve(conversations);
@@ -259,15 +259,31 @@ export class ChatService {
               this.receive();
             }
           });
-
+          // console.log('currentLoginUserId22', this.chat_topic_keyword);
+          const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])
+            // .equalTo('topic', this.chat_topic_keyword)
             .limit(100)
             .withLastMessagesRefreshed(true)
             // .contains('topic', this.chat_topic_keyword)
             .find()
             .then(function(conversations) {
-              resolve(conversations);
+
+              let chats: Array<any> = new Array();
+              conversations.map(function(chat) {
+                if (chat) {
+                  if (chat.lastMessage) {
+                    if (chat.lastMessage._lcattrs) {
+                      if (chat.lastMessage._lcattrs.topic == chat_top) {
+                        chats.push(chat);
+                      }
+                    }
+                  }
+                }
+              });
+
+              resolve(chats);
               // 默认按每个对话的最后更新日期（收到最后一条消息的时间）倒序排列
               // conversations.map(function(conversation) {
               //   console.log('1111', conversation);
@@ -284,7 +300,7 @@ export class ChatService {
 
 
 
-  send(adId, adUserId, anotherUserId, orderId, message): Promise<any> {
+  send(adId, adUserId, anotherUserId, orderId, message, adUserName , anotherUserName): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
         const conversation: any = await this.getConversationLocal(adId, adUserId, anotherUserId);
@@ -302,6 +318,8 @@ export class ChatService {
             for: String(adId),
             adUserId: String(adUserId),
             anotherUserId: String(anotherUserId),
+            adUserName: String(adUserName),
+            anotherUserName: String(anotherUserName),
             orderId: String(orderId),
             topic: this.chat_topic_keyword,
             avatar: this.user.avatar || '',
@@ -334,10 +352,14 @@ export class ChatService {
   }
 
   updateChatList(adId, adUserId, anotherUserId, orderId): Promise<any> {
+    const chat_top = this.chat_topic_keyword;
+
     return new Promise(async (resolve, reject) => {
       const conversation = await this.getConversationLocal(adId, adUserId, anotherUserId);
+      
       if (conversation) {
         conversation.queryMessages({limit: 500})
+          // .contains('topic', this.chat_topic_keyword)
           .then(messages => {
             let chat_union_ids = '';
             if (Number(adUserId) > Number(anotherUserId)) {
@@ -362,14 +384,19 @@ export class ChatService {
               const _avatar = message.getAttributes().avatar;
               const _sendTimestamp = message.getAttributes().sendTimestamp;
               const _text = message.text;
+              const _adUserName = message.getAttributes().adUserName;
+              const _anotherUserName = message.getAttributes().anotherUserName;
+              const _topic = message.getAttributes().topic;
 
-              this.conservationObj[chat_union_ids].chatList.push({
-                from: _from,
-                content: _text,
-                avatar: _avatar,
-                sendTimestamp: _sendTimestamp,
-                isMe: _from == this.user.id,
-              });
+              if (_topic && _topic == chat_top ) {
+                this.conservationObj[chat_union_ids].chatList.push({
+                  from: _from,
+                  content: _text,
+                  avatar: _avatar,
+                  sendTimestamp: _sendTimestamp,
+                  isMe: _from == this.user.id,
+                });
+              }
             });
             // console.log('message::conversation:::::', conversation);
             // console.log('message::count:::::', messages.length);

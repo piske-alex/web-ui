@@ -35,8 +35,8 @@ export class ListChatComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log('list-chat anotherUserId', this.anotherUserId);
-    console.log('list-chat adUserId', this.adUserId);
+    // console.log('list-chat anotherUserId', this.anotherUserId);
+    // console.log('list-chat adUserId', this.adUserId);
     this.anotherUser = await this.userService.getDetail({userid: this.anotherUserId});
     this.adUser = await this.userService.getDetail({userid: this.adUserId});
 
@@ -63,14 +63,14 @@ export class ListChatComponent implements OnInit {
   }
 
 
-  async send(message) {
-    try {
-      this.chatList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId,this.orderId, message);
-      this._updateScroll();
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // async send(message) {
+  //   try {
+  //     this.chatList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId,this.orderId, message, this.adId, this.adUserId);
+  //     this._updateScroll();
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   private _updateScroll() {
     // document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
