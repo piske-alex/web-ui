@@ -417,7 +417,7 @@ export class ChatService {
 
   closeChatClient() {
     this.isLogin = false;
-    // this.chat.close().then(function() {  }).catch(console.error.bind(console));
+     this.chat.close().then(function() {  }).catch(console.error.bind(console));
   }
 
 

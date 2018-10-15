@@ -266,7 +266,10 @@
   },
   "my_trade": {
     "myBuy": "我的买单",
-    "mySell": "我的卖单"
+    "mySell": "我的卖单",
+    "do_rating": "交易评价",
+    "rating_1": "好评",
+    "rating_0": "差评"
   },
   "user": {
     "hisPublishAd": "他发布的广告",
@@ -383,7 +386,8 @@
     "confirm_buy":"确认购买",
     "cancel_sell":"放弃出售",
     "cancel_buy":"放弃购买",
-    "trans_confirm_time":"到账时间"
+    "trans_confirm_time":"到账时间",
+    "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息"
   },
   "trust": {
     "praise": "好评",

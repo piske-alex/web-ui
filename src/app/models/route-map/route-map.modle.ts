@@ -57,6 +57,9 @@ export class RouteMap {
       LIST_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc'),
       DEAL_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/ad/otc/transaction/deal'),
       OTC_TRENDING: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/trending'),
+      UPDATE_ORDER_RATING: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/rating'),
+      GET_TRANS_BY_USERID: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/get_trans_by_userid'),
+      GET_TRANS_BETWEEN_USERIDS: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/get_trans_between_userids'),
     },
     WALLET: {
       MY_ACCOUNT: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/coin/my'),

@@ -21,9 +21,9 @@ export class CommonService {
       if (this.cache['myTradeList'] !== undefined) {
         resolve(this.cache['myTradeList']);
       } else {
-        this.httpService.request(RouteMap.V1.AD.GET_ORDER, params).then(data => {
+        this.httpService.request(RouteMap.V1.AD.GET_TRANS_BY_USERID, params).then(data => {
           if (data && data.success) {
-            //this.cache['myTradeList'] = data.data; 
+            // this.cache['myTradeList'] = data.data;
             let _result = [];
             if (data.data && data.data.length > 0) {
               _result = data.data.map(_data => {

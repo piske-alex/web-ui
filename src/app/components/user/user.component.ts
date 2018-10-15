@@ -69,7 +69,7 @@ export class UserComponent implements OnInit {
 
   private async loadDealList() {
     try {
-      this.dealWithMeList = await this.adService.listDealList({otherUserId: this.userId});
+      this.dealWithMeList = await this.adService.listDealList2({otherUserId: this.userId});
     } catch (e) {
       console.error(e);
     }

@@ -266,7 +266,10 @@
   },
   "my_trade": {
     "myBuy": "我的買單",
-    "mySell": "我的賣單"
+    "mySell": "我的賣單",
+    "do_rating": "交易評估",
+    "rating_1": "好评",
+    "rating_0": "好評"
   },
   "user": {
     "hisPublishAd": "他發布的廣告",
@@ -388,7 +391,8 @@
     "confirm_buy":"確認購買",
     "cancel_sell":"放弃出售",
     "cancel_buy":"放弃購買",
-    "trans_confirm_time":"到賬時間"
+    "trans_confirm_time":"到賬時間",
+    "goto_old_unfinish_order":"15分鐘內有未完成的交易，請先查看處理舊的交易資訊"
   },
   "wallet": {
     "title": "錢包",

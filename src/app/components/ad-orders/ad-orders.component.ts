@@ -68,6 +68,10 @@ export class AdOrdersComponent implements OnInit {
     this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
     this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
 
+    this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
+    this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
+    this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
+
     try {
        this.adData = await this.adService.getOtcAdById({ adid: this.adId });
        console.log('ad', this.adData);
@@ -100,6 +104,22 @@ export class AdOrdersComponent implements OnInit {
 
   toOrderDetail2(order: any) {
     this.router.navigate(['/orderDetailB', { orderId: order.id, adId: this.adId, adUserId: this.adUserId, anotherUserId: order.userid }]);
+  }
+
+  async doOrderRating (order: any, rating: string) {
+    this.adService.updateOrderRating({ orderid: order.id, rating: rating }).then ( (_result) => {
+
+      this.adService.getOrder({adid: this.adId}).then( (data) => {
+        this.orders = data;
+        console.log('adid orders1', this.orders);
+      } , error => {
+        console.log('adid orders2', error);
+      });
+
+    }, error => {
+      console.log('doOrderRating error', error);
+      console.log('doOrderRating error', error.message);
+    });
   }
 
 }

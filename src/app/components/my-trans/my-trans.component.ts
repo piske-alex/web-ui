@@ -73,7 +73,10 @@ export class MyTransComponent implements OnInit {
     };
 
     try {
+      console.log('my trade list');
+      // this.list =  await this.cmService.listMyTradeList(_params);
       this.list =  await this.cmService.listMyTradeList(_params);
+      console.log('my trade list', this.list);
     } catch (e) {
       console.error(e);
     }

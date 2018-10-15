@@ -69,6 +69,7 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.confirm_buy = await this.languageService.get('transaction.confirm_buy');
     this.i18ns.cancel_sell = await this.languageService.get('transaction.cancel_sell');
     this.i18ns.cancel_buy = await this.languageService.get('transaction.cancel_buy');
+    this.i18ns.goto_old_unfinish_order = await this.languageService.get('transaction.goto_old_unfinish_order');
 
     this.i18ns.ap_alipay = await this.languageService.get('element_list_trans.ap_alipay');
     this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
@@ -146,15 +147,24 @@ export class TransactionBComponent implements OnInit {
     this.adService.transaction({ adid: this.data.adId, amount: this.receiveAmount , btccnt: this.payAmount }).then(async (data) => {
       const _result = data;
       const _orderId = _result.orderid;
-      // console.log("order", _result);
-      this.router.navigate(['/orderDetailB', { orderId: _orderId,
-        adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
+      console.log('order', _result);
+      if (_result.order_is_new) {
+        this.router.navigate(['/orderDetailB', { orderId: _orderId,
+          adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
+      } else {
+        this.dialogService.alert(this.i18ns.goto_old_unfinish_order).subscribe(res => {
+          if (res) {
+            this.router.navigate(['/orderDetailB', { orderId: _orderId,
+              adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
+          }
+        });
+      }
     }, error => {
       console.error('---------------------error_transaction: ', error);
       if (error.status === 403 && error.error.userGroup === 'user') {
         this.dialogService.alert(this.i18ns.onlyRealUser);
       } else {
-        this.dialogService.alert(error.message);
+        this.dialogService.alert(error.error);
       }
     });
 

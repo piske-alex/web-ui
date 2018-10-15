@@ -266,7 +266,10 @@
   },
   "my_trade": {
     "myBuy": "My buy order",
-    "mySell": "My sell order"
+    "mySell": "My sell order",
+    "do_rating": "Evaluation",
+    "rating_1": "Praise",
+    "rating_0": "Negative"
   },
   "user": {
     "hisPublishAd": "The ad he posted",
@@ -382,7 +385,8 @@
     "confirm_buy":"Confirm buy",
     "cancel_sell":"Give up sell",
     "cancel_buy":"Give up buy",
-    "trans_confirm_time":"Time of arrival"
+    "trans_confirm_time":"Time of arrival",
+    "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息"
   },
   "trust": {
     "praise": "Praise",

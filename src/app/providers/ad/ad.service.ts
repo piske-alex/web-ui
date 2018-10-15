@@ -36,6 +36,7 @@ export class AdService {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.LIST_TRANSACTION, params).then(data => {
         if (data && data.success) {
+          console.log('api myads', data);
           let _result = {list: [], total: 0};
           if (data.data && data.data.length > 0) {
             _result.list = data.data.map(_data => {
@@ -61,6 +62,20 @@ export class AdService {
   listDealList(params): Promise<Deal[]> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.DEAL_TRANSACTION, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  listDealList2(params): Promise<Deal[]> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.GET_TRANS_BETWEEN_USERIDS, params, true).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {
@@ -108,6 +123,7 @@ export class AdService {
   transaction(params): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.TRANSACTION_AD, params, true).then(data => {
+        console.log('api transaction', data);
         if (data && data.success) {
           resolve(data.data);
         } else {
@@ -136,6 +152,20 @@ export class AdService {
   updateOrderStatus(params): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.UPDATE_ORDER_STATUS, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  updateOrderRating(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.UPDATE_ORDER_RATING, params, true).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {

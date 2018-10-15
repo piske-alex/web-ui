@@ -35,8 +35,17 @@
          
           <div class="gz-list-td">{{this.i18ns.order_amount}}: {{data.amount}} </div>
           <div class="gz-list-td">{{this.i18ns.order_create_time}}: {{data.create_time  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
+          <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 1">{{this.i18ns.do_rating}}: {{this.i18ns.rating_1}} </div>
+          <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 0">{{this.i18ns.do_rating}}: {{this.i18ns.rating_0}} </div>
           <div class="gz-list-tr-detail">   
-        </div>
+          </div>
+            <!-- {{this.i18ns.do_rating}}
+          <div class="btn btn-outline-blue gz-circle" *ngIf="data.is_rating == 0 " (click)="doOrderRating(data,'1')">
+            {{this.i18ns.rating_1}}
+          </div>
+          <div class="btn btn-outline-blue gz-circle" *ngIf="data.is_rating == 0 " (click)="doOrderRating(data,'0')">
+            {{this.i18ns.rating_0}}
+          </div>   -->
       </div>
       <div class="gz-list-tr-right">
         <div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '2'" (click)="toOrderDetail2(data)">
@@ -45,6 +54,7 @@
         <div class="btn btn-outline-blue gz-circle" *ngIf="this.adType == '1'" (click)="toOrderDetail1(data)">
           {{this.i18ns.order_detail}}
         </div>
+        
       </div>
     </section>
     <div class="align_center" *ngIf="!orders">{{this.i18ns.has_no_order}}</div>
