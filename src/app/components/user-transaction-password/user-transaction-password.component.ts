@@ -108,13 +108,14 @@ export class UserTransactionPasswordComponent implements OnInit {
       return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
+    if (!this.password) {
+      return this.dialogService.alert(this.i18ns.input_trans_password);
+    }
+
     if (!this.smsCode) {
       return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
-    if (!this.password) {
-      return this.dialogService.alert(this.i18ns.input_trans_password);
-    }
     try {
        this.userService.setTransactionPassword({
         verifyCode: this.smsCode,
@@ -122,8 +123,6 @@ export class UserTransactionPasswordComponent implements OnInit {
       }).then( async (data) => {
         this.goBack();
         }, e => {
-          console.log('ssss', e);
-          console.log('ssss', e.error);
           const errRes = e.error;
           console.log('errRes.error.name', errRes.error.name);
           if (errRes.success == false && errRes.error.name != undefined) {

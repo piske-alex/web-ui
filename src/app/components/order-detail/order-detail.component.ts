@@ -26,11 +26,16 @@ export class OrderDetailComponent implements OnInit {
   isStop: boolean;
   payStatus: string;
 
+  btccnt: string;
+
   isShowCancel: boolean;
   isShowBuyPay: boolean;
   isShowBuyDispute: boolean;
   isShowSellDispute: boolean;
   isShowSellConfirm: boolean;
+
+  paypassword: string;
+  isShowPayPassword: boolean;
 
   @ViewChild(ListChatingComponent)
   private listChatingComponent;
@@ -50,6 +55,7 @@ export class OrderDetailComponent implements OnInit {
     this.anotherUserId = this.route.snapshot.paramMap.get('anotherUserId');
     const currentLoginUserId = localStorage.getItem('user_id');
     this.isStop = false;
+    this.isShowPayPassword = false;
 
     if (currentLoginUserId === this.adUserId) {
       this.isAdOwner = true;
@@ -113,6 +119,8 @@ export class OrderDetailComponent implements OnInit {
         this.isStop = true;
       }
 
+
+
     } catch (e) {
       console.error(e);
     }
@@ -132,10 +140,15 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
 
+    this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
+    this.i18ns.cancel = await this.languageService.get('common.cancel');
+    this.i18ns.confirm = await this.languageService.get('common.confirm');
+
     let noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
     let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
     this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
 
+    this.btccnt = (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
     this.timeout = true;
 
     let createTime: Date = new Date(this.order.create_time * 1000);
@@ -242,18 +255,36 @@ export class OrderDetailComponent implements OnInit {
   }
 
   async sellOrder() {
+    this.isShowPayPassword = true;
+  }
+
+  cancelSellerConfirm() {
     this.dialogService.confirm({ content: this.i18ns.confirm_markReceive }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'seller_confirm'}).then(async (data) => {
-          this.location.back();
-          this.location.back();
-        }, err => {
-          this.dialogService.alert(err.error);
-        });
+        this.isShowPayPassword = true;
       } else {
+        this.isShowPayPassword = false;
           return;
       }
     });
+  }
+
+  confirmSellerConfirm() {
+    if (!this.paypassword) {
+      return this.dialogService.alert(this.i18ns.input_trans_password);
+    }
+
+    this.isShowPayPassword = false;
+    try {
+      this.adService.updateOrderStatus({orderid: this.orderId,
+        action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
+      this.location.back();
+      this.location.back();
+    });
+    } catch (e) {
+      console.log('err-sellerconfirm', e);
+      this.dialogService.alert(e.message);
+    }
   }
 
   async sellMarkDispute() {

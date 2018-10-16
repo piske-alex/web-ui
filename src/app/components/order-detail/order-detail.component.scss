@@ -36,3 +36,57 @@
 .chatmsg{
   width:100%;
 }
+
+
+
+.gz-bg {
+
+}
+
+.gz-popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gz-popup-content {
+  width: 80%;
+  background: $article_bg;
+  z-index: 100;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0px 0 0px;
+
+  .gz-popup-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 20px;
+  }
+
+  .gz-warn {
+    color: $warn_font_color;
+  }
+
+  .gz-popup-btn-row {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid $border_default;
+    margin-top: 10px;
+    line-height: 30px;
+
+    & > div {
+      width: 50%;
+      color: $link_active_color;
+    }
+    & > div:first-child {
+      border-right: 1px solid $border_default;
+    }
+  }
+}

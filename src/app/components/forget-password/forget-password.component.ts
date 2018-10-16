@@ -105,12 +105,12 @@ export class ForgetPasswordComponent implements OnInit {
       return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
-    if (!this.smsCode) {
-      return this.dialogService.alert(this.i18ns.inputSmsCode);
-    }
-
     if (!this.password) {
       return this.dialogService.alert(this.i18ns.input_login_password);
+    }
+
+    if (!this.smsCode) {
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
     let _params = {

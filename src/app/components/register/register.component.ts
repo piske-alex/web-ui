@@ -134,12 +134,12 @@ export class RegisterComponent implements OnInit {
       return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
-    if (!this.smsCode) {
-      return this.dialogService.alert(this.i18ns.inputSmsCode);
-    }
-
     if (!this.password) {
       return this.dialogService.alert(this.i18ns.inputPassword);
+    }
+
+    if (!this.smsCode) {
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
     if (!this._validatePassword()) {

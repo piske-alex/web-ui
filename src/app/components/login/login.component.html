@@ -43,6 +43,20 @@
     </div>
   </section>
   <section>
+    <div class="gz-label {{isFocus('password')}}">
+      <gz-i18n key="user.inputPassword"></gz-i18n>
+    </div>
+    <div class="gz-password">
+        <input type="text" style="display:none;" />
+      <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword"
+          (focus)="focus('password')" (blur)="blur('password')"  autocomplete="new-password" maxlength="40" >
+      <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
+          (blur)="blur('password')"  autocomplete="new-password"  maxlength="40" >
+      <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
+      <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
+    </div>
+  </section>
+  <section>
       <div class="gz-label {{isFocus('smsCode')}}">{{i18ns.inputSmsCode}}</div>
       <div style="position: relative;">
         <input type="text" class="{{isFocus('smsCode')}}" placeholder="{{i18ns.inputSmsCode}}"
@@ -54,20 +68,7 @@
         <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay">{{i18ns.resendSmsCode}}({{resendSmsCodeDelay}})</div>
       </div>
     </section>
-  <section>
-      <div class="gz-label {{isFocus('password')}}">
-        <gz-i18n key="user.inputPassword"></gz-i18n>
-      </div>
-      <div class="gz-password">
-          <input type="text" style="display:none;" />
-        <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword"
-            (focus)="focus('password')" (blur)="blur('password')"  autocomplete="new-password" maxlength="40" >
-        <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
-            (blur)="blur('password')"  autocomplete="new-password"  maxlength="40" >
-        <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
-        <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
-      </div>
-    </section>
+  
   
 
   <section class="gz-submit">

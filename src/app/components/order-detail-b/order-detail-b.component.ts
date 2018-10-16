@@ -27,6 +27,8 @@ export class OrderDetailBComponent implements OnInit {
   isStop: boolean;
   payStatus: string;
 
+  btccnt: string;
+
   isShowCancel: boolean;
   isShowBuyPay: boolean;
   isShowBuyDispute: boolean;
@@ -137,6 +139,8 @@ export class OrderDetailBComponent implements OnInit {
     let noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
     let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
     this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
+    
+    this.btccnt = (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
 
     this.timeout = true;
 

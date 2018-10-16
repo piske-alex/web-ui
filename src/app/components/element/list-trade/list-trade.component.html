@@ -24,6 +24,16 @@
           {{this.i18ns.order_detail}}
         </div>
         
+        <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 1">{{this.i18ns.do_rating}}: {{this.i18ns.rating_1}} </div>
+        <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 0">{{this.i18ns.do_rating}}: {{this.i18ns.rating_0}} </div>
+        
+        <div class="btn btn-outline-blue gz-circle" *ngIf="data.is_rating == 0 " (click)="doOrderRating(data,'1')">
+            {{this.i18ns.rating_1}}
+        </div>
+        <div class="btn btn-outline-blue gz-circle" *ngIf="data.is_rating == 0 " (click)="doOrderRating(data,'0')">
+            {{this.i18ns.rating_0}}
+        </div>   -
+
 
     <!-- <div _ngcontent-c5="" class="btn btn-primary gz-circle">
       <gz-i18n _ngcontent-c5="" key="element_list_trans.edit" _nghost-c2="" ng-reflect-key="element_list_trans.edit">好评</gz-i18n>

@@ -12,6 +12,7 @@ import { CoinType } from '../../models/common/CoinType';
 import { SelectCoinTypeComponent } from '../element/select-coin-type/select-coin-type.component';
 import { SelectPayTypeComponent } from '../element/select-pay-type/select-pay-type.component';
 import { SelectCurrencyComponent } from '../element/select-currency/select-currency.component';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 const $ = (<any>window).$;
 
@@ -60,7 +61,8 @@ export class OtcComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private commonService: CommonService,
     private adService: AdService,
-    private languageService: LanguageService) {
+    private languageService: LanguageService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -136,7 +138,12 @@ export class OtcComponent implements OnInit, OnDestroy {
       this.adList = _result.list;
       this.adTotal = _result.total;
     } catch (e) {
+      this.isLoading = false;
       console.error(e);
+      if (e.message) {
+        this.dialogService.alert(e.message);
+      }
+
     }
 
   }

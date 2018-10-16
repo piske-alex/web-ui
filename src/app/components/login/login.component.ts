@@ -117,12 +117,12 @@ export class LoginComponent implements OnInit {
       return this.dialogService.alert(this.i18ns.inputValidPhone);
     }
 
-    if (!this.smsCode) {
-      return this.dialogService.alert(this.i18ns.inputSmsCode);
-    }
-
     if (!this.password) {
       return this.dialogService.alert(this.i18ns.inputPassword);
+    }
+
+    if (!this.smsCode) {
+      return this.dialogService.alert(this.i18ns.inputSmsCode);
     }
 
     this.isLoading = true;
@@ -133,6 +133,8 @@ export class LoginComponent implements OnInit {
       password: this.password,
       verifyCode: this.smsCode,
     };
+
+    try {
 
     this.httpService.request(RouteMap.V1.USER.LOGIN, _params).then(async (data) => {
       const _token = data && data.token;
@@ -170,6 +172,7 @@ export class LoginComponent implements OnInit {
       }
       this.isLoading = false;
     }, error => {
+      this.isLoading = false;
       console.error('---------------------error: ', error);
       this.password = '';
       if (error.error.success === false && error.error.errmsg !== undefined) {
@@ -181,10 +184,28 @@ export class LoginComponent implements OnInit {
       } else {
         this.resendSmsCodeDelay = 1;
         console.log ('error', error.error );
-        this.dialogService.alert(error.error); // this.i18ns.err_phone_or_password
+        if (error.error.errmsg) {
+          if (error.error.errmsg == 'login or password wrong') {
+            this.dialogService.alert(this.i18ns.err_phone_or_password); // 
+          } else {
+            this.dialogService.alert(error.error.errmsg); // this.i18ns.err_phone_or_password
+          }
+        } else if (error.error.message) {
+          this.dialogService.alert(error.error.message); // this.i18ns.err_phone_or_password
+        } else if (error.error.error) {
+          this.dialogService.alert(error.error.error);
+        } else {
+          this.dialogService.alert('Serve error');
+        }
       }
       this.isLoading = false;
     });
+
+  } catch (e) {
+    this.isLoading = false;
+    console.error('catch eee ', e);
+    // this.dialogService.alert(e && e.errMsg || this.i18ns.publishError);
+  }
 
   }
 

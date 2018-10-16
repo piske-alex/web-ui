@@ -69,7 +69,7 @@
     <div>
       <gz-i18n key="otc.count"></gz-i18n>
     </div>
-    <div>{{order.amount}} {{order.ad_data.crypto_currency}}</div>
+    <div>{{ this.btccnt }} {{order.ad_data.crypto_currency}}</div>
   </section>
   <section class="gz-row">
     <div>
@@ -116,3 +116,28 @@
   </footer>
 
 </article>
+
+
+<section class="gz-bg" *ngIf="isShowPayPassword" (click)="cancelSellerConfirm()"></section>
+<div class="gz-popup" *ngIf="isShowPayPassword">
+  <div class="gz-popup-content">
+    <h3><gz-i18n key="transaction.order_confirm"></gz-i18n></h3>
+    <div class="gz-popup-row">
+      <div><gz-i18n key="user_trans_password.input_trans_password"></gz-i18n></div>
+      <div>
+        <input type="password"  placeholder="{{this.i18ns.input_trans_password}}"
+             [(ngModel)]="paypassword"  autocomplete="new-password"  maxlength="40"
+             >
+      </div>
+    </div>
+    
+    <div class="gz-popup-btn-row">
+      <div (click)="cancelSellerConfirm()">
+        <span>{{i18ns.cancel}}</span>
+      </div>
+      <div (click)="confirmSellerConfirm()">        
+        <span>{{i18ns.confirm}}</span>
+      </div>
+    </div>
+  </div>
+</div>

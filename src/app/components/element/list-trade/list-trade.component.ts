@@ -46,6 +46,9 @@ export class ListTradeComponent implements OnInit {
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
     this.i18ns.order_detail = await this.languageService.get('my_ad.order_detail');
+    this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
+    this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
+    this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
   }
 
   /*
@@ -79,10 +82,23 @@ export class ListTradeComponent implements OnInit {
         this.dialogService.alert(err);
       }
     );
-
-
-
-    
   }
+
+  async doOrderRating (order: any, rating: string) {
+    this.adService.updateOrderRating({ orderid: order.id, rating: rating }).then ( (_result) => {
+
+      this.adService.getOrder({adid: this.adId}).then( (data) => {
+        this.router.navigate(['/myTrans']);
+      } , error => {
+        console.log('adid orders2', error);
+      });
+
+    }, error => {
+      console.log('doOrderRating error', error);
+      console.log('doOrderRating error', error.message);
+    });
+  }
+
+
 
 }

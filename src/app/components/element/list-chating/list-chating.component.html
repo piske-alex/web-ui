@@ -2,7 +2,7 @@
     <section *ngFor="let chat of chatingList">
       <div class="chat-time" *ngIf="chat.sendTime">{{chat.sendTimestamp | date: 'MM:dd:HH:mm:ss'}}</div>
       <div class="gz-chat-me" *ngIf="chat.isMe">
-        <div class="gz-chat-content">{{chat.content}}</div>
+        <div class="gz-chat-content-me">{{chat.content}}</div>
         <img class="headImg" src="{{chat.avatar | avatar}}">
       </div>
       <div class="gz-chat-other" *ngIf="!chat.isMe">

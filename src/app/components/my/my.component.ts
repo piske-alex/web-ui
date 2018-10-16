@@ -80,8 +80,8 @@ export class MyComponent implements OnInit {
         localStorage.removeItem('user');
         localStorage.removeItem('login_timestamp');
         localStorage.removeItem('access_token');
-        this.router.navigate(['/home']);
         this.chatService.closeChatClient();
+        this.router.navigate(['/home']);
       } else {
           return;
       }

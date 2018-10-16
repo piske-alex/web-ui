@@ -25,7 +25,9 @@ export class MyMsgComponent implements OnInit {
     private chatService: ChatService  ,
     private adService: AdService,
     private dialogService: DialogService
-    ) {}
+    ) {
+      // this.getUnReadCount();
+    }
 
   async ngOnInit() {
 
@@ -41,15 +43,18 @@ export class MyMsgComponent implements OnInit {
     this.i18ns.last_msg_time = await this.languageService.get('my_msg.last_msg_time');
     this.i18ns.goto_detail = await this.languageService.get('my_msg.goto_detail');
 
-    this.getUnReadCount();
+    setTimeout(() => {
+      this.getUnReadCount();
+    }, 1000);
+    // this.getUnReadCount();
   }
 
   goBack() {
     this.location.back();
   }
 
-  async getUnReadCount() {
-    this.chatService.loginAndGetChatDialogList().then(async(data) => {
+   getUnReadCount() {
+     this.chatService.loginAndGetChatDialogList().then((data) => {
 
       console.log('my msg data', data);
       let list1: Array<any> = new Array();

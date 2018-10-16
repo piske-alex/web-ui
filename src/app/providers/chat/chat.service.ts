@@ -202,22 +202,76 @@ export class ChatService {
       this.currentLoginUserId = this.user.id;
 
       return new Promise((resolve, reject) => {
-         console.log('currentLoginUserId11', this.currentLoginUserId);
+        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+          this.chat = chat;
+          this.isLogin = true;
 
-         this.chat.getQuery()
-        .containsMembers([String(this.currentLoginUserId)])
-        .limit(50)
-        .withLastMessagesRefreshed(true)
-       .contains('topic', this.chat_topic_keyword)
-        .find()
-        .then(function(conversations) {
-          resolve(conversations);
-          // 默认按每个对话的最后更新日期（收到最后一条消息的时间）倒序排列
-          // conversations.map(function(conversation) {
-          //   console.log('1111', conversation);
-          // });
-        }).catch(console.error.bind(console));
-       });
+          chat.on(AV.Event.MESSAGE, (message, conversation) => {
+            console.log('--------------111----message: ', message);
+            const _from = message.from;
+            const _adId = message.getAttributes().for;
+            const _adUserId = message.getAttributes().adUserId;
+            const _anotherUserId = message.getAttributes().anotherUserId;
+            const _avatar = message.getAttributes().avatar;
+            const _sendTimestamp = message.getAttributes().sendTimestamp;
+            const _text = message.text;
+
+            let chat_union_ids = '';
+            if (Number(_adUserId) > Number(_anotherUserId)) {
+              chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
+            } else {
+              chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
+            }
+
+            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+            this.conservationObj[chat_union_ids].conversation = conversation;
+            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+            this.conservationObj[chat_union_ids].chatList.push({
+              from: _from,
+              content: _text,
+              avatar: _avatar,
+              sendTimestamp: _sendTimestamp,
+              isMe: _from == this.user.id,
+            });
+            if (this.receive) {
+              this.receive();
+            }
+          });
+          // console.log('currentLoginUserId22', this.chat_topic_keyword);
+          const chat_top = this.chat_topic_keyword;
+          this.chat.getQuery()
+            .containsMembers([String(this.currentLoginUserId)])
+            // .equalTo('topic', this.chat_topic_keyword)
+            .limit(100)
+            .withLastMessagesRefreshed(true)
+            // .contains('topic', this.chat_topic_keyword)
+            .find()
+            .then(function(conversations) {
+
+              let chats: Array<any> = new Array();
+              conversations.map(function(chat) {
+                if (chat) {
+                  if (chat.lastMessage) {
+                    if (chat.lastMessage._lcattrs) {
+                      if (chat.lastMessage._lcattrs.topic == chat_top) {
+                        chats.push(chat);
+                      }
+                    }
+                  }
+                }
+              });
+
+              resolve(chats);
+              // 默认按每个对话的最后更新日期（收到最后一条消息的时间）倒序排列
+              // conversations.map(function(conversation) {
+              //   console.log('1111', conversation);
+              // });
+            }).catch(console.error.bind(console));
+
+        });
+
+      });
+
     } else {
       const _user = localStorage.getItem('user');
       this.user = JSON.parse(_user);
@@ -229,7 +283,7 @@ export class ChatService {
           this.isLogin = true;
 
           chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            // console.log('------------------message: ', message);
+            console.log('------------------message: ', message);
             const _from = message.from;
             const _adId = message.getAttributes().for;
             const _adUserId = message.getAttributes().adUserId;
@@ -417,6 +471,7 @@ export class ChatService {
 
   closeChatClient() {
     this.isLogin = false;
+    console.log('closeChatClient');
      this.chat.close().then(function() {  }).catch(console.error.bind(console));
   }
 
