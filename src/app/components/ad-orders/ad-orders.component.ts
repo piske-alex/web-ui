@@ -24,6 +24,7 @@ export class AdOrdersComponent implements OnInit {
   anotherUserId: string;
 
   adType: string;
+  isNoData: boolean;
 
 
 
@@ -74,7 +75,7 @@ export class AdOrdersComponent implements OnInit {
 
     try {
        this.adData = await this.adService.getOtcAdById({ adid: this.adId });
-       console.log('ad', this.adData);
+      // console.log('ad', this.adData);
       // this.adUserId = this.data.userId;
 
       await this.adService.getOrder({adid: this.adId}).then( (data) => {
@@ -88,9 +89,12 @@ export class AdOrdersComponent implements OnInit {
           }
           return 0;
         });
+        this.isNoData = false;
         // console.log('adid orders1', this.orders);
       } , error => {
-        console.log('adid orders2', error);
+        if (error.error == 'order not found') {
+          this.isNoData = true;
+        }
       });
       // this.orders = _result.data;
      // const loginUserId = localStorage.getItem('user_id');

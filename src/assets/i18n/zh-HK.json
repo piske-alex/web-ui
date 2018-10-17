@@ -255,8 +255,14 @@
     "markDispute":"標記爭議",
     "confirm_markDispute":"確認標記爭議?",
     "myMsg":"我的消息",
+    "insufficient_balance": "餘額不足",
     "not_trans_as_ad_hidden": "廣告已下架，不支持交易。",
-    "myTradeTitle":"我的交易"
+    "myTradeTitle":"我的交易",
+    "mark_dispute_err_notpaid":"交易尚未支付",
+    "mark_receive_err_notpaid":"交易尚未支付",
+    "paypassword_invalid":"資金密碼錯誤",
+    "mark_dispute_success":"標記爭議成功，系統會進行後續處理。",
+    "mark_receive_success":"標記收款成功，系統會進行後續處理。"
   },
   "my_msg": {
     "chat_with_members": "對話成員",

@@ -15,8 +15,8 @@ export class ListChatingComponent implements OnInit {
 
   chatingList: any[] = [];
 
-  adUser: User;
-  anotherUser: User;
+  // adUser: User;
+  // anotherUser: User;
 
   @Input()
   adUserId;
@@ -38,19 +38,20 @@ export class ListChatingComponent implements OnInit {
               private dialogService: DialogService) {
 
     this.chatService.loginChat();
-    this.chatService.receive = () => {
-    this._updateScroll();
-    };
   }
 
   async ngOnInit() {
     console.log('adUser', this.adUserId);
     console.log('anotherUser', this.anotherUserId);
-    this.adUser = await this.userService.getDetail({ id: this.adUserId });
-    this.anotherUser = await this.userService.getDetail({ id: this.anotherUserId });
+    // this.adUser = await this.userService.getDetail({ id: this.adUserId });
+    // this.anotherUser = await this.userService.getDetail({ id: this.anotherUserId });
 
-    console.log('adUser', this.adUser);
-    console.log('anotherUser', this.anotherUser);
+    // console.log('adUser', this.adUser);
+    // console.log('anotherUser', this.anotherUser);
+
+    this.chatService.receive = () => {
+      this._updateScroll();
+    };
 
     setTimeout(() => {
       this.refreshchatlist();
@@ -71,8 +72,9 @@ export class ListChatingComponent implements OnInit {
       // this.chatingList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId, message);
       // this._updateScroll();
       this.chatService.send(this.adId, this.adUserId, this.anotherUserId, this.orderId, message,
-        this.adUser.username, this.anotherUser.username)
+        '', '')
       .then(async (data) => {
+        console.error('---------------------ok_send: ', data);
         this.chatingList = data;
         this._updateScroll();
       }, error => {

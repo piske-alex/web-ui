@@ -4,6 +4,7 @@ import { RouteMap } from "../../models/route-map/route-map.modle";
 import { TransactionListItem } from "../../models/ad/TransactionListItem";
 import { OtcAd } from "../../models/ad/OtcAd";
 import { Deal } from "../../models/ad/Deal";
+import { TradeItem } from 'src/app/models/common/TradeItem';
 
 @Injectable({
   providedIn: 'root'
@@ -73,11 +74,18 @@ export class AdService {
     });
   }
 
-  listDealList2(params): Promise<Deal[]> {
+  listDealList2(params): Promise<TradeItem[]> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.GET_TRANS_BETWEEN_USERIDS, params, true).then(data => {
         if (data && data.success) {
-          resolve(data.data);
+          let _result = [];
+            if (data.data && data.data.length > 0) {
+              _result = data.data.map(_data => {
+                return TradeItem.newInstance(_data);
+              });
+            }
+            debugger
+          resolve(_result);
         } else {
           reject(data);
         }

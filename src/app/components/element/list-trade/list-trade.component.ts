@@ -25,6 +25,7 @@ export class ListTradeComponent implements OnInit {
   adUserId: string;
   anotherUserId: string;
   adType: string;
+  loginUserId: string;
 
   constructor(private languageService: LanguageService,
     private router: Router,
@@ -49,6 +50,12 @@ export class ListTradeComponent implements OnInit {
     this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
     this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
     this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
+    this.i18ns.buy = await this.languageService.get('common.buy');
+    this.i18ns.sale = await this.languageService.get('common.sale');
+    this.i18ns.noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
+    this.i18ns.payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
+
+    this.loginUserId = localStorage.getItem('user_id');
   }
 
   /*
@@ -64,9 +71,9 @@ export class ListTradeComponent implements OnInit {
     this.router.navigate(['/user', { userId: adUserId, coinType: '' }]);
   }
 
-  async toOrderDetail1(order: any) {
-    this.router.navigate(['/orderDetail', { orderId: order.id, adId: order.adid, adUserId: this.adUserId, anotherUserId: order.userid }]);
-  }
+  //async toOrderDetail1(order: any) {
+  //  this.router.navigate(['/orderDetail', { orderId: order.id, adId: order.adid, adUserId: this.adUserId, anotherUserId: order.userid }]);
+  //}
 
   async toOrderDetail2(order: any) {
     let data = await this.adService.getOtcAdById({ adid: order.adid }).then(item => {
@@ -86,11 +93,15 @@ export class ListTradeComponent implements OnInit {
 
   async doOrderRating (order: any, rating: string) {
     this.adService.updateOrderRating({ orderid: order.id, rating: rating }).then ( (_result) => {
-
-      this.adService.getOrder({adid: this.adId}).then( (data) => {
-        this.router.navigate(['/myTrans']);
-      } , error => {
-        console.log('adid orders2', error);
+      
+      this.tradelist.forEach(item => {
+        if(item.id == order.id){
+          item.isRating = 1;
+          if(rating == '1')
+            item.orderRating = 1;
+          else
+            item.orderRating = 0;
+        }
       });
 
     }, error => {

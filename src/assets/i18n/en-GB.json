@@ -255,8 +255,14 @@
     "markDispute":"Mark dispute",
     "confirm_markDispute":"Confirm mark dispute?",
     "myMsg":"My Information",
+    "insufficient_balance": "Insufficient balance",
     "not_trans_as_ad_hidden": "The advertisement has been removed, not support transaction.",
-    "myTradeTitle":"My transaction"
+    "myTradeTitle":"My transaction",
+    "mark_dispute_err_notpaid":"Failure, the order not paid.",
+    "mark_receive_err_notpaid":"Failure, the order not paid.",
+    "paypassword_invalid":"Payment password invalid.",
+    "mark_dispute_success":"Mark dispute success. The system will be processed. ",
+    "mark_receive_success":"Mark receipt success. The system will be processed."
   },
   "my_msg": {
     "chat_with_members": "Dialog member",

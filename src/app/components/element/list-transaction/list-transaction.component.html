@@ -10,13 +10,13 @@
         <div class="gz-list-cell_10 float_left">{{data.username}}</div>
         <div class="gz-list-cell_20 float_left">
           <img src="/assets/images/pay_ap.jpg" title="{{this.i18ns.ap_alipay}}" alt="{{this.i18ns.ap_alipay}}"  class="gz-icon" *ngIf="data.is_payment_ap"> 
-          &nbsp;
+          
           <img src="/assets/images/pay_wp.jpg" title="{{this.i18ns.wp_wechatpay}}" alt="{{this.i18ns.wp_wechatpay}}"  class="gz-icon" *ngIf="data.is_payment_wp"> 
-          &nbsp;
+          
           <img src="/assets/images/pay_pp.jpg" title="{{this.i18ns.pp_paypal}}" alt="{{this.i18ns.pp_paypal}}"  class="gz-icon" *ngIf="data.is_payment_pp"> 
-          &nbsp;
+          
           <img src="/assets/images/pay_bt.jpg" title="{{this.i18ns.bt_bank_transfer}}" alt="{{this.i18ns.bt_bank_transfer}}"  class="gz-icon" *ngIf="data.is_payment_bt">
-          &nbsp;
+          
         </div>
         <!-- <span class="btn btn-success gz-sm" *ngIf="data.is_payment_ap">
           <gz-i18n key="element_list_trans.ap_alipay"></gz-i18n>

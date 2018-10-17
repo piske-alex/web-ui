@@ -7,6 +7,7 @@ import { LanguageService } from '../../providers/language/language.service';
 import { AdService } from '../../providers/ad/ad.service';
 import { Deal } from '../../models/ad/Deal';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
+import { TradeItem } from 'src/app/models/common/TradeItem';
 
 @Component({
   selector: 'gz-user',
@@ -20,7 +21,7 @@ export class UserComponent implements OnInit {
   data: User = new User();
 
   publishList: TransactionListItem[] = [];
-  dealWithMeList: Deal[] = [];
+  dealWithMeList: TradeItem[] = [];
 
   i18ns: any = {};
 

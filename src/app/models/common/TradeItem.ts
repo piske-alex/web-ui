@@ -14,6 +14,7 @@ export class TradeItem {
     isRating:number;//
     createTime:number;//
     updateTime:number;//
+    type: string;//
 
     //下面字段是界面上要用到的
     userHeadUrl: string; // 用户头像 url
@@ -41,19 +42,21 @@ export class TradeItem {
       _item.status = obj.status;
       _item.paymentTime = obj.payment_time;
       _item.confirmTime = obj.confirm_time;
-      _item.orderRating = obj.order_rating;
-      _item.isRating = obj.is_rating;
+
+      _item.orderRating = obj.order_rating == null ? 0 : obj.order_rating;
+      _item.isRating = obj.is_rating == null ? 0 : obj.is_rating;
       _item.createTime = obj.create_time;
       _item.updateTime = obj.update_time;
       
+      _item.type = obj.type;
       _item.userHeadUrl = "";
       _item.username = "";
-      _item.currency = "";
-      _item.tradeCurrency = "";
-      _item.transactionCount = 0;
-      _item.price = 0;
-      _item.tradeTime = 0;
-      _item.collectTime = 0;
+      _item.currency = obj.legal_currency;
+      _item.tradeCurrency = obj.crypto_currency;
+      _item.transactionCount = obj.amount / obj.legal_currency_rate;
+      _item.price = obj.legal_currency_rate;
+      _item.tradeTime = obj.payment_time;
+      _item.collectTime = obj.confirm_time;
       
       return _item;
     }

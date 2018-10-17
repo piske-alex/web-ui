@@ -134,6 +134,12 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.confirm_markDispute = await this.languageService.get('otc.confirm_markDispute');
     this.i18ns.confirm_cancelTransaction = await this.languageService.get('otc.confirm_cancelTransaction');
 
+    this.i18ns.mark_dispute_err_notpaid = await this.languageService.get('otc.mark_dispute_err_notpaid');
+    this.i18ns.mark_receive_err_notpaid = await this.languageService.get('otc.mark_receive_err_notpaid');
+    this.i18ns.paypassword_invalid = await this.languageService.get('otc.paypassword_invalid');
+    this.i18ns.mark_dispute_success = await this.languageService.get('otc.mark_dispute_success');
+    this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
+
     this.i18ns.order_status = await this.languageService.get('my_ad.order_status');
     this.i18ns.order_status_unfinish = await this.languageService.get('my_ad.order_status_unfinish');
     this.i18ns.order_status_finish = await this.languageService.get('my_ad.order_status_finish');
@@ -277,10 +283,28 @@ export class OrderDetailComponent implements OnInit {
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
         action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
-          this.location.back();
-          this.location.back();
+          this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
+            res => {
+              this.location.back();
+              this.location.back();
+            }
+          );
         }, err => {
-          this.dialogService.alert(err.error);
+          console.log('err-sellerconfirm1', err);
+          if (err.error) {
+            if (err.error == 'order payment has not been confirmed') {
+              this.dialogService.alert(this.i18ns.mark_receive_err_notpaid);
+            } else {
+              // order payment has been confirm
+              if (err.error.name == 'PasswordInvalid') {
+                this.dialogService.alert(this.i18ns.paypassword_invalid);
+              } else {
+                if (err.error.message) {
+                  this.dialogService.alert(err.error.message);
+                }
+              }
+            }
+          }
         });
     } catch (e) {
       console.log('err-sellerconfirm', e);
@@ -292,10 +316,20 @@ export class OrderDetailComponent implements OnInit {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
-          this.location.back();
-          this.location.back();
+          this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
+            res2 => {
+              this.location.back();
+              this.location.back();
+            }
+          );
         }, err => {
-          this.dialogService.alert(err.error);
+          if (err.error) {
+            if (err.error == 'this.i18ns.mark_dispute_err_notpaid') {
+              this.dialogService.alert(err.error);
+            } else {
+              this.dialogService.alert(err.error);
+            }
+          }
         });
       } else {
           return;

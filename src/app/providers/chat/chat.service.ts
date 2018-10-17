@@ -392,7 +392,7 @@ export class ChatService {
             sendTimestamp: Date.now(),
           });
           conversation.send(_textMessage);
-          // console.log('### >>> send message ...', _textMessage);
+           console.log('### >>> send message ...', _textMessage);
           this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
           this.conservationObj[chat_union_ids].conversation = conversation;
           this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
@@ -405,7 +405,7 @@ export class ChatService {
           });
           resolve(this.conservationObj[chat_union_ids].chatList);
           // console.log('### >>> send message ...end');
-          return conversation;
+          // return conversation;
         } else {
           console.log('### >>> not found conversaction or create failed!!!');
           reject('### >>> not found conversaction or create failed!!!');
