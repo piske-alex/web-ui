@@ -92,7 +92,7 @@
       <div class="gz-edit-label">
         <gz-i18n key="otc.transactionPrice"></gz-i18n>
       </div>
-      <div><input type="number" [(ngModel)]="ad.price" maxlength="13"></div>
+      <div><input type="text" [(ngModel)]="ad.price" #price  (keyup)="onKeyPress_Price(price.value)"></div>
     </div>
     <div class="gz-edit-right">
       <span *ngIf="currency">{{currency.code}}</span>
@@ -159,7 +159,7 @@
       <div class="gz-edit-label">
         <gz-i18n key="otc.minCount"></gz-i18n>
       </div>
-      <input type="number" [(ngModel)]="ad.minCount" maxlength="13">
+      <input type="text" [(ngModel)]="ad.minCount" #minCnt  (keyup)="onKeyPress_Min(minCnt.value)">
     </div>
     <div class="gz-edit-right">
       <span *ngIf="currency">{{currency.code}}</span>
@@ -171,7 +171,7 @@
       <div class="gz-edit-label">
         <gz-i18n key="otc.maxCount"></gz-i18n>
       </div>
-      <input type="number" [(ngModel)]="ad.maxCount" maxlength="13">
+      <input type="text" [(ngModel)]="ad.maxCount" #maxCnt  (keyup)="onKeyPress_Max(maxCnt.value)" />
     </div>
     <div class="gz-edit-right">
       <span *ngIf="currency">{{currency.code}}</span>

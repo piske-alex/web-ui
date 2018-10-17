@@ -37,20 +37,23 @@
         <h3>{{data.data.username}}</h3>
         <div>{{i18ns.transaction}} {{data.data.transaction_count}} | 
           <gz-i18n key="trust.praise"></gz-i18n> {{data.data.positive_count}}% | 
-          <gz-i18n key="trust.trust"></gz-i18n> {{data.data.trust_count}}</div>
+          <gz-i18n key="trust.trust"></gz-i18n> {{data.data.trust_count}}
+        </div>
+          <div class="gz-list-tr-right">
+              <div>{{getDealWithHimDesc(data.data)}}</div>
+          </div>
       </div>
+      
     </div>
-    <div class="gz-list-tr-right">
-      <div>{{getDealWithHimDesc(data.data)}}</div>
-    </div>
+    
     <div class="gz-list-tr-right">
 
-        <div class="btn btn-primary" *ngIf="relationShip == 1" (click)="cancelTrustList(data.data.id)">
+        <div class="btn btn-primary" *ngIf="relationShip == 1" (click)="cancelTrustList(data.id)">
             <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
             {{this.i18ns.cancel_trust}}
           </div>
           
-      <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.data.id)">
+      <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.id)">
         <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
         {{this.i18ns.cancel_black}}
       </div>

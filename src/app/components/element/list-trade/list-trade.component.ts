@@ -54,7 +54,8 @@ export class ListTradeComponent implements OnInit {
     this.i18ns.sale = await this.languageService.get('common.sale');
     this.i18ns.noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
     this.i18ns.payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
-
+    this.i18ns.orderNo = await this.languageService.get('otc.orderNo');
+    this.i18ns.orderCreateTime = await this.languageService.get('my_ad.order_create_time');
     this.loginUserId = localStorage.getItem('user_id');
   }
 

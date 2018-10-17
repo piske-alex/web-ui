@@ -24,7 +24,6 @@ export class AdOrdersComponent implements OnInit {
   anotherUserId: string;
 
   adType: string;
-  isNoData: boolean;
 
 
 
@@ -68,14 +67,16 @@ export class AdOrdersComponent implements OnInit {
     this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
     this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
     this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
-
+    this.i18ns.noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
+    this.i18ns.payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
+    
     this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
     this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
     this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
 
     try {
        this.adData = await this.adService.getOtcAdById({ adid: this.adId });
-      // console.log('ad', this.adData);
+       console.log('ad', this.adData);
       // this.adUserId = this.data.userId;
 
       await this.adService.getOrder({adid: this.adId}).then( (data) => {
@@ -89,12 +90,9 @@ export class AdOrdersComponent implements OnInit {
           }
           return 0;
         });
-        this.isNoData = false;
         // console.log('adid orders1', this.orders);
       } , error => {
-        if (error.error == 'order not found') {
-          this.isNoData = true;
-        }
+        console.log('adid orders2', error);
       });
       // this.orders = _result.data;
      // const loginUserId = localStorage.getItem('user_id');

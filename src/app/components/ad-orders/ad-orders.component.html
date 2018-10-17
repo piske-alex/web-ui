@@ -26,15 +26,15 @@
       <div class="gz-list-tr-left">
           
           <div class="gz-list-td">{{this.i18ns.order_id}}: {{data.id}} </div>
-          <div class="gz-list-td" *ngIf="data.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} </div>
-          <div class="gz-list-td" *ngIf="data.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} </div>
-          <div class="gz-list-td" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} </div>
-          <div class="gz-list-td" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} </div>
+          <div class="gz-list-td" *ngIf="data.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} <span *ngIf="data.payment_status === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.payment_status === 1">{{this.i18ns.payed}}</span></div>
+          <div class="gz-list-td" *ngIf="data.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} <span *ngIf="data.payment_status === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.payment_status === 1">{{this.i18ns.payed}}</span></div>
+          <div class="gz-list-td" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} <span *ngIf="data.payment_status === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.payment_status === 1">{{this.i18ns.payed}}</span></div>
+          <div class="gz-list-td" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} <span *ngIf="data.payment_status === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.payment_status === 1">{{this.i18ns.payed}}</span></div>
           <div class="gz-list-td">{{this.i18ns.order_user_id}}: {{data.userid}} </div>
                
          
           <div class="gz-list-td">{{this.i18ns.order_amount}}: {{data.amount}} </div>
-          <div class="gz-list-td">{{this.i18ns.order_create_time}}: {{data.create_time * 1000  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_create_time}}: {{data.create_time  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
           <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 1">{{this.i18ns.do_rating}}: {{this.i18ns.rating_1}} </div>
           <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 0">{{this.i18ns.do_rating}}: {{this.i18ns.rating_0}} </div>
           <div class="gz-list-tr-detail">   
@@ -57,7 +57,7 @@
         
       </div>
     </section>
-    <div class="align_center" *ngIf="isNoData">{{this.i18ns.has_no_order}}</div>
+    <div class="align_center" *ngIf="!orders">{{this.i18ns.has_no_order}}</div>
     
 
   

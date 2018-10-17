@@ -108,7 +108,6 @@ export class PostAdComponent implements OnInit {
     this.i18ns.input_minCount = await this.languageService.get('otc.input_minCount');
     this.i18ns.input_maxCount = await this.languageService.get('otc.input_maxCount');
     this.i18ns.input_maxCountMoreThanMin = await this.languageService.get('otc.input_maxCountMoreThanMin');
-    this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
   }
 
   goBack() {
@@ -327,16 +326,13 @@ export class PostAdComponent implements OnInit {
         // this.location.back();
         this.router.navigate(['/otc', { adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode }]);
       }, error => {
-        this._isSubmiting = false;
         console.error('---------------------error_publishOtcAd: ', error);
         if (error.status === 403 && error.error.userGroup === 'user') {
           this.dialogService.alert(this.i18ns.onlyRealUser);
+          this._isSubmiting = false;
         } else {
-          if (error.error == 'Insufficient balance') {
-            this.dialogService.alert(this.i18ns.insufficient_balance);
-          } else {
-            this.dialogService.alert(error.error);
-          }
+          this.dialogService.alert(error.message);
+          this._isSubmiting = false;
         }
       });
     } catch (e) {
@@ -344,9 +340,6 @@ export class PostAdComponent implements OnInit {
       console.error(e);
       this.dialogService.alert(e && e.errMsg || this.i18ns.publishError);
     }
-
-
-   
   }
 
   private _validateRemark(): string {
@@ -367,5 +360,60 @@ export class PostAdComponent implements OnInit {
     }
     return '';
   }
+
+  onKeyPress_Price(value: any) {
+    this.ad.price = this.changeValidNumber(value,  2, 28);
+  }
+
+  onKeyPress_Min(value: any) {
+    this.ad.minCount = this.changeValidNumber(value,  2, 28);
+  }
+
+  onKeyPress_Max(value: any) {
+    this.ad.maxCount = this.changeValidNumber(value,  2, 28);
+  }
+
+  changeValidNumber(objValue,  point , integerLen) {
+    let tmpVal = objValue;
+    // 先把非数字的都替换掉，除了数字和
+    tmpVal = tmpVal.replace(/[^\d\.]/g, '');
+    // 必须保证第一个为数字而不是
+    tmpVal = tmpVal.replace(/^\./g, '');
+    // 保证只有出现一个.而没有多个
+    tmpVal = tmpVal.replace(/\.{2,}/g, '');
+    // 保证.只出现一次，而不能出现两次以上
+    tmpVal = tmpVal.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
+    // 开头多余2个0，只保留一个 000.5 => 0.5
+    tmpVal = tmpVal.replace(/^(0{2,})/, "0");
+
+    const p6 = /(\.+)(\d+)(\.+)/g; // 屏蔽1....234.的情况
+    tmpVal = tmpVal.replace(p6, '$1$2'); // 屏蔽最后一位的.
+
+    if (point != undefined && !isNaN(point) && point == 0) { // 如果没有小数位,则不输入小数点
+        tmpVal = tmpVal.replace(/\./g, '');
+    }
+
+    if (point != undefined && !isNaN(point) && point > 0) {
+        var ind = tmpVal.indexOf(".");
+        if (ind != -1) {
+            point = parseInt(point);
+            tmpVal = tmpVal.substring(0, ind + 1 + point);
+        }
+    }
+    if (integerLen != undefined && !isNaN(integerLen) && integerLen > 0) {
+        var ind = tmpVal.indexOf(".");
+        if (ind != -1) {
+            if (ind + 1 > integerLen) {
+                var afterPoint = tmpVal.substr(ind);
+                var integerPart = tmpVal.substr(0, integerLen);
+                tmpVal = integerPart + afterPoint;
+            }
+        } else {
+            tmpVal = tmpVal.substr(0, integerLen);
+        }
+    }
+    return tmpVal;
+}
+
 
 }
