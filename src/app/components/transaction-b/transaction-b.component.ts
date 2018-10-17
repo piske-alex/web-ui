@@ -285,13 +285,17 @@ export class TransactionBComponent implements OnInit {
 
 
 onblur_pay() {
-  this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
-  this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+  if (this.payAmount) {
+    this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
+    this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+  }
 }
 
 onblur_receive() {
-  this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
-  this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+  if (this.receiveAmount) {
+    this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
+    this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+  }
 }
 
 

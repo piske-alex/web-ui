@@ -345,7 +345,8 @@
     "language":"语言",
     "lang_en":"English",
     "lang_zh_cn":"简体中文",
-    "lang_hk":"繁体中文"
+    "lang_hk":"繁体中文",
+    "set_paypass_first": "请先设置资金密码"
   },
   "user_trans_password": {
     "trans_password": "资金密码",

@@ -31,15 +31,17 @@
   <section class="gz-list-tr" *ngFor="let data of list">
     <div class="gz-list-tr-left">
       <div class="gz-list-tr-head">
-        <img src="{{data.avatar | avatar}}" alt="">
+        <img src="{{data.data.avatar | avatar}}" alt="">
       </div>
       <div class="gz-list-tr-detail">
-        <h3>{{data.username}}</h3>
-        <div>{{i18ns.transaction}} {{data.transactionCount}} | <gz-i18n key="trust.praise"></gz-i18n> {{data.praiseCount}} | <gz-i18n key="trust.trust"></gz-i18n> {{data.trustCount}}</div>
+        <h3>{{data.data.username}}</h3>
+        <div>{{i18ns.transaction}} {{data.data.transaction_count}} | 
+          <gz-i18n key="trust.praise"></gz-i18n> {{data.data.positive_count}}% | 
+          <gz-i18n key="trust.trust"></gz-i18n> {{data.data.trust_count}}</div>
       </div>
     </div>
     <div class="gz-list-tr-right">
-      <div>{{getDealWithHimDesc(data)}}</div>
+      <div>{{getDealWithHimDesc(data.data)}}</div>
     </div>
     <div class="gz-list-tr-right">
 

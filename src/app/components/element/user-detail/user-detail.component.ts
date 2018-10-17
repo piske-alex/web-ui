@@ -82,6 +82,7 @@ export class UserDetailComponent implements OnInit {
     try {
       let _result = await this.userService.addBlackList({userid: this.userId, action: 'add'});
       this.data.is_in_my_black_list = true;
+      this.data = await this.userService.getDetail({userid: this.userId});
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);
@@ -92,6 +93,7 @@ export class UserDetailComponent implements OnInit {
     try {
       let _result = await this.userService.addTrustList({userid: this.userId, action: 'add'});
       this.data.is_in_my_trust_list = true;
+      this.data = await this.userService.getDetail({userid: this.userId});
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);
@@ -102,6 +104,7 @@ export class UserDetailComponent implements OnInit {
     try {
       let _result = await this.userService.addBlackList({userid: this.userId, action: 'remove'});
       this.data.is_in_my_black_list = false;
+      this.data = await this.userService.getDetail({userid: this.userId});
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);
@@ -112,6 +115,7 @@ export class UserDetailComponent implements OnInit {
     try {
       let _result = await this.userService.addTrustList({userid: this.userId, action: 'remove'});
       this.data.is_in_my_trust_list = false;
+      this.data = await this.userService.getDetail({userid: this.userId});
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);

@@ -106,14 +106,15 @@
       <div class="gz-warn"><gz-i18n key="transaction.order_warn"></gz-i18n></div>
     </div>
     <div class="gz-popup-btn-row">
-      <div (click)="cancelTransaction()">
-        <span *ngIf="data.adType == '1'">{{i18ns.cancel_buy}}</span>
-        <span *ngIf="data.adType == '2'">{{i18ns.cancel_sell}}</span>
-      </div>
+      
       <div (click)="confirmTransaction()">        
         <span *ngIf="data.adType == '1'">{{i18ns.confirm_buy}}</span>
         <span *ngIf="data.adType == '2'">{{i18ns.confirm_sell}}</span>
       </div>
+      <div (click)="cancelTransaction()">
+          <span *ngIf="data.adType == '1'">{{i18ns.cancel_buy}}</span>
+          <span *ngIf="data.adType == '2'">{{i18ns.cancel_sell}}</span>
+        </div>
     </div>
   </div>
 </div>

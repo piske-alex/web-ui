@@ -36,12 +36,9 @@ export class MyComponent implements OnInit {
       if (_user) {
         this.isHadLogin = true;
         this.user = JSON.parse(_user);
-      }
-
-      this.userId = localStorage.getItem('user_id');
-      if (!this.userId) {
+        this.userId = this.user.id;
+      } else {
         this.isHadLogin = false;
-
         localStorage.removeItem('user_id');
         localStorage.removeItem('user');
         localStorage.removeItem('login_timestamp');

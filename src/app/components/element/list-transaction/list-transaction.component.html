@@ -1,5 +1,5 @@
 <section class="gz-list-tr" *ngFor="let data of transactionList">
-  <div class="gz-list-tr-left" *ngIf='data.userId != userId'>
+  <div class="gz-list-tr-left" >
     <div class="gz-list-tr-head">
       <img src="{{data.userHeadUrl | avatar}}" (click)="toUserDetail(data.userId)">
       <div class="btn btn-outline-orange gz-sm" *ngIf="data.isRealUser">
@@ -34,7 +34,7 @@
         <gz-i18n key="element_list_trans.bt_bank_transfer"></gz-i18n>
       </span> -->
       
-      <div class="gz-list-cell_15">
+      <div class="gz-list-cell_20">
         <gz-i18n key="element_list_trans.trans"></gz-i18n> {{data.transactionCount || 0}} 
         | 
         <gz-i18n key="element_list_trans.praise"></gz-i18n> {{data.praiseCount || ''}} 
@@ -45,7 +45,7 @@
         <gz-i18n key="element_list_trans.limit_amount"></gz-i18n> {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
     </div>
   </div>
-  <div class="gz-list-tr-right"  *ngIf='data.userId != userId'>
+  <div class="gz-list-tr-right"  >
     <div class="gz-currency-large gz-list-cell_30">{{data.rate}} {{data.transactionCurrency}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransactionB(data)" *ngIf="data.userId != userId && adType == '1'"><gz-i18n key="element_list_trans.sell_btc"></gz-i18n>{{data.transactionCoinType}}</div>
     <div class="btn btn-primary gz-circle" (click)="toTransaction(data)" *ngIf="data.userId != userId && adType == '2'"><gz-i18n key="element_list_trans.buy_btc"></gz-i18n>{{data.transactionCoinType}}</div>

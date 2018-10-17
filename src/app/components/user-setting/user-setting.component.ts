@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from '../../providers/user/user.service';
 import { User } from '../../models/user/user';
+import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-user-setting',
@@ -13,10 +15,13 @@ export class UserSettingComponent implements OnInit {
 
   userId: string;
   user: User = new User();
+  i18ns: any = {};
 
   constructor(private location: Location,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    private languageService: LanguageService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -34,6 +39,7 @@ export class UserSettingComponent implements OnInit {
       console.error(e);
     }
     this.user = await this.userService.getDetail({ id: this.userId });
+    this.i18ns.set_paypass_first = await this.languageService.get('user_setting.set_paypass_first');
   }
 
   goBack() {
@@ -42,8 +48,12 @@ export class UserSettingComponent implements OnInit {
   }
 
   goToVerify() {
-     if (!this.user.kycStatus  || this.user.kycStatus === 'unverified' ) {
-      this.router.navigate(['/userRealCert']);
+    if (!this.user.payPass ) {
+      return this.dialogService.alert(this.i18ns.set_paypass_first);
+     } else {
+      if (!this.user.kycStatus  || this.user.kycStatus === 'unverified' ) {
+        this.router.navigate(['/userRealCert']);
+       }
      }
   }
 

@@ -6,7 +6,7 @@ export class TransactionListItem {
   userHeadUrl: string; // 用户头像 url
   username: string; // 用户名
   transactionCount: number; // 交易数量
-  praiseCount: number; // 好评
+  praiseCount: string; // 好评
   trustCount: number; // 信任
   limitMinAmount: number; // 限额 最小
   limitMaxAmount: number; // 限额 最大
@@ -26,6 +26,7 @@ export class TransactionListItem {
   is_payment_wp: boolean;
   is_payment_pp: boolean;
   is_payment_bt: boolean;
+  order_count: number;
 
 
   constructor() {
@@ -63,6 +64,12 @@ export class TransactionListItem {
       _item.adType = '2';
     }
     _item.remark = obj.message;
+
+    _item.transactionCount = obj.transaction_count; // 交易数量
+    _item.praiseCount =  String(obj.positive_count) + '%'; // 好评
+    _item.trustCount = obj.trust_count; // 信任
+
+    _item.order_count = obj.order_count;
 
     return _item;
   }

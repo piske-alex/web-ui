@@ -255,18 +255,17 @@ export class OrderDetailComponent implements OnInit {
   }
 
   async sellOrder() {
-    this.isShowPayPassword = true;
-  }
-
-  cancelSellerConfirm() {
     this.dialogService.confirm({ content: this.i18ns.confirm_markReceive }).subscribe(async res => {
       if (res) {
         this.isShowPayPassword = true;
       } else {
         this.isShowPayPassword = false;
-          return;
       }
     });
+  }
+
+  cancelSellerConfirm() {
+    this.isShowPayPassword = false;
   }
 
   confirmSellerConfirm() {
@@ -278,9 +277,11 @@ export class OrderDetailComponent implements OnInit {
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
         action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
-      this.location.back();
-      this.location.back();
-    });
+          this.location.back();
+          this.location.back();
+        }, err => {
+          this.dialogService.alert(err.error);
+        });
     } catch (e) {
       console.log('err-sellerconfirm', e);
       this.dialogService.alert(e.message);

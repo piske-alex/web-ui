@@ -16,6 +16,21 @@
     <p><gz-i18n key="user_setting.personal_safety_settings"></gz-i18n></p>
   </section>
   <section class="gz-my-group">
+      <div class="gz-my-row" routerLink="/userTransactionPassword">
+        <div class="gz-my-left">
+          <div>
+            <!--<fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>-->
+          </div>
+          <div><gz-i18n key="user_setting.money_password"></gz-i18n></div>
+        </div>
+        <div class="gz-my-right">
+          <div>
+            <span *ngIf="!user.payPass"><gz-i18n key="user_setting.not_set"></gz-i18n></span>
+            <span *ngIf="user.payPass"><gz-i18n key="user_setting.had_set"></gz-i18n></span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
+        </div>
+      </div>
     <div class="gz-my-row" (click)="goToVerify()">
       <div class="gz-my-left">
         <div>
@@ -31,22 +46,7 @@
           <fa-icon *ngIf="!user.kycStatus || user.kycStatus == 'unverified'"  [icon]="['fas', 'chevron-right']"></fa-icon>
         </div>
       </div>
-    </div>
-    <div class="gz-my-row" routerLink="/userTransactionPassword">
-      <div class="gz-my-left">
-        <div>
-          <!--<fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>-->
-        </div>
-        <div><gz-i18n key="user_setting.money_password"></gz-i18n></div>
-      </div>
-      <div class="gz-my-right">
-        <div>
-          <span *ngIf="!user.payPass"><gz-i18n key="user_setting.not_set"></gz-i18n></span>
-          <span *ngIf="user.payPass"><gz-i18n key="user_setting.had_set"></gz-i18n></span>
-          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-        </div>
-      </div>
-    </div>
+    </div>    
   </section>
 
   <section class="gz-form-head">

@@ -58,7 +58,7 @@ export class TrustListComponent implements OnInit {
 
   getDealWithHimDesc(data) {
     if (this.i18ns.iDealWithHimCount) {
-      return this.i18ns.iDealWithHimCount.replace('${1}', data.dealWithMeCount || 0);
+      return this.i18ns.iDealWithHimCount.replace('${1}', data.deal_with_me_count || 0);
     } else {
       return '';
     }
@@ -73,7 +73,7 @@ export class TrustListComponent implements OnInit {
   private async getUserList() {
     try {
       this.list = await this.userService.getUserList({ relationship: this.relationShip });
-      // console.log('getUserList', this.list);
+       console.log('trust getUserList', this.list);
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);

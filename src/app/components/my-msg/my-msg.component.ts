@@ -31,8 +31,8 @@ export class MyMsgComponent implements OnInit {
 
   async ngOnInit() {
 
-    const _accessToken = localStorage.getItem('access_token');
-    if (!_accessToken) {
+    const user = localStorage.getItem('user');
+    if (!user) {
       this.router.navigate(['/login']);
       return;
     }
@@ -56,7 +56,7 @@ export class MyMsgComponent implements OnInit {
    getUnReadCount() {
      this.chatService.loginAndGetChatDialogList().then((data) => {
 
-      console.log('my msg data', data);
+      console.log('my msg data222', data);
       let list1: Array<any> = new Array();
       let list2: Array<any> = new Array();
       for (const item of data) {

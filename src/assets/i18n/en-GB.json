@@ -344,7 +344,8 @@
     "language":"Language",
     "lang_en":"English",
     "lang_zh_cn":"Simplified Chinese",
-    "lang_hk":"Traditional Chinese"
+    "lang_hk":"Traditional Chinese",
+    "set_paypass_first": "Please set fund password at first"
   },
   "user_trans_password": {
     "trans_password": "Fund password",

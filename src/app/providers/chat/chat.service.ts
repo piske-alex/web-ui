@@ -196,7 +196,9 @@ export class ChatService {
   }
 
   loginAndGetChatDialogList(): Promise<any> {
+    console.log('--------------loginAndGetChatDialogList----: ');
     if (this.isLogin && this.chat) {
+      console.log('--------------loginAndGetChatDialogList----if: ');
       const _user = localStorage.getItem('user');
       this.user = JSON.parse(_user);
       this.currentLoginUserId = this.user.id;
@@ -237,7 +239,7 @@ export class ChatService {
               this.receive();
             }
           });
-          // console.log('currentLoginUserId22', this.chat_topic_keyword);
+          console.log('currentLoginUserId11', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])
@@ -273,6 +275,7 @@ export class ChatService {
       });
 
     } else {
+      console.log('--------------loginAndGetChatDialogList----else: ');
       const _user = localStorage.getItem('user');
       this.user = JSON.parse(_user);
       this.currentLoginUserId = this.user.id;
@@ -456,12 +459,12 @@ export class ChatService {
             // console.log('message::count:::::', messages.length);
             // console.log('message::this.user.id:::::', this.user.id);
 
-            resolve(this.conservationObj[chat_union_ids].chatList);
-
             // 进入到对话页面时标记其为已读
             conversation.read().then(function(conversation2) {
-              // console.log('对话已标记为已读');
+               console.log('对话已标记为已读');
             }).catch(console.error.bind(console));
+
+            resolve(this.conservationObj[chat_union_ids].chatList);
 
              return conversation;
           }).catch(console.error.bind(console));

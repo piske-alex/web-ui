@@ -126,6 +126,8 @@ export class OtcComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       const _result = await this.adService.listTransactionList(_params);
       this.isLoading = false;
+      // console.error('otc -list ', _result);
+
       // this.adList = _result.list.sort((obj1, obj2) => {
       //   if (obj1.rate > obj2.rate) {
       //       return 1;
