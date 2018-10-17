@@ -79,7 +79,7 @@
   </section>
 
   <section class="gz-row-btn">
-    <div class="btn btn-default gz-circle" (click)="cancelOrder()" *ngIf="this.isShowCancel">
+    <div class="btn btn-primary gz-circle" (click)="cancelOrder()" *ngIf="this.isShowCancel">
       <gz-i18n key="otc.cancelTransaction"></gz-i18n>
     </div>
     <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellDispute" (click)="sellMarkDispute()">

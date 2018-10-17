@@ -27,11 +27,12 @@
       <div class="btn btn-outline-blue gz-circle" *ngIf="data.adType == '1'" (click)="toTransaction(data)">
         {{i18ns.buy}} {{data.transactionCoinType}}
       </div> -->
-      <div class="btn btn-outline-blue gz-circle"  (click)="toAdOrders(data)">
+      <div class="btn btn-outline-blue gz-circle" *ngIf="adStatus == 'active' " (click)="obtained(data)">
+        <gz-i18n key="transaction.obtained"></gz-i18n>
+      </div>
+      <div class="btn btn-outline-blue gz-circle"  (click)="toAdOrders(data)" >
           <gz-i18n key="my_ad.ad_orders_title"></gz-i18n> {{data.order_count}}
       </div>
-      <div class="btn btn-outline-blue gz-circle" *ngIf="adStatus == 'active' " (click)="obtained(data)">
-          <gz-i18n key="transaction.obtained"></gz-i18n>
-      </div>
+      
     </div>
   </section>

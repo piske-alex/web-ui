@@ -21,7 +21,7 @@ export class ChatService {
 
   constructor() {
     this.initChat();
-    this.chat_topic_keyword = 'dev01';
+    this.chat_topic_keyword = 'dev02';
   }
 
   initChat() {
@@ -33,20 +33,22 @@ export class ChatService {
       appKey: 'Pd10DELIIqFQkIkNJdv490IW',
       region: 'cn', // 美国节点为 "us"
     });
+
   }
 
   loginChat() {
-    // console.log('### >>> loginChat:::', this.isLogin);
+     console.log('### >>> loginChat:::', this.isLogin);
     if (this.isLogin) {
       return;
     }
+    const chat_top = this.chat_topic_keyword;
     const _user = localStorage.getItem('user');
     try {
       if (this.realtime && _user) {
         this.user = JSON.parse(_user);
         this.currentLoginUserId = this.user.id;
 
-        // console.log('### >>> create im client:::', this.user.id);
+         console.log('### >>> create im client:::', this.user);
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
@@ -70,13 +72,19 @@ export class ChatService {
             this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
             this.conservationObj[chat_union_ids].conversation = conversation;
             this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
-            this.conservationObj[chat_union_ids].chatList.push({
-              from: _from,
-              content: _text,
-              avatar: _avatar,
-              sendTimestamp: _sendTimestamp,
-              isMe: _from == this.user.id,
-            });
+
+            const _topic = message.getAttributes().topic;
+
+              if (_topic && _topic == chat_top ) {
+                this.conservationObj[chat_union_ids].chatList.push({
+                  from: _from,
+                  content: _text,
+                  avatar: _avatar,
+                  sendTimestamp: _sendTimestamp,
+                  isMe: _from == this.user.id,
+                });
+             }
+
             if (this.receive) {
               this.receive();
             }
@@ -93,73 +101,73 @@ export class ChatService {
     }
   }
 
-  loginChatTest(loginUserId: number) {
-    // console.log('### >>> loginChat:::', this.isLogin);
-    if (this.isLogin) {
-      return;
-    }
-    const _user = localStorage.getItem('user');
-    try {
-      if (this.realtime && _user) {
-        this.user = JSON.parse(_user);
-        this.currentLoginUserId = this.user.id;
+  // loginChatTest(loginUserId: number) {
+  //   // console.log('### >>> loginChat:::', this.isLogin);
+  //   if (this.isLogin) {
+  //     return;
+  //   }
+  //   const _user = localStorage.getItem('user');
+  //   try {
+  //     if (this.realtime && _user) {
+  //       this.user = JSON.parse(_user);
+  //       this.currentLoginUserId = this.user.id;
 
-        // console.log('### >>> create im client:::', this.user.id);
-        this.realtime.createIMClient(String(this.user.id)).then(chat => {
-          this.chat = chat;
-          this.isLogin = true;
-          chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            // console.log('------------------message: ', message);
-            const _from = message.from;
-            const _adId = message.getAttributes().for;
-            const _adUserId = message.getAttributes().adUserId;
-            const _anotherUserId = message.getAttributes().anotherUserId;
-            const _orderId = message.getAttributes().orderId;
-            const _avatar = message.getAttributes().avatar;
-            const _sendTimestamp = message.getAttributes().sendTimestamp;
-            const _text = message.text;
+  //       // console.log('### >>> create im client:::', this.user.id);
+  //       this.realtime.createIMClient(String(this.user.id)).then(chat => {
+  //         this.chat = chat;
+  //         this.isLogin = true;
+  //         chat.on(AV.Event.MESSAGE, (message, conversation) => {
+  //           // console.log('------------------message: ', message);
+  //           const _from = message.from;
+  //           const _adId = message.getAttributes().for;
+  //           const _adUserId = message.getAttributes().adUserId;
+  //           const _anotherUserId = message.getAttributes().anotherUserId;
+  //           const _orderId = message.getAttributes().orderId;
+  //           const _avatar = message.getAttributes().avatar;
+  //           const _sendTimestamp = message.getAttributes().sendTimestamp;
+  //           const _text = message.text;
 
-            let chat_union_ids = '';
-            if (Number(_adUserId) > Number(_anotherUserId)) {
-              chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
-            } else {
-              chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
-            }
+  //           let chat_union_ids = '';
+  //           if (Number(_adUserId) > Number(_anotherUserId)) {
+  //             chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
+  //           } else {
+  //             chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
+  //           }
 
-            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
-            this.conservationObj[chat_union_ids].conversation = conversation;
-            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
-            this.conservationObj[chat_union_ids].chatList.push({
-              from: _from,
-              content: _text,
-              avatar: _avatar,
-              sendTimestamp: _sendTimestamp,
-              isMe: _from == this.user.id,
-            });
+  //           this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+  //           this.conservationObj[chat_union_ids].conversation = conversation;
+  //           this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+  //           this.conservationObj[chat_union_ids].chatList.push({
+  //             from: _from,
+  //             content: _text,
+  //             avatar: _avatar,
+  //             sendTimestamp: _sendTimestamp,
+  //             isMe: _from == this.user.id,
+  //           });
 
-            // console.log('conservationObj======', this.conservationObj);
-            if (this.receive) {
-              this.receive();
-            }
-          });
+  //           // console.log('conservationObj======', this.conservationObj);
+  //           if (this.receive) {
+  //             this.receive();
+  //           }
+  //         });
 
-          // chat.on(AV.Event.UNREAD_MESSAGES_COUNT_UPDATE, function(conversations) {
-          //   for (let conv of conversations) {
-          //     console.log(conv.id, conv.name, conv.unreadMessagesCount);
-          //   }
-          // });
+  //         // chat.on(AV.Event.UNREAD_MESSAGES_COUNT_UPDATE, function(conversations) {
+  //         //   for (let conv of conversations) {
+  //         //     console.log(conv.id, conv.name, conv.unreadMessagesCount);
+  //         //   }
+  //         // });
 
-        }).catch(console.error);
-      } else {
-        console.log('### >>> realtime or user is null');
-        setTimeout(() => {
-          this.loginChat();
-        }, 5000);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  //       }).catch(console.error);
+  //     } else {
+  //       console.log('### >>> realtime or user is null');
+  //       setTimeout(() => {
+  //         this.loginChat();
+  //       }, 5000);
+  //     }
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   getConversationLocal(adId, adUserId, anotherUserId): any {
     return new Promise((resolve, reject) => {
@@ -181,7 +189,7 @@ export class ChatService {
          _conversation =
         this.chat.createConversation({
           members: [String(adUserId), String(anotherUserId)],
-          name: String(chat_union_ids),
+          name: String(chat_union_ids) + '_' + this.chat_topic_keyword,
           transient: false,
           unique: true,
         }).then(conversation => {
@@ -239,7 +247,8 @@ export class ChatService {
               this.receive();
             }
           });
-          console.log('currentLoginUserId11', this.chat_topic_keyword);
+          console.log('currentLoginUserId11', this.user.id);
+          console.log('topic keyword', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])
@@ -409,15 +418,16 @@ export class ChatService {
   }
 
   updateChatList(adId, adUserId, anotherUserId, orderId): Promise<any> {
+
     const chat_top = this.chat_topic_keyword;
 
     return new Promise(async (resolve, reject) => {
       const conversation = await this.getConversationLocal(adId, adUserId, anotherUserId);
-      
+
       if (conversation) {
-        conversation.queryMessages({limit: 500})
+        conversation.queryMessages({limit: 1000})
           // .contains('topic', this.chat_topic_keyword)
-          .then(messages => {
+          .then(messageses => {
             let chat_union_ids = '';
             if (Number(adUserId) > Number(anotherUserId)) {
               chat_union_ids = String(adUserId) + '_' + String(anotherUserId) + '_' + String(adId) ;
@@ -427,10 +437,10 @@ export class ChatService {
 
             this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
             this.conservationObj[chat_union_ids].conversation = conversation;
-            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+            // this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
 
             this.conservationObj[chat_union_ids].chatList = [];
-            (messages || []).forEach(message => {
+            (messageses || []).forEach(message => {
               // console.log('message:::::::', message);
               if (!message.getAttributes()) {
                 console.log('### >>> message get attribute is null......');
@@ -466,11 +476,12 @@ export class ChatService {
 
             resolve(this.conservationObj[chat_union_ids].chatList);
 
-             return conversation;
           }).catch(console.error.bind(console));
       }
     });
   }
+
+
 
   closeChatClient() {
     this.isLogin = false;

@@ -50,7 +50,7 @@ export class ListChatingComponent implements OnInit {
     this.anotherUser = await this.userService.getDetail({ id: this.anotherUserId });
 
     console.log('adUser', this.adUser);
-     console.log('anotherUser', this.anotherUser);
+    console.log('anotherUser', this.anotherUser);
 
     setTimeout(() => {
       this.refreshchatlist();
