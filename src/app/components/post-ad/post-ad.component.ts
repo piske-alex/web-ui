@@ -108,6 +108,7 @@ export class PostAdComponent implements OnInit {
     this.i18ns.input_minCount = await this.languageService.get('otc.input_minCount');
     this.i18ns.input_maxCount = await this.languageService.get('otc.input_maxCount');
     this.i18ns.input_maxCountMoreThanMin = await this.languageService.get('otc.input_maxCountMoreThanMin');
+    this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
   }
 
   goBack() {
@@ -326,13 +327,16 @@ export class PostAdComponent implements OnInit {
         // this.location.back();
         this.router.navigate(['/otc', { adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode }]);
       }, error => {
+        this._isSubmiting = false;
         console.error('---------------------error_publishOtcAd: ', error);
         if (error.status === 403 && error.error.userGroup === 'user') {
           this.dialogService.alert(this.i18ns.onlyRealUser);
-          this._isSubmiting = false;
         } else {
-          this.dialogService.alert(error.message);
-          this._isSubmiting = false;
+          if (error.error == 'Insufficient balance') {
+            this.dialogService.alert(this.i18ns.insufficient_balance);
+          } else {
+            this.dialogService.alert(error.error);
+          }
         }
       });
     } catch (e) {

@@ -48,12 +48,12 @@
     
     <div class="gz-list-tr-right">
 
-        <div class="btn btn-primary" *ngIf="relationShip == 1" (click)="cancelTrustList(data.id)">
+        <div class="btn btn-primary" *ngIf="relationShip == 1" (click)="cancelTrustList(data.data.id)">
             <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
             {{this.i18ns.cancel_trust}}
           </div>
           
-      <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.id)">
+      <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.data.id)">
         <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
         {{this.i18ns.cancel_black}}
       </div>
