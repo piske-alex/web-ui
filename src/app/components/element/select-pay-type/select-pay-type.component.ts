@@ -54,10 +54,13 @@ export class SelectPayTypeComponent implements OnInit {
     this.done.emit(this.data);
   }
 
-  async toSelect() {
+  async toSelect(header:string) {
     this._init();
     this.isShowSelect = true;
-    this.selectHead = await this.languageService.get('select.currency');
+    if(header && header!== undefined && header !== ""){
+      this.selectHead = header;
+    }else
+      this.selectHead = await this.languageService.get('select.currency');
   }
 
   selectCancel() {

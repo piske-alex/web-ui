@@ -109,6 +109,7 @@ export class PostAdComponent implements OnInit {
     this.i18ns.input_maxCount = await this.languageService.get('otc.input_maxCount');
     this.i18ns.input_maxCountMoreThanMin = await this.languageService.get('otc.input_maxCountMoreThanMin');
     this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
+    this.i18ns.payType =  await this.languageService.get('otc.payType');
   }
 
   goBack() {
@@ -254,7 +255,7 @@ export class PostAdComponent implements OnInit {
   }
 
   toSelectPayType() {
-    this.selectPayTypeComponent.toSelect();
+    this.selectPayTypeComponent.toSelect(this.i18ns.payType);
   }
 
   selectPayType(data) {

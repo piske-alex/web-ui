@@ -96,7 +96,7 @@
         <div class="swiper-container footcs">
           <ul class="gz-ad-slide-imgs swiper-wrapper" *ngIf="otcTransactions.length > 0">
             <li class="swiper-slide" *ngFor="let otcAds of otcTransactions">
-              <div class="{{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds">
+              <div class="adCls {{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds">
                 <div>
                   <img src="{{otcAd.avatar | avatar}}">
                 </div>

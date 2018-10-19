@@ -79,6 +79,9 @@ export class LoginComponent implements OnInit {
     if (this.focusInput === inputName) {
       this.focusInput = '';
     }
+    if (inputName === "phone") {
+      this.phone = this.phone.replace(/\s+/g,'');
+    }
   }
 
   isFocus(inputName: string): string {

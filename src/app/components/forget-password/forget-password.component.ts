@@ -19,6 +19,7 @@ export class ForgetPasswordComponent implements OnInit {
   smsCode: string;
   password: string;
   resendSmsCodeDelay: number = 0;
+  passwordWarn: string = '';
 
   isShowPassword: boolean;
   focusInput: string;
@@ -55,6 +56,9 @@ export class ForgetPasswordComponent implements OnInit {
     this.i18ns.inputValidPhone = await this.languageService.get('user.inputValidPhone');
     this.i18ns.setting_password_relogin = await this.languageService.get('user.setting_password_relogin');
     this.i18ns.setting_password_fail = await this.languageService.get('user.setting_password_fail');
+    this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
+    this.i18ns.password_valid_warn_1 = await this.languageService.get('register.password_valid_warn_1');
+    this.i18ns.password_valid_warn_2 = await this.languageService.get('register.password_valid_warn_2');
   }
 
   goBack() {
@@ -68,6 +72,9 @@ export class ForgetPasswordComponent implements OnInit {
   blur(inputName: string) {
     if (this.focusInput === inputName) {
       this.focusInput = '';
+    }
+    if (inputName === 'password') {
+      this._validatePassword();
     }
   }
 
@@ -131,8 +138,15 @@ export class ForgetPasswordComponent implements OnInit {
             this.router.navigate(['/login']);
         }, error => {
           console.error('----------------forgetPassword-----error: ', error);
-          if (error.error.success === false && error.error.errmsg !== undefined) {
-            this.dialogService.alert(error.error.errmsg);
+          if(error.success === false){
+            if(error.error === "user not found"){
+              this.dialogService.alert(this.i18ns.inputValidPhone);
+            }
+          }else if (error.error.success === false && error.error.errmsg !== undefined) {
+            if(error.error.errmsg == "Invalid verification code")
+              this.dialogService.alert(this.i18ns.invalid_verification_code);
+            else
+              this.dialogService.alert(error.error.errmsg);
           } else {
             this.dialogService.alert(this.i18ns.setting_password_fail);
           }
@@ -142,6 +156,18 @@ export class ForgetPasswordComponent implements OnInit {
       console.error(e);
     }
 
+  }
+
+  private _validatePassword(): boolean {
+    this.password = this.password || '';
+    if (this.password.length < 8) {
+      this.passwordWarn = this.i18ns.password_valid_warn_1;
+    } else if (!/[A-Z]{1,}/g.test(this.password) || !/[a-z]{1,}/g.test(this.password) || !/[\d]{1,}/g.test(this.password)) {
+      this.passwordWarn = this.i18ns.password_valid_warn_2;
+    } else {
+      this.passwordWarn = '';
+    }
+    return this.passwordWarn.length === 0;
   }
 
 }

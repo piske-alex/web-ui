@@ -140,7 +140,7 @@ body .gz-app {
     right: 0;
     padding: 20px;
     background: $article_bg;
-
+    z-index: 99;
     p {
       margin: 0;
     }

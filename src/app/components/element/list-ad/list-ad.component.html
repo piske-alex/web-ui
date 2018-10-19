@@ -3,7 +3,7 @@
       <div class="gz-list-tr-detail">
           <div class="gz-list-cell_8 float_left" *ngIf="data.adType=='1'">{{this.i18ns.sale}} {{data.transactionCoinType}}</div>
           <div class="gz-list-cell_8 float_left" *ngIf="data.adType=='2'">{{this.i18ns.buy}} {{data.transactionCoinType}}</div>
-          <div class="gz-list-cell_15 float_left"><span class="sh3"> {{i18ns.bid}}: {{data.rate}} {{data.transactionCurrency}} </span></div>
+          <div class="gz-list-cell_20 float_left"><span class="sh3"> {{i18ns.bid}}: {{data.rate | cnyFormat}} {{data.transactionCurrency}} </span></div>
           <div class="gz-list-cell_20 float_left">
               <img src="/assets/images/pay_ap.jpg" title="{{this.i18ns.ap_alipay}}" alt="{{this.i18ns.ap_alipay}}"  class="gz-icon" *ngIf="data.is_payment_ap">
               <img src="/assets/images/pay_wp.jpg" title="{{this.i18ns.wp_wechatpay}}" alt="{{this.i18ns.wp_wechatpay}}"  class="gz-icon" *ngIf="data.is_payment_wp">
