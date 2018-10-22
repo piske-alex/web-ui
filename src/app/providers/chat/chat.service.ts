@@ -188,7 +188,7 @@ export class ChatService {
         // console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
          _conversation =
         this.chat.createConversation({
-          members: [String(adUserId), String(anotherUserId)],
+          members: [String(adUserId), String(anotherUserId), String(chat_union_ids) + '_' + this.chat_topic_keyword],
           name: String(chat_union_ids) + '_' + this.chat_topic_keyword,
           transient: false,
           unique: true,

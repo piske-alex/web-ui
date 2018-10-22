@@ -72,6 +72,7 @@ export class TransactionComponent implements OnInit {
     this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
     this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
     this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
+    this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
