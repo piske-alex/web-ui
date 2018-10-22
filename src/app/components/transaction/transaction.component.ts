@@ -159,7 +159,10 @@ export class TransactionComponent implements OnInit {
       }
     }, error => {
       console.error('---------------------error_transaction: ', error);
-      if (error.status === 403 && error.error.userGroup === 'user') {
+      if(error.error === "Insufficient balance"){
+        this.dialogService.alert(this.i18ns.insufficient_balance);
+      }
+      else if (error.status === 403 && error.error.userGroup === 'user') {
         this.dialogService.alert(this.i18ns.onlyRealUser);
       } else {
         this.dialogService.alert(error.error);

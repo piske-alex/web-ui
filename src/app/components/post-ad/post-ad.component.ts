@@ -348,16 +348,20 @@ export class PostAdComponent implements OnInit {
   }
 
   private _validateRemark(): string {
-    if (!this.ad.price || this.ad.price <= 0) {
+    let price = isNaN(Number(this.ad.price)) ? 0 : Number(this.ad.price);
+    let minCnt = isNaN(Number(this.ad.minCount)) ? 0 : Number(this.ad.minCount);
+    let maxCnt = isNaN(Number(this.ad.maxCount)) ? 0 : Number(this.ad.maxCount);
+
+    if (price <= 0) {
       return this.i18ns.input_price;
     }
-    if (!this.ad.minCount ||  this.ad.minCount <= 0) {
+    if (minCnt <= 0) {
       return this.i18ns.input_minCount;
     }
-    if (!this.ad.maxCount ||  this.ad.maxCount <= 0) {
+    if (maxCnt <= 0) {
       return this.i18ns.input_maxCount;
     }
-    if (this.ad.maxCount < this.ad.minCount) {
+    if (maxCnt < minCnt) {
       return this.i18ns.input_maxCountMoreThanMin;
     }
     if (!this.ad.remark || this.ad.remark.trim() == "") {
@@ -367,15 +371,15 @@ export class PostAdComponent implements OnInit {
   }
 
   onKeyPress_Price(value: any) {
-    this.ad.price = this.changeValidNumber(value,  2, 28);
+    this.ad.price = this.changeValidNumber(value,  2, 28) ;
   }
 
   onKeyPress_Min(value: any) {
-    this.ad.minCount = this.changeValidNumber(value,  2, 28);
+    this.ad.minCount = this.changeValidNumber(value,  2, 28) ;
   }
 
   onKeyPress_Max(value: any) {
-    this.ad.maxCount = this.changeValidNumber(value,  2, 28);
+    this.ad.maxCount = this.changeValidNumber(value,  2, 28) ;
   }
 
   changeValidNumber(objValue,  point , integerLen) {

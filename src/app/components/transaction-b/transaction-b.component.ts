@@ -75,6 +75,7 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
     this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
     this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
+    this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
@@ -161,7 +162,10 @@ export class TransactionBComponent implements OnInit {
       }
     }, error => {
       console.error('---------------------error_transaction: ', error);
-      if (error.status === 403 && error.error.userGroup === 'user') {
+      if(error.error === "Insufficient balance"){
+        this.dialogService.alert(this.i18ns.insufficient_balance);
+      }
+      else if (error.status === 403 && error.error.userGroup === 'user') {
         this.dialogService.alert(this.i18ns.onlyRealUser);
       } else {
         this.dialogService.alert(error.error);
