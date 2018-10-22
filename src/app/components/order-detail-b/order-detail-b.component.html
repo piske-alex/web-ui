@@ -124,9 +124,12 @@
   <div class="gz-popup-content">
     <h3><gz-i18n key="user_trans_password.input_trans_password"></gz-i18n></h3>
     <div class="gz-popup-row">
-        <input type="password"  placeholder="{{this.i18ns.input_trans_password}}"
-             [(ngModel)]="paypassword"  autocomplete="new-password"  maxlength="40"
-             >
+        <input type="password"  placeholder="{{this.i18ns.input_trans_password}}" *ngIf="!isShowPassword"
+             [(ngModel)]="paypassword"  autocomplete="new-password"  maxlength="40"> 
+        <input type="text"  placeholder="{{this.i18ns.input_trans_password}}" *ngIf="isShowPassword"
+             [(ngModel)]="paypassword"  autocomplete="new-password"  maxlength="40"> 
+        <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
+        <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
     </div>
     
     <div class="gz-popup-btn-row">

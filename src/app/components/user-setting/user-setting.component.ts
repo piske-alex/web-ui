@@ -30,14 +30,14 @@ export class UserSettingComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    try {
-      const _user = localStorage.getItem('user');
-      if (_user) {
-        this.user = JSON.parse(_user);
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    // try {
+    //   const _user = localStorage.getItem('user');
+    //   if (_user) {
+    //     this.user = JSON.parse(_user);
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
     this.user = await this.userService.getDetail({ id: this.userId });
     this.i18ns.set_paypass_first = await this.languageService.get('user_setting.set_paypass_first');
   }

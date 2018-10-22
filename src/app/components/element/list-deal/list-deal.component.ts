@@ -44,8 +44,10 @@ export class ListDealComponent implements OnInit {
     this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
     this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
     this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
+    this.i18ns.orderNo = await this.languageService.get('otc.orderNo');
     this.i18ns.noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
     this.i18ns.payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
+    this.i18ns.orderCreateTime = await this.languageService.get('my_ad.order_create_time');
 
   }
 

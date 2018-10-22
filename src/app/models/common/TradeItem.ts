@@ -49,7 +49,7 @@ export class TradeItem {
       _item.updateTime = obj.update_time;
       
       _item.type = obj.type;
-      _item.userHeadUrl = "";
+      _item.userHeadUrl = obj.avatar;
       _item.username = "";
       _item.currency = obj.legal_currency;
       _item.tradeCurrency = obj.crypto_currency;

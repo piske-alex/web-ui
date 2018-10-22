@@ -93,6 +93,7 @@ export class OtcComponent implements OnInit, OnDestroy {
     this.i18ns.listError = await this.languageService.get('otc.listError');
 
     // this.loadList();
+    this.follow();
 
     this.autoScroll();
   }
@@ -301,4 +302,37 @@ export class OtcComponent implements OnInit, OnDestroy {
   isActiveAdType(adType: string) {
     return this.filter.adType === adType ? 'gz-active' : '';
   }
+
+  follow(){
+    let oDiv: any = document.getElementsByClassName("fixPara")[0],
+        H = 0;
+    let Y: any = oDiv;   
+    let origCls = oDiv.className; 
+    let origTop = oDiv.style.top;
+    let origWidth = document.getElementsByClassName("gz-header-container")[0].clientWidth;
+    let gdTop = document.getElementsByClassName("gz-header-container")[0].clientHeight + document.getElementsByClassName("gz-pc-menu")[0].clientHeight;
+    let adHeight = document.getElementsByClassName("adSwiperHeader")[0].clientHeight;
+    while (Y) {
+        H += Y.offsetTop; 
+        Y = Y.offsetParent;
+    }
+    window.onscroll = function()
+    {
+        var s = document.body.scrollTop || document.documentElement.scrollTop;
+        
+        if(s > adHeight) {
+            //console.log(origWidth)
+            oDiv.style.top = gdTop + "px";
+            oDiv.style.position = "fixed";
+            oDiv.style.width = origWidth + "px";
+            
+        } else {
+            oDiv.style.top = origTop;
+            oDiv.style.position = "";
+          }
+    }
+  }
+
+
+
 }

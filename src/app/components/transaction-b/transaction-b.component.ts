@@ -149,7 +149,7 @@ export class TransactionBComponent implements OnInit {
       const _result = data;
       const _orderId = _result.orderid;
       console.log('order', _result);
-      if (_result.order_is_new) {
+      if (_result.order_is_new == 'true') {
         this.router.navigate(['/orderDetailB', { orderId: _orderId,
           adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
       } else {
@@ -162,7 +162,7 @@ export class TransactionBComponent implements OnInit {
       }
     }, error => {
       console.error('---------------------error_transaction: ', error);
-      if(error.error === "Insufficient balance"){
+      if (error.error === "Insufficient balance") {
         this.dialogService.alert(this.i18ns.insufficient_balance);
       }
       else if (error.status === 403 && error.error.userGroup === 'user') {

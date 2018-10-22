@@ -56,7 +56,9 @@
   <article>
     <app-swiper-slide >
     </app-swiper-slide>
-    <nav>
+  </article>
+  <article>
+    <nav class="fixPara">
       <ul class="nav">
         <li class="nav-item {{filter.coinType === type.code ? 'active' : ''}}" *ngFor="let type of coinTypes"
             (click)="selectType(type)">
@@ -64,7 +66,8 @@
         </li>
       </ul>
     </nav>
-
+  </article>
+  <article>
     <div class="gz-transaction-list">
       <gz-list-transaction *ngIf="!isLoading" [transactionList]="adList" [adType]="filter.adType"></gz-list-transaction>
       <div class="loader" *ngIf="isLoading">Loading...</div>

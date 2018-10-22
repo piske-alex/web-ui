@@ -18,6 +18,7 @@ export class MyMsgComponent implements OnInit {
   chatList: any[] = [];
   chatDlgList: any ;
   i18ns: any = {};
+  currentLoginUserId: string;
 
   constructor(private location: Location,
     private router: Router,
@@ -37,6 +38,8 @@ export class MyMsgComponent implements OnInit {
       return;
     }
 
+    this.currentLoginUserId = localStorage.getItem('user_id');
+
     this.i18ns.myMsg = await this.languageService.get('otc.myMsg');
     this.i18ns.chat_with_members = await this.languageService.get('my_msg.chat_with_members');
     this.i18ns.unread_count = await this.languageService.get('my_msg.unread_count');
@@ -54,9 +57,31 @@ export class MyMsgComponent implements OnInit {
   }
 
    getUnReadCount() {
+     const currentUserId = this.currentLoginUserId;
      this.chatService.loginAndGetChatDialogList().then((data) => {
 
       console.log('my msg data222', data);
+
+      for (const item of data) {
+        if (item.lastMessage._lcattrs.adUserId == currentUserId ) {
+          if (item.lastMessage._lcattrs.anotherUserName != undefined
+            && item.lastMessage._lcattrs.anotherUserName != '') {
+            item.chatwith = item.lastMessage._lcattrs.anotherUserName;
+          } else {
+            item.chatwith = item.lastMessage._lcattrs.anotherUserId;
+          }
+        } else {
+          if (item.lastMessage._lcattrs.adUserName != undefined
+              && item.lastMessage._lcattrs.adUserName != '') {
+            item.chatwith = item.lastMessage._lcattrs.adUserName;
+          } else {
+            item.chatwith = item.lastMessage._lcattrs.adUserId;
+          }
+        }
+      }
+
+    //   this.adUser = await this.userService.getDetail({ userid: this.adUserId });
+
       let list1: Array<any> = new Array();
       let list2: Array<any> = new Array();
       for (const item of data) {

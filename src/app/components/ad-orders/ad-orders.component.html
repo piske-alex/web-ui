@@ -33,8 +33,8 @@
           <div class="gz-list-td">{{this.i18ns.order_user_id}}: {{data.userid}} </div>
                
          
-          <div class="gz-list-td">{{this.i18ns.order_amount}}: {{data.amount}} </div>
-          <div class="gz-list-td">{{this.i18ns.order_create_time}}: {{data.create_time  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_amount}}: {{data.amount | cnyFormat}} </div>
+          <div class="gz-list-td">{{this.i18ns.order_create_time}}: {{data.create_time * 1000  | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
           <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 1">{{this.i18ns.do_rating}}: {{this.i18ns.rating_1}} </div>
           <div class="gz-list-td" *ngIf="data.is_rating == 1 && data.order_rating == 0">{{this.i18ns.do_rating}}: {{this.i18ns.rating_0}} </div>
           <div class="gz-list-tr-detail">   

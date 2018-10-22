@@ -34,7 +34,8 @@ export class OrderDetailBComponent implements OnInit {
   isShowBuyDispute: boolean;
   isShowSellDispute: boolean;
   isShowSellConfirm: boolean;
-
+  isShowPassword: boolean;
+  
   paypassword: string;
   isShowPayPassword: boolean;
 
@@ -388,5 +389,9 @@ export class OrderDetailBComponent implements OnInit {
       this.chatmsg = '';
     }
 
+  }
+
+  showPassword(show: boolean) {
+    this.isShowPassword = show;
   }
 }

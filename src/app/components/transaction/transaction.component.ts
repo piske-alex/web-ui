@@ -147,7 +147,7 @@ export class TransactionComponent implements OnInit {
       const _result = data;
       const _orderId = _result.orderid;
        console.log('order', _result);
-      if (_result.order_is_new) {
+      if (_result.order_is_new == 'true') {
         this.router.navigate(['/orderDetail', { orderId: _orderId,
           adId: this.data.adId, adUserId: this.data.userId, anotherUserId: this.userId }]);
       } else {
