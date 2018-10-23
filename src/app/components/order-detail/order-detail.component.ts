@@ -76,49 +76,59 @@ export class OrderDetailComponent implements OnInit {
     this.orderId = this.route.snapshot.paramMap.get('orderId');
 
     try {
-      this.order = await this.adService.getOrder({orderid: this.orderId});
-      console.log('this.order', this.order);
-      if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
-        if (this.order.payment_status == '1') { // had paid
-          this.stopInterval();
-          this.isStop = true;
-          if (this.isAdOwner) { // sell
+      let initNewStatus;
+      let getNewStatusFn = async () =>{
+          this.order = await this.adService.getOrder({orderid: this.orderId});
+          console.log('this.order', this.order);
+          if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
+            if (this.order.payment_status == '1') { // had paid
+              if(initNewStatus !== undefined)
+                clearInterval(initNewStatus);
+              this.stopInterval();
+              this.isStop = true;
+              if (this.isAdOwner) { // sell
+                this.isShowCancel = false;
+                this.isShowBuyPay = false;
+                this.isShowBuyDispute = false;
+                this.isShowSellDispute = true;
+                this.isShowSellConfirm = true;
+              } else { // buy
+                this.isShowCancel = false;
+                this.isShowBuyPay = false;
+                this.isShowBuyDispute = true;
+                this.isShowSellDispute = false;
+                this.isShowSellConfirm = false;
+              }
+            } else { // not paid
+              if (this.isAdOwner) { // sell
+                this.isShowCancel = false;
+                this.isShowBuyPay = false;
+                this.isShowBuyDispute = false;
+                this.isShowSellDispute = true;
+                this.isShowSellConfirm = true;
+              } else { // buy
+                this.isShowCancel = true;
+                this.isShowBuyPay = true;
+                this.isShowBuyDispute = false;
+                this.isShowSellDispute = false;
+                this.isShowSellConfirm = false;
+              }
+            }
+          } else { //  finish, canceled, dispute
             this.isShowCancel = false;
             this.isShowBuyPay = false;
             this.isShowBuyDispute = false;
-            this.isShowSellDispute = true;
-            this.isShowSellConfirm = true;
-          } else { // buy
-            this.isShowCancel = false;
-            this.isShowBuyPay = false;
-            this.isShowBuyDispute = true;
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
+            if(initNewStatus !== undefined)
+                clearInterval(initNewStatus);
+            this.stopInterval();
+            this.isStop = true;
           }
-        } else { // not paid
-          if (this.isAdOwner) { // sell
-            this.isShowCancel = false;
-            this.isShowBuyPay = false;
-            this.isShowBuyDispute = false;
-            this.isShowSellDispute = true;
-            this.isShowSellConfirm = true;
-          } else { // buy
-            this.isShowCancel = true;
-            this.isShowBuyPay = true;
-            this.isShowBuyDispute = false;
-            this.isShowSellDispute = false;
-            this.isShowSellConfirm = false;
-          }
-        }
-      } else { //  finish, canceled, dispute
-        this.isShowCancel = false;
-        this.isShowBuyPay = false;
-        this.isShowBuyDispute = false;
-        this.isShowSellDispute = false;
-        this.isShowSellConfirm = false;
-        this.stopInterval();
-        this.isStop = true;
       }
+
+      await getNewStatusFn();
+      initNewStatus = setInterval(getNewStatusFn,5000);
 
 
 
