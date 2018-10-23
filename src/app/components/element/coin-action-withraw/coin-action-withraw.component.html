@@ -8,11 +8,11 @@
   <div class="gz-action-withraw-row">
     <div class="gz-label">{{coinType}}<gz-i18n key="element_coin_withraw.coin_amount"></gz-i18n></div>
     <div class="gz-input">
-      <input type="number" [(ngModel)]="amount" placeholder="{{this.i18ns.input_amount}}">
+      <input type="number" [(ngModel)]="amount" placeholder="{{this.i18ns.input_amount}}" maxlength="18">
     </div>
   </div>
   <div class="gz-action-withraw-info">
-    <gz-i18n key="element_coin_withraw.max_send"></gz-i18n>{{coinBalance.balance | coinNumber}}{{coinType}}
+    <gz-i18n key="element_coin_withraw.max_send"></gz-i18n>{{coinBalance.balance | btcFormat}} {{coinType}}
   </div>
   <div class="gz-action-withraw-row gz-input">
     <input type="text" [(ngModel)]="remark" placeholder="{{this.i18ns.remark}}">
@@ -53,7 +53,7 @@
       </div>
       <div>
         <span><gz-i18n key="element_coin_withraw.withraw_amount"></gz-i18n>: </span>
-        <span>{{transaction.amount | coinNumber}}{{transaction.coin}}</span>
+        <span>{{transaction.amount | btcFormat}} {{transaction.coin}}</span>
       </div>
     </div>
   </div>

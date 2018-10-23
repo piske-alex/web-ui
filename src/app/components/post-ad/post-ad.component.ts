@@ -371,15 +371,15 @@ export class PostAdComponent implements OnInit {
   }
 
   onKeyPress_Price(value: any) {
-    this.ad.price = this.changeValidNumber(value,  2, 28) ;
+    this.ad.price = this.changeValidNumber(value,  2, 10) ;
   }
 
   onKeyPress_Min(value: any) {
-    this.ad.minCount = this.changeValidNumber(value,  2, 28) ;
+    this.ad.minCount = this.changeValidNumber(value,  2, 10) ;
   }
 
   onKeyPress_Max(value: any) {
-    this.ad.maxCount = this.changeValidNumber(value,  2, 28) ;
+    this.ad.maxCount = this.changeValidNumber(value,  2, 10) ;
   }
 
   changeValidNumber(objValue,  point , integerLen) {

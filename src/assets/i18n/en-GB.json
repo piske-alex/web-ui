@@ -88,8 +88,13 @@
     "input_amount":"Please enter the quantity",
     "max_send":"Can send up to ${coinBalance.balance} | ${coinNumber} ${coinType}",
     "remark":"Remarks (only shown in the transaction details)",
+    "input_remark":"Please enter the remarks (only shown in the transaction details)",
     "trans_password":"Transaction password",
     "input_trans_password":"Please enter the fund transaction password",
+    "err_paypassword_invalid":"The transaction password is wrong",
+    "err_address_invalid":"Address invalid",
+    "err_coin_network_error":"Coin network error",
+    "err_insufficient_balance":"Insufficient balance",
     "notice":"Attention",
     "notice_info":"${coinType} Address can only be ${coinType} address sending asset, If not to ${coinType} address sending assets will not be retrieved. ${coinType} Network transfer fee is 0.0005 ${coinType}, The minimum outgoing amount is 0.01  ",
     "confirm_send":"Confirm sending",
@@ -163,6 +168,7 @@
     "lang": "Select Language"
   },
   "otc": {
+    "Unauthorized":"Unauthorized",
     "iBuy": "I Buy",
     "iSell": "I Sell",
     "postAd": "Post Ad",
@@ -393,6 +399,8 @@
     "cancel_sell":"Give up sell",
     "cancel_buy":"Give up buy",
     "trans_confirm_time":"Time of arrival",
+    "buy_sell_has_dispute_order":"buy_sell_has_dispute_order",
+    "reach_maximun_unflnish_order":"reach_maximun_unflnish_order",
     "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息"
   },
   "trust": {
@@ -409,6 +417,8 @@
     "withraw": "Transfer funds",
     "usable": "Available",
     "freeze": "Freeze",
+    "cnyprice": "Price",
+    
     "selectCoin": "Select a cryptocurrency",
     "depositWillReceiveHelp": "<p>Tips</p><p>In ${coinTYpe} network reception ${coinTYpe} usually takes 10 minutes, we will receive ${coinTYpe} after the network confirms, it will be credited to you. The minimum deposit amount is 0.01 ${coinTYpe}, we will not process less than this amount ${coinTYpe} deposit request, transfers to each other within the platform are real-time and free of charge.</p>"
   },

@@ -1,28 +1,65 @@
 @import "../../../constants";
 
-.gz-order-detail {
-  padding: 20px;
 
-  .gz-order-delay {
-
-  }
-
-  .gz-row {
+.gz-chat-list {
+  border: 2px solid white;
+  
+  .chat-time {
     display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
+    justify-content: center;
+    color: $link_default_color;
   }
 
-  .gz-row-1 {
-    border-bottom: 1px solid $border_default;
-    padding: 10px 0;
-    font-size: 18px;
-  }
-
-  .gz-row-btn {
+  .gz-chat-me, .gz-chat-other {
     display: flex;
-    justify-content: space-around;
+    margin-bottom: 10px;
 
+    .headImg {
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+    }
+
+    .gz-chat-content {
+      min-height: 40px;
+      max-width: 80%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      // background-color: $chat_bg_color;
+      color: $chat_font_color;
+    }
+
+    .gz-chat-content-me {
+      min-height: 40px;
+      max-width: 80%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      background-color: $chat_bg_color;
+      color: $chat_font_color;
+    }
+
+  }
+
+  .gz-chat-me {
+    justify-content: flex-end;
+
+    .gz-chat-content {
+      margin-right: 10px;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .gz-chat-other {
+    justify-content: flex-start;
+
+    .gz-chat-content {
+      margin-left: 10px;
+      border-top-left-radius: 0;
+    }
   }
 
 }
@@ -32,7 +69,4 @@
   overflow-y: auto;
   border: 2px solid white;
   margin-top: 10px;
-}
-.chatmsg{
-  width:100%;
 }

@@ -48,6 +48,7 @@ export class WalletComponent implements OnInit {
     this.i18ns.withraw = await this.languageService.get('wallet.withraw');
     this.i18ns.usable = await this.languageService.get('wallet.usable');
     this.i18ns.freeze = await this.languageService.get('wallet.freeze');
+    this.i18ns.cnyprice = await this.languageService.get('wallet.cnyprice');
 
     this.loadAccount();
   }
@@ -74,13 +75,22 @@ export class WalletComponent implements OnInit {
       let _coins = await this.walletService.walletBalance({coin: '', accountType: 'otc'});
       this.coinList = [];
       for (let _coin in _coins) {
+        // console.log(_coin);
+        let _rate = await this.commonService.getCoinRate(_coin, this.defaultCurrency);
+        // console.log(_rate);
         let _data = _coins[_coin];
         this.coinList.push({
           coinType: _coin,
-          usableAmount: _data.balance,
+          balanceAmount: _data.balance,
+          usableAmount: (+_data.balance -  +_data.locked),
           freezeAmount: _data.locked,
+          rate: _rate.value,
+          currency: this.defaultCurrency,
         });
       }
+
+      let totalAmountCNY: number;
+      totalAmountCNY = 0;
       if (this.coinList && this.coinList.length > 0) {
         let _data = this.coinList[0];
         let _rate = await this.commonService.getCoinRate(_data.coinType, this.defaultCurrency);
@@ -88,14 +98,14 @@ export class WalletComponent implements OnInit {
           coinType: _data.coinType,
           usableAmount: _data.usableAmount,
           freezeAmount: _data.freezeAmount,
-          totalAmount: (+_data.usableAmount + +_data.freezeAmount).toFixed(8),
+          totalAmount: _data.balanceAmount, // (+_data.usableAmount + +_data.freezeAmount).toFixed(8),
           rate: _rate.value,
           currencyAmount: '0.00',
           currency: this.defaultCurrency,
         };
-        this.mainCoin.currencyAmount = (this.mainCoin.totalAmount * this.mainCoin.rate).toFixed(2);
+        totalAmountCNY = totalAmountCNY +  (this.mainCoin.totalAmount * this.mainCoin.rate);
       }
-
+      this.mainCoin.currencyAmount = totalAmountCNY.toFixed(2);
       this.isLoading = false;
 
     } catch (e) {

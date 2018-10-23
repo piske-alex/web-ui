@@ -1,54 +1,29 @@
 <header class="gz-header-container">
     <div class="gz-header">
       <div>
-        <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
       </div>
       <div class="gz-title">
-        <gz-i18n key="otc.order"></gz-i18n>
       </div>
       <div></div>
     </div>  
   </header>
   
-<article>
-    <div class="btn btn-outline-blue gz-circle" (click)="updateChatList()">
-        3 updateChatList
-        </div>
-    <div>
-    
-        loginUserId<input name="loginUserId" [(ngModel)]="loginUserId">
-        <br>
+  <article class="gz-chat-list">
+    <section *ngFor="let chat of chatingList">
+      <div class="chat-time" *ngIf="chat.sendTime">{{chat.sendTimestamp | date: 'MM:dd:HH:mm:ss'}}</div>
+      <div class="gz-chat-me" *ngIf="chat.isMe">
+        <div class="gz-chat-content-me">{{chat.content}}</div>
         
-        adUserId<input name="adUserId" [(ngModel)]="adUserId">
-        <br>
-        anotherUserId<input name="anotherUserId" [(ngModel)]="anotherUserId">
-        <br>
-        adId<input name="adId" [(ngModel)]="adId">
-        <br>
-        orderId<input name="orderId" [(ngModel)]="orderId">
-        <br>
-        
+        <img class="headImg" src="{{chat.avatar | avatar}}">
+        <div class="gz-chat-content">{{chat.adUserName}}</div>
       </div>
-
-  
-    <div class="div_list_chat">
-        <gz-list-chating *ngIf="adId" 
-        [adId]="adId" 
-        [adUserId]="adUserId" 
-        [anotherUserId]="anotherUserId" 
-        [orderId]="orderId"
-        [chatTitle]="Order"></gz-list-chating>
-    </div>
-  
-    <footer>
-        <div><hr/></div>
-        <div>
-            <textarea  rows="3" name="chatmsg" [(ngModel)]="chatmsg" class="chatmsg" ></textarea>
-        </div>
-        <div class="btn btn-outline-blue gz-circle" (click)="sendChatMsg()">
-            <gz-i18n key="transaction.trans_send"></gz-i18n>
-        </div>
-    </footer>
-  
+      <div class="gz-chat-other" *ngIf="!chat.isMe">
+          <div class="gz-chat-content">{{chat.anotherUserName}}</div>
+        <img class="headImg" src="{{chat.avatar | avatar}}">
+        
+        <div class="gz-chat-content">{{chat.content}}</div>
+      </div>
+    </section>
   </article>
+  
   

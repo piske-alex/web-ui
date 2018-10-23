@@ -37,7 +37,7 @@ export class ListChatingComponent implements OnInit {
               private chatService: ChatService,
               private dialogService: DialogService) {
 
-    this.chatService.loginChat();
+      this.chatService.loginChat();
   }
 
   async ngOnInit() {
@@ -73,7 +73,7 @@ export class ListChatingComponent implements OnInit {
       this.chatService.send(this.adId, this.adUserId, this.anotherUserId, this.orderId, message,
         this.adUser.username, this.anotherUser.username)
       .then(async (data) => {
-        console.error('---------------------ok_send: ', data);
+       // console.error('---------------------ok_send: ', data);
         this.chatingList = data;
         this._updateScroll();
       }, error => {

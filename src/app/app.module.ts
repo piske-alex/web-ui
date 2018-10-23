@@ -74,6 +74,7 @@ import { TransactionBComponent } from './components/transaction-b/transaction-b.
 import { BtcFormatPipe } from './pipes/btcFormat/btc-format.pipe';
 import { AdShowComponent } from './components/ad-show/ad-show.component';
 import { CnyFormatPipe } from './pipes/cnyFormat/cny-format.pipe';
+import { RateFormatPipe } from './pipes/rateFormat/rate-format.pipe';
 import { SwiperSlideComponent } from './components/element/swiper-slide/swiper-slide.component';
 import { MyMsgComponent } from './components/my-msg/my-msg.component';
 import { ChatingComponent } from './components/chating/chating.component';
@@ -148,6 +149,7 @@ const createTranslateLoader = function (http: HttpClient) {
     BtcFormatPipe,
     AdShowComponent,
     CnyFormatPipe,
+    RateFormatPipe,
     SwiperSlideComponent,
     MyMsgComponent,
     ChatingComponent,

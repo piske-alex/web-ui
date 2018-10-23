@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (!this.phone) {
+    if (!this.phone || this.phone.trim() == '') {
       return this.dialogService.alert(this.i18ns.inputPhone);
     }
 

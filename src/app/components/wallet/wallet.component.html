@@ -40,6 +40,7 @@
         <div class="gz-coin-amount">
           <div>{{i18ns.usable}} {{data.usableAmount | btcFormat}}</div>
           <div>{{i18ns.freeze}} {{data.freezeAmount | btcFormat}}</div>
+          <div>{{data.rate | rateFormat}} {{data.currency}}/{{data.coinType}}</div>
         </div>
       </div>
       <div>

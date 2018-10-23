@@ -392,7 +392,7 @@ export class ChatService {
             sendTimestamp: Date.now(),
           });
           conversation.send(_textMessage);
-           console.log('### >>> send message ...', _textMessage);
+           // console.log('### >>> send message ...', _textMessage);
           this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
           this.conservationObj[chat_union_ids].conversation = conversation;
           this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
@@ -486,7 +486,9 @@ export class ChatService {
   closeChatClient() {
     this.isLogin = false;
     console.log('closeChatClient');
-     this.chat.close().then(function() {  }).catch(console.error.bind(console));
+    if (this.chat) {
+      this.chat.close().then(function() {  }).catch(console.error.bind(console));
+    }
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WalletService } from '../../../providers/wallet/wallet.service';
 import { LanguageService } from '../../../providers/language/language.service';
+import { DialogService } from '../../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'gz-coin-action-withraw',
@@ -19,7 +20,7 @@ export class CoinActionWithrawComponent implements OnInit {
   amount: number | string;
   remark: string;
   paypassword: string;
- 
+
 
   coinBalance: { balance: string, locked: string, total: string } = {
     balance: '0.00000000',
@@ -33,7 +34,8 @@ export class CoinActionWithrawComponent implements OnInit {
   i18ns: any = {};
 
   constructor(private languageService: LanguageService,
-              private walletService: WalletService) {
+              private walletService: WalletService,
+              private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -42,6 +44,8 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
     this.i18ns.remark = await this.languageService.get('element_coin_withraw.remark');
     this.i18ns.input_trans_password = await this.languageService.get('element_coin_withraw.input_trans_password');
+    this.i18ns.input_amount = await this.languageService.get('element_coin_withraw.input_amount');
+    this.i18ns.input_remark = await this.languageService.get('element_coin_withraw.input_remark');
     this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
     this.i18ns.input_address = this.i18ns.input_address.replace(/\$\{coinType\}/g, this.coinType);
 
@@ -49,6 +53,12 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.notice_info = await this.languageService.get('element_coin_withraw.notice_info');
     this.i18ns.send_address = this.i18ns.send_address.replace(/\$\{coinType\}/g, this.coinType);
     this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{coinType\}/g, this.coinType);
+
+    this.i18ns.err_paypassword_invalid = await this.languageService.get('element_coin_withraw.err_paypassword_invalid');
+    this.i18ns.err_address_invalid = await this.languageService.get('element_coin_withraw.err_address_invalid');
+    this.i18ns.err_coin_network_error = await this.languageService.get('element_coin_withraw.err_coin_network_error');
+    this.i18ns.err_insufficient_balance = await this.languageService.get('element_coin_withraw.err_insufficient_balance');
+    
 
     this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
       data.total = (+data.balance + +data.locked).toFixed(8);
@@ -80,6 +90,22 @@ export class CoinActionWithrawComponent implements OnInit {
   }
 
   async submit() {
+    if (!this.address || this.address.trim() == '') {
+      return this.dialogService.alert(this.i18ns.input_address);
+    }
+
+    if (!this.amount  ) {
+      return this.dialogService.alert(this.i18ns.input_amount);
+    }
+
+    if (!this.paypassword || this.paypassword.trim() == '') {
+      return this.dialogService.alert(this.i18ns.input_trans_password);
+    }
+    
+    if (!this.remark || this.remark.trim() == '') {
+      return this.dialogService.alert(this.i18ns.input_remark);
+    }
+    
 
     let _params = {
       coin: this.coinType,
@@ -96,9 +122,21 @@ export class CoinActionWithrawComponent implements OnInit {
         this.amount = '';
         this.paypassword = '';
         this.remark = '';
+      } else {
+        
       }
     } catch (e) {
-      console.error(e);
+      if (e.error == 'password wrong') {
+        this.dialogService.alert(this.i18ns.err_paypassword_invalid);
+      } else if (e.error == 'address invaild') {
+        this.dialogService.alert(this.i18ns.err_address_invalid);
+      } else if (e.error == 'coin network error') {
+        this.dialogService.alert(this.i18ns.err_coin_network_error);
+      } else if (e.error == 'insufficient balance') {
+        this.dialogService.alert(this.i18ns.err_insufficient_balance);
+      } else {
+        this.dialogService.alert(e.error);
+      }
     }
   }
 

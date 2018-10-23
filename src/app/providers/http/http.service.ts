@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { RouteJson, RouteMap } from '../../models/route-map/route-map.modle';
 import { Observable, Subject } from "rxjs/index";
-
+import { LanguageService } from '../../providers/language/language.service';
 
 @Injectable()
 export class HttpService {
@@ -11,7 +11,7 @@ export class HttpService {
   private isLoading: boolean = false;
   private authSubject: Subject<boolean> = new Subject();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private languageService: LanguageService) {
   }
 
   openLoading() {
@@ -85,7 +85,13 @@ export class HttpService {
               // 如果是401
               this.gotoLogin();
               resolve({success: false, message: error.error || '请先登录!'});
-            } else {
+            } else if(error.success === false){
+              if(error.message === "Unauthorized"){
+                let msg =  this.languageService.get('otc.Unauthorized');
+                resolve({success: false, message: msg});
+              }
+            }
+            else {
               reject(error);
             }
           });

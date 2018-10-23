@@ -70,6 +70,9 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.cancel_sell = await this.languageService.get('transaction.cancel_sell');
     this.i18ns.cancel_buy = await this.languageService.get('transaction.cancel_buy');
     this.i18ns.goto_old_unfinish_order = await this.languageService.get('transaction.goto_old_unfinish_order');
+    this.i18ns.buy_sell_has_dispute_order = await this.languageService.get('transaction.buy_sell_has_dispute_order');
+    this.i18ns.reach_maximun_unflnish_order = await this.languageService.get('transaction.reach_maximun_unflnish_order');
+
 
     this.i18ns.ap_alipay = await this.languageService.get('element_list_trans.ap_alipay');
     this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
@@ -162,10 +165,13 @@ export class TransactionBComponent implements OnInit {
       }
     }, error => {
       console.error('---------------------error_transaction: ', error);
-      if (error.error === "Insufficient balance") {
+      if (error.error === 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.insufficient_balance);
-      }
-      else if (error.status === 403 && error.error.userGroup === 'user') {
+      } else if (error.error === 'buy_sell_has_dispute_order') {
+        this.dialogService.alert(this.i18ns.buy_sell_has_dispute_order);
+      } else if (error.error === 'reach_maximun_unflnish_order') {
+        this.dialogService.alert(this.i18ns.reach_maximun_unflnish_order);
+      } else if (error.status === 403 && error.error.userGroup === 'user') {
         this.dialogService.alert(this.i18ns.onlyRealUser);
       } else {
         this.dialogService.alert(error.error);
