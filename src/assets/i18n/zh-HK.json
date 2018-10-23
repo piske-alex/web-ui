@@ -267,6 +267,8 @@
     "mark_dispute_err_notpaid":"交易尚未支付",
     "mark_receive_err_notpaid":"交易尚未支付",
     "paypassword_invalid":"資金密碼錯誤",
+    "err_PasswordNotActive":"在{0}之前密碼不可用",
+    "order_must_be_unfinish":"交易狀態必須是未完成",
     "mark_dispute_success":"標記爭議成功，系統會進行後續處理。",
     "mark_receive_success":"標記收款成功，系統會進行後續處理。"
   },

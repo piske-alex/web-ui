@@ -136,8 +136,10 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.mark_dispute_err_notpaid = await this.languageService.get('otc.mark_dispute_err_notpaid');
     this.i18ns.mark_receive_err_notpaid = await this.languageService.get('otc.mark_receive_err_notpaid');
     this.i18ns.paypassword_invalid = await this.languageService.get('otc.paypassword_invalid');
+    this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
     this.i18ns.mark_dispute_success = await this.languageService.get('otc.mark_dispute_success');
     this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
+    this.i18ns.order_must_be_unfinish = await this.languageService.get('otc.order_must_be_unfinish');
 
     this.i18ns.order_status = await this.languageService.get('my_ad.order_status');
     this.i18ns.order_status_unfinish = await this.languageService.get('my_ad.order_status_unfinish');
@@ -165,7 +167,9 @@ export class OrderDetailBComponent implements OnInit {
     this.go(createTime);
 
     setTimeout(() => {
-      document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
+      if (document.querySelector('.div_list_chat')) {
+        document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
+      }
     }, 2000);
   }
 
@@ -204,10 +208,10 @@ export class OrderDetailBComponent implements OnInit {
     return i;
  }
 
- stopInterval(){
+ stopInterval() {
     this.isStop = true;
-    this.delayDesc = "";
-    if(this._ordertimer != null){
+    this.delayDesc = '';
+    if (this._ordertimer != null) {
       window.clearInterval(this._ordertimer);
       this._ordertimer = null;
     }
@@ -314,7 +318,12 @@ export class OrderDetailBComponent implements OnInit {
               // order payment has been confirm
               if (err.error.name == 'PasswordInvalid') {
                 this.dialogService.alert(this.i18ns.paypassword_invalid);
-              } else {
+              } else if (err.error.name == 'PasswordNotActive') {
+                let passwordNotActive = this.i18ns.err_PasswordNotActive;
+                const activetime  = err.error.activetoLocaleString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+                passwordNotActive = passwordNotActive.replace('{0}', activetime);
+                this.dialogService.alert(passwordNotActive);
+              }  else {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 }
@@ -340,8 +349,10 @@ export class OrderDetailBComponent implements OnInit {
           );
         }, err => {
           if (err.error) {
-            if (err.error == 'this.i18ns.mark_dispute_err_notpaid') {
-              this.dialogService.alert(err.error);
+            if (err.error == 'buyer_not_paid') {
+              this.dialogService.alert(this.i18ns.mark_dispute_err_notpaid);
+            } else if (err.error == 'the order status must be unfinish') {
+              this.dialogService.alert(this.i18ns.order_must_be_unfinish);
             } else {
               this.dialogService.alert(err.error);
             }
@@ -360,10 +371,18 @@ export class OrderDetailBComponent implements OnInit {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
-          this.location.back();
-          this.location.back();
+          this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
+            res2 => {
+              this.location.back();
+              this.location.back();
+            }
+          );
         }, err => {
-          this.dialogService.alert(err.error);
+          if (err.error == 'the order status must be unfinish') {
+            this.dialogService.alert(this.i18ns.order_must_be_unfinish);
+          } else {
+            this.dialogService.alert(err.error);
+          }
         });
       } else {
           return;

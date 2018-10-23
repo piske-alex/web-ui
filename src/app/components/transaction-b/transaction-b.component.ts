@@ -108,15 +108,15 @@ export class TransactionBComponent implements OnInit {
   }
 
   getLeftTopTxt() {
-    return this.i18ns.transactionLimit + ' ' + this.data.limitMinAmount
-    + '~' + this.data.limitMaxAmount + ' ' + this.data.transactionCurrency;
+    return this.i18ns.transactionLimit + ' ' + this.transform(this.data.limitMinAmount)
+    + '~' + this.transform(this.data.limitMaxAmount) + ' ' + this.data.transactionCurrency;
   }
 
   async transaction() {
     // if (this.data.adType === '1') {
-      let _payDes = this.i18ns.buy;
-      if (!this.receiveAmount) {
-        let inputAmount = this.i18ns.input_x_amount ;
+      let _payDes = this.i18ns.sale;
+      if (!this.payAmount) {
+        let inputAmount = this.i18ns.input_x_number ;
         inputAmount = inputAmount.replace('{BuyOrSell}', _payDes);
         this.dialogService.alert(inputAmount);
       } else if (this.receiveAmount < Number(this.data.limitMinAmount)) {
@@ -306,6 +306,27 @@ onblur_receive() {
     this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
     this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
   }
+}
+
+
+transform(value: any): any {
+  if (!value) {
+    return value;
+  }
+
+  const x = parseFloat(value);
+  const x0 = x.toFixed(2);
+  const x0Str = x0.toString();
+  const i = x0Str.indexOf('.');
+  const x1 = x0Str.substr(0, i);
+  const x2 = x0Str.substr(i + 1);
+
+  const reg1 = /\B(?=(\d{3})+(?!\d))/g; // 12,345,678
+  const xNew = (x1).replace(reg1, '$&,') + '.' + (x2);
+
+  // const reg2 = /\d{1,4}(?=(\d{4})+$)/g; // 1234 5678
+  // let xNew = (x1).replace(reg1, '$&,') + '.' + (x2).replace(reg2, '$& ');
+  return xNew;
 }
 
 
