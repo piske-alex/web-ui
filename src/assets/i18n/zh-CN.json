@@ -60,6 +60,7 @@
     "loading":"加载中...",
     "alert_title":"提示",
     "alert_ok":"确定",
+    "load_more":"... 点击加载更多 ...",
     "confirm_title":"确认"
   },
   "element_coin_deposit":{
@@ -168,6 +169,7 @@
     "lang": "选择语言"
   },
   "otc": {
+    "sellbtc_time":"放币时间",
     "Unauthorized":"未授权",
     "iBuy": "我要购买",
     "iSell": "我要出售",
@@ -262,6 +264,8 @@
     "confirm_markDispute":"确认标记争议?",
     "myMsg":"我的消息",
     "insufficient_balance": "余额不足",
+    "err_adv_seller_insufficient_balance": "广告发布者余额不足",
+    "err_seller_insufficient_balance": "卖家余额不足",
     "not_trans_as_ad_hidden": "广告已下架，不支持交易。",
     "myTradeTitle":"我的交易",
     "mark_dispute_err_notpaid":"交易尚未支付",
@@ -333,6 +337,7 @@
     "input_card_back":"请选择证件反面",
     "input_bust":"请选择半身像",
     "checked_promise":"请选择我承诺",
+    "input_right_image":"请选择图片文件",
     "promise":"我承诺提交的信息属于本人所有，不存在盗用他人证件的行为。",
     "submit":"提交"
   },

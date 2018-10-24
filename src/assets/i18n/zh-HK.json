@@ -60,6 +60,7 @@
     "loading":"加載中...",
     "alert_title":"提示",
     "alert_ok":"確定",
+    "load_more":"... 點擊加載更多 ...",
     "confirm_title":"確認"
   },
   "element_coin_deposit":{
@@ -168,6 +169,7 @@
     "lang": "選擇語言"
   },
   "otc": {
+    "sellbtc_time":"放幣時間",
     "Unauthorized":"未授權",
     "iBuy": "我要購買",
     "iSell": "我要出售",
@@ -262,6 +264,8 @@
     "confirm_markDispute":"確認標記爭議?",
     "myMsg":"我的消息",
     "insufficient_balance": "餘額不足",
+    "err_adv_seller_insufficient_balance": "廣告發佈者餘額不足",
+    "err_seller_insufficient_balance": "賣家餘額不足",
     "not_trans_as_ad_hidden": "廣告已下架，不支持交易。",
     "myTradeTitle":"我的交易",
     "mark_dispute_err_notpaid":"交易尚未支付",
@@ -332,6 +336,7 @@
     "input_card_back":"請選擇證件反面",
     "input_bust":"請選擇半身像",
     "checked_promise":"请選擇我承諾",
+    "input_right_image":"請選擇圖片",
     "promise":"我承諾提交的資訊屬於本人所有，不存在盜用他人證件的行為。",
     "submit":"提交"
   },

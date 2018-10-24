@@ -53,6 +53,8 @@ export class UserRealCertificationComponent implements OnInit {
     this.i18ns.input_card_back = await this.languageService.get('user_real_cert.input_card_back');
     this.i18ns.input_bust = await this.languageService.get('user_real_cert.input_bust');
     this.i18ns.checked_promise = await this.languageService.get('user_real_cert.checked_promise');
+    this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
+
   }
 
   goBack() {
@@ -151,6 +153,12 @@ export class UserRealCertificationComponent implements OnInit {
   async imgChange(event, imgObj) {
     var files = event && event.target && event.target.files;
     if (files) {
+      let fileType = files[0].type.toUpperCase();
+      console.log('fileType', fileType);
+      if (fileType.indexOf('IMAGE') == -1) {
+        return this.dialogService.alert(this.i18ns.input_right_image);
+      }
+
       try {
         let _result: any = await this._getImgB64(files[0]);
         imgObj.src = _result.b64img;

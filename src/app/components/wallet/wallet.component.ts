@@ -92,18 +92,22 @@ export class WalletComponent implements OnInit {
       let totalAmountCNY: number;
       totalAmountCNY = 0;
       if (this.coinList && this.coinList.length > 0) {
-        let _data = this.coinList[0];
-        let _rate = await this.commonService.getCoinRate(_data.coinType, this.defaultCurrency);
-        this.mainCoin = {
-          coinType: _data.coinType,
-          usableAmount: _data.usableAmount,
-          freezeAmount: _data.freezeAmount,
-          totalAmount: _data.balanceAmount, // (+_data.usableAmount + +_data.freezeAmount).toFixed(8),
-          rate: _rate.value,
-          currencyAmount: '0.00',
-          currency: this.defaultCurrency,
-        };
-        totalAmountCNY = totalAmountCNY +  (this.mainCoin.totalAmount * this.mainCoin.rate);
+         let len = this.coinList.length;
+         for (let i = 0; i < len; i++) {
+
+          let _data = this.coinList[i];
+          let _rate = await this.commonService.getCoinRate(_data.coinType, this.defaultCurrency);
+          this.mainCoin = {
+            coinType: _data.coinType,
+            usableAmount: _data.usableAmount,
+            freezeAmount: _data.freezeAmount,
+            totalAmount: _data.balanceAmount, // (+_data.usableAmount + +_data.freezeAmount).toFixed(8),
+            rate: _rate.value,
+            currencyAmount: '0.00',
+            currency: this.defaultCurrency,
+          };
+          totalAmountCNY = totalAmountCNY +  (this.mainCoin.totalAmount * this.mainCoin.rate);
+        }
       }
       this.mainCoin.currencyAmount = totalAmountCNY.toFixed(2);
       this.isLoading = false;

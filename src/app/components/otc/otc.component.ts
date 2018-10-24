@@ -27,6 +27,8 @@ export class OtcComponent implements OnInit, OnDestroy {
   showAddList = false;
   isShowSearch = false;
   isLoading = false;
+  isShowLoadMore = false;
+
   coinTypes: any;
 
   adList: TransactionListItem[];
@@ -37,6 +39,8 @@ export class OtcComponent implements OnInit, OnDestroy {
   currencyCode = 'CNY';
   payTypeCode = 'AP';
   payTypeNames = '';
+
+  
 
   country: Country = new Country();
   coinType: CoinType = new CoinType();
@@ -121,7 +125,7 @@ export class OtcComponent implements OnInit, OnDestroy {
         currency: this.filter.currencyCode,
         payment: this.filter.payTypeCode,
         offset: 0,
-        limit: 1000,
+        limit: 15,
         // userid: '',
       };
       this.isLoading = true;
@@ -138,8 +142,76 @@ export class OtcComponent implements OnInit, OnDestroy {
       //   }
       //   return 0;
       // });
+
       this.adList = _result.list;
       this.adTotal = _result.total;
+
+      if (_result.total > this.adList.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+
+    } catch (e) {
+      this.isLoading = false;
+      console.error(e);
+      if (e.message) {
+        this.dialogService.alert(e.message);
+      }
+
+    }
+
+  }
+
+  private async loadMoreList() {
+    try {
+      let currentListLength = 0;
+      if (this.adList) {
+        currentListLength = this.adList.length;
+      }
+      const _params = {
+        type: this.filter.adType === '2' ? 'sell' : 'buy',
+        country: this.filter.countryCode,
+        coin: this.filter.coinType,
+        currency: this.filter.currencyCode,
+        payment: this.filter.payTypeCode,
+        offset: currentListLength,
+        limit: 10,
+        // userid: '',
+      };
+      // this.isLoading = true;
+      const _result = await this.adService.listTransactionList(_params);
+      this.isLoading = false;
+      // console.error('otc -list ', _result);
+
+      // this.adList = _result.list.sort((obj1, obj2) => {
+      //   if (obj1.rate > obj2.rate) {
+      //       return 1;
+      //   }
+      //   if (obj1.rate < obj2.rate) {
+      //       return -1;
+      //   }
+      //   return 0;
+      // });
+      if (this.adList) {
+        const tempList = this.adList.concat(_result.list);
+        this.adList = tempList;
+        // let len = _result.list.length;
+        // for (let i = 0; i < len; i++) {
+        //   this.adList.push(_result.list[i]);
+        // }
+      } else {
+        this.adList = _result.list;
+      }
+
+      this.adTotal = _result.total;
+
+      if (_result.total > this.adList.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+
     } catch (e) {
       this.isLoading = false;
       console.error(e);

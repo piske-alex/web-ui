@@ -71,7 +71,12 @@
     <div class="gz-transaction-list">
       <gz-list-transaction *ngIf="!isLoading" [transactionList]="adList" [adType]="filter.adType"></gz-list-transaction>
       <div class="loader" *ngIf="isLoading">Loading...</div>
+      <div (click)="loadMoreList()" *ngIf="isShowLoadMore"
+       style="text-align:center;margin-bottom: 25px;margin-top:10px; background-color:#E9BC32;color:black; ">
+        <gz-i18n key="common.load_more"></gz-i18n>
+      </div>
     </div>
+    
   </article>
 
   <footer>

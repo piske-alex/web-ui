@@ -75,6 +75,9 @@ export class TransactionComponent implements OnInit {
     this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
     this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
     this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
+    this.i18ns.err_adv_seller_insufficient_balance = await this.languageService.get('otc.err_adv_seller_insufficient_balance');
+    this.i18ns.err_seller_insufficient_balance = await this.languageService.get('otc.err_seller_insufficient_balance');
+
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
@@ -164,6 +167,10 @@ export class TransactionComponent implements OnInit {
       console.error('---------------------error_transaction: ', error);
       if (error.error === 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.insufficient_balance);
+      } else if (error.error === 'adv_seller_insufficient_balance') {
+        this.dialogService.alert(this.i18ns.err_adv_seller_insufficient_balance);
+      } else if (error.error === 'seller_insufficient_balance') {
+        this.dialogService.alert(this.i18ns.err_seller_insufficient_balance);
       } else if (error.error === 'buy_sell_has_dispute_order') {
         this.dialogService.alert(this.i18ns.buy_sell_has_dispute_order);
       } else if (error.error === 'reach_maximun_unflnish_order') {

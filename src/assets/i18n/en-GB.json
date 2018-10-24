@@ -60,6 +60,7 @@
     "loading":"Loading...",
     "alert_title":"Information",
     "alert_ok":"OK",
+    "load_more":"... click to load more ...",
     "confirm_title":"Confirm"
   },
   "element_coin_deposit":{
@@ -168,6 +169,7 @@
     "lang": "Select Language"
   },
   "otc": {
+    "sellbtc_time":"Send coin time",
     "Unauthorized":"Unauthorized",
     "iBuy": "I Buy",
     "iSell": "I Sell",
@@ -262,6 +264,8 @@
     "confirm_markDispute":"Confirm mark dispute?",
     "myMsg":"My Information",
     "insufficient_balance": "Insufficient balance",
+    "err_adv_seller_insufficient_balance": "Advertising seller insufficient balance",
+    "err_seller_insufficient_balance": "Seller insufficient balance",
     "not_trans_as_ad_hidden": "The advertisement has been removed, not support transaction.",
     "myTradeTitle":"My transaction",
     "mark_dispute_err_notpaid":"Failure, the order not paid.",
@@ -332,6 +336,7 @@
     "input_card_back":"Please select reverse side of the document",
     "input_bust":"Please select half-length photo",
     "checked_promise":"Please checked the information I promised",
+    "input_right_image":"Please select image file",
     "promise":"The information I promised to submit belongs to me and there is no misappropriation of other people's documents.",
     "submit":"Submit"
   },

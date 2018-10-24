@@ -28,4 +28,8 @@
   <section class="gz-list-ad">
     <gz-list-ad-my [list]="list" [adStatus]="status" (refreshButtonClicked)="loadPublishAd()"></gz-list-ad-my>
   </section>
+  <div (click)="loadMorePublishAd()" *ngIf="isShowLoadMore"
+       style="text-align:center;margin-bottom: 25px;margin-top:10px; background-color:#E9BC32;color:black; ">
+        <gz-i18n key="common.load_more"></gz-i18n>
+      </div>
 </article>

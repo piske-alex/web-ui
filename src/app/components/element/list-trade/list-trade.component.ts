@@ -14,8 +14,8 @@ export class ListTradeComponent implements OnInit {
 
   @Input()
   public tradelist: TradeItem[];
-
-  //adType: string;
+  @Input()
+  public actionType: string;
 
   //userId: string;
 
@@ -56,6 +56,7 @@ export class ListTradeComponent implements OnInit {
     this.i18ns.payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
     this.i18ns.orderNo = await this.languageService.get('otc.orderNo');
     this.i18ns.orderCreateTime = await this.languageService.get('my_ad.order_create_time');
+    this.i18ns.sellBtcTime = await this.languageService.get('otc.sellbtc_time');
     this.loginUserId = localStorage.getItem('user_id');
   }
 

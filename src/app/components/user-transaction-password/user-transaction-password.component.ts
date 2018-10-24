@@ -124,12 +124,14 @@ export class UserTransactionPasswordComponent implements OnInit {
         this.goBack();
         }, e => {
           const errRes = e.error;
-          console.log('errRes.error.name', errRes.error.name);
+          console.log('errRes.error.name', errRes.error);
           if (errRes.success == false && errRes.error.name != undefined) {
             if (errRes.error.name == 'VerifyCodeError') {
               this.dialogService.alert(this.i18ns.invalid_verification_code);
             } else {
-              this.dialogService.alert(errRes.error.message);
+              if (errRes.error) {
+                this.dialogService.alert(errRes.error.name);
+              }
             }
           } else {
             this.resendSmsCodeDelay = 1;

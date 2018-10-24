@@ -320,7 +320,9 @@ export class OrderDetailComponent implements OnInit {
                 const activetime  = err.error.activetoLocaleString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
                 passwordNotActive = passwordNotActive.replace('{0}', activetime);
                 this.dialogService.alert(passwordNotActive);
-              } else {
+              } else if (err.error == 'the order status must be unfinish') {
+                this.dialogService.alert(this.i18ns.order_must_be_unfinish);
+              }  else {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 }

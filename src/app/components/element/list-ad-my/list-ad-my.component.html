@@ -10,7 +10,7 @@
                 <img src="/assets/images/pay_pp.jpg" title="{{this.i18ns.pp_paypal}}" alt="{{this.i18ns.pp_paypal}}"  class="gz-icon" *ngIf="data.is_payment_pp">
                 <img src="/assets/images/pay_bt.jpg" title="{{this.i18ns.bt_bank_transfer}}" alt="{{this.i18ns.bt_bank_transfer}}"  class="gz-icon" *ngIf="data.is_payment_bt">
             </div>
-            <div class="gz-list-cell_20 float_left">{{i18ns.limitAmount}}: {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}</div>
+            <div class="gz-list-cell_20 float_left">{{i18ns.limitAmount}}: {{data.limitMinAmount | cnyFormat}}-{{data.limitMaxAmount | cnyFormat}} {{data.transactionCurrency}}</div>
         </div>
     </div>
     
