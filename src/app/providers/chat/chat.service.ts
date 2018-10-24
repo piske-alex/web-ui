@@ -52,43 +52,43 @@ export class ChatService {
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
-          chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            // console.log('------------------message: ', message);
-            const _from = message.from;
-            const _adId = message.getAttributes().for;
-            const _adUserId = message.getAttributes().adUserId;
-            const _anotherUserId = message.getAttributes().anotherUserId;
-            const _avatar = message.getAttributes().avatar;
-            const _sendTimestamp = message.getAttributes().sendTimestamp;
-            const _text = message.text;
+          // chat.on(AV.Event.MESSAGE, (message, conversation) => {
+          //    console.log('--loginChat--------3333--------message: ', message);
+          //   const _from = message.from;
+          //   const _adId = message.getAttributes().for;
+          //   const _adUserId = message.getAttributes().adUserId;
+          //   const _anotherUserId = message.getAttributes().anotherUserId;
+          //   const _avatar = message.getAttributes().avatar;
+          //   const _sendTimestamp = message.getAttributes().sendTimestamp;
+          //   const _text = message.text;
 
-            let chat_union_ids = '';
-            if (Number(_adUserId) > Number(_anotherUserId)) {
-              chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
-            } else {
-              chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
-            }
+          //   let chat_union_ids = '';
+          //   if (Number(_adUserId) > Number(_anotherUserId)) {
+          //     chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
+          //   } else {
+          //     chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
+          //   }
 
-            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
-            this.conservationObj[chat_union_ids].conversation = conversation;
-            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+          //   this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+          //   this.conservationObj[chat_union_ids].conversation = conversation;
+          //   this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
 
-            const _topic = message.getAttributes().topic;
+          //   const _topic = message.getAttributes().topic;
 
-              if (_topic && _topic == chat_top ) {
-                this.conservationObj[chat_union_ids].chatList.push({
-                  from: _from,
-                  content: _text,
-                  avatar: _avatar,
-                  sendTimestamp: _sendTimestamp,
-                  isMe: _from == this.user.id,
-                });
-             }
+          //     if (_topic && _topic == chat_top ) {
+          //       this.conservationObj[chat_union_ids].chatList.push({
+          //         from: _from,
+          //         content: _text,
+          //         avatar: _avatar,
+          //         sendTimestamp: _sendTimestamp,
+          //         isMe: _from == this.user.id,
+          //       });
+          //    }
 
-            if (this.receive) {
-              this.receive();
-            }
-          });
+          //   if (this.receive) {
+          //     this.receive();
+          //   }
+          // });
         }).catch(console.error);
       } else {
         console.log('### >>> realtime or user is null');
@@ -101,74 +101,7 @@ export class ChatService {
     }
   }
 
-  // loginChatTest(loginUserId: number) {
-  //   // console.log('### >>> loginChat:::', this.isLogin);
-  //   if (this.isLogin) {
-  //     return;
-  //   }
-  //   const _user = localStorage.getItem('user');
-  //   try {
-  //     if (this.realtime && _user) {
-  //       this.user = JSON.parse(_user);
-  //       this.currentLoginUserId = this.user.id;
-
-  //       // console.log('### >>> create im client:::', this.user.id);
-  //       this.realtime.createIMClient(String(this.user.id)).then(chat => {
-  //         this.chat = chat;
-  //         this.isLogin = true;
-  //         chat.on(AV.Event.MESSAGE, (message, conversation) => {
-  //           // console.log('------------------message: ', message);
-  //           const _from = message.from;
-  //           const _adId = message.getAttributes().for;
-  //           const _adUserId = message.getAttributes().adUserId;
-  //           const _anotherUserId = message.getAttributes().anotherUserId;
-  //           const _orderId = message.getAttributes().orderId;
-  //           const _avatar = message.getAttributes().avatar;
-  //           const _sendTimestamp = message.getAttributes().sendTimestamp;
-  //           const _text = message.text;
-
-  //           let chat_union_ids = '';
-  //           if (Number(_adUserId) > Number(_anotherUserId)) {
-  //             chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
-  //           } else {
-  //             chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
-  //           }
-
-  //           this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
-  //           this.conservationObj[chat_union_ids].conversation = conversation;
-  //           this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
-  //           this.conservationObj[chat_union_ids].chatList.push({
-  //             from: _from,
-  //             content: _text,
-  //             avatar: _avatar,
-  //             sendTimestamp: _sendTimestamp,
-  //             isMe: _from == this.user.id,
-  //           });
-
-  //           // console.log('conservationObj======', this.conservationObj);
-  //           if (this.receive) {
-  //             this.receive();
-  //           }
-  //         });
-
-  //         // chat.on(AV.Event.UNREAD_MESSAGES_COUNT_UPDATE, function(conversations) {
-  //         //   for (let conv of conversations) {
-  //         //     console.log(conv.id, conv.name, conv.unreadMessagesCount);
-  //         //   }
-  //         // });
-
-  //       }).catch(console.error);
-  //     } else {
-  //       console.log('### >>> realtime or user is null');
-  //       setTimeout(() => {
-  //         this.loginChat();
-  //       }, 5000);
-  //     }
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
-
+  
   getConversationLocal(adId, adUserId, anotherUserId): any {
     return new Promise((resolve, reject) => {
       let chat_union_ids = '';
@@ -216,37 +149,37 @@ export class ChatService {
           this.chat = chat;
           this.isLogin = true;
 
-          chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            console.log('--------------111----message: ', message);
-            const _from = message.from;
-            const _adId = message.getAttributes().for;
-            const _adUserId = message.getAttributes().adUserId;
-            const _anotherUserId = message.getAttributes().anotherUserId;
-            const _avatar = message.getAttributes().avatar;
-            const _sendTimestamp = message.getAttributes().sendTimestamp;
-            const _text = message.text;
+          // chat.on(AV.Event.MESSAGE, (message, conversation) => {
+          //   console.log('-----loginAndGetChatDialogList---------111----message: ', message);
+          //   const _from = message.from;
+          //   const _adId = message.getAttributes().for;
+          //   const _adUserId = message.getAttributes().adUserId;
+          //   const _anotherUserId = message.getAttributes().anotherUserId;
+          //   const _avatar = message.getAttributes().avatar;
+          //   const _sendTimestamp = message.getAttributes().sendTimestamp;
+          //   const _text = message.text;
 
-            let chat_union_ids = '';
-            if (Number(_adUserId) > Number(_anotherUserId)) {
-              chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
-            } else {
-              chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
-            }
+          //   let chat_union_ids = '';
+          //   if (Number(_adUserId) > Number(_anotherUserId)) {
+          //     chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
+          //   } else {
+          //     chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
+          //   }
 
-            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
-            this.conservationObj[chat_union_ids].conversation = conversation;
-            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
-            this.conservationObj[chat_union_ids].chatList.push({
-              from: _from,
-              content: _text,
-              avatar: _avatar,
-              sendTimestamp: _sendTimestamp,
-              isMe: _from == this.user.id,
-            });
-            if (this.receive) {
-              this.receive();
-            }
-          });
+          //   this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+          //   this.conservationObj[chat_union_ids].conversation = conversation;
+          //   this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+          //   this.conservationObj[chat_union_ids].chatList.push({
+          //     from: _from,
+          //     content: _text,
+          //     avatar: _avatar,
+          //     sendTimestamp: _sendTimestamp,
+          //     isMe: _from == this.user.id,
+          //   });
+          //   if (this.receive) {
+          //     this.receive();
+          //   }
+          // });
           console.log('currentLoginUserId11', this.user.id);
           console.log('topic keyword', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
@@ -294,37 +227,38 @@ export class ChatService {
           this.chat = chat;
           this.isLogin = true;
 
-          chat.on(AV.Event.MESSAGE, (message, conversation) => {
-            console.log('------------------message: ', message);
-            const _from = message.from;
-            const _adId = message.getAttributes().for;
-            const _adUserId = message.getAttributes().adUserId;
-            const _anotherUserId = message.getAttributes().anotherUserId;
-            const _avatar = message.getAttributes().avatar;
-            const _sendTimestamp = message.getAttributes().sendTimestamp;
-            const _text = message.text;
+          // chat.on(AV.Event.MESSAGE, (message, conversation) => {
+          //   console.log('-----loginAndGetChatDialogList------22222-------message: ', message);
+          //   const _from = message.from;
+          //   const _adId = message.getAttributes().for;
+          //   const _adUserId = message.getAttributes().adUserId;
+          //   const _anotherUserId = message.getAttributes().anotherUserId;
+          //   const _avatar = message.getAttributes().avatar;
+          //   const _sendTimestamp = message.getAttributes().sendTimestamp;
+          //   const _text = message.text;
 
-            let chat_union_ids = '';
-            if (Number(_adUserId) > Number(_anotherUserId)) {
-              chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
-            } else {
-              chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
-            }
+          //   let chat_union_ids = '';
+          //   if (Number(_adUserId) > Number(_anotherUserId)) {
+          //     chat_union_ids = String(_adUserId) + '_' + String(_anotherUserId) + '_' + String(_adId);
+          //   } else {
+          //     chat_union_ids = String(_anotherUserId) + '_' + String(_adUserId) + '_' + String(_adId) ;
+          //   }
 
-            this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
-            this.conservationObj[chat_union_ids].conversation = conversation;
-            this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
-            this.conservationObj[chat_union_ids].chatList.push({
-              from: _from,
-              content: _text,
-              avatar: _avatar,
-              sendTimestamp: _sendTimestamp,
-              isMe: _from == this.user.id,
-            });
-            if (this.receive) {
-              this.receive();
-            }
-          });
+          //   this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+          //   this.conservationObj[chat_union_ids].conversation = conversation;
+          //   this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+          //   this.conservationObj[chat_union_ids].chatList.push({
+          //     from: _from,
+          //     content: _text,
+          //     avatar: _avatar,
+          //     sendTimestamp: _sendTimestamp,
+          //     isMe: _from == this.user.id,
+          //   });
+          //   if (this.receive) {
+          //     this.receive();
+          //   }
+          // });
+
           // console.log('currentLoginUserId22', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
@@ -471,7 +405,7 @@ export class ChatService {
 
             // 进入到对话页面时标记其为已读
             conversation.read().then(function(conversation2) {
-               console.log('对话已标记为已读');
+              // console.log('对话已标记为已读');
             }).catch(console.error.bind(console));
 
             resolve(this.conservationObj[chat_union_ids].chatList);

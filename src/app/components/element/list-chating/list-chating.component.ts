@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit , OnDestroy} from '@angular/core';
 import { User } from '../../../models/user/user';
 import { UserService } from '../../../providers/user/user.service';
 import { ChatService } from '../../../providers/chat/chat.service';
@@ -33,11 +33,19 @@ export class ListChatingComponent implements OnInit {
   @Input()
   orderId;
 
+  handleRefreshChat: any;
+
   constructor(private userService: UserService,
               private chatService: ChatService,
               private dialogService: DialogService) {
 
       this.chatService.loginChat();
+  }
+
+  async ngOnDestroy() {
+    if (this.handleRefreshChat !== undefined ) {
+      clearInterval(this.handleRefreshChat);
+    }
   }
 
   async ngOnInit() {
@@ -48,13 +56,15 @@ export class ListChatingComponent implements OnInit {
     console.log('adUser', this.adUser);
     console.log('anotherUser', this.anotherUser);
 
-    this.chatService.receive = () => {
-      this._updateScroll();
-    };
+    // this.chatService.receive = () => {
+    //   this._updateScroll();
+    // };
 
-    setTimeout(() => {
-      this.refreshchatlist();
-    }, 1000);
+    // setTimeout(() => {
+    //   this.refreshchatlist();
+    // }, 1000);
+
+    this.handleRefreshChat = setInterval( () => { this.refreshchatlist(); }, 1000);
 
   }
 
@@ -74,8 +84,8 @@ export class ListChatingComponent implements OnInit {
         this.adUser.username, this.anotherUser.username)
       .then(async (data) => {
        // console.error('---------------------ok_send: ', data);
-        this.chatingList = data;
-        this._updateScroll();
+       // this.chatingList = data;
+       // this._updateScroll();
       }, error => {
         console.error('---------------------error_send: ', error);
         this.dialogService.alert(error.message);
@@ -86,16 +96,14 @@ export class ListChatingComponent implements OnInit {
   }
 
   private _updateScroll() {
+    if ( document.querySelector('.gz-chat-list') ) {
     document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
       // document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
 
       setTimeout(() => {
         document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
       }, 1000);
-    //  document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
-    //  setTimeout(() => {
-    //    document.querySelector('body').scrollTop = document.querySelector('body').scrollHeight;
-    //  }, 1000);
+    }
   }
 }
 

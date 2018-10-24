@@ -132,7 +132,7 @@ export class CoinActionWithrawComponent implements OnInit {
         this.dialogService.alert(this.i18ns.err_address_invalid);
       } else if (e.error == 'coin network error') {
         this.dialogService.alert(this.i18ns.err_coin_network_error);
-      } else if (e.error == 'insufficient balance') {
+      } else if (e.error == 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.err_insufficient_balance);
       } else {
         this.dialogService.alert(e.error);

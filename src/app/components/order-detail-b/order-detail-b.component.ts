@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild ,OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
@@ -28,6 +28,7 @@ export class OrderDetailBComponent implements OnInit {
   payStatus: string;
 
   btccnt: string;
+  initNewStatus: any;
 
   isShowCancel: boolean;
   isShowBuyPay: boolean;
@@ -48,6 +49,12 @@ export class OrderDetailBComponent implements OnInit {
               private languageService: LanguageService,
               private adService: AdService,
               private dialogService: DialogService) {
+  }
+
+  async ngOnDestroy(){
+    console.log("ngOnDestroy")
+    if(this.initNewStatus !== undefined)
+      clearInterval(this.initNewStatus);
   }
 
   async ngOnInit() {
@@ -78,14 +85,13 @@ export class OrderDetailBComponent implements OnInit {
 
     try {
 
-      let initNewStatus;
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
           console.log('this.order', this.order);
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
             if (this.order.payment_status == '1') { // had paid
-              if(initNewStatus !== undefined)
-                clearInterval(initNewStatus);
+              if(this.initNewStatus !== undefined)
+                  clearInterval(this.initNewStatus);
               this.stopInterval();
               this.isStop = true;
               if (!this.isAdOwner) { // sell
@@ -122,15 +128,15 @@ export class OrderDetailBComponent implements OnInit {
             this.isShowBuyDispute = false;
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
-            if(initNewStatus !== undefined)
-                clearInterval(initNewStatus);
+            if(this.initNewStatus !== undefined)
+                clearInterval(this.initNewStatus);
             this.stopInterval();
             this.isStop = true;
           }
     }
 
     await getNewStatusFn();
-    initNewStatus = setInterval(getNewStatusFn,5000);
+    this.initNewStatus = setInterval(getNewStatusFn,5000);
 
     } catch (e) {
       console.error(e);

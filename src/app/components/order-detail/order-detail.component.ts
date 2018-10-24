@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild , OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
@@ -27,7 +27,7 @@ export class OrderDetailComponent implements OnInit {
   payStatus: string;
 
   btccnt: string;
-
+  initNewStatus: any;
   isShowCancel: boolean;
   isShowBuyPay: boolean;
   isShowBuyDispute: boolean;
@@ -47,6 +47,12 @@ export class OrderDetailComponent implements OnInit {
               private languageService: LanguageService,
               private adService: AdService,
               private dialogService: DialogService) {
+  }
+
+  async ngOnDestroy(){
+      console.log("ngOnDestroy")
+      if(this.initNewStatus !== undefined)
+        clearInterval(this.initNewStatus);
   }
 
   async ngOnInit() {
@@ -76,14 +82,14 @@ export class OrderDetailComponent implements OnInit {
     this.orderId = this.route.snapshot.paramMap.get('orderId');
 
     try {
-      let initNewStatus;
+      
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
           console.log('this.order', this.order);
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
             if (this.order.payment_status == '1') { // had paid
-              if(initNewStatus !== undefined)
-                clearInterval(initNewStatus);
+              if(this.initNewStatus !== undefined)
+                clearInterval(this.initNewStatus);
               this.stopInterval();
               this.isStop = true;
               if (this.isAdOwner) { // sell
@@ -120,15 +126,15 @@ export class OrderDetailComponent implements OnInit {
             this.isShowBuyDispute = false;
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
-            if(initNewStatus !== undefined)
-                clearInterval(initNewStatus);
+            if(this.initNewStatus !== undefined)
+                clearInterval(this.initNewStatus);
             this.stopInterval();
             this.isStop = true;
           }
       }
 
       await getNewStatusFn();
-      initNewStatus = setInterval(getNewStatusFn,5000);
+      this.initNewStatus = setInterval(getNewStatusFn,5000);
 
 
 
