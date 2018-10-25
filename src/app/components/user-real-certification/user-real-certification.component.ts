@@ -109,7 +109,8 @@ export class UserRealCertificationComponent implements OnInit {
 
     try {
       this.userService.realCertifiation(_params);
-      this.goBack();
+      // this.goBack();
+      this.router.navigate(['/userSetting']);
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);

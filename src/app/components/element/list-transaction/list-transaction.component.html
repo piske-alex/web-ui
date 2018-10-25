@@ -42,9 +42,9 @@
         <gz-i18n key="element_list_trans.trust"></gz-i18n> {{data.trustCount || 0}}
       </div>
       <div class="gz-list-cell_25">
-        <gz-i18n key="element_list_trans.limit_amount"></gz-i18n> {{data.limitMinAmount}}-{{data.limitMaxAmount}} {{data.transactionCurrency}}
+        <gz-i18n key="element_list_trans.limit_amount"></gz-i18n> {{data.limitMinAmount | cnyFormat}}-{{data.limitMaxAmount | cnyFormat}} {{data.transactionCurrency}}
       </div>
-      <div class="gz-currency-large gz-list-cell_20">{{data.rate}} {{data.transactionCurrency}}</div>
+      <div class="gz-currency-large gz-list-cell_20">{{data.rate | cnyFormat}} {{data.transactionCurrency}}</div>
     </div>
 
   </div>

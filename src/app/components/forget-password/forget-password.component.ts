@@ -76,6 +76,9 @@ export class ForgetPasswordComponent implements OnInit {
     if (inputName === 'password') {
       this._validatePassword();
     }
+    if (inputName === "phoneNo") {
+      this.phoneNo = this.phoneNo.replace(/\s+/g,'');
+    }
   }
 
   showPassword(show: boolean) {

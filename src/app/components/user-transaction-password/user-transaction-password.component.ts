@@ -121,7 +121,8 @@ export class UserTransactionPasswordComponent implements OnInit {
         verifyCode: this.smsCode,
         password: this.password
       }).then( async (data) => {
-        this.goBack();
+        // this.goBack();
+        this.router.navigate(['/userSetting']);
         }, e => {
           const errRes = e.error;
           console.log('errRes.error.name', errRes.error);

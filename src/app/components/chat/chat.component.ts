@@ -39,7 +39,14 @@ export class ChatComponent implements OnInit {
     this.adId = this.route.snapshot.paramMap.get('adId');
     this.adUserId = this.route.snapshot.paramMap.get('adUserId');
     this.anotherUserId = this.route.snapshot.paramMap.get('anotherUserId');
-    this.data = await this.adService.getOtcAdById({adid: this.adId});
+    // this.data = await this.adService.getOtcAdById({adid: this.adId});
+    try {
+      this.data = await this.adService.getOtcAdById({ adid: this.adId });
+
+    } catch (e) {
+      console.error(e);
+    }
+
 
     this.i18ns.sell = await this.languageService.get('chat.sell');
     this.i18ns.buy = await this.languageService.get('chat.buy');

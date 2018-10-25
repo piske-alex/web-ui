@@ -88,8 +88,8 @@ export class OrderDetailComponent implements OnInit {
           console.log('this.order', this.order);
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
             if (this.order.payment_status == '1') { // had paid
-              if(this.initNewStatus !== undefined)
-                clearInterval(this.initNewStatus);
+              // if(this.initNewStatus !== undefined)
+              //   clearInterval(this.initNewStatus);
               this.stopInterval();
               this.isStop = true;
               if (this.isAdOwner) { // sell
@@ -156,6 +156,8 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.paypassword_invalid = await this.languageService.get('otc.paypassword_invalid');
     
     this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
+    this.i18ns.order_has_been_confirm = await this.languageService.get('otc.order_has_been_confirm');
+    
 
     this.i18ns.mark_dispute_success = await this.languageService.get('otc.mark_dispute_success');
     this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
@@ -166,6 +168,8 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_finish = await this.languageService.get('my_ad.order_status_finish');
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
+
+    
 
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
@@ -187,7 +191,7 @@ export class OrderDetailComponent implements OnInit {
       if (document.querySelector('.div_list_chat')) {
         document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
       }
-    }, 2000);
+    }, 1500);
   }
 
   goBack() {
@@ -328,9 +332,15 @@ export class OrderDetailComponent implements OnInit {
                 this.dialogService.alert(passwordNotActive);
               } else if (err.error == 'the order status must be unfinish') {
                 this.dialogService.alert(this.i18ns.order_must_be_unfinish);
-              }  else {
+                this.ngOnInit();
+              } else if (err.error == 'order has been confirm') {
+                this.dialogService.alert(this.i18ns.order_has_been_confirm);
+                this.ngOnInit();
+              } else {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
+                } else if (err.error) {
+                  this.dialogService.alert(err.error);
                 }
               }
             }
@@ -405,12 +415,14 @@ export class OrderDetailComponent implements OnInit {
 
     } else {
       this.listChatingComponent.send(this.chatmsg);
-      document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
-      // document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
-
-      setTimeout(() => {
+      if (document.querySelector('.div_list_chat')) {
         document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
-      }, 1000);
+        // document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
+
+        setTimeout(() => {
+          document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
+        }, 1000);
+      }
       this.chatmsg = '';
     }
   }

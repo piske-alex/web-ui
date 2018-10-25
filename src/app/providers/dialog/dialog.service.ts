@@ -33,7 +33,7 @@ public confirm(contentOrConfig: any, title?: string): Observable<any> {
         width: '400px'// ,
        // height: '200px'
        , disableClose: true   // 点击对话框外不消失
-
+       , hasBackdrop: true
     };
     if (contentOrConfig instanceof Object) {
         config.data = contentOrConfig;
@@ -55,7 +55,7 @@ public alert(contentOrConfig: any, title?: string): Observable<any> {
         width: '400px' // ,
        // height: '200px'
        , disableClose: true   // 点击对话框外不消失
-
+       , hasBackdrop: true
     };
     if (contentOrConfig instanceof Object) {
         config.data = contentOrConfig;

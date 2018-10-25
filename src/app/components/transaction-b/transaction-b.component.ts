@@ -81,12 +81,15 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
     this.i18ns.err_adv_seller_insufficient_balance = await this.languageService.get('otc.err_adv_seller_insufficient_balance');
     this.i18ns.err_seller_insufficient_balance = await this.languageService.get('otc.err_seller_insufficient_balance');
-
+    this.i18ns.not_trans_as_ad_hidden = await this.languageService.get('otc.not_trans_as_ad_hidden');
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
     } catch (e) {
       console.error(e);
+      if (e.error === 'advertisement not found') {
+        this.dialogService.alert(this.i18ns.not_trans_as_ad_hidden);
+      }
     }
 
   }
@@ -115,6 +118,10 @@ export class TransactionBComponent implements OnInit {
     + '~' + this.transform(this.data.limitMaxAmount) + ' ' + this.data.transactionCurrency;
   }
 
+  getRightTopTxt(){
+    return this.transform(this.data.rate) + ' ' + this.data.transactionCurrency;
+  }
+  
   async transaction() {
     // if (this.data.adType === '1') {
       let _payDes = this.i18ns.sale;
@@ -180,8 +187,12 @@ export class TransactionBComponent implements OnInit {
         this.dialogService.alert(this.i18ns.reach_maximun_unflnish_order);
       } else if (error.status === 403 && error.error.userGroup === 'user') {
         this.dialogService.alert(this.i18ns.onlyRealUser);
+      } else if (error.error === 'advertisement not found') {
+        this.dialogService.alert(this.i18ns.not_trans_as_ad_hidden);
       } else {
-        this.dialogService.alert(error.error);
+        if (error.error) {
+          this.dialogService.alert(error.error);
+        }
       }
     });
 

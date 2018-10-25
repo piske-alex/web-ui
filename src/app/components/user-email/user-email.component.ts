@@ -77,7 +77,8 @@ export class UserEmailComponent implements OnInit {
       // let _result = await this.userService.bindEmail({email: this.email});
       this.userService.bindEmail({email: this.email}).then(async (data) => {
         this.dialogService.alert(this.i18ns.bind_email_success);
-          this.goBack();
+          // this.goBack();
+          this.router.navigate(['/userSetting']);
       }, error => {
         if (error.error.success === false && error.error.errmsg !== undefined) {
           this.dialogService.alert(error.error.errmsg);

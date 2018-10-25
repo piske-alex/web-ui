@@ -273,6 +273,7 @@
     "paypassword_invalid":"Payment password invalid.",
     "err_PasswordNotActive":"Password is not active before {0}",
     "order_must_be_unfinish":"The order status must be unfinish",
+    "order_has_been_confirm":"The order has been confirm",
     "mark_dispute_success":"Mark dispute success. The system will be processed. ",
     "mark_receive_success":"Mark receipt success. The system will be processed."
   },

@@ -88,6 +88,9 @@ export class RegisterComponent implements OnInit {
     if (inputName === 'password') {
       this._validatePassword();
     }
+    if (inputName === "phoneNo") {
+      this.phoneNo = this.phoneNo.replace(/\s+/g,'');
+    }
   }
 
   isFocus(inputName: string): string {
