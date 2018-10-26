@@ -36,11 +36,11 @@
   <section class="gz-my-coin-list" *ngIf="!isLoading">
     <div class="gz-my-coin" *ngFor="let data of coinList" (click)="goToCoinAction(data)">
       <div class="gz-coin-detail">
-        <div>{{data.coinType}}</div>
+        <div class="gz-coin-cointype">{{data.coinType}}</div>
         <div class="gz-coin-amount">
-          <div>{{i18ns.usable}} {{data.usableAmount | btcFormat}}</div>
-          <div>{{i18ns.freeze}} {{data.freezeAmount | btcFormat}}</div>
-          <div>{{data.rate | rateFormat}} {{data.currency}}/{{data.coinType}}</div>
+          <div class="gz-list-cell_10 float_left">{{i18ns.usable}} {{data.usableAmount | btcFormat}}</div>
+          <div class="gz-list-cell_10 float_left">{{i18ns.freeze}} {{data.freezeAmount | btcFormat}}</div>
+          <div class="gz-list-cell_10 float_left">{{data.rate | rateFormat}} {{data.currency}}/{{data.coinType}}</div>
         </div>
       </div>
       <div>

@@ -63,8 +63,10 @@ export class SetNicknameComponent implements OnInit {
     }
 
     try {
+      const tempUserId = this.userId;
       this.userService.setNickname({username: this.nickname}).then( (data) => {
-        this.router.navigate(['/my', {userId: this.userId}]);
+        console.log(data);
+        this.router.navigate(['/my', {userId: tempUserId}]);
       });
     } catch (e) {
       console.error(e);

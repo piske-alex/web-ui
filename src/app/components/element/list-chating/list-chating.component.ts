@@ -69,8 +69,22 @@ export class ListChatingComponent implements OnInit {
   }
 
   async refreshchatlist() {
-    this.chatingList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
-    this._updateScroll();
+    if (this.chatingList) {
+      const tempList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
+      if (this.chatingList.length != tempList.length) {
+       // console.log('chatingList updateScroll');
+        this.chatingList = tempList;
+        this._updateScroll();
+      } else {
+       // console.log('chatingList updateScroll nonononono');
+      }
+    } else {
+      this.chatingList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
+      this._updateScroll();
+    }
+
+    // this.chatingList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
+    // this._updateScroll();
 
     // console.log('chatingList', this.chatingList);
   }

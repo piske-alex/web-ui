@@ -124,6 +124,12 @@
   <div class="gz-popup-content">
     <h3><gz-i18n key="user_trans_password.input_trans_password"></gz-i18n></h3>
     <div class="gz-popup-row">
+      <!-- 额外增加的内容 -->
+<form style="display:none">
+    <input type="password"/>
+  </form>
+  <input type="password" style="width:0;height:0;float:left;visibility:hidden"/>
+  
         <input type="password"  placeholder="{{this.i18ns.input_trans_password}}" *ngIf="!isShowPassword"
              [(ngModel)]="paypassword"  autocomplete="new-password"  maxlength="40"> 
         <input type="text"  placeholder="{{this.i18ns.input_trans_password}}" *ngIf="isShowPassword"

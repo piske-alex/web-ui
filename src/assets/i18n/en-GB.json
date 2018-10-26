@@ -85,9 +85,9 @@
   "element_coin_withraw":{
     "send_address":"Send address",
     "input_address":"Please enter ${coinType} Address",
-    "coin_amount":"${coinType} quantity",
+    "coin_amount":" quantity",
     "input_amount":"Please enter the quantity",
-    "max_send":"Can send up to ${coinBalance.balance} | ${coinNumber} ${coinType}",
+    "max_send":"Can send up to ",
     "remark":"Remarks (only shown in the transaction details)",
     "input_remark":"Please enter the remarks (only shown in the transaction details)",
     "trans_password":"Transaction password",
@@ -101,6 +101,7 @@
     "confirm_send":"Confirm sending",
     "trans_in_processing":"Transfer in progress",
     "refresh":"Refresh",
+    "send_success":"Send success",
     "withraw_amount":"Number of extraction",
     "txid":"TXID",
     "loading":"Loading..."

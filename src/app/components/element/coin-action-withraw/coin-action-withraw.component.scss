@@ -12,9 +12,10 @@
     align-items: center;
     border-bottom: 1px solid $border_default;
     padding: 10px;
+    width:100%;
 
     .gz-label {
-      width: 90px;
+      width: 200px;
     }
 
     input {
@@ -39,7 +40,7 @@
     padding: 10px;
 
     .btn.gz-circle {
-      width: 100px;
+      width: 200px;
       border: 1px solid $border_default;
 
       &.active {

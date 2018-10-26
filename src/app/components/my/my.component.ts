@@ -31,6 +31,37 @@ export class MyComponent implements OnInit {
 
     this.i18ns.confirm_logout = await this.languageService.get('user.confirm_logout');
     this.isHadLogin = false;
+    // try {
+    //   const _user = localStorage.getItem('user');
+    //   if (_user) {
+    //     this.isHadLogin = true;
+    //     this.user = JSON.parse(_user);
+    //     this.userId = this.user.id;
+    //   } else {
+    //     this.isHadLogin = false;
+    //     localStorage.removeItem('user_id');
+    //     localStorage.removeItem('user');
+    //     localStorage.removeItem('login_timestamp');
+    //     localStorage.removeItem('access_token');
+    //     await this.userService.logout();
+    //     return;
+    //   }
+
+    // } catch (e) {
+    //   console.error(e);
+    // }
+    // localStorage.removeItem('user');
+
+    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
+      this.user = await this.userService.getDetail({});
+      this.isHadLogin = true;
+       console.log('user detail: ', this.user);
+      localStorage.setItem('user_id', this.user.id);
+      localStorage.setItem('user', JSON.stringify(this.user));
+      this.chatService.initChat();
+      this.chatService.loginChat();
+    }
+
     try {
       const _user = localStorage.getItem('user');
       if (_user) {
@@ -50,17 +81,7 @@ export class MyComponent implements OnInit {
     } catch (e) {
       console.error(e);
     }
-    localStorage.removeItem('user');
 
-    console.log('isHadLogin', this.isHadLogin);
-    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
-      this.user = await this.userService.getDetail({});
-      // console.log('user detail: ', this.user);
-      localStorage.setItem('user_id', this.user.id);
-      localStorage.setItem('user', JSON.stringify(this.user));
-      this.chatService.initChat();
-      this.chatService.loginChat();
-    }
 
   }
 

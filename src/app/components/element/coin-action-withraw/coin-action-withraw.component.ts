@@ -58,7 +58,7 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.err_address_invalid = await this.languageService.get('element_coin_withraw.err_address_invalid');
     this.i18ns.err_coin_network_error = await this.languageService.get('element_coin_withraw.err_coin_network_error');
     this.i18ns.err_insufficient_balance = await this.languageService.get('element_coin_withraw.err_insufficient_balance');
-    
+    this.i18ns.send_success = await this.languageService.get('element_coin_withraw.send_success');
 
     this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
       data.total = (+data.balance + +data.locked).toFixed(8);
@@ -101,11 +101,10 @@ export class CoinActionWithrawComponent implements OnInit {
     if (!this.paypassword || this.paypassword.trim() == '') {
       return this.dialogService.alert(this.i18ns.input_trans_password);
     }
-    
+
     if (!this.remark || this.remark.trim() == '') {
       return this.dialogService.alert(this.i18ns.input_remark);
     }
-    
 
     let _params = {
       coin: this.coinType,
@@ -122,8 +121,9 @@ export class CoinActionWithrawComponent implements OnInit {
         this.amount = '';
         this.paypassword = '';
         this.remark = '';
+        this.dialogService.alert(this.i18ns.send_success);
       } else {
-        
+
       }
     } catch (e) {
       if (e.error == 'password wrong') {

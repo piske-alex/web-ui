@@ -80,12 +80,16 @@ export class OrderDetailComponent implements OnInit {
     }
 
     this.orderId = this.route.snapshot.paramMap.get('orderId');
+    let noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
+    let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
+    
 
     try {
       
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
           console.log('this.order', this.order);
+          this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
             if (this.order.payment_status == '1') { // had paid
               // if(this.initNewStatus !== undefined)
@@ -175,9 +179,7 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
 
-    let noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
-    let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
-    this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
+    
 
     this.btccnt = (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
     this.timeout = true;

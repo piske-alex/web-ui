@@ -18,8 +18,8 @@
     "info_chat_via_temp":"未下单前，只能通过对话模板进行交流"
   },
   "coin":{
-    "detail":"明細",
-    "total_assets":"總資產",
+    "detail":"明细",
+    "total_assets":"总资产",
     "balance":"可用资产",
     "locked":"冻结资产",
     "Deposit":"充币",
@@ -101,6 +101,7 @@
     "confirm_send":"确认发送",
     "trans_in_processing":"正在处理中的转账",
     "refresh":"刷新",
+    "send_success":"发送成功",
     "withraw_amount":"提取数量",
     "txid":"TXID",
     "loading":"加载中..."
