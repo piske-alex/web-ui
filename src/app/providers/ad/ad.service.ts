@@ -78,6 +78,7 @@ export class AdService {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.GET_TRANS_BETWEEN_USERIDS, params, true).then(data => {
         if (data && data.success) {
+          console.log("api",data);
           let _result = [];
             if (data.data && data.data.length > 0) {
               _result = data.data.map(_data => {

@@ -60,8 +60,10 @@ export class MyTransComponent implements OnInit {
   private async loadTrade() {
     const _params = {
       userid : this.userId,
-      adtype : this.adType
-      /*type: '', // 'sell buy'
+      adtype : this.adType,
+      offset: 0,
+      limit: 1000
+       /*type: '', // 'sell buy'
       country: '',
       coin: '',
       currency: '',

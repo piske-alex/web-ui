@@ -409,8 +409,8 @@
     "cancel_sell":"放弃出售",
     "cancel_buy":"放弃购买",
     "trans_confirm_time":"到账时间",
-    "buy_sell_has_dispute_order":"buy_sell_has_dispute_order",
-    "reach_maximun_unflnish_order":"reach_maximun_unflnish_order",
+    "buy_sell_has_dispute_order":"订单正在争议",
+    "reach_maximun_unflnish_order":"已超出未完成的订单上限，上限为3张未完成的订单",
     "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息"
   },
   "trust": {

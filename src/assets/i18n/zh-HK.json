@@ -414,9 +414,9 @@
     "cancel_sell":"放弃出售",
     "cancel_buy":"放弃購買",
     "trans_confirm_time":"到賬時間",
-    "buy_sell_has_dispute_order":"buy_sell_has_dispute_order",
-    "reach_maximun_unflnish_order":"reach_maximun_unflnish_order",
-    "goto_old_unfinish_order":"15分鐘內有未完成的交易，請先查看處理舊的交易資訊"
+    "buy_sell_has_dispute_order":"訂單正在爭議",
+    "reach_maximun_unflnish_order":"已超出未完成的訂單上限，上限為3張未完成的訂單",
+    "goto_old_unfinish_order":"這裡還有未完成的訂單，請查看舊訂單"
   },
   "wallet": {
     "title": "錢包",
