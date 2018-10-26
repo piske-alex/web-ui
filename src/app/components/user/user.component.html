@@ -25,6 +25,11 @@
   <section class="gz-list-ad">
     <gz-list-ad *ngIf="isSelectPublish && publishList.length" [list]="publishList"></gz-list-ad>
     <gz-list-deal *ngIf="!isSelectPublish && dealWithMeList.length" [list]="dealWithMeList"></gz-list-deal>
+    <div class="loader" *ngIf="isLoading">Loading...</div>
+      <div (click)="loadUserPageList(isSelectPublish)" *ngIf="isShowLoadMore"
+       style="text-align:center;margin-bottom: 25px;margin-top:10px; background-color:#E9BC32;color:black; ">
+        <gz-i18n key="common.load_more"></gz-i18n>
+      </div>
   </section>
 
   <section class="gz-exchange-foot"></section>

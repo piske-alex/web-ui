@@ -1,8 +1,8 @@
 <section class="gz-list-tr" *ngFor="let data of tradelist">
   <div class="gz-list-tr-left">
-    <div class="gz-list-tr-head">
+    <!--<div class="gz-list-tr-head">
       <img src="{{data.userHeadUrl | avatar}}" >
-    </div>
+    </div>-->
     <div class="gz-list-tr-detail">
         <div class="gz-list-cell_8 float_left">{{this.i18ns.orderNo}}:{{data.id}}</div>
 
@@ -20,7 +20,7 @@
       <div class="gz-list-cell_15 float_left"><span>{{i18ns.price}}: </span><span>{{data.price | cnyFormat }} {{data.currency || ''}}</span></div>
       <div class="gz-list-cell_17 float_left"><span>{{i18ns.orderCreateTime}}: </span><span>{{data.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
       <div class="gz-list-cell_17 float_left"><span>{{i18ns.trade_time}}: </span><span *ngIf="data.paymentStatus==1">{{data.paymentTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
-      <div class="gz-list-cell_17 float_left"><span *ngIf="actionType=='buy'">{{i18ns.collect_time}}: </span><span *ngIf="actionType=='sell'">{{i18ns.sellBtcTime}}: </span><span *ngIf="data.sellerPaymentConfirm==1">{{data.confirmTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+      <div class="gz-list-cell_17 float_left"><span>{{i18ns.collect_time}}: </span><span *ngIf="data.sellerPaymentConfirm==1">{{data.confirmTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
       
 
       

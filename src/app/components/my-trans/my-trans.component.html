@@ -27,5 +27,10 @@
 
   <section class="gz-list-trade">
     <gz-list-trade [tradelist]="list" [actionType]="adType"></gz-list-trade>
+    <div class="loader" *ngIf="isLoading">Loading...</div>
+      <div (click)="loadMoreList()" *ngIf="isShowLoadMore"
+       style="text-align:center;margin-bottom: 25px;margin-top:10px; background-color:#E9BC32;color:black; ">
+        <gz-i18n key="common.load_more"></gz-i18n>
+      </div>
   </section>
 </article>

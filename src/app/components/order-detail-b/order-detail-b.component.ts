@@ -163,6 +163,9 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
     this.i18ns.order_must_be_unfinish = await this.languageService.get('otc.order_must_be_unfinish');
     this.i18ns.order_has_been_confirm = await this.languageService.get('otc.order_has_been_confirm');
+    this.i18ns.order_already_mark_dispute = await this.languageService.get('otc.order_already_mark_dispute');
+    this.i18ns.order_already_mark_finish = await this.languageService.get('otc.order_already_mark_finish');
+    
 
     this.i18ns.order_status = await this.languageService.get('my_ad.order_status');
     this.i18ns.order_status_unfinish = await this.languageService.get('my_ad.order_status_unfinish');
@@ -350,7 +353,13 @@ export class OrderDetailBComponent implements OnInit {
               } else if (err.error == 'order has been confirm') {
                 this.dialogService.alert(this.i18ns.order_has_been_confirm);
                 this.ngOnInit();
-              } else {
+              } else if (err.error == 'order_already_mark_dispute') {
+                this.dialogService.alert(this.i18ns.order_already_mark_dispute);
+                this.ngOnInit();
+              } else if (err.error == 'order_already_mark_finish') {
+                this.dialogService.alert(this.i18ns.order_already_mark_finish);
+                this.ngOnInit();
+              }  else {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 } else if (err.error) {

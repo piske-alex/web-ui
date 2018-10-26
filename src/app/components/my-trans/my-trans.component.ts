@@ -16,7 +16,9 @@ export class MyTransComponent implements OnInit {
   status = 'active'; // old 1. 进行中， 10. 已下架   new status = (active=在架，hidden=下架)
   list: TradeItem[] = [];
   adType: string; // buy sell
-
+  total: number;
+  isLoading: boolean;
+  isShowLoadMore:boolean;
 
   constructor(private location: Location,
     private router: Router,
@@ -36,9 +38,10 @@ export class MyTransComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    this.isLoading = true;
     this.adType = 'buy';
     this.loadTrade();
+    this.isLoading = false;
   }
 
   goBack() {
@@ -62,7 +65,7 @@ export class MyTransComponent implements OnInit {
       userid : this.userId,
       adtype : this.adType,
       offset: 0,
-      limit: 1000
+      limit: 15
        /*type: '', // 'sell buy'
       country: '',
       coin: '',
@@ -75,14 +78,67 @@ export class MyTransComponent implements OnInit {
     };
 
     try {
-      console.log('my trade list');
+      //console.log('my trade list');
       // this.list =  await this.cmService.listMyTradeList(_params);
-      this.list =  await this.cmService.listMyTradeList(_params);
+      this.isLoading = true;
+      const _result =  await this.cmService.listMyTradeList(_params);
+      this.list = _result.list;
+      this.total = _result.total;
+      this.isLoading = false;
       console.log('my trade list', this.list);
+      if (_result.total > this.list.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
     } catch (e) {
+      this.isLoading = false;
       console.error(e);
     }
 
   }
+
+  private async loadMoreTrade() {
+    let currentListLength = 0;
+      if (this.list) {
+        currentListLength = this.list.length;
+      }
+    const _params = {
+      userid : this.userId,
+      adtype : this.adType,
+      offset: currentListLength,
+      limit: 1000
+    };
+
+    try {
+      console.log('my trade list');
+      this.isLoading = true;
+      // this.list =  await this.cmService.listMyTradeList(_params);
+      const _result =  await this.cmService.listMyTradeList(_params);
+      console.log('my trade list', this.list);
+      this.isLoading = false;
+
+      if (this.list) {
+        const tempList = this.list.concat(_result.list);
+        this.list = tempList;
+      } else {
+        this.list = _result.list;
+      }
+
+      this.total = _result.total;
+
+      if (_result.total > this.list.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+
+    } catch (e) {
+      this.isLoading = false;
+      console.error(e);
+    }
+
+  }
+
 
 }

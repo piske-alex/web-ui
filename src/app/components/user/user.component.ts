@@ -23,6 +23,10 @@ export class UserComponent implements OnInit {
   publishList: TransactionListItem[] = [];
   dealWithMeList: TradeItem[] = [];
 
+  total: number;
+  isLoading: boolean;
+  isShowLoadMore:boolean;
+
   i18ns: any = {};
 
   isSelectPublish = true;
@@ -40,8 +44,9 @@ export class UserComponent implements OnInit {
 
     this.i18ns.hisPublishAd = await this.languageService.get('user.hisPublishAd');
     this.i18ns.iDealWithHim = await this.languageService.get('user.iDealWithHim');
-
+    this.isLoading = true;
     this.loadPublishList();
+    this.isLoading = false;
   }
 
   goBack() {
@@ -57,12 +62,56 @@ export class UserComponent implements OnInit {
         currency: '',
         payment: '',
         offset: 0,
-        limit: 1000,
+        limit: 15,
         userid: this.userId,
       };
+      this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
+      this.isLoading = false;
       this.publishList = _result.list;
+      this.total = _result.total;
     } catch (e) {
+      this.isLoading = false;
+      console.error(e);
+    }
+
+  }
+
+  private async loadMorePublishList() {
+    let currentListLength = 0;
+      if (this.publishList) {
+        currentListLength = this.publishList.length;
+      }
+    try {
+      let _params = {
+        type: '',
+        country: '',
+        coin: '',
+        currency: '',
+        payment: '',
+        offset: currentListLength,
+        limit: 100,
+        userid: this.userId,
+      };
+      this.isLoading = true;
+      let _result = await this.adService.listTransactionList(_params);
+      this.isLoading = false;
+
+      if (this.publishList) {
+        const tempList = this.publishList.concat(_result.list);
+        this.publishList = tempList;
+      } else {
+        this.publishList = _result.list;
+      }
+      this.total = _result.total;
+      
+      if (_result.total > this.publishList.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+    } catch (e) {
+      this.isLoading = false;
       console.error(e);
     }
 
@@ -70,10 +119,58 @@ export class UserComponent implements OnInit {
 
   private async loadDealList() {
     try {
-      this.dealWithMeList = await this.adService.listDealList2({otherUserId: this.userId, offset: 0 , limit: 1000});
+      this.isLoading = true;
+      const _result = await this.adService.listDealList2({otherUserId: this.userId, offset: 0 , limit: 10});
+      this.dealWithMeList = _result.list;
+      this.total = _result.total;
+      this.isLoading = false;
+      if (_result.total > this.dealWithMeList.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
     } catch (e) {
+      this.isLoading = false;
       console.error(e);
     }
+  }
+
+  private async loadMoreDealList() {
+    try {
+      let currentListLength = 0;
+      if (this.dealWithMeList) {
+        currentListLength = this.dealWithMeList.length;
+      }
+
+      this.isLoading = true;
+      const _result = await this.adService.listDealList2({otherUserId: this.userId, offset: currentListLength , limit: 1000});
+      this.isLoading = false;
+
+      if (this.dealWithMeList) {
+        const tempList = this.dealWithMeList.concat(_result.list);
+        this.dealWithMeList = tempList;
+      } else {
+        this.dealWithMeList = _result.list;
+      }
+      this.total = _result.total;
+
+      if (_result.total > this.dealWithMeList.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+
+    } catch (e) {
+      this.isLoading = false;
+      console.error(e);
+    }
+  }
+
+  loadUserPageList(isSelectPublish:boolean){
+    if(isSelectPublish)
+      this.loadMorePublishList()
+    else
+      this.loadMoreDealList()
   }
 
   selectPublish() {

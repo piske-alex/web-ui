@@ -156,7 +156,7 @@
     "order_status_sellconfirm_status_1": "賣家已確認收款",
     "order_user_id": "交易對方",
     "order_amount": "金額",
-    "order_create_time": "創建時間",
+    "order_create_time": "下單時間",
     "order_detail": "詳情",
     "ad_orders_title": "交易清單"
   },
@@ -259,8 +259,8 @@
     "input_maxCount":"請輸入最大量，且大於0",
     "input_maxCountMoreThanMin":"最小量不應大於最大量",
     "input_price":"請輸入交易價格，且大於0",
-    "trade_time":"交易時間",
-    "collect_time":"收幣時間",
+    "trade_time":"支付時間",
+    "collect_time":"放幣時間",
     "markDispute":"標記爭議",
     "confirm_markDispute":"確認標記爭議?",
     "myMsg":"我的消息",
@@ -275,6 +275,8 @@
     "err_PasswordNotActive":"在{0}之前密碼不可用",
     "order_must_be_unfinish":"交易狀態必須是未完成",
     "order_has_been_confirm":"交易已經標記收款",
+    "order_already_mark_dispute":"交易已經標記爭議",
+    "order_already_mark_finish":"交易已經標記完成",
     "mark_dispute_success":"標記爭議成功，系統會進行後續處理。",
     "mark_receive_success":"標記收款成功，系統會進行後續處理。"
   },

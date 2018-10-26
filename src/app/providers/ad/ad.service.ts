@@ -5,6 +5,7 @@ import { TransactionListItem } from "../../models/ad/TransactionListItem";
 import { OtcAd } from "../../models/ad/OtcAd";
 import { Deal } from "../../models/ad/Deal";
 import { TradeItem } from 'src/app/models/common/TradeItem';
+import { UrlParam } from 'src/app/models/common/UrlParam';
 
 @Injectable({
   providedIn: 'root'
@@ -74,18 +75,18 @@ export class AdService {
     });
   }
 
-  listDealList2(params): Promise<TradeItem[]> {
+  listDealList2(params): Promise<{ list: TradeItem[], total: number }> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.GET_TRANS_BETWEEN_USERIDS, params, true).then(data => {
         if (data && data.success) {
           console.log("api",data);
-          let _result = [];
+          let _result = {list: [], total: 0};
             if (data.data && data.data.length > 0) {
-              _result = data.data.map(_data => {
+              _result.list = data.data.map(_data => {
                 return TradeItem.newInstance(_data);
               });
+              _result.total = data.total;
             }
-            debugger
           resolve(_result);
         } else {
           reject(data);
@@ -104,6 +105,20 @@ export class AdService {
   listOtcAd(params): Promise<OtcAd[]> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.LIST_OTC_AD, params).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  listSwiperAd(params): Promise<UrlParam[]> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.COMMON.AD_BANNERS, params).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {
