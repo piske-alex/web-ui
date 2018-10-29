@@ -94,10 +94,13 @@ export class ChatService {
         console.log('### >>> realtime or user is null');
         setTimeout(() => {
           this.loginChat();
-        }, 5000);
+        }, 2000);
       }
     } catch (e) {
       console.error(e);
+      setTimeout(() => {
+        this.loginChat();
+      }, 2000);
     }
   }
 

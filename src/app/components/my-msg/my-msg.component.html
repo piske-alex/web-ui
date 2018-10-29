@@ -12,24 +12,27 @@
 
 <article *ngIf="this.chatDlgList  && chatDlgList?.length > 0" >
     <section class="gz-list-tr" *ngFor="let data of chatDlgList">
-        <div class="gz-list-tr-left">
+        <div class="gz-list-tr-left" (click)="toOrderDetail(data?.lastMessage)"
+        onmouseover="this.style.backgroundColor='RGB(58,58,58)'"
+        onmouseout="this.style.backgroundColor=''"
+>
             
             <!-- <div class="gz-list-td">with: {{data?.lastMessage?.from}} </div> -->
             <!-- <div class="gz-list-td">{{this.i18ns.chat_with_members}}: {{data?.members[0]}} , {{data?.members[1]}} </div> -->
-            <div class="gz-list-td" style="width:150px;">{{this.i18ns.chat_with_members}}: {{data?.chatwith}} </div>
-            <div class="gz-list-td">ad: {{data?.lastMessage?._lcattrs?.for}} </div>
+            <div class="gz-list-td" style="width:150px;">{{data?.chatwith}} </div>
+            <div class="gz-list-td" style="width:80px;">{{this.i18ns.msg_ad}}: {{data?.lastMessage?._lcattrs?.for}} </div>
             <div class="gz-list-td">{{this.i18ns.unread_count}}: {{data?.unreadMessagesCount}}
               <img alt='' src="/assets/images/unread.png" *ngIf="data?.unreadMessagesCount != 0">
             </div>
             <div class="gz-list-td">{{this.i18ns.last_msg_time}}: {{data?.lastMessageAt | date: 'yyyy-MM-dd HH:mm:ss'}} </div>
             
         </div>
-        <div class="gz-list-tr-right">
+        <!-- <div class="gz-list-tr-right">
           <div class="btn btn-outline-blue gz-circle" (click)="toOrderDetail(data?.lastMessage)">
               {{this.i18ns.goto_detail}}
           </div>
 
-        </div>
+        </div> -->
     </section>
     
 </article>

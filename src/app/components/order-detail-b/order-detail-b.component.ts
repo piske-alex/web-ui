@@ -89,7 +89,7 @@ export class OrderDetailBComponent implements OnInit {
 
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
-          console.log('this.order', this.order);
+          // console.log('this.order', this.order);
           this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
           
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
@@ -391,6 +391,12 @@ export class OrderDetailBComponent implements OnInit {
               this.dialogService.alert(this.i18ns.mark_dispute_err_notpaid);
             } else if (err.error == 'the order status must be unfinish') {
               this.dialogService.alert(this.i18ns.order_must_be_unfinish);
+            } else if (err.error == 'order_already_mark_dispute') {
+              this.dialogService.alert(this.i18ns.order_already_mark_dispute);
+              this.ngOnInit();
+            } else if (err.error == 'order_already_mark_finish') {
+              this.dialogService.alert(this.i18ns.order_already_mark_finish);
+              this.ngOnInit();
             } else {
               this.dialogService.alert(err.error);
             }
@@ -418,6 +424,12 @@ export class OrderDetailBComponent implements OnInit {
         }, err => {
           if (err.error == 'the order status must be unfinish') {
             this.dialogService.alert(this.i18ns.order_must_be_unfinish);
+          } else if (err.error == 'order_already_mark_dispute') {
+            this.dialogService.alert(this.i18ns.order_already_mark_dispute);
+            this.ngOnInit();
+          } else if (err.error == 'order_already_mark_finish') {
+            this.dialogService.alert(this.i18ns.order_already_mark_finish);
+            this.ngOnInit();
           } else {
             this.dialogService.alert(err.error);
           }

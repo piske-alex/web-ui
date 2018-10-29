@@ -45,7 +45,8 @@ export class MyMsgComponent implements OnInit {
     this.i18ns.unread_count = await this.languageService.get('my_msg.unread_count');
     this.i18ns.last_msg_time = await this.languageService.get('my_msg.last_msg_time');
     this.i18ns.goto_detail = await this.languageService.get('my_msg.goto_detail');
-
+    this.i18ns.msg_ad = await this.languageService.get('my_msg.msg_ad');
+    
     setTimeout(() => {
       this.getUnReadCount();
     }, 1000);
@@ -60,7 +61,7 @@ export class MyMsgComponent implements OnInit {
      const currentUserId = this.currentLoginUserId;
      this.chatService.loginAndGetChatDialogList().then((data) => {
 
-      console.log('my msg data222', data);
+     // console.log('my msg data222', data);
 
       for (const item of data) {
         if (item.lastMessage._lcattrs.adUserId == currentUserId ) {

@@ -144,7 +144,7 @@
     "goto_order": "交易信息",
     "ad_coin_type": "币种",
     "has_no_order": "没有交易信息",
-    "order_id": "id",
+    "order_id": "编号",
     "order_status": "状态",
     "order_status_unfinish": "未完成",
     "order_status_finish": "已完成",
@@ -282,9 +282,10 @@
   },
   "my_msg": {
     "chat_with_members": "对话框成员",
-    "unread_count": "未读数量",
+    "unread_count": "未读",
     "last_msg_time": "最近会话时间",
-    "goto_detail": "进入对话"
+    "goto_detail": "进入对话",
+    "msg_ad": "广告"
   },
   "my_trade": {
     "myBuy": "我的买单",

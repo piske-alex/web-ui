@@ -282,9 +282,10 @@
   },
   "my_msg": {
     "chat_with_members": "Dialog member",
-    "unread_count": "Unread quantity",
+    "unread_count": "Unread",
     "last_msg_time": "Recent session time",
-    "goto_detail": "Enter the conversation"
+    "goto_detail": "Enter the conversation",
+    "msg_ad": "ad"
   },
   "my_trade": {
     "myBuy": "My buy order",
