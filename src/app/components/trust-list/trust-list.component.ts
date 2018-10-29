@@ -18,6 +18,7 @@ export class TrustListComponent implements OnInit {
   list: User[] = [];
 
   i18ns: any = {};
+  isLoading: boolean;
 
   constructor(private location: Location,
     private router: Router,
@@ -72,7 +73,9 @@ export class TrustListComponent implements OnInit {
 
   private async getUserList() {
     try {
+      this.isLoading = true;
       this.list = await this.userService.getUserList({ relationship: this.relationShip });
+      this.isLoading = false;
        console.log('trust getUserList', this.list);
     } catch (e) {
       console.error(e);
@@ -85,7 +88,9 @@ export class TrustListComponent implements OnInit {
 
   async cancelBlackList(anotherUserId: string) {
     try {
+      this.isLoading = true;
       let _result = await this.userService.addBlackList({userid: anotherUserId, action: 'remove'});
+      this.isLoading = false;
       this.getUserList();
     } catch (e) {
       console.error(e);
@@ -95,7 +100,9 @@ export class TrustListComponent implements OnInit {
 
   async cancelTrustList(anotherUserId: string) {
     try {
+      this.isLoading = true;
       let _result = await this.userService.addTrustList({userid: anotherUserId, action: 'remove'});
+      this.isLoading = false;
       this.getUserList();
     } catch (e) {
       console.error(e);

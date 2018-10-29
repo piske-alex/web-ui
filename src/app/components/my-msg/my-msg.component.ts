@@ -19,7 +19,8 @@ export class MyMsgComponent implements OnInit {
   chatDlgList: any ;
   i18ns: any = {};
   currentLoginUserId: string;
-
+  isLoading: boolean;
+  
   constructor(private location: Location,
     private router: Router,
     private languageService: LanguageService,
@@ -46,7 +47,7 @@ export class MyMsgComponent implements OnInit {
     this.i18ns.last_msg_time = await this.languageService.get('my_msg.last_msg_time');
     this.i18ns.goto_detail = await this.languageService.get('my_msg.goto_detail');
     this.i18ns.msg_ad = await this.languageService.get('my_msg.msg_ad');
-    
+    this.isLoading = true;
     setTimeout(() => {
       this.getUnReadCount();
     }, 1000);
@@ -114,6 +115,7 @@ export class MyMsgComponent implements OnInit {
       });
 
       this.chatDlgList = list1.concat(list2);
+      this.isLoading = false;
     });
   }
 

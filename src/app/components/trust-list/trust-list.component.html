@@ -27,12 +27,12 @@
       <a class="nav-link {{relationShip == 3 ? 'active' : ''}}" (click)="loadList(3)">{{i18ns.iBlackList}}</a>
     </nav>
   </section>
-
-  <section class="gz-list-tr" *ngFor="let data of list">
+  <div *ngIf="!isLoading">
+  <section class="gz-list-tr"  *ngFor="let data of list">
     <div class="gz-list-tr-left">
-      <!-- <div class="gz-list-tr-head">
+      <div class="gz-list-tr-head">
         <img src="{{data.data.avatar | avatar}}" alt="">
-      </div> -->
+      </div>
       <div class="gz-list-tr-detail">
         <h3>{{data.data.username}}</h3>
         <div>{{i18ns.transaction}} {{data.data.transaction_count}} | 
@@ -43,22 +43,20 @@
               <div>{{getDealWithHimDesc(data.data)}}</div>
           </div>
       </div>
-      
     </div>
     
     <div class="gz-list-tr-right">
-
         <div class="btn btn-primary" *ngIf="relationShip == 1" (click)="cancelTrustList(data.data.id)">
             <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
             {{this.i18ns.cancel_trust}}
-          </div>
-          
-      <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.data.id)">
-        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
-        {{this.i18ns.cancel_black}}
-      </div>
+        </div>
+        <div class="btn btn-primary"  *ngIf="relationShip == 3" (click)="cancelBlackList(data.data.id)">
+          <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+          {{this.i18ns.cancel_black}}
+        </div>
       
     </div>
   </section>
-
+  </div>
+  <div class="loader" *ngIf="isLoading">Loading...</div>
 </article>

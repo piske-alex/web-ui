@@ -19,6 +19,7 @@ export class MyAdComponent implements OnInit {
   list: TransactionListItem[] = [];
   i18ns: any = {};
   isShowLoadMore = false;
+  isLoading = false;
 
   constructor(private location: Location,
     private router: Router,
@@ -73,8 +74,9 @@ export class MyAdComponent implements OnInit {
 
     try {
       // this.adService.listOtcAd({ userId: this.userId, status: this.status });
-      // this.isLoading = true;
+      this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
+      this.isLoading = false;
       this.list = _result.list;
 
       if (_result.total > this.list.length) {
@@ -109,8 +111,9 @@ export class MyAdComponent implements OnInit {
 
     try {
       // this.adService.listOtcAd({ userId: this.userId, status: this.status });
-      // this.isLoading = true;
+      //this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
+      this.isLoading = false;
       if (this.list) {
         const tempList = this.list.concat(_result.list);
         this.list = tempList;

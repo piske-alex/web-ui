@@ -10,7 +10,7 @@
   </div>
 </header>
 
-<article *ngIf="this.chatDlgList  && chatDlgList?.length > 0" >
+<article *ngIf="!isLoading && this.chatDlgList  && chatDlgList?.length > 0" >
     <section class="gz-list-tr" *ngFor="let data of chatDlgList">
         <div class="gz-list-tr-left" (click)="toOrderDetail(data?.lastMessage)"
         onmouseover="this.style.backgroundColor='RGB(58,58,58)'"
@@ -36,3 +36,4 @@
     </section>
     
 </article>
+<div class="loader" *ngIf="isLoading">Loading...</div>
