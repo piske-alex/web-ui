@@ -41,7 +41,7 @@ export class CoinActionWithrawComponent implements OnInit {
   async ngOnInit() {
 
     this.i18ns.withrawProcessingHelp = await this.languageService.get('wallet.withrawProcessingHelp');
-    this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
+    // this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
     this.i18ns.remark = await this.languageService.get('element_coin_withraw.remark');
     this.i18ns.input_trans_password = await this.languageService.get('element_coin_withraw.input_trans_password');
     this.i18ns.input_amount = await this.languageService.get('element_coin_withraw.input_amount');
@@ -115,16 +115,17 @@ export class CoinActionWithrawComponent implements OnInit {
       tag: this.remark,
     };
     try {
-      let _result = await this.walletService.walletWidthdraw(_params);
-      if (_result && _result.success) {
-        this.address = '';
-        this.amount = '';
-        this.paypassword = '';
-        this.remark = '';
-        this.dialogService.alert(this.i18ns.send_success);
-      } else {
-        console.error(_result);
-      }
+      this.walletService.walletWidthdraw(_params).then( _result => {
+        if (_result && _result.success) {
+          this.address = '';
+          this.amount = '';
+          this.paypassword = '';
+          this.remark = '';
+          this.dialogService.alert(this.i18ns.send_success);
+        } else {
+          console.error(_result);
+        }
+      });
     } catch (e) {
       console.error(e);
       if (e.error == 'password wrong') {

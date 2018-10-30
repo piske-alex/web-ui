@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { RouteJson, RouteMap } from '../../models/route-map/route-map.modle';
-import { Observable, Subject } from "rxjs/index";
+import { Observable, Subject } from 'rxjs/index';
 import { LanguageService } from '../../providers/language/language.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class HttpService {
   private isLoading: boolean = false;
   private authSubject: Subject<boolean> = new Subject();
 
-  constructor(private http: HttpClient,private languageService: LanguageService) {
+  constructor(private http: HttpClient, private languageService: LanguageService) {
   }
 
   openLoading() {

@@ -85,7 +85,7 @@
   },
   "element_coin_withraw":{
     "send_address":"發送地址",
-    "input_address":"請輸入{coinType}地址",
+    "input_address":"請輸入${coinType}地址",
     "coin_amount":"數量",
     "input_amount":"請輸入數量",
     "max_send":"最多可以發送",
