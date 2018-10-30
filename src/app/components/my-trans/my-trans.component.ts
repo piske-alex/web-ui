@@ -41,7 +41,7 @@ export class MyTransComponent implements OnInit {
     this.isLoading = true;
     this.adType = 'buy';
     this.loadTrade();
-    this.isLoading = false;
+    //this.isLoading = false;
   }
 
   goBack() {

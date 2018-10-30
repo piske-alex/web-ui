@@ -15,7 +15,8 @@
     "chat_template_2":"你好，请问可以及时付款吗？",
     "chat_template_3":"你好，请问付款跟实名是一致的吗？",
     "chat_template_4":"你好，请问可以设置信任进行交易吗？",
-    "info_chat_via_temp":"未下单前，只能通过对话模板进行交流"
+    "info_chat_via_temp":"未下单前，只能通过对话模板进行交流",
+    "newmsg":"您有新的消息"
   },
   "coin":{
     "detail":"明细",

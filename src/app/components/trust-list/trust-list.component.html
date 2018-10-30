@@ -30,9 +30,9 @@
   <div *ngIf="!isLoading">
   <section class="gz-list-tr"  *ngFor="let data of list">
     <div class="gz-list-tr-left">
-      <div class="gz-list-tr-head">
+      <!-- <div class="gz-list-tr-head">
         <img src="{{data.data.avatar | avatar}}" alt="">
-      </div>
+      </div> -->
       <div class="gz-list-tr-detail">
         <h3>{{data.data.username}}</h3>
         <div>{{i18ns.transaction}} {{data.data.transaction_count}} | 

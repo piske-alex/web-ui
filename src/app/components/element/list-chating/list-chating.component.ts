@@ -38,8 +38,12 @@ export class ListChatingComponent implements OnInit {
   constructor(private userService: UserService,
               private chatService: ChatService,
               private dialogService: DialogService) {
-
-      this.chatService.loginChat();
+      try {
+        this.chatService.loginChat();
+      } catch (e) {
+        console.error('list chating  error', e);
+        this.chatService.loginChat();
+      }
   }
 
   async ngOnDestroy() {
@@ -110,7 +114,7 @@ export class ListChatingComponent implements OnInit {
   }
 
   private _updateScroll() {
-    if ( document.querySelector('.gz-chat-list') ) {
+    if ( document.querySelector('.gz-chat-list').scrollHeight ) {
     document.querySelector('.div_list_chat').scrollTop = document.querySelector('.gz-chat-list').scrollHeight + 150;
       // document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 100;
 

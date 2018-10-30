@@ -15,7 +15,8 @@
     "chat_template_1":"Hello, are you here?",
     "chat_template_2":"Hello, can you pay in time?",
     "chat_template_3":"Hello, is the payment name as same as the real name?",
-    "chat_template_4":"Hello, can you set up trust to trade?"
+    "chat_template_4":"Hello, can you set up trust to trade?",
+    "newmsg":"You have new messages."
   },
   "coin":{
     "detail":"Detail",

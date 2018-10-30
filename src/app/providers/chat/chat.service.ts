@@ -16,6 +16,7 @@ export class ChatService {
   conservationObj: any = {};
 
   receive: Function;
+  unreadTip: Function;
 
   chat_topic_keyword: string;
 
@@ -52,6 +53,7 @@ export class ChatService {
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
           this.chat = chat;
           this.isLogin = true;
+          console.log('chat info:' , chat);
           // chat.on(AV.Event.MESSAGE, (message, conversation) => {
           //    console.log('--loginChat--------3333--------message: ', message);
           //   const _from = message.from;
@@ -89,6 +91,15 @@ export class ChatService {
           //     this.receive();
           //   }
           // });
+
+          chat.on(AV.UNREAD_MESSAGES_COUNT_UPDATE, function(unreadconversations) {
+            console.log('chat service  UNREAD_MESSAGES_COUNT_UPDATE');
+            if (this.unreadTip) {
+              console.log('chat service  UNREAD_MESSAGES_COUNT_UPDATE  proces');
+              this.unreadTip();
+            }
+          });
+
         }).catch(console.error);
       } else {
         console.log('### >>> realtime or user is null');
@@ -104,7 +115,7 @@ export class ChatService {
     }
   }
 
-  
+
   getConversationLocal(adId, adUserId, anotherUserId): any {
     return new Promise((resolve, reject) => {
       let chat_union_ids = '';
@@ -418,6 +429,97 @@ export class ChatService {
     });
   }
 
+
+  getUnreadCount(): Promise<any> {
+    const _user = localStorage.getItem('user');
+    if (_user == undefined) {
+      return new Promise((resolve, reject) => { resolve(0); });
+    }
+    this.user = JSON.parse(_user);
+    if (this.user.id == undefined) {
+      return new Promise((resolve, reject) => { resolve(0); });
+    }
+    this.currentLoginUserId = this.user.id;
+
+    if (this.isLogin && this.chat) {
+     // console.log('--------------getUnreadCount----if had login: ');
+
+      return new Promise((resolve, reject) => {
+        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+          this.chat = chat;
+          this.isLogin = true;
+
+          const chat_top = this.chat_topic_keyword;
+          this.chat.getQuery()
+            .containsMembers([String(this.currentLoginUserId)])
+            .limit(100)
+            .withLastMessagesRefreshed(true)
+            .find()
+            .then(function(conversations) {
+
+              let unreadCountSum = 0;
+              let chats: Array<any> = new Array();
+              conversations.map(function(chat) {
+                if (chat) {
+                  if (chat.lastMessage) {
+                    if (chat.lastMessage._lcattrs) {
+                      if (chat.lastMessage._lcattrs.topic == chat_top) {
+                        // chats.push(chat);
+                        unreadCountSum = unreadCountSum + chat.unreadMessagesCount;
+                      }
+                    }
+                  }
+                }
+              });
+
+              resolve(unreadCountSum);
+
+            }).catch(console.error.bind(console));
+
+        });
+
+      });
+
+    } else {
+      console.log('--------------getUnreadCount----else not login: ');
+
+      return new Promise((resolve, reject) => {
+        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+         this.chat = chat;
+          this.isLogin = true;
+          const chat_top = this.chat_topic_keyword;
+          this.chat.getQuery()
+            .containsMembers([String(this.currentLoginUserId)])
+            .limit(100)
+            .withLastMessagesRefreshed(true)
+            .find()
+            .then(function(conversations) {
+
+              let unreadCountSum = 0;
+              let chats: Array<any> = new Array();
+              conversations.map(function(chat) {
+                if (chat) {
+                  if (chat.lastMessage) {
+                    if (chat.lastMessage._lcattrs) {
+                      if (chat.lastMessage._lcattrs.topic == chat_top) {
+                        // chats.push(chat);
+                        unreadCountSum = unreadCountSum + chat.unreadMessagesCount;
+                      }
+                    }
+                  }
+                }
+              });
+
+              resolve(unreadCountSum);
+
+            }).catch(console.error.bind(console));
+
+        });
+
+      });
+    }
+
+  }
 
 
   closeChatClient() {

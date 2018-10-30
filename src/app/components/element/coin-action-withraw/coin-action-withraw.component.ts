@@ -123,9 +123,10 @@ export class CoinActionWithrawComponent implements OnInit {
         this.remark = '';
         this.dialogService.alert(this.i18ns.send_success);
       } else {
-
+        console.error(_result);
       }
     } catch (e) {
+      console.error(e);
       if (e.error == 'password wrong') {
         this.dialogService.alert(this.i18ns.err_paypassword_invalid);
       } else if (e.error == 'address invaild') {
@@ -135,7 +136,9 @@ export class CoinActionWithrawComponent implements OnInit {
       } else if (e.error == 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.err_insufficient_balance);
       } else {
-        this.dialogService.alert(e.error);
+        if (e.error) {
+          this.dialogService.alert(e.error);
+        }
       }
     }
   }

@@ -39,7 +39,7 @@ export class UserSettingComponent implements OnInit {
     //   console.error(e);
     // }
     this.user = await this.userService.getDetail({ id: this.userId });
-    console.error(this.user);
+    // console.error(this.user);
     this.i18ns.set_paypass_first = await this.languageService.get('user_setting.set_paypass_first');
   }
 

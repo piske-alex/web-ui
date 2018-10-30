@@ -70,6 +70,9 @@ export class UserTransactionPasswordComponent implements OnInit {
     if (this.focusInput === inputName) {
       this.focusInput = '';
     }
+    if (inputName === "phoneNo") {
+      this.phoneNo = this.phoneNo.replace(/\s+/g,'');
+    }
   }
 
   isFocus(inputName: string): string {

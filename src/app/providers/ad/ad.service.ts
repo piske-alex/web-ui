@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from "../http/http.service";
-import { RouteMap } from "../../models/route-map/route-map.modle";
-import { TransactionListItem } from "../../models/ad/TransactionListItem";
-import { OtcAd } from "../../models/ad/OtcAd";
-import { Deal } from "../../models/ad/Deal";
+import { HttpService } from '../http/http.service';
+import { RouteMap } from '../../models/route-map/route-map.modle';
+import { TransactionListItem } from '../../models/ad/TransactionListItem';
+import { OtcAd } from '../../models/ad/OtcAd';
+import { Deal } from '../../models/ad/Deal';
 import { TradeItem } from 'src/app/models/common/TradeItem';
 import { UrlParam } from 'src/app/models/common/UrlParam';
 
@@ -38,7 +38,7 @@ export class AdService {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.LIST_TRANSACTION, params).then(data => {
         if (data && data.success) {
-          console.log('api myads', data);
+          // console.log('api myads', data);
           let _result = {list: [], total: 0};
           if (data.data && data.data.length > 0) {
             _result.list = data.data.map(_data => {
@@ -79,7 +79,7 @@ export class AdService {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.GET_TRANS_BETWEEN_USERIDS, params, true).then(data => {
         if (data && data.success) {
-          console.log("api",data);
+          // console.log("api",data);
           let _result = {list: [], total: 0};
             if (data.data && data.data.length > 0) {
               _result.list = data.data.map(_data => {
@@ -147,7 +147,21 @@ export class AdService {
   transaction(params): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.TRANSACTION_AD, params, true).then(data => {
-        console.log('api transaction', data);
+        // console.log('api transaction', data);
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  getNewMsg(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.GET_ORDER, params, true).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {

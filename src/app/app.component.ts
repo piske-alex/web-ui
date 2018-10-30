@@ -20,9 +20,9 @@ export class AppComponent implements OnInit {
               private router: Router,
               private chatService: ChatService,
               private languageService: LanguageService) {
-
-     // this.chatService.initChat();
-     // this.chatService.loginChat();
+      console.log('AppComponent AppComponent AppComponent');
+      this.chatService.initChat();
+      this.chatService.loginChat();
 
     // ###### change language
     // setTimeout(() => {

@@ -55,7 +55,7 @@ export class MyComponent implements OnInit {
     if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
       this.user = await this.userService.getDetail({});
       this.isHadLogin = true;
-       console.log('user detail: ', this.user);
+      // console.log('user detail: ', this.user);
       localStorage.setItem('user_id', this.user.id);
       localStorage.setItem('user', JSON.stringify(this.user));
       this.chatService.initChat();

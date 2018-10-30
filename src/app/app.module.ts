@@ -81,7 +81,7 @@ import { ChatingComponent } from './components/chating/chating.component';
 import { ListChatingComponent } from './components/element/list-chating/list-chating.component';
 import { ConfirmDialogComponent } from './components/element/confirm-dialog/confirm-dialog.component';
 import { AlertDialogComponent } from './components/element/alert-dialog/alert-dialog.component';
-
+import { MessageWarnComponent } from './components/element/message-warn/message-warn.component';
 
 
 library.add(fas);
@@ -156,6 +156,7 @@ const createTranslateLoader = function (http: HttpClient) {
     ListChatingComponent,
     ConfirmDialogComponent,
     AlertDialogComponent,
+    MessageWarnComponent,
 
 
   ],

@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
 
     try {
       this.otcTransactions = await this.adService.otcTrending({});
-       console.log('otcTransactions', this.otcTransactions);
+      // console.log('otcTransactions', this.otcTransactions);
       (this.otcTransactions || []).forEach(_data => {
         _data = _data || [];
         const _len = _data.length;

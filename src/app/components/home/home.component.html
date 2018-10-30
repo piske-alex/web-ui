@@ -62,8 +62,8 @@
           </div>
         </div>
         <div class="gz-coin-rate">
-          <b>{{price.USD}} USD</b>
-          <span>{{price.CNY}} CNY</span>
+          <b>{{price.USD | rateFormat}} USD</b>
+          <span>{{price.CNY | rateFormat}} CNY</span>
         </div>
         <div class="gz-coin-change">
           <div class="gz-price-up" *ngIf="price.changePercent >= 0">
@@ -100,7 +100,7 @@
                 <div>
                   <img src="{{otcAd.avatar | avatar}}">
                 </div>
-                <div>{{otcAd.currencyAmount}} {{otcAd.currency}}</div>
+                <div>{{otcAd.currencyAmount | cnyFormat}} {{otcAd.currency}}</div>
                 <div>
                   <div *ngIf="payTypeObj[otcAd.payType]">{{payTypeObj[otcAd.payType].name}}</div>
                 </div>
@@ -126,4 +126,5 @@
   </article>
 
   <footer class="gz-empty-foot"></footer>
+  
 </div>
