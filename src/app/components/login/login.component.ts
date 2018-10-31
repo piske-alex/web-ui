@@ -139,7 +139,7 @@ export class LoginComponent implements OnInit {
     };
 
     try {
-
+      this.password = '';
     this.httpService.request(RouteMap.V1.USER.LOGIN, _params).then(async (data) => {
       const _token = data && data.token;
       if (_token) {
@@ -155,6 +155,8 @@ export class LoginComponent implements OnInit {
               if (!_user.username) {
                 this.router.navigate(['setNickName', { userId: _user.id || '' }]);
               }
+              this.languageService.initConfig(_user.language);
+              localStorage.setItem('language', _user.language);
               this.router.navigate(['/my', { userId: _user.id }]);
             } else {
               this.dialogService.alert(this.i18ns.err_getuserdetail_fail);

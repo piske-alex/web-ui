@@ -76,6 +76,8 @@ export class CoinActionWithrawComponent implements OnInit {
       this.transactions = await this.walletService.walletTransaction({
         accountType: 'otc',
         type: 'send',
+        coin: this.coinType,
+        confirm: 0,
         offset: 0,
         limit: 1000
       });

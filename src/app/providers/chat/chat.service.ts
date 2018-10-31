@@ -194,15 +194,13 @@ export class ChatService {
           //     this.receive();
           //   }
           // });
-          console.log('currentLoginUserId11', this.user.id);
-          console.log('topic keyword', this.chat_topic_keyword);
+          // console.log('currentLoginUserId11', this.user.id);
+          // console.log('topic keyword', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])
-            // .equalTo('topic', this.chat_topic_keyword)
             .limit(100)
             .withLastMessagesRefreshed(true)
-            // .contains('topic', this.chat_topic_keyword)
             .find()
             .then(function(conversations) {
 
@@ -277,10 +275,8 @@ export class ChatService {
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
             .containsMembers([String(this.currentLoginUserId)])
-            // .equalTo('topic', this.chat_topic_keyword)
             .limit(100)
             .withLastMessagesRefreshed(true)
-            // .contains('topic', this.chat_topic_keyword)
             .find()
             .then(function(conversations) {
 
@@ -481,7 +477,7 @@ export class ChatService {
       });
 
     } else {
-      console.log('--------------getUnreadCount----else not login: ');
+      // console.log('--------------getUnreadCount----else not login: ');
 
       return new Promise((resolve, reject) => {
         this.realtime.createIMClient(String(this.user.id)).then(chat => {
@@ -524,7 +520,7 @@ export class ChatService {
 
   closeChatClient() {
     this.isLogin = false;
-    console.log('closeChatClient');
+    // console.log('closeChatClient');
     if (this.chat) {
       this.chat.close().then(function() {  }).catch(console.error.bind(console));
     }

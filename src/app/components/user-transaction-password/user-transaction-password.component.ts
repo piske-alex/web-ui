@@ -56,6 +56,7 @@ export class UserTransactionPasswordComponent implements OnInit {
     this.i18ns.err_gettoken_fail = await this.languageService.get('user.err_gettoken_fail');
     this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
     this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
+    this.i18ns.phone_mismatch = await this.languageService.get('user.phone_mismatch');
   }
 
   goBack() {
@@ -121,6 +122,8 @@ export class UserTransactionPasswordComponent implements OnInit {
 
     try {
        this.userService.setTransactionPassword({
+        countryCallingCode: this.countryCode,
+        phone: this.phoneNo,
         verifyCode: this.smsCode,
         password: this.password
       }).then( async (data) => {
@@ -138,8 +141,12 @@ export class UserTransactionPasswordComponent implements OnInit {
               }
             }
           } else {
-            this.resendSmsCodeDelay = 1;
-            this.dialogService.alert(this.i18ns.err_phone_or_password);
+            if (errRes.success == false && errRes.error == 'phone number mismatch'){
+              this.dialogService.alert(this.i18ns.phone_mismatch);
+            } else {
+              this.resendSmsCodeDelay = 1;
+              this.dialogService.alert(this.i18ns.err_phone_or_password);
+            }
           }
         }
       );

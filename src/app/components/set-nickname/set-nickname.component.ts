@@ -37,6 +37,7 @@ export class SetNicknameComponent implements OnInit {
 
     this.userId = this.route.snapshot.paramMap.get('userId');
     this.i18ns.input_nickname = await this.languageService.get('user.input_nickname');
+    this.i18ns.err_username_had_used = await this.languageService.get('user.err_username_had_used');
   }
 
   goBack() {
@@ -67,6 +68,14 @@ export class SetNicknameComponent implements OnInit {
       this.userService.setNickname({username: this.nickname}).then( (data) => {
         console.log(data);
         this.router.navigate(['/my', {userId: tempUserId}]);
+      }, err => {
+        if (err.error) {
+          if (err.error == 'username have been used') {
+            return this.dialogService.alert(this.i18ns.err_username_had_used);
+          } else {
+            this.dialogService.alert(err.error);
+          }
+        }
       });
     } catch (e) {
       console.error(e);

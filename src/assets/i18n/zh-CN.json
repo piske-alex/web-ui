@@ -16,7 +16,7 @@
     "chat_template_3":"你好，请问付款跟实名是一致的吗？",
     "chat_template_4":"你好，请问可以设置信任进行交易吗？",
     "info_chat_via_temp":"未下单前，只能通过对话模板进行交流",
-    "newmsg":"您有新的消息"
+    "newmsg":"您有新消息"
   },
   "coin":{
     "detail":"明细",
@@ -306,6 +306,7 @@
     "loginDesc": "立刻登录可以查看更多内容",
     "logout": "退出",
     "inputPhone": "请输入手机号",
+    "phone_mismatch": "手机号不匹配",
     "inputSmsCode": "请输入短信验证码",
     "inputPassword": "请输入密码",
     "resendSmsCode": "重新获取验证码",
@@ -314,6 +315,7 @@
     "iDealWithHimCount": "我和他交易过${1}次",
     "set_nickname":"设置昵称",
     "input_nickname":"请输入昵称",
+    "err_username_had_used":"昵称已被使用",  
     "confirm_logout": "确定要退出吗？",
     "inputValidPhone": "请输入正确的手机号码",
     

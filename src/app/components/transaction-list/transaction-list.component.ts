@@ -29,6 +29,7 @@ export class TransactionListComponent implements OnInit {
       coin: this.coinType,
       // type: 'receive',
       offset: 0,
+      confirm: 1,
       limit: 1000,
     });
 

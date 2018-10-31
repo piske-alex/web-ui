@@ -59,6 +59,7 @@ export class ForgetPasswordComponent implements OnInit {
     this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
     this.i18ns.password_valid_warn_1 = await this.languageService.get('register.password_valid_warn_1');
     this.i18ns.password_valid_warn_2 = await this.languageService.get('register.password_valid_warn_2');
+    this.i18ns.phone_mismatch = await this.languageService.get('user.phone_mismatch');
   }
 
   goBack() {
@@ -76,7 +77,7 @@ export class ForgetPasswordComponent implements OnInit {
     if (inputName === 'password') {
       this._validatePassword();
     }
-    if (inputName === "phoneNo") {
+    if (inputName === 'phoneNo') {
       this.phoneNo = this.phoneNo.replace(/\s+/g,'');
     }
   }
@@ -141,15 +142,18 @@ export class ForgetPasswordComponent implements OnInit {
             this.router.navigate(['/login']);
         }, error => {
           console.error('----------------forgetPassword-----error: ', error);
-          if(error.success === false){
-            if(error.error === "user not found"){
+          if (error.success === false) {
+            if (error.error === 'user not found') {
               this.dialogService.alert(this.i18ns.inputValidPhone);
             }
-          }else if (error.error.success === false && error.error.errmsg !== undefined) {
-            if(error.error.errmsg == "Invalid verification code")
+          } else if (error.error.success === false && error.error.errmsg !== undefined) {
+            if (error.error.errmsg == 'Invalid verification code') {
               this.dialogService.alert(this.i18ns.invalid_verification_code);
-            else
+            } else if (error.error.errmsg == 'phone number mismatch') {
+              this.dialogService.alert(this.i18ns.phone_mismatch);
+            } else {
               this.dialogService.alert(error.error.errmsg);
+            }
           } else {
             this.dialogService.alert(this.i18ns.setting_password_fail);
           }

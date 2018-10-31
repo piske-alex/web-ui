@@ -35,6 +35,8 @@ export class ListChatingComponent implements OnInit {
 
   handleRefreshChat: any;
 
+  isLoading: boolean;
+
   constructor(private userService: UserService,
               private chatService: ChatService,
               private dialogService: DialogService) {
@@ -68,6 +70,7 @@ export class ListChatingComponent implements OnInit {
     //   this.refreshchatlist();
     // }, 1000);
 
+    this.isLoading = true;
     this.handleRefreshChat = setInterval( () => { this.refreshchatlist(); }, 500);
 
   }
@@ -75,6 +78,7 @@ export class ListChatingComponent implements OnInit {
   async refreshchatlist() {
     if (this.chatingList) {
       const tempList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
+      this.isLoading = false;
       if (this.chatingList.length != tempList.length) {
        // console.log('chatingList updateScroll');
         this.chatingList = tempList;
@@ -84,6 +88,7 @@ export class ListChatingComponent implements OnInit {
       }
     } else {
       this.chatingList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
+      this.isLoading = false;
       this._updateScroll();
     }
 
