@@ -49,8 +49,9 @@ export class LoginComponent implements OnInit {
     this.i18ns.err_phone_or_password = await this.languageService.get('user.err_phone_or_password');
     this.i18ns.err_gettoken_fail = await this.languageService.get('user.err_gettoken_fail');
     this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
+    this.i18ns.err_usergroup_disabled = await this.languageService.get('user.err_usergroup_disabled');
     this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
-
+    
     const _accessToken = localStorage.getItem('access_token');
     const _loginTimestamp = localStorage.getItem('login_timestamp');
     if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
@@ -163,10 +164,18 @@ export class LoginComponent implements OnInit {
             console.error('---------------------error_getuserdetail: ', error_getuserdetail);
             if (error_getuserdetail.status === 403 && error_getuserdetail.error.userGroup === 'guest') {
               this.router.navigate(['setNickName', { userId: '' }]);
+            } else if (error_getuserdetail.status === 403 && error_getuserdetail.error.userGroup === 'disabled') {
+              localStorage.removeItem('login_timestamp');
+              localStorage.removeItem('access_token');
+              this.dialogService.alert(this.i18ns.err_usergroup_disabled);
             } else if (error_getuserdetail.message == 'Unauthorized' ) {
               this.router.navigate(['setNickName', { }]);
             } else {
-              this.dialogService.alert(error_getuserdetail.message);
+              localStorage.removeItem('login_timestamp');
+              localStorage.removeItem('access_token');
+              if (error_getuserdetail.message) {
+                this.dialogService.alert(error_getuserdetail.message);
+              }
             }
             this.isLoading = false;
           });

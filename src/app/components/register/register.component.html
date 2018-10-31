@@ -75,7 +75,7 @@
   <div class="gz-popup" *ngIf="isShowConfirm">
     <div class="gz-popup-content" style="opacity: 1;border: 1px solid #777">
       <h3><gz-i18n key="register.agreement_name"></gz-i18n></h3>
-      <div class="gz-popup-row" style="min-height:300px">
+      <div class="gz-popup-row" style="min-height:200px">
         <div [innerHTML]="serv_items_en" *ngIf="language == 'en-GB'" class="gz-div-overflow"></div>
         <div [innerHTML]="serv_items_simp" *ngIf="language == 'zh-CN'" class="gz-div-overflow"></div>
         <div [innerHTML]="serv_items_trad" *ngIf="language == 'zh-HK'" class="gz-div-overflow"></div>

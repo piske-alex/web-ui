@@ -52,17 +52,17 @@ export class MyComponent implements OnInit {
     // }
     // localStorage.removeItem('user');
 
-    if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
-      this.user = await this.userService.getDetail({});
-      this.isHadLogin = true;
-      // console.log('user detail: ', this.user);
-      localStorage.setItem('user_id', this.user.id);
-      localStorage.setItem('user', JSON.stringify(this.user));
-      this.chatService.initChat();
-      this.chatService.loginChat();
-    }
-
     try {
+      if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
+        this.user = await this.userService.getDetail({});
+        this.isHadLogin = true;
+        // console.log('user detail: ', this.user);
+        localStorage.setItem('user_id', this.user.id);
+        localStorage.setItem('user', JSON.stringify(this.user));
+        this.chatService.initChat();
+        this.chatService.loginChat();
+      }
+
       const _user = localStorage.getItem('user');
       if (_user) {
         this.isHadLogin = true;
@@ -80,6 +80,12 @@ export class MyComponent implements OnInit {
 
     } catch (e) {
       console.error(e);
+      this.isHadLogin = false;
+      localStorage.removeItem('user_id');
+        localStorage.removeItem('user');
+        localStorage.removeItem('login_timestamp');
+        localStorage.removeItem('access_token');
+        await this.userService.logout();
     }
 
 

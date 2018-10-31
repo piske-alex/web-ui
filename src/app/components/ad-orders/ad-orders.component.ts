@@ -73,6 +73,7 @@ export class AdOrdersComponent implements OnInit {
     this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
     this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
     this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
+    this.i18ns.amount = await this.languageService.get('otc.amount');
 
     try {
        this.adData = await this.adService.getOtcAdById({ adid: this.adId });

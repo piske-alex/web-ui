@@ -320,6 +320,7 @@
     "setting_password_relogin": "Password changed successfully, please login again",
     "setting_password_fail": "Failed to change password",
     "err_gettoken_fail":"Server-side processing failed, the obtained_token is undefined",
+    "err_usergroup_disabled":"Login failed, the account is disabled.",
     "err_getuserdetail_fail":"Server-side getUserDetail processing failed"
   },
   "user_email": {
@@ -425,9 +426,9 @@
   "wallet": {
     "title": "OTC Account",
     "cointEqualsCurrency": "OTC Assets",
-    "deposit": "Deposit into exchange",
+    "deposit": "Deposit",
     "transfer": "Transfer funds",
-    "withraw": "Withdraw from exchange",
+    "withraw": "Withdraw",
     "usable": "Available",
     "freeze": "Freeze",
     "cnyprice": "Price",

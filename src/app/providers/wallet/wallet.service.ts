@@ -55,6 +55,7 @@ export class WalletService {
   walletWidthdraw(params: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.WALLET.WALLET_WIDTHDRAW, params).then(data => {
+        console.log('api withdraw', data);
         if (data && data.success) {
           resolve(data.data);
         } else {

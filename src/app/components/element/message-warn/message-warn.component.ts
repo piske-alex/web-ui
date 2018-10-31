@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../../providers/chat/chat.service';
 import { Router } from '@angular/router';
+import { LanguageService } from '../../../providers/language/language.service';
 
 @Component({
   selector: 'app-message-warn',
@@ -11,9 +12,11 @@ export class MessageWarnComponent implements OnInit {
 
   isShowNewMessage: boolean;
   unreadCount: number;
+  i18ns: any = {};
 
-
-  constructor(private router: Router, private chatService: ChatService) {
+  constructor(private router: Router,
+    private languageService: LanguageService,
+    private chatService: ChatService) {
 
   }
 
@@ -26,6 +29,7 @@ export class MessageWarnComponent implements OnInit {
 
     let fetchNewMessage = async () => {
       // console.log(this.chatService);
+      this.i18ns.newmsgTip = await this.languageService.get('chat.newmsg');
       if (this.chatService.isLogin) {
         this.chatService.getUnreadCount().then((data) => {
           // console.log('warrrrrrrrrrrrrrrrrrrrrrrning  ngOnInit ', data);

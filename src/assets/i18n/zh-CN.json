@@ -321,6 +321,7 @@
     "setting_password_relogin": "修改密码成功,请重新登录",
     "setting_password_fail": "修改密码失败",
     "err_gettoken_fail":"服务器端处理失败，获取到的_token是undefined",
+    "err_usergroup_disabled":"登录失败，账号被禁用",
     "err_getuserdetail_fail":"服务器端getUserDetail处理失败"
   },
   "user_email": {

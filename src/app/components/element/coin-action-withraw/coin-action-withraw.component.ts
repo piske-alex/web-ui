@@ -115,19 +115,36 @@ export class CoinActionWithrawComponent implements OnInit {
       tag: this.remark,
     };
     try {
-      this.walletService.walletWidthdraw(_params).then( _result => {
-        if (_result && _result.success) {
+      this.walletService.walletWidthdraw(_params).then( data => {
+        console.log('_result----', data);
+        // if (data && data.success) {
           this.address = '';
           this.amount = '';
           this.paypassword = '';
           this.remark = '';
           this.dialogService.alert(this.i18ns.send_success);
-        } else {
-          console.error(_result);
+        // }
+      }, err => {
+        console.log('err----', err);
+        if (err.error) {
+          if (err.error == 'password wrong') {
+            this.dialogService.alert(this.i18ns.err_paypassword_invalid);
+          } else if (err.error == 'address invaild') {
+            this.dialogService.alert(this.i18ns.err_address_invalid);
+          } else if (err.error == 'coin network error') {
+            this.dialogService.alert(this.i18ns.err_coin_network_error);
+          } else if (err.error == 'Insufficient balance') {
+            this.dialogService.alert(this.i18ns.err_insufficient_balance);
+          } else {
+            if (err.error) {
+              this.dialogService.alert(err.error);
+            }
+          }
         }
       });
     } catch (e) {
-      console.error(e);
+      console.log('catch----', e);
+      if (e.error) {
       if (e.error == 'password wrong') {
         this.dialogService.alert(this.i18ns.err_paypassword_invalid);
       } else if (e.error == 'address invaild') {
@@ -137,7 +154,6 @@ export class CoinActionWithrawComponent implements OnInit {
       } else if (e.error == 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.err_insufficient_balance);
       } else {
-        if (e.error) {
           this.dialogService.alert(e.error);
         }
       }

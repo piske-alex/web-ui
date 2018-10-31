@@ -320,6 +320,7 @@
     "setting_password_relogin": "修改密碼成功,請重新登錄",
     "setting_password_fail": "修改密碼失敗",
     "err_gettoken_fail":"服務器端處理失敗，獲取到的_token是undefined",
+    "err_usergroup_disabled":"登錄失敗，帳號被禁用 ",
     "err_getuserdetail_fail":"服務器端getUserDetail處理失敗"
   },
   "user_email": {

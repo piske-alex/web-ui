@@ -1,4 +1,5 @@
 <div class="msgwarn" *ngIf="isShowNewMessage" (click)="gotoMyMsg()">
   <gz-i18n key="chat.newmsg"></gz-i18n>
   {{this.unreadCount}}
+  {{this.i18ns.newmsgTip}}
 </div>
