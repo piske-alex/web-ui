@@ -65,7 +65,7 @@
     "confirm_title":"確認"
   },
   "element_coin_deposit":{
-    "to_address_recharge":"向如下位址匯入{coinType}完成充值",
+    "to_address_recharge":"向如下位址匯入${coinType}完成充值",
     "attention":"注意事項",
     "attention_info":" ${coinType}位址只能充值${coinType}資產，任何充入${coinType}位址的非${coinType}資產將不可找回。充值上述位址需要1個網路確認才能到帳，最低存入金額為 0.01 ${coinType}",
     "start_trans":"即將到賬的轉帳",
@@ -434,7 +434,7 @@
     "usable": "可用",
     "freeze": "凍結",
     "cnyprice": "價格",
-    
+    "withrawProcessingHelp":"",
     "selectCoin": "選擇幣種",
     "depositWillReceiveHelp": "<p>溫馨提示</p><p>在${coinTYpe}網絡接收${coinTYpe}通常需要10分鐘，我們會在收到${coinTYpe}網絡1個確認後給您入帳。最低存入金額為0.01${coinTYpe}， 我們不會處理少於該金額的${coinTYpe}存入請求，在平台內互相轉賬是實時到賬且免費的。</p>"
   },

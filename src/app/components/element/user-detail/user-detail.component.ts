@@ -47,6 +47,8 @@ export class UserDetailComponent implements OnInit {
   async ngOnInit() {
     this.i18ns.blackList = await this.languageService.get('common.blackList');
     this.i18ns.trust = await this.languageService.get('common.trust');
+    this.i18ns.cancel_trust = await this.languageService.get('trust.cancel_trust');
+    this.i18ns.cancel_black = await this.languageService.get('trust.cancel_black');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.transactionCount = await this.languageService.get('otc.transactionCount');
     this.i18ns.trustCount = await this.languageService.get('otc.trustCount');

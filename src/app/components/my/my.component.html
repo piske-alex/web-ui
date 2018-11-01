@@ -26,13 +26,13 @@
     <div *ngIf="user && user.id">
       <div>{{user.username}}</div>
       <div>
-        <span><gz-i18n key="common.transaction"></gz-i18n></span>
+        <span><gz-i18n key="otc.transactionCount"></gz-i18n></span>
         <span>{{user.transaction_count}}</span>
         <span>|</span>
         <span><gz-i18n key="otc.praiseCount"></gz-i18n></span>
         <span>{{user.positive_count}}%</span>
         <span>|</span>
-        <span><gz-i18n key="common.trust"></gz-i18n></span>
+        <span><gz-i18n key="otc.trustCount"></gz-i18n></span>
         <span>{{user.trust_count}}</span>
       </div>
     </div>

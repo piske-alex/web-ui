@@ -17,7 +17,7 @@
       </div>
       <!-- <div class="btn btn-primary" *ngIf="data.is_in_my_black_list" (click)="cancelBlackList()">
         <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
-        {{i18ns.cancel}}{{i18ns.blackList}}
+        {{i18ns.cancel_black}}
       </div> -->
       <div class="btn btn-primary" *ngIf="!data.is_in_my_trust_list" (click)="addTrustList()">
         <fa-icon [icon]="['fas', 'plus']"></fa-icon>
@@ -25,7 +25,7 @@
       </div>
       <div class="btn btn-primary" *ngIf="data.is_in_my_trust_list" (click)="cancelTrustList()">
         <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
-        {{i18ns.cancel}}{{i18ns.trust}}
+        {{i18ns.cancel_trust}}
       </div>
     </div>
     <div class="gz-list-tr-right" *ngIf="rightTop=== 'money'">
