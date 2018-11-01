@@ -96,7 +96,8 @@
         <div class="swiper-container footcs">
           <ul class="gz-ad-slide-imgs swiper-wrapper" *ngIf="otcTransactions.length > 0">
             <li class="swiper-slide" *ngFor="let otcAds of otcTransactions">
-              <div class="adCls {{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds">
+              <div class="adCls {{otcAd.adType ? '' : 'gz-no-border'}}" *ngFor="let otcAd of otcAds"
+              (click)="toTransaction(otcAd.id)" >
                 <div>
                   <img src="{{otcAd.avatar | avatar}}">
                 </div>
@@ -105,7 +106,7 @@
                   <div *ngIf="payTypeObj[otcAd.payType]">{{payTypeObj[otcAd.payType].name}}</div>
                 </div>
                 <div *ngIf="otcAd.adType">
-                  <div class="btn btn-primary" (click)="toTransaction(otcAd.id)">
+                  <div class="btn btn-primary">
                     <span *ngIf="otcAd.adType == 'buy'">
                       <gz-i18n key="common.sale"></gz-i18n>
                     </span>
