@@ -57,7 +57,8 @@
         
       </div>
     </section>
-    <div class="align_center" *ngIf="!orders">{{this.i18ns.has_no_order}}</div>
+    <div class="loader" *ngIf="isLoading">Loading...</div>
+    <div class="align_center" *ngIf="!isLoading && !orders">{{this.i18ns.has_no_order}}</div>
     
 
   

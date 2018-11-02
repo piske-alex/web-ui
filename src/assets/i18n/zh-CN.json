@@ -435,7 +435,7 @@
     "usable": "可用",
     "freeze": "冻结",
     "cnyprice": "价格",
-    "withrawProcessingHelp":"请确保你的接收加密货币的地址是正确，提币后，我们会立刻处理。",
+    "withrawProcessingHelp":"请确保你接收加密货币的地址是正确，提币后，我们会立刻处理。",
     "selectCoin": "选择币种",
     "depositWillReceiveHelp": "<p>温馨提示</p><p>在${coinTYpe}网络接收${coinTYpe}通常需要10分钟，我们会在收到${coinTYpe}网络1个确认后给您入帐。最低存入金额为0.01${coinTYpe}， 我们不会处理少于该金额的${coinTYpe}存入请求，在平台内互相转账是实时到账且免费的。</p>"
   },

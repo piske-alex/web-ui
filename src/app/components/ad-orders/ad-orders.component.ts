@@ -25,7 +25,7 @@ export class AdOrdersComponent implements OnInit {
 
   adType: string;
 
-
+  isLoading: boolean;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -40,7 +40,7 @@ export class AdOrdersComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    this.isLoading = true;
     // this.anotherUserId = localStorage.getItem('user_id');
     this.adUserId = localStorage.getItem('user_id');
     this.adId = this.route.snapshot.paramMap.get('adId');
@@ -92,9 +92,10 @@ export class AdOrdersComponent implements OnInit {
           }
           return 0;
         });
-        // console.log('adid orders1', this.orders);
+        this.isLoading = false;
       } , error => {
         console.log('adid orders2', error);
+        this.isLoading = false;
       });
       // this.orders = _result.data;
      // const loginUserId = localStorage.getItem('user_id');
@@ -103,6 +104,7 @@ export class AdOrdersComponent implements OnInit {
 
     } catch (e) {
       console.error(e);
+      this.isLoading = false;
     }
 
   }

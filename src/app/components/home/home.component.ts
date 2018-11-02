@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
       //autoResize:true,
       autoplay: true,
       autoplayDisableOnInteraction:false,
-      speed: 10000,
+      speed: 5000,
       //grabCursor: true,// 开启鼠标的抓手状态
       loop: true,
       pagination : '.footcsPagination',

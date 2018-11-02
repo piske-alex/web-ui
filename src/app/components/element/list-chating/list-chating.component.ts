@@ -71,11 +71,19 @@ export class ListChatingComponent implements OnInit {
     // }, 1000);
 
     this.isLoading = true;
-    this.handleRefreshChat = setInterval( () => { this.refreshchatlist(); }, 500);
+    this.handleRefreshChat = setInterval( () => { this.refreshchatlist(); }, 800);
 
   }
 
   async refreshchatlist() {
+    if (!this.chatService.isLogin) {
+      try {
+        this.chatService.loginChat();
+      } catch (e) {
+        console.error('list chating  error', e);
+        this.chatService.loginChat();
+      }
+    }
     if (this.chatingList) {
       const tempList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
       this.isLoading = false;
