@@ -22,7 +22,7 @@ export class ChatService {
 
   constructor() {
     this.initChat();
-    this.chat_topic_keyword = 'dev02';
+    this.chat_topic_keyword = 'dev03';
   }
 
   initChat() {
@@ -50,7 +50,7 @@ export class ChatService {
         this.currentLoginUserId = this.user.id;
 
          console.log('### >>> create im client:::', this.user);
-        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+        this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
           this.chat = chat;
           this.isLogin = true;
           console.log('chat info:' , chat);
@@ -159,7 +159,7 @@ export class ChatService {
       this.currentLoginUserId = this.user.id;
 
       return new Promise((resolve, reject) => {
-        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+        this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
           this.chat = chat;
           this.isLogin = true;
 
@@ -235,7 +235,7 @@ export class ChatService {
       this.currentLoginUserId = this.user.id;
 
       return new Promise((resolve, reject) => {
-        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+        this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
           this.chat = chat;
           this.isLogin = true;
 
@@ -441,7 +441,7 @@ export class ChatService {
      // console.log('--------------getUnreadCount----if had login: ');
 
       return new Promise((resolve, reject) => {
-        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+        this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
           this.chat = chat;
           this.isLogin = true;
 
@@ -480,7 +480,7 @@ export class ChatService {
       // console.log('--------------getUnreadCount----else not login: ');
 
       return new Promise((resolve, reject) => {
-        this.realtime.createIMClient(String(this.user.id)).then(chat => {
+        this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
          this.chat = chat;
           this.isLogin = true;
           const chat_top = this.chat_topic_keyword;
