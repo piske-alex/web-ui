@@ -46,13 +46,13 @@
       <span *ngIf="data.adType == '2'">{{data.transactionCoinType}}</span>
       <span *ngIf="data.adType == '1'">{{data.transactionCurrency}}</span>
 
-      <input type="text" [(ngModel)]="payAmount"
+      <input type="text" [(ngModel)]="payAmount" tabindex="1"
       #payAmountVars (blur)="onblur_pay()"
       (keyup)="onKeyPress_Pay(payAmountVars.value)" [placeholder]="getLeftPlacehold()">
       <fa-icon [icon]="['fas', 'exchange-alt']"></fa-icon>
       <span *ngIf="data.adType == '2'">{{data.transactionCurrency}}</span>
       <span *ngIf="data.adType == '1'">{{data.transactionCoinType}}</span>
-      <input type="text" [(ngModel)]="receiveAmount"
+      <input type="text" [(ngModel)]="receiveAmount" tabindex="2"
       #receiveAmountVars (blur)="onblur_receive()"
        (keyup)="onKeyPress_Recevice(receiveAmountVars.value)" [placeholder]="getRightPlacehold()">
     </div>
@@ -72,11 +72,11 @@
     <fa-icon [icon]="['fas', 'comment-dots']"></fa-icon>
     {{i18ns.contact}}
   </div>
-  <div class="btn gz-foot-blue" *ngIf="data.userId != userId"  (click)="transaction()">
+  <div class="btn gz-foot-blue" *ngIf="data.userId != userId"  (click)="transaction()" (keyup.enter)="transaction()" tabindex="3">
     <span *ngIf="data.adType == '2'">{{i18ns.sale}}</span>
     <span *ngIf="data.adType == '1'">{{i18ns.buy}}</span>
   </div>
-  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="obtained()">
+  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="obtained()" (keyup.enter)="obtained()" tabindex="3">
     <span><gz-i18n key="transaction.obtained"></gz-i18n></span>
   </div>
   <!--<div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="edit()">-->

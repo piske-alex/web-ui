@@ -14,7 +14,7 @@
   <section class="gz-country">
     <div style="min-width: 60px;"><gz-i18n key="common.country"></gz-i18n></div>
     <div class="gz-country-select">
-      <select [(ngModel)]="countryCode">
+      <select [(ngModel)]="countryCode" tabindex="1">
         <option *ngFor="let cc of countryCodes" value="{{cc.code}}">
           {{cc.name}}({{cc.code}})
         </option>
@@ -27,7 +27,7 @@
   <section>
     <div class="gz-label {{isFocus('phoneNo')}}"><gz-i18n key="user.inputPhone"></gz-i18n></div>
     <div>
-      <input type="text" class="{{isFocus('phoneNo')}}" 
+      <input type="text" class="{{isFocus('phoneNo')}}" tabindex="2"
              [(ngModel)]="phoneNo" maxlength="15"
              (focus)="focus('phoneNo')" (blur)="blur('phoneNo')"
              placeholder="{{this.i18ns.inputPhone}}" >
@@ -37,10 +37,10 @@
   <section>
     <div class="gz-label {{isFocus('password')}}"><gz-i18n key="user.inputPassword"></gz-i18n></div>
     <div class="gz-password">
-      <input type="password" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}"
+      <input type="password" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}" tabindex="3"
              [(ngModel)]="password" *ngIf="!isShowPassword" maxlength="40"
              (focus)="focus('password')" (blur)="blur('password')">
-      <input type="text" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}"
+      <input type="text" class="{{isFocus('password')}}" placeholder="{{this.i18ns.inputPassword}}" tabindex="3"
              [(ngModel)]="password" *ngIf="isShowPassword" maxlength="40"
              (focus)="focus('password')" (blur)="blur('password')">
       <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
@@ -52,7 +52,7 @@
   <section>
     <div class="gz-label {{isFocus('smsCode')}}"><gz-i18n key="user.inputSmsCode"></gz-i18n></div>
     <div style="position: relative;">
-      <input type="text" class="{{isFocus('smsCode')}}" 
+      <input type="text" class="{{isFocus('smsCode')}}" tabindex="4"
              [(ngModel)]="smsCode" maxlength="6"
              (focus)="focus('smsCode')" (blur)="blur('smsCode')"
              placeholder="{{this.i18ns.inputSmsCode}}"
@@ -63,11 +63,11 @@
   </section>
   
   <section class="gz-agree-terms">
-    <input type="checkbox" id="isAggreeTerms" [(ngModel)]="isAggreeTerms" style="zoom:150%;min-height:15px;min-width:15px;">
+    <input type="checkbox" id="isAggreeTerms" [(ngModel)]="isAggreeTerms" style="zoom:150%;min-height:15px;min-width:15px;" tabindex="5">
     <label for="isAggreeTerms"><gz-i18n key="register.read_agreement"></gz-i18n> <span class="gz-active" (click)="showServiceItems()"><gz-i18n key="register.agreement_name"></gz-i18n></span></label>
   </section>
   <section class="gz-submit">
-    <div class="btn gz-circle active" (click)="register()"><gz-i18n key="register.next_step"></gz-i18n></div>
+    <div class="btn gz-circle active" (click)="register()" (keyup.enter)="register()" tabindex="6"><gz-i18n key="register.next_step"></gz-i18n></div>
   </section>
 </article>
 

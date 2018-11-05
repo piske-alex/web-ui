@@ -2,26 +2,26 @@
   <div class="gz-action-withraw-row" >
     <div class="gz-label">{{this.i18ns.send_address}}</div>
     <div class="gz-input">
-      <input type="text" class="gz-input" [(ngModel)]="address" placeholder="{{this.i18ns.input_address}}">
+      <input type="text" class="gz-input" [(ngModel)]="address" placeholder="{{this.i18ns.input_address}}" tabindex="1">
     </div>
   </div>
   <div class="gz-action-withraw-row">
     <div class="gz-label">{{coinType}}<gz-i18n key="element_coin_withraw.coin_amount"></gz-i18n></div>
     <div class="gz-input">
-      <input type="number" [(ngModel)]="amount" placeholder="{{this.i18ns.input_amount}}" maxlength="18">
+      <input type="number" [(ngModel)]="amount" placeholder="{{this.i18ns.input_amount}}" maxlength="18" tabindex="2">
     </div>
   </div>
   <div class="gz-action-withraw-info">
     <gz-i18n key="element_coin_withraw.max_send"></gz-i18n>{{coinBalance.balance | btcFormat}} {{coinType}}
   </div>
   <div class="gz-action-withraw-row gz-input">
-    <input type="text" [(ngModel)]="remark" placeholder="{{this.i18ns.remark}}"
+    <input type="text" [(ngModel)]="remark" placeholder="{{this.i18ns.remark}}" tabindex="3"
      >
   </div>
   <div class="gz-action-withraw-row">
     <div class="gz-label"><gz-i18n key="element_coin_withraw.trans_password"></gz-i18n></div>
     <div class="gz-input">
-      <input type="password" [(ngModel)]="paypassword" maxlength="40"
+      <input type="password" [(ngModel)]="paypassword" maxlength="40" tabindex="4"
       placeholder="{{this.i18ns.input_trans_password}}">
     </div>
   </div>
@@ -35,7 +35,7 @@
   </div>
   <div class="gz-btn-row">
     <!--active-->
-    <div class="btn btn-primary gz-circle" (click)="submit()"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
+    <div class="btn btn-primary gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="5"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
   </div>
 </div>
 

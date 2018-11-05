@@ -22,7 +22,7 @@
       <gz-i18n key="common.country"></gz-i18n>
     </div>
     <div class="gz-country-select">
-      <select [(ngModel)]="countryCode">
+      <select [(ngModel)]="countryCode" tabindex="1">
         <option *ngFor="let cc of countryCodes" value="{{cc.code}}">
           {{cc.name}}({{cc.code}})
         </option>
@@ -37,7 +37,7 @@
       <gz-i18n key="user.inputPhone"></gz-i18n>
     </div>
     <div>
-      <input type="text" class="{{isFocus('phone')}}" placeholder="{{i18ns.inputPhone}}" [(ngModel)]="phone"
+      <input type="text" class="{{isFocus('phone')}}" placeholder="{{i18ns.inputPhone}}" [(ngModel)]="phone" tabindex="2"
       maxlength="15"
       (focus)="focus('phone')" (blur)="blur('phone')" >
     </div>
@@ -48,9 +48,9 @@
     </div>
     <div class="gz-password">
         <input type="text" style="display:none;" />
-      <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword"
+      <input type="password" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="!isShowPassword" tabindex="3"
           (focus)="focus('password')" (blur)="blur('password')"  autocomplete="new-password" maxlength="40" >
-      <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')"
+      <input type="text" class="{{isFocus('password')}}" placeholder="{{i18ns.inputPassword}}" [(ngModel)]="password" *ngIf="isShowPassword" (focus)="focus('password')" tabindex="3"
           (blur)="blur('password')"  autocomplete="new-password"  maxlength="40" >
       <fa-icon [icon]="['fas', 'eye-slash']" *ngIf="!isShowPassword" (click)="showPassword(true)"></fa-icon>
       <fa-icon class="gz-active" [icon]="['fas', 'eye']" *ngIf="isShowPassword" (click)="showPassword(false)"></fa-icon>
@@ -59,7 +59,7 @@
   <section>
       <div class="gz-label {{isFocus('smsCode')}}">{{i18ns.inputSmsCode}}</div>
       <div style="position: relative;">
-        <input type="text" class="{{isFocus('smsCode')}}" placeholder="{{i18ns.inputSmsCode}}"
+        <input type="text" class="{{isFocus('smsCode')}}" placeholder="{{i18ns.inputSmsCode}}" tabindex="4"
                [(ngModel)]="smsCode" maxlength="6"
                (focus)="focus('smsCode')" (blur)="blur('smsCode')">
         <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">
@@ -72,7 +72,7 @@
   
 
   <section class="gz-submit">
-    <div class="btn gz-circle active" (click)="login()">
+    <div class="btn gz-circle active" (click)="login()" (keyup.enter)="login()" tabindex="5">
       <gz-i18n key="common.login"></gz-i18n>
     </div>
 

@@ -22,7 +22,7 @@ export class ChatService {
 
   constructor() {
     this.initChat();
-    this.chat_topic_keyword = 'dev03';
+    this.chat_topic_keyword = '_dev01';
   }
 
   initChat() {
@@ -124,10 +124,6 @@ export class ChatService {
       } else {
         chat_union_ids = String(anotherUserId) + '_' + String(adUserId) + '_' + String(adId) ;
       }
-      // let memberTo = anotherUserId;
-      // if (this.currentLoginUserId === anotherUserId) {
-      //   memberTo = adUserId;
-      // }
 
       const _conservationObj = this.conservationObj[chat_union_ids];
       let _conversation = _conservationObj && _conservationObj.conversation || null;
@@ -135,7 +131,9 @@ export class ChatService {
         // console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
          _conversation =
         this.chat.createConversation({
-          members: [String(adUserId), String(anotherUserId), String(chat_union_ids) + '_' + this.chat_topic_keyword],
+          members: [(String(adUserId) + this.chat_topic_keyword),
+            (String(anotherUserId) + this.chat_topic_keyword),
+            String(chat_union_ids) + '_' + this.chat_topic_keyword],
           name: String(chat_union_ids) + '_' + this.chat_topic_keyword,
           transient: false,
           unique: true,
@@ -198,7 +196,7 @@ export class ChatService {
           // console.log('topic keyword', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
-            .containsMembers([String(this.currentLoginUserId)])
+            .containsMembers([(String(this.currentLoginUserId) + this.chat_topic_keyword)])
             .limit(100)
             .withLastMessagesRefreshed(true)
             .find()
@@ -274,7 +272,7 @@ export class ChatService {
           // console.log('currentLoginUserId22', this.chat_topic_keyword);
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
-            .containsMembers([String(this.currentLoginUserId)])
+            .containsMembers([(String(this.currentLoginUserId)+ + this.chat_topic_keyword)])
             .limit(100)
             .withLastMessagesRefreshed(true)
             .find()
@@ -385,7 +383,7 @@ export class ChatService {
 
             this.conservationObj[chat_union_ids].chatList = [];
             (messageses || []).forEach(message => {
-              // console.log('message:::::::', message);
+               console.log('message:::::::', message);
               if (!message.getAttributes()) {
                 console.log('### >>> message get attribute is null......');
                 return;
@@ -405,7 +403,7 @@ export class ChatService {
                   content: _text,
                   avatar: _avatar,
                   sendTimestamp: _sendTimestamp,
-                  isMe: _from == this.user.id,
+                  isMe: _from == (String(this.user.id) + this.chat_topic_keyword),
                 });
               }
             });
@@ -447,7 +445,7 @@ export class ChatService {
 
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
-            .containsMembers([String(this.currentLoginUserId)])
+            .containsMembers([(String(this.currentLoginUserId) + this.chat_topic_keyword)])
             .limit(100)
             .withLastMessagesRefreshed(true)
             .find()
@@ -485,7 +483,7 @@ export class ChatService {
           this.isLogin = true;
           const chat_top = this.chat_topic_keyword;
           this.chat.getQuery()
-            .containsMembers([String(this.currentLoginUserId)])
+            .containsMembers([(String(this.currentLoginUserId) + this.chat_topic_keyword)])
             .limit(100)
             .withLastMessagesRefreshed(true)
             .find()

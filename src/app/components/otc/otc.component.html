@@ -165,7 +165,7 @@
     </section>
 
     <section class="gz-submit">
-      <div class="btn btn-primary gz-circle" (click)="search()">
+      <div class="btn btn-primary gz-circle" (click)="search()" (keyup.enter)="search()" tabindex="1">
         <gz-i18n key="common.search"></gz-i18n>
       </div>
     </section>

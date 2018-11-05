@@ -43,20 +43,20 @@
 
   <section class="gz-edit-row gz-mt-10">
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.input_name}}" [(ngModel)]="realName">
+      <input type="text" placeholder="{{this.i18ns.input_name}}" [(ngModel)]="realName" tabindex="1">
     </div>
   </section>
 
   <section class="gz-edit-row gz-mt-10">
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.input_cardno}}" [(ngModel)]="realCardNo">
+      <input type="text" placeholder="{{this.i18ns.input_cardno}}" [(ngModel)]="realCardNo" tabindex="2">
     </div>
   </section>
 
   <section class="gz-full-img">
     <div class="inputFileWrapper">
       <label for="">
-        <input type="file" #frontImgFile (change)="imgChange($event, frontImg)">
+        <input type="file" #frontImgFile (change)="imgChange($event, frontImg)" tabindex="3">
           <span class="custorm-style">
               <span class="left-button" (click)="selectImg(frontImgFile)">{{this.i18ns.card_front}}</span>
               <span class="right-text"  (click)="selectImg(frontImgFile)">{{frontImg.name}}</span>
@@ -69,7 +69,7 @@
   <section class="gz-full-img">
       <div class="inputFileWrapper">
           <label for="">
-              <input type="file" #backImgFile (change)="imgChange($event, backImg)">
+              <input type="file" #backImgFile (change)="imgChange($event, backImg)" tabindex="4">
               <span class="custorm-style">
                   <span class="left-button" (click)="selectImg(backImgFile)">{{this.i18ns.card_back}}</span>
                   <span class="right-text"  (click)="selectImg(backImgFile)">{{backImg.name}}</span>
@@ -81,7 +81,7 @@
   <section class="gz-full-img">
       <div class="inputFileWrapper">
           <label for="">
-              <input type="file" #halfImgFile (change)="imgChange($event, halfImg)">
+              <input type="file" #halfImgFile (change)="imgChange($event, halfImg)" tabindex="5">
               <span class="custorm-style">
                   <span class="left-button" (click)="selectImg(halfImgFile)">{{this.i18ns.bust}}</span>
                   <span class="right-text"  (click)="selectImg(halfImgFile)">{{halfImg.name}}</span>
@@ -92,12 +92,12 @@
   </section>
 
   <section class="gz-agree">
-    <input type="checkbox" id="isSelectPromise" [(ngModel)]="isSelectPromise"  style="zoom:150%;min-height:15px;min-width:15px;">
+    <input type="checkbox" id="isSelectPromise" [(ngModel)]="isSelectPromise"  style="zoom:150%;min-height:15px;min-width:15px;" tabindex="6">
     <label for="isSelectPromise"><gz-i18n key="user_real_cert.promise"></gz-i18n></label>
   </section>
 
   <section class="gz-submit">
-    <div class="btn btn-outline-blue gz-circle" (click)="submit()">
+    <div class="btn btn-outline-blue gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="7">
       <gz-i18n key="user_real_cert.submit"></gz-i18n>
     </div>
   </section>

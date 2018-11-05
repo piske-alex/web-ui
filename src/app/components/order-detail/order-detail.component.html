@@ -108,9 +108,9 @@
   <footer>
       <div><hr/></div>
       <div>
-          <textarea  rows="3" name="chatmsg" [(ngModel)]="chatmsg" class="chatmsg" ></textarea>
+          <textarea  rows="3" name="chatmsg" [(ngModel)]="chatmsg" class="chatmsg" tabindex="1" ></textarea>
       </div>
-      <div class="btn btn-outline-blue gz-circle" (click)="sendChatMsg()">
+      <div class="btn btn-outline-blue gz-circle" (click)="sendChatMsg()" (keyup.enter)="sendChatMsg()" tabindex="2">
           <gz-i18n key="transaction.trans_send"></gz-i18n>
       </div>
   </footer>

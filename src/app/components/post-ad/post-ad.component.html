@@ -92,7 +92,7 @@
       <div class="gz-edit-label">
         <gz-i18n key="otc.transactionPrice"></gz-i18n>
       </div>
-      <div><input type="text" [(ngModel)]="ad.price" #price  (keyup)="onKeyPress_Price(price.value)"></div>
+      <div><input type="text" [(ngModel)]="ad.price" #price  (keyup)="onKeyPress_Price(price.value)" tabindex="1"></div>
     </div>
     <div class="gz-edit-right">
       <span *ngIf="currency">{{currency.code}}</span>
@@ -159,7 +159,7 @@
       <div class="gz-edit-label">
         <gz-i18n key="otc.minCount"></gz-i18n>
       </div>
-      <input type="text" [(ngModel)]="ad.minCount" #minCnt  (keyup)="onKeyPress_Min(minCnt.value)">
+      <input type="text" [(ngModel)]="ad.minCount" #minCnt  (keyup)="onKeyPress_Min(minCnt.value)" tabindex="2">
     </div>
     <div class="gz-edit-right">
       <span *ngIf="currency">{{currency.code}}</span>
@@ -171,7 +171,7 @@
       <div class="gz-edit-label">
         <gz-i18n key="otc.maxCount"></gz-i18n>
       </div>
-      <input type="text" [(ngModel)]="ad.maxCount" #maxCnt  (keyup)="onKeyPress_Max(maxCnt.value)" />
+      <input type="text" [(ngModel)]="ad.maxCount" #maxCnt  (keyup)="onKeyPress_Max(maxCnt.value)" tabindex="3"/>
     </div>
     <div class="gz-edit-right">
       <span *ngIf="currency">{{currency.code}}</span>
@@ -221,7 +221,7 @@
   </section>
 
   <section class="gz-edit-row">
-    <textarea [(ngModel)]="ad.remark" maxlength="500"></textarea>
+    <textarea [(ngModel)]="ad.remark" maxlength="500" tabindex="4"></textarea>
   </section>
 
   <!--<section class="gz-edit-row">-->
@@ -261,7 +261,7 @@
   <!--</section>-->
 
   <section class="gz-submit">
-    <div class="btn btn-outline-blue gz-circle" (click)="publish()">
+    <div class="btn btn-outline-blue gz-circle" (click)="publish()" (keyup.enter)="publish()" tabindex="5">
       <gz-i18n key="otc.publish"></gz-i18n>
     </div>
   </section>

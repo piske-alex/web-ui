@@ -11,12 +11,12 @@
       <div class="gz-list-cell_22" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} , <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
       <div class="gz-list-cell_22" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} , <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
 
-      <!--<div  class="gz-list-cell_10 float_left">{{data.username}}</div>-->
+      <!--<div  class="gz-list-cell_10 float_left">{{data.username}}</div>
       <div class="gz-list-cell_8 float_left" *ngIf="data.type=='sell'">{{this.i18ns.sale}} {{data.tradeCurrency}}</div>
       <div class="gz-list-cell_8 float_left" *ngIf="data.type=='buy'">{{this.i18ns.buy}} {{data.tradeCurrency}}</div>
+      -->
 
-
-      <div class="gz-list-cell_20 float_left"><span>{{i18ns.count}}: </span><span>{{data.transactionCount.toFixed(8) | btcFormat }}</span></div>
+      <div class="gz-list-cell_20 float_left"><span>{{i18ns.count}}: </span><span>{{data.transactionCount.toFixed(8) | btcFormat }} {{data.tradeCurrency}}</span></div>
       <div class="gz-list-cell_20 float_left"><span>{{i18ns.price}}: </span><span>{{data.price | cnyFormat }} {{data.currency || ''}}</span></div>
       <div class="gz-list-cell_23 float_left"><span>{{i18ns.orderCreateTime}}: </span><span>{{data.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
       <div class="gz-list-cell_23 float_left"><span>{{i18ns.trade_time}}: </span><span *ngIf="data.paymentStatus==1">{{data.paymentTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>

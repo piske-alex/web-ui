@@ -112,6 +112,8 @@ export class PostAdComponent implements OnInit {
     this.i18ns.payType =  await this.languageService.get('otc.payType');
   }
 
+  
+
   goBack() {
     this.location.back();
   }

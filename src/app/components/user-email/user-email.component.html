@@ -18,7 +18,7 @@
   </section>
   <section>
     <div>
-      <input type="email" [(ngModel)]="email" placeholder="{{this.i18ns.input_email}}">
+      <input type="email" [(ngModel)]="email" placeholder="{{this.i18ns.input_email}}" tabindex="1">
     </div>
   </section>
 
@@ -32,7 +32,7 @@
   <!--</section>-->
 
   <section class="gz-submit">
-    <div class="btn btn-outline-blue gz-circle" (click)="submit()">
+    <div class="btn btn-outline-blue gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="2">
       <gz-i18n key="user_email.submit"></gz-i18n>
     </div>
   </section>
