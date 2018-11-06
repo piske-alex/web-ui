@@ -12,8 +12,9 @@
 
 <article class="gz-my">
   <section class="gz-user">
+    <div class="fetchCur">
     <img *ngIf="!(user && user.avatar)" src="./assets/images/logo.jpg" (click)="setAvatar(avatarFile)"/>
-    <img *ngIf="user && user.avatar" src="{{user.avatar | avatar}}" (click)="setAvatar(avatarFile)"/>
+    <img *ngIf="user && user.avatar" src="{{user.avatar | avatar}}" (click)="setAvatar(avatarFile)"/></div>
     <input type="file" class="gz-avatar-file" #avatarFile (change)="fileChange($event)" style="visibility: hidden;">
     <div *ngIf="!(user && user.id)">
       <div routerLink="/login">
@@ -38,7 +39,7 @@
     </div>
   </section>
 
-  <section class="gz-my-group">
+  <section class="gz-my-group fetchCur">
     <!--<div class="gz-my-row">-->
     <!--<div class="gz-my-left">-->
     <!--<div>-->

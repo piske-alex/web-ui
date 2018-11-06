@@ -10,7 +10,7 @@
   </div>
 </header>
 
-<article class="gz-coin-select">
+<article class="gz-coin-select fetchCur">
   <ul class="list-group list-group-flush">
     <li class="list-group-item {{data.code === language ? 'active': ''}}" *ngFor="let data of list" (click)="submit(data)">{{data.name}}</li>
   </ul>

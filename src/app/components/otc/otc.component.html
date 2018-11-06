@@ -70,7 +70,7 @@
   <article>
     <div class="gz-transaction-list">
       <gz-list-transaction *ngIf="!isLoading" [transactionList]="adList" [adType]="filter.adType"></gz-list-transaction>
-      <div class="loader" *ngIf="isLoading">Loading...</div>
+      <div class="loader fetchCur" *ngIf="isLoading">Loading...</div>
       <div (click)="loadMoreList()" *ngIf="isShowLoadMore"
        style="text-align:center;margin-bottom: 25px;margin-top:10px; background-color:#E9BC32;color:black; ">
         <gz-i18n key="common.load_more"></gz-i18n>
@@ -98,7 +98,7 @@
   </header>
 
   <article class="gz-form gz-post-ad">
-    <section class="gz-edit-row">
+    <section class="gz-edit-row fetchCur">
       <div class="gz-edit-left" (click)="toSelectCoinType()">
         <div class="gz-edit-label">
           <gz-i18n key="otc.coinType"></gz-i18n>
@@ -111,7 +111,7 @@
         <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectCoinType()"></fa-icon>
       </div>
     </section>
-    <section class="gz-edit-row">
+    <section class="gz-edit-row fetchCur">
       <div class="gz-edit-left" (click)="toSelectCountry()">
         <div class="gz-edit-label">
           <gz-i18n key="otc.country"></gz-i18n>
@@ -137,7 +137,7 @@
     <!--<span *ngIf="currency">{{currency.code}}</span>-->
     <!--</div>-->
     <!--</section>-->
-    <section class="gz-edit-row">
+    <section class="gz-edit-row fetchCur">
       <div class="gz-edit-left" (click)="toSelectPayType()">
         <div class="gz-edit-label">
           <gz-i18n key="otc.payType"></gz-i18n>
@@ -150,7 +150,7 @@
         <fa-icon [icon]="['fas', 'chevron-right']" (click)="toSelectPayType()"></fa-icon>
       </div>
     </section>
-    <section class="gz-edit-row">
+    <section class="gz-edit-row fetchCur">
       <div class="gz-edit-left" (click)="toSelectCurrency()">
         <div class="gz-edit-label">
           <gz-i18n key="otc.currency"></gz-i18n>

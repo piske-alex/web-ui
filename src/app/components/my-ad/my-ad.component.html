@@ -11,7 +11,7 @@
 </header>
 <div class="gz-my-ad gz-header-sub  ">
   <section class="gz-full-tab">
-    <nav class="nav">
+    <nav class="nav fetchCur">
       <a class="nav-link {{status == 'active' ? 'active' : ''}}" (click)="selectProcessing()"><gz-i18n key="my_ad.processing"></gz-i18n></a>
       <a class="nav-link {{status == 'hidden' ? 'active' : ''}}" (click)="selectObtained()"><gz-i18n key="my_ad.obtained"></gz-i18n></a>
     </nav>
@@ -20,7 +20,7 @@
 
 <article class="gz-my-ad ">
     <section class="gz-full-tab ">
-        <nav class="nav">
+        <nav class="nav fetchCur">
           <a class="nav-link {{status == 'active' ? 'active' : ''}}" (click)="selectProcessing()"><gz-i18n key="my_ad.processing"></gz-i18n></a>
           <a class="nav-link {{status == 'hidden' ? 'active' : ''}}" (click)="selectObtained()"><gz-i18n key="my_ad.obtained"></gz-i18n></a>
         </nav>

@@ -31,8 +31,8 @@
       </li> -->
     </ul>
   </section>
-  <section class="gz-edit-row">
-    <div class="gz-edit-left" (click)="toSelectAdType()">
+  <section class="gz-edit-row fetchCur">
+    <div class="gz-edit-left " (click)="toSelectAdType()">
       <div class="gz-edit-label">
         <gz-i18n key="otc.adType"></gz-i18n>
       </div>
@@ -45,7 +45,7 @@
       <!--<fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp()"></fa-icon>-->
     </div>
   </section>
-  <section class="gz-edit-row">
+  <section class="gz-edit-row fetchCur">
     <div class="gz-edit-left" (click)="toSelectCoinType()">
       <div class="gz-edit-label">
         <gz-i18n key="otc.coinType"></gz-i18n>
@@ -59,7 +59,7 @@
       <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('coinType')"></fa-icon>
     </div>
   </section>
-  <section class="gz-edit-row">
+  <section class="gz-edit-row fetchCur">
     <div class="gz-edit-left" (click)="toSelectCountry()">
       <div class="gz-edit-label">
         <gz-i18n key="otc.country"></gz-i18n>
@@ -73,7 +73,7 @@
       <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('country')"></fa-icon>
     </div>
   </section>
-  <section class="gz-edit-row">
+  <section class="gz-edit-row fetchCur">
     <div class="gz-edit-left" (click)="toSelectCurrency()">
       <div class="gz-edit-label">
         <gz-i18n key="otc.currency"></gz-i18n>
@@ -178,7 +178,7 @@
       <fa-icon class="gz-icon-question" [icon]="['fas', 'question-circle']" (click)="toggleHelp('maxCount')"></fa-icon>
     </div>
   </section>
-  <section class="gz-edit-row">
+  <section class="gz-edit-row fetchCur">
     <div class="gz-edit-left" (click)="toSelectPayType()">
       <div class="gz-edit-label">
         <gz-i18n key="otc.payType"></gz-i18n>
@@ -261,7 +261,7 @@
   <!--</section>-->
 
   <section class="gz-submit">
-    <div class="btn btn-outline-blue gz-circle" (click)="publish()" (keyup.enter)="publish()" tabindex="5">
+    <div class="btn btn-primary gz-circle" (click)="publish()" (keyup.enter)="publish()" tabindex="5">
       <gz-i18n key="otc.publish"></gz-i18n>
     </div>
   </section>

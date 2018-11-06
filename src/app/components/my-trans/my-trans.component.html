@@ -9,6 +9,19 @@
     <div></div>
   </div>
 </header>
+
+<article class="gz-header-container2">
+  <div class="gz-header2">
+      <section class="gz-full-tab">
+          <nav class="nav fetchCur">
+            <a class="nav-link {{status == 'active' ? 'active' : ''}}" (click)="selectProcessing()"><gz-i18n key="my_trade.myBuy"></gz-i18n></a>
+            <a class="nav-link {{status == 'hidden' ? 'active' : ''}}" (click)="selectObtained()"><gz-i18n key="my_trade.mySell"></gz-i18n></a>
+          </nav>
+        </section>
+  </div>
+</article>
+
+<!--
 <div class="gz-my-ad gz-header-sub  ">
   <section class="gz-full-tab">
     <nav class="nav">
@@ -16,15 +29,8 @@
       <a class="nav-link {{status == 'hidden' ? 'active' : ''}}" (click)="selectObtained()"><gz-i18n key="my_trade.mySell"></gz-i18n></a>
     </nav>
   </section>
-</div>
+</div>-->
 <article class="gz-my-ad">
-  <section class="gz-full-tab">
-    <nav class="nav">
-      <a class="nav-link {{status == 'active' ? 'active' : ''}}" (click)="selectProcessing()"><gz-i18n key="my_trade.myBuy"></gz-i18n></a>
-      <a class="nav-link {{status == 'hidden' ? 'active' : ''}}" (click)="selectObtained()"><gz-i18n key="my_trade.mySell"></gz-i18n></a>
-    </nav>
-  </section>
-
   <section class="gz-list-trade">
     <gz-list-trade [tradelist]="list" *ngIf="!isLoading" [actionType]="adType"></gz-list-trade>
     <div class="loader" *ngIf="isLoading">Loading...</div>

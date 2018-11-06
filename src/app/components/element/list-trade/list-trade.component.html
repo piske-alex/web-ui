@@ -29,7 +29,7 @@
   </div>
   
   <div class="gz-list-tr-right w15">
-        <div class="btn btn-primary gz-circle lf " (click)="toOrderDetail2(data)">
+        <div class="btn btn-primary gz-circle" (click)="toOrderDetail2(data)">
           {{this.i18ns.order_detail}}
         </div>
         <div class="ml10 float_right" *ngIf="this.loginUserId== data.userid  && data.isRating == 1 && data.orderRating == 1">{{this.i18ns.do_rating}}: {{this.i18ns.rating_1}} </div>

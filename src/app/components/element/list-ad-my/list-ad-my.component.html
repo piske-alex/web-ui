@@ -24,7 +24,7 @@
       <div class="btn btn-primary gz-circle"  (click)="toAdOrders(data)">
           <gz-i18n key="my_ad.ad_orders_title"></gz-i18n> {{data.order_count}}
       </div>
-      <div class="btn btn-primary gz-circle" *ngIf="adStatus == 'active' " (click)="obtained(data)">
+      <div class="btn btn-primary gz-circle ml10" *ngIf="adStatus == 'active' " (click)="obtained(data)">
           <gz-i18n key="transaction.obtained"></gz-i18n>
       </div>
     </div>

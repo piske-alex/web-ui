@@ -16,7 +16,8 @@ article.gz-register {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 9999;
+    
   }
   
   .gz-popup-content {
@@ -58,6 +59,8 @@ article.gz-register {
     }
 
     .gz-div-overflow{
-      overflow-y:scroll; height:400px;    text-align: left;
+      overflow-y:scroll; 
+      height:300px;    
+      text-align: left;
     }
   }

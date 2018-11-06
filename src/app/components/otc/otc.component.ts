@@ -13,7 +13,7 @@ import { SelectCoinTypeComponent } from '../element/select-coin-type/select-coin
 import { SelectPayTypeComponent } from '../element/select-pay-type/select-pay-type.component';
 import { SelectCurrencyComponent } from '../element/select-currency/select-currency.component';
 import { DialogService } from '../../providers/dialog/dialog.service';
-import { HostListener} from '@angular/core';
+import { HostListener} from "@angular/core";
 
 const $ = (<any>window).$;
 
@@ -69,7 +69,7 @@ export class OtcComponent implements OnInit, OnDestroy {
     private dialogService: DialogService) {
   }
 
-  @HostListener('window:scroll', [])
+  @HostListener("window:scroll", [])
   onWindowScroll() {
    let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
    // console.log('winScroll', winScroll);

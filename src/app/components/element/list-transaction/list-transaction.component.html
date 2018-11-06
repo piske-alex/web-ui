@@ -1,6 +1,6 @@
 <section class="gz-list-tr" *ngFor="let data of transactionList">
   <div class="gz-list-tr-left" >
-    <div class="gz-list-tr-head">
+    <div class="gz-list-tr-head fetchCur">
       <img src="{{data.userHeadUrl | avatar}}" (click)="toUserDetail(data.userId)">
       <div class="btn btn-outline-orange gz-sm" *ngIf="data.isRealUser">
         <gz-i18n key="element_list_trans.real_cert_valid"></gz-i18n>

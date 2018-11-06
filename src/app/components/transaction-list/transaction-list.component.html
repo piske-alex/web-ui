@@ -15,15 +15,13 @@
     <div class="gz-transaction-date">{{date}}</div>
     <div class="gz-list" *ngFor="let transaction of transactions[date]">
       <div class="gz-coin gz-coin-{{transaction.type}}">
-        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_receive"></gz-i18n></span>
-        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_send"></gz-i18n></span>
-        <span><gz-i18n key="transaction.trans_coin_number"></gz-i18n>: </span>
+        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_receive"></gz-i18n><gz-i18n key="transaction.trans_coin_number"></gz-i18n>: </span>
+        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_send"></gz-i18n><gz-i18n key="transaction.trans_coin_number"></gz-i18n>: </span>
         <span>{{transaction.amount | btcFormat}}{{transaction.coin}}</span>
       </div>
       <div>
-        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_in"></gz-i18n></span>
-        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_out"></gz-i18n></span>
-        <span><gz-i18n key="transaction.trans_address"></gz-i18n>: </span>
+        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.trans_in"></gz-i18n><gz-i18n key="transaction.trans_address"></gz-i18n>: </span>
+        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.trans_out"></gz-i18n><gz-i18n key="transaction.trans_address"></gz-i18n>: </span>
         <span>{{transaction.address}}</span>
       </div>
       <div>

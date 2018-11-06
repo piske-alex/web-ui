@@ -18,8 +18,8 @@
     <!-- <div class="gz-amount">{{mainCoin.usableAmount}} {{mainCoin.coinType}}</div> -->
     <div class="gz-currency">≈{{mainCoin.currencyAmount | cnyFormat}} {{mainCoin.currency}}</div>
     <div class="gz-wallet-action">
-      <div class="btn gz-circle" (click)="goToCoinActionDeposit()">{{i18ns.deposit}}</div>
-      <div class="btn gz-circle" (click)="goToCoinActionWithraw()">{{i18ns.withraw}}</div>
+      <div class="btn btn-primary gz-circle" (click)="goToCoinActionDeposit()">{{i18ns.deposit}}</div>
+      <div class="btn btn-primary gz-circle" (click)="goToCoinActionWithraw()">{{i18ns.withraw}}</div>
       <!--<div class="btn gz-circle" (click)="goToCoinActionTransfer()">{{i18ns.transfer}}</div>-->
     </div>
   </section>

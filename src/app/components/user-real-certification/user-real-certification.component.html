@@ -53,7 +53,7 @@
     </div>
   </section>
 
-  <section class="gz-full-img">
+  <section class="gz-full-img fetchCur">
     <div class="inputFileWrapper">
       <label for="">
         <input type="file" #frontImgFile (change)="imgChange($event, frontImg)" tabindex="3">
@@ -66,7 +66,7 @@
     <img alt="{{this.i18ns.card_front}}" [src]="frontImg.src || '/assets/images/id_front.jpg'" (click)="selectImg(frontImgFile)">
   </section>
 
-  <section class="gz-full-img">
+  <section class="gz-full-img fetchCur">
       <div class="inputFileWrapper">
           <label for="">
               <input type="file" #backImgFile (change)="imgChange($event, backImg)" tabindex="4">
@@ -78,7 +78,7 @@
         </div>
         <img alt="{{this.i18ns.card_back}}" [src]="backImg.src || '/assets/images/id_back.jpg'" (click)="selectImg(backImgFile)">
   </section>
-  <section class="gz-full-img">
+  <section class="gz-full-img fetchCur">
       <div class="inputFileWrapper">
           <label for="">
               <input type="file" #halfImgFile (change)="imgChange($event, halfImg)" tabindex="5">
@@ -97,7 +97,7 @@
   </section>
 
   <section class="gz-submit">
-    <div class="btn btn-outline-blue gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="7">
+    <div class="btn btn-primary gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="7">
       <gz-i18n key="user_real_cert.submit"></gz-i18n>
     </div>
   </section>

@@ -31,10 +31,10 @@ export class MyAdComponent implements OnInit {
   @HostListener('window:scroll', [])
   onWindowScroll() {
    let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-   // console.log('winScroll', winScroll);
+    console.log('winScroll', winScroll);
    let divOffHeight = document.querySelector('.gz-list-ad').scrollHeight;
-   // console.log('divOffHeight', divOffHeight);
-   if (winScroll + 700 > divOffHeight) {
+    console.log('divOffHeight', divOffHeight);
+   if (winScroll + 850 > divOffHeight) {
     this.loadMorePublishAd();
    }
   }
@@ -150,7 +150,6 @@ export class MyAdComponent implements OnInit {
       this.isLoadMoreing = false;
     } catch (e) {
       this.isLoadMoreing = false;
-      this.isLoading = false;
       console.error(e);
     }
 

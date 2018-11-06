@@ -20,7 +20,7 @@
       <p><gz-i18n key="chat.limit"></gz-i18n>: {{data.limitMinAmount}} - {{data.limitMaxAmount}} CNY</p>
     </div>
     <div>
-      <div class="btn btn-outline-blue gz-circle" (click)="transaction()" *ngIf="this.currentLoginUserId != this.adUserId">
+      <div class="btn btn-primary gz-circle" (click)="transaction()" *ngIf="this.currentLoginUserId != this.adUserId">
         {{data.adType == '2' ? this.i18ns.sell : this.i18ns.buy }}
       </div>
     </div>

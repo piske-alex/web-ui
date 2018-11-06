@@ -7,7 +7,7 @@
       <gz-i18n key="common.login"></gz-i18n>
     </div>
     <div>
-      <div routerLink="/register">
+      <div routerLink="/register" class="fetchCur">
         <gz-i18n key="common.registry"></gz-i18n>
       </div>
     </div>
@@ -62,7 +62,7 @@
         <input type="text" class="{{isFocus('smsCode')}}" placeholder="{{i18ns.inputSmsCode}}" tabindex="4"
                [(ngModel)]="smsCode" maxlength="6"
                (focus)="focus('smsCode')" (blur)="blur('smsCode')">
-        <div class="gz-get-smscode" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">
+        <div class="gz-get-smscode fetchCur" *ngIf="!resendSmsCodeDelay" (click)="sendSmsCode()">
           <gz-i18n key="user.sendSmsCode"></gz-i18n>
         </div>
         <div class="gz-get-smscode" *ngIf="resendSmsCodeDelay">{{i18ns.resendSmsCode}}({{resendSmsCodeDelay}})</div>
@@ -77,8 +77,8 @@
     </div>
 
   </section>
-  <section class="gz-forget-paaswd" routerLink="/forgetPassword">
-    <gz-i18n key="common.forgetPassword"></gz-i18n>
+  <section class="gz-forget-paaswd fetchCur" routerLink="/forgetPassword">
+    <gz-i18n key="common.forgetPassword" tabindex="6"></gz-i18n>
   </section>
 </article>
 

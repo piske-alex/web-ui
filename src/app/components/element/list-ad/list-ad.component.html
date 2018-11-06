@@ -15,10 +15,10 @@
   </div>
 
   <div class="gz-list-tr-right">
-    <div class="btn btn-outline-blue gz-circle" *ngIf="data.adType == '2'" (click)="toTransaction(data)">
+    <div class="btn btn-primary gz-circle" *ngIf="data.adType == '2'" (click)="toTransaction(data)">
       {{i18ns.sale}} {{data.transactionCoinType}}
     </div>
-    <div class="btn btn-outline-blue gz-circle" *ngIf="data.adType == '1'" (click)="toTransaction(data)">
+    <div class="btn btn-primary gz-circle" *ngIf="data.adType == '1'" (click)="toTransaction(data)">
       {{i18ns.buy}} {{data.transactionCoinType}}
     </div>
   </div>
