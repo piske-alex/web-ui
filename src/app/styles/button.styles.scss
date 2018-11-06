@@ -6,14 +6,11 @@ body .gz-app {
     font-size: 12px;
     font-weight: 100;
     color: $btn_default_font;
-   // background: $btn_default_bg;
+    background: $btn_default_bg;
 
     &:active {
-      // color: $btn_default_bg;
-      // background: $btn_default_font;
-      background-color: $btn_default_bg;
-        color: $btn_primary;
-        border: 1px solid $btn_primary;
+      color: $btn_default_bg;
+      background: $btn_default_font;
     }
 
     &.btn-outline-orange {
@@ -37,7 +34,7 @@ body .gz-app {
       border-radius: 4px;
 
       &:active {
-        background-color: $btn_default_bg;
+        background-color: $btn_primary;
         color: #ffffff;
       }
     }
@@ -49,7 +46,8 @@ body .gz-app {
 
       &:active {
         background-color: $btn_default_bg;
-        color: $btn_default;
+        color: $btn_primary;
+        border: 1px solid $btn_primary;
       }
     }
 
@@ -63,7 +61,6 @@ body .gz-app {
         color: $btn_primary;
         border: 1px solid $btn_primary;
       }
-
     }
 
     &.gz-sm {

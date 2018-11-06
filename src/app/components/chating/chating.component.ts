@@ -35,7 +35,7 @@ export class ChatingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     this.initChat();
-    this.chat_topic_keyword = 'dev02';
+    this.chat_topic_keyword = '_dev01';
   }
 
   async ngOnInit() {
@@ -82,7 +82,7 @@ export class ChatingComponent implements OnInit {
    try {
      if (this.realtime ) {
 
-       this.realtime.createIMClient(String(adUserId)).then(async chat => {
+       this.realtime.createIMClient(String(this.adUserId) + this.chat_topic_keyword).then(async chat => {
          this.chat = chat;
          this.isLogin = true;
 
@@ -126,7 +126,7 @@ export class ChatingComponent implements OnInit {
                      content: _text,
                      avatar: _avatar,
                      sendTimestamp: _sendTimestamp,
-                     isMe: _from == _anotherUserId,
+                     isMe: _from == (String(_anotherUserId) + this.chat_topic_keyword),
                      adUserName : _adUserName,
                      anotherUserName : _anotherUserName,
                      adUserId : _adUserId,
@@ -175,7 +175,9 @@ export class ChatingComponent implements OnInit {
       // console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
        _conversation =
       this.chat.createConversation({
-        members: [String(adUserId), String(anotherUserId), String(chat_union_ids) + '_' + this.chat_topic_keyword],
+        members: [(String(adUserId) + this.chat_topic_keyword),
+          (String(anotherUserId) + this.chat_topic_keyword),
+          String(chat_union_ids) + '_' + this.chat_topic_keyword],
         name: String(chat_union_ids) + '_' + this.chat_topic_keyword,
         transient: false,
         unique: true,

@@ -62,7 +62,7 @@
       <ul class="nav">
         <li class="nav-item {{filter.coinType === type.code ? 'active' : ''}}" *ngFor="let type of coinTypes"
             (click)="selectType(type)">
-          <a class="nav-link">{{type.code}}</a>
+          <a class="nav-link bold">{{type.code}}</a>
         </li>
       </ul>
     </nav>

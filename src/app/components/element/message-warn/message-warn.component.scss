@@ -3,11 +3,19 @@
     top: 70%;
     right: 10px;
     
-    background: #555;
-    color: #f00e0e;
+    background: #f00e0e;
+    
+    color: #fff;
     font-size: 13px;
     padding: 10px;
-    filter: opacity(1);
+
+    filter:alpha(Opacity=70);
+    -moz-opacity:0.7;
+    opacity: 0.7;
+    border-radius:15px;
+    cursor: pointer;
+
+    font-weight: bold;
 }
 .msgwarn a{
     color: #f00e0e;

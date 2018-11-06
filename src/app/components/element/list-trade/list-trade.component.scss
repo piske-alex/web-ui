@@ -46,7 +46,7 @@
       &.btn-primary {
 
         &:active {
-          background-image: url("/assets/images/btn-bg.png");
+          // background-image: url("/assets/images/btn-bg.png");
         }
       }
     }
@@ -103,4 +103,8 @@
 
 .lf{
   margin-left: 0px !important
+}
+.changeBg{
+  color: #14171C !important;
+  background: #E9BC32 !important;
 }

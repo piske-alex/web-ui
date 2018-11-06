@@ -13,6 +13,7 @@ import { SelectCoinTypeComponent } from '../element/select-coin-type/select-coin
 import { SelectPayTypeComponent } from '../element/select-pay-type/select-pay-type.component';
 import { SelectCurrencyComponent } from '../element/select-currency/select-currency.component';
 import { DialogService } from '../../providers/dialog/dialog.service';
+import { HostListener} from '@angular/core';
 
 const $ = (<any>window).$;
 
@@ -28,6 +29,7 @@ export class OtcComponent implements OnInit, OnDestroy {
   isShowSearch = false;
   isLoading = false;
   isShowLoadMore = false;
+  isLoadMoreing = false;
 
   coinTypes: any;
 
@@ -39,8 +41,6 @@ export class OtcComponent implements OnInit, OnDestroy {
   currencyCode = 'CNY';
   payTypeCode = 'AP';
   payTypeNames = '';
-
-  
 
   country: Country = new Country();
   coinType: CoinType = new CoinType();
@@ -67,6 +67,17 @@ export class OtcComponent implements OnInit, OnDestroy {
     private adService: AdService,
     private languageService: LanguageService,
     private dialogService: DialogService) {
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+   let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+   // console.log('winScroll', winScroll);
+   let divOffHeight = document.querySelector('.gz-transaction-list').scrollHeight;
+   // console.log('divOffHeight', divOffHeight);
+   if (winScroll + 500 > divOffHeight) {
+    this.loadMoreList();
+   }
   }
 
   async ngOnInit() {
@@ -145,7 +156,7 @@ export class OtcComponent implements OnInit, OnDestroy {
 
       this.adList = _result.list;
       this.adTotal = _result.total;
-
+      console.error('_result.total', _result.total);
       if (_result.total > this.adList.length) {
         this.isShowLoadMore = true;
       } else {
@@ -164,11 +175,16 @@ export class OtcComponent implements OnInit, OnDestroy {
   }
 
   private async loadMoreList() {
+    if (this.isLoadMoreing) {
+      return ;
+    }
+    this.isLoadMoreing = true;
     try {
       let currentListLength = 0;
       if (this.adList) {
         currentListLength = this.adList.length;
       }
+      console.log('load more length', currentListLength);
       const _params = {
         type: this.filter.adType === '2' ? 'sell' : 'buy',
         country: this.filter.countryCode,
@@ -176,7 +192,7 @@ export class OtcComponent implements OnInit, OnDestroy {
         currency: this.filter.currencyCode,
         payment: this.filter.payTypeCode,
         offset: currentListLength,
-        limit: 10,
+        limit: 15,
         // userid: '',
       };
       // this.isLoading = true;
@@ -211,9 +227,10 @@ export class OtcComponent implements OnInit, OnDestroy {
       } else {
         this.isShowLoadMore = false;
       }
-
+      this.isLoadMoreing = false;
     } catch (e) {
       this.isLoading = false;
+      this.isLoadMoreing = false;
       console.error(e);
       if (e.message) {
         this.dialogService.alert(e.message);

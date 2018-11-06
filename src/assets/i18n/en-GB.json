@@ -16,7 +16,7 @@
     "chat_template_2":"Hello, can you pay in time?",
     "chat_template_3":"Hello, is the payment name as same as the real name?",
     "chat_template_4":"Hello, can you set up trust to trade?",
-    "newmsg":"You have new messages."
+    "newmsg":"new messages."
   },
   "coin":{
     "detail":"Detail",
@@ -61,7 +61,7 @@
     "loading":"Loading...",
     "alert_title":"Information",
     "alert_ok":"OK",
-    "load_more":"... click to load more ...",
+    "load_more":"... loading more data ...",
     "confirm_title":"Confirm"
   },
   "element_coin_deposit":{

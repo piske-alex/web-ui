@@ -16,7 +16,7 @@
     "chat_template_3":"你好，請問付款跟實名是一致的嗎？",
     "chat_template_4":"你好，請問可以設置信任進行交易嗎？",
     "info_chat_via_temp":"未下單前，只能通過對話範本進行交流",
-    "newmsg":"您有新消息"
+    "newmsg":"新消息"
   },
   "coin":{
     "detail":"明細",
@@ -61,7 +61,7 @@
     "loading":"加載中...",
     "alert_title":"提示",
     "alert_ok":"確定",
-    "load_more":"... 點擊加載更多 ...",
+    "load_more":"... 正在加載更多的數據 ...",
     "confirm_title":"確認"
   },
   "element_coin_deposit":{

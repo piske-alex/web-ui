@@ -10,7 +10,7 @@
       right: 0;
       bottom: 0;
       border-top: 1px solid $border_default;
-      z-index: 999;
+      z-index: 99999;
 
       ul {
         display: flex;
@@ -59,7 +59,7 @@
       top: 0;
       max-width: $pc_max_width !important;
       width: 100%;
-      z-index: 999;
+      z-index: 9999;
 
       img {
         display: none;

@@ -5,7 +5,7 @@ import { LanguageService } from '../../providers/language/language.service';
 import { AdService } from '../../providers/ad/ad.service';
 import { Router } from '@angular/router';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
-
+import { HostListener} from '@angular/core';
 
 @Component({
   selector: 'gz-my-ad',
@@ -19,12 +19,24 @@ export class MyAdComponent implements OnInit {
   list: TransactionListItem[] = [];
   i18ns: any = {};
   isShowLoadMore = false;
+  isLoadMoreing = false;
   isLoading = false;
 
   constructor(private location: Location,
     private router: Router,
     private languageService: LanguageService,
     private adService: AdService) {
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+   let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+   // console.log('winScroll', winScroll);
+   let divOffHeight = document.querySelector('.gz-list-ad').scrollHeight;
+   // console.log('divOffHeight', divOffHeight);
+   if (winScroll + 700 > divOffHeight) {
+    this.loadMorePublishAd();
+   }
   }
 
   async ngOnInit() {
@@ -92,6 +104,11 @@ export class MyAdComponent implements OnInit {
 
 
   async loadMorePublishAd() {
+    if (this.isLoadMoreing) {
+      return ;
+    }
+    this.isLoadMoreing = true;
+
     let currentListLength = 0;
     if (this.list) {
       currentListLength = this.list.length;
@@ -130,7 +147,10 @@ export class MyAdComponent implements OnInit {
       } else {
         this.isShowLoadMore = false;
       }
+      this.isLoadMoreing = false;
     } catch (e) {
+      this.isLoadMoreing = false;
+      this.isLoading = false;
       console.error(e);
     }
 

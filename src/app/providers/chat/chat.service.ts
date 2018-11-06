@@ -383,7 +383,7 @@ export class ChatService {
 
             this.conservationObj[chat_union_ids].chatList = [];
             (messageses || []).forEach(message => {
-               console.log('message:::::::', message);
+              // console.log('message:::::::', message);
               if (!message.getAttributes()) {
                 console.log('### >>> message get attribute is null......');
                 return;

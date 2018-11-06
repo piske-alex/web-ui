@@ -80,8 +80,10 @@ export class LoginComponent implements OnInit {
     if (this.focusInput === inputName) {
       this.focusInput = '';
     }
-    if (inputName === "phone") {
-      this.phone = this.phone.replace(/\s+/g,'');
+    if (inputName === 'phone') {
+      if (this.phone) {
+        this.phone = this.phone.replace(/\s+/g, '');
+      }
     }
   }
 
