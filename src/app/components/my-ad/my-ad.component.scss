@@ -4,3 +4,36 @@
   background: $article_bg;
   max-width: 1200px;
 }
+@media (min-width: 760px){
+  .gz-header-container2 {
+    //margin-bottom: 50px;
+    max-width: 1199.98px !important;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+    height: 0 !important;
+  }
+  .gz-header2 {
+    top: 56px !important;
+    max-width: 1199.98px;
+    width: 100%;
+  }
+}
+
+.gz-header-container2 {
+  height: 56px;
+}
+.gz-header2 {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  top: 56px;
+  height: 56px;
+  color: #ffffff;
+  background: #212831;
+  line-height: 28px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 100;
+}

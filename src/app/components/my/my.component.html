@@ -12,12 +12,13 @@
 
 <article class="gz-my">
   <section class="gz-user">
-    <div class="fetchCur">
+    
     <img *ngIf="!(user && user.avatar)" src="./assets/images/logo.jpg" (click)="setAvatar(avatarFile)"/>
+    <div class="fetchCur">
     <img *ngIf="user && user.avatar" src="{{user.avatar | avatar}}" (click)="setAvatar(avatarFile)"/></div>
     <input type="file" class="gz-avatar-file" #avatarFile (change)="fileChange($event)" style="visibility: hidden;">
     <div *ngIf="!(user && user.id)">
-      <div routerLink="/login">
+      <div routerLink="/login" class="fetchCur">
         <gz-i18n key="user.loginOrRegister"></gz-i18n>
       </div>
       <div>

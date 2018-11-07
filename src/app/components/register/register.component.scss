@@ -62,5 +62,6 @@ article.gz-register {
       overflow-y:scroll; 
       height:300px;    
       text-align: left;
+      -webkit-overflow-scrolling: touch;
     }
   }
