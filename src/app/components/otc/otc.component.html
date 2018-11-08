@@ -3,7 +3,7 @@
 
   <header class="gz-header-container">
     <div class="gz-header">
-      <div (click)="toSelectCountry()">
+      <div (click)="toSelectCountry()" class="fetchCur">
         <span class="gz-pc-hide" *ngIf="country">{{country.name}}</span>
       </div>
       <div class="btn-group gz-tab" role="group">
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="gz-pc-header-right">
-        <div (click)="toSelectCountry()">
+        <div (click)="toSelectCountry()" class="fetchCur">
           <span class="gz-pc-show" *ngIf="country">{{country.name}}</span>
         </div>
         <div>

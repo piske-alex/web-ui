@@ -15,7 +15,8 @@
   <section class="gz-form-head">
     <p><gz-i18n key="user_setting.personal_safety_settings"></gz-i18n></p>
   </section>
-  <section class="gz-my-group fetchCur">
+  <section class="gz-my-group">
+    <div class="fetchCur">
       <div class="gz-my-row" routerLink="/userTransactionPassword">
         <div class="gz-my-left">
           <div>
@@ -31,28 +32,31 @@
           </div>
         </div>
       </div>
-    <div class="gz-my-row" (click)="goToVerify()">
-      <div class="gz-my-left">
-        <div>
-          <!--<fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>-->
+    </div>
+    <div [ngClass]="{fetchCur: user.kycStatus != 'verified'}">
+      <div class="gz-my-row" (click)="goToVerify()">
+        <div class="gz-my-left">
+          <div>
+            <!--<fa-icon class="gz-icon-user" [icon]="['fas', 'user']"></fa-icon>-->
+          </div>
+          <div><gz-i18n key="user_setting.real_cert"></gz-i18n></div>
         </div>
-        <div><gz-i18n key="user_setting.real_cert"></gz-i18n></div>
-      </div>
-      <div class="gz-my-right">
-        <div>
-          <span *ngIf="!user.kycStatus || user.kycStatus == 'unverified'"><gz-i18n key="user_setting.real_cert_unverified"></gz-i18n></span>
-          <span *ngIf="user.kycStatus == 'verified'"><gz-i18n key="user_setting.real_cert_verified"></gz-i18n></span>
-          <span *ngIf="user.kycStatus == 'pending'"><gz-i18n key="user_setting.real_cert_pending"></gz-i18n></span>
-          <fa-icon *ngIf="!user.kycStatus || user.kycStatus == 'unverified'"  [icon]="['fas', 'chevron-right']"></fa-icon>
+        <div class="gz-my-right">
+          <div>
+            <span *ngIf="!user.kycStatus || user.kycStatus == 'unverified'"><gz-i18n key="user_setting.real_cert_unverified"></gz-i18n></span>
+            <span *ngIf="user.kycStatus == 'verified'"><gz-i18n key="user_setting.real_cert_verified"></gz-i18n></span>
+            <span *ngIf="user.kycStatus == 'pending'"><gz-i18n key="user_setting.real_cert_pending"></gz-i18n></span>
+            <fa-icon *ngIf="!user.kycStatus || user.kycStatus == 'unverified'"  [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
         </div>
-      </div>
-    </div>    
+      </div>    
+    </div>
   </section>
 
   <section class="gz-form-head">
     <p><gz-i18n key="user_setting.account_safe_set"></gz-i18n></p>
   </section>
-  <section class="gz-my-group fetchCur">
+  <section class="gz-my-group">
     <div class="gz-my-row">
       <div class="gz-my-left">
         <div></div>
@@ -65,29 +69,33 @@
         </div>
       </div>
     </div>
-    <div class="gz-my-row" (click)="goToBindEmail()">
-      <div class="gz-my-left">
-        <div></div>
-        <div><gz-i18n key="user_setting.set_email"></gz-i18n></div>
-      </div>
-      <div class="gz-my-right">
-        <div>
-          <span *ngIf="!user.emailStatus || user.emailStatus == 'unset'"><gz-i18n key="user_setting.email_not_setting"></gz-i18n></span>
-          <span *ngIf="user.emailStatus == 'unverified'"><gz-i18n key="user_setting.email_unverified"></gz-i18n></span>
-          <span *ngIf="user.emailStatus == 'verified'"><gz-i18n key="user_setting.email_verified"></gz-i18n></span>
-          <span *ngIf="user.emailStatus == 'pending'"><gz-i18n key="user_setting.email_pending"></gz-i18n></span>
-          <fa-icon *ngIf="!user.emailStatus  || user.emailStatus == 'unset'" [icon]="['fas', 'chevron-right']"></fa-icon>
+    <div [ngClass]="{fetchCur: user.emailStatus != 'verified' && user.emailStatus != 'unverified'}">
+      <div class="gz-my-row" (click)="goToBindEmail()">
+        <div class="gz-my-left">
+          <div></div>
+          <div><gz-i18n key="user_setting.set_email"></gz-i18n></div>
+        </div>
+        <div class="gz-my-right">
+          <div>
+            <span *ngIf="!user.emailStatus || user.emailStatus == 'unset'"><gz-i18n key="user_setting.email_not_setting"></gz-i18n></span>
+            <span *ngIf="user.emailStatus == 'unverified'"><gz-i18n key="user_setting.email_unverified"></gz-i18n></span>
+            <span *ngIf="user.emailStatus == 'verified'"><gz-i18n key="user_setting.email_verified"></gz-i18n></span>
+            <span *ngIf="user.emailStatus == 'pending'"><gz-i18n key="user_setting.email_pending"></gz-i18n></span>
+            <fa-icon *ngIf="!user.emailStatus  || user.emailStatus == 'unset'" [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
         </div>
       </div>
     </div>
-    <div class="gz-my-row" routerLink="/forgetPassword">
-      <div class="gz-my-left">
-        <div><gz-i18n key="user_setting.login_password"></gz-i18n></div>
-      </div>
-      <div class="gz-my-right">
-        <div>
-          <span></span>
-          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+    <div class="fetchCur">
+      <div class="gz-my-row" routerLink="/forgetPassword">
+        <div class="gz-my-left">
+          <div><gz-i18n key="user_setting.login_password"></gz-i18n></div>
+        </div>
+        <div class="gz-my-right">
+          <div>
+            <span></span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
         </div>
       </div>
     </div>
