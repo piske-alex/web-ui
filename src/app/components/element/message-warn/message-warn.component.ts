@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnDestroy} from '@angular/core';
 import { ChatService } from '../../../providers/chat/chat.service';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../../providers/language/language.service';
@@ -14,11 +14,19 @@ export class MessageWarnComponent implements OnInit {
   unreadCount: number;
   i18ns: any = {};
 
+  handleMessageWarn: any;
+
   constructor(private router: Router,
     private languageService: LanguageService,
     private chatService: ChatService) {
 
   }
+
+  async ngOnDestroy(){
+    console.log("ngOnDestroy")
+    if(this.handleMessageWarn !== undefined)
+      clearInterval(this.handleMessageWarn);
+ }
 
   async ngOnInit() {
 
@@ -47,7 +55,7 @@ export class MessageWarnComponent implements OnInit {
       }
     };
 
-    setInterval(fetchNewMessage, 5000); // 10秒刷新一次
+    this.handleMessageWarn = setInterval(fetchNewMessage, 3000); // 10秒刷新一次
 
     // this.isShowNewMessage = false;
     // if (this.chatService.chat) {
