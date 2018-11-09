@@ -146,6 +146,7 @@
     "ad_coin_type": "幣種",
     "has_no_order": "沒有交易記錄",
     "order_id": "編號",
+    "userid_neither_ad_nor_order": "無權訪問該數據。",
     "order_status": "狀態",
     "order_status_unfinish": "未完成",
     "order_status_finish": "已完成",

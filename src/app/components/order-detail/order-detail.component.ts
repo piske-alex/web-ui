@@ -38,6 +38,8 @@ export class OrderDetailComponent implements OnInit {
   paypassword: string;
   isShowPayPassword: boolean;
 
+  userId: string;
+
   @ViewChild(ListChatingComponent)
   private listChatingComponent;
 
@@ -49,13 +51,18 @@ export class OrderDetailComponent implements OnInit {
               private dialogService: DialogService) {
   }
 
-  async ngOnDestroy(){
-      console.log("ngOnDestroy")
-      if(this.initNewStatus !== undefined)
+  async ngOnDestroy() {
+      if (this.initNewStatus !== undefined)
         clearInterval(this.initNewStatus);
   }
 
   async ngOnInit() {
+
+    this.userId = localStorage.getItem('user_id');
+    if (!this.userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
     this.adId = this.route.snapshot.paramMap.get('adId');
     this.adUserId = this.route.snapshot.paramMap.get('adUserId');
@@ -82,10 +89,11 @@ export class OrderDetailComponent implements OnInit {
     this.orderId = this.route.snapshot.paramMap.get('orderId');
     let noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
     let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
-    
+
+    this.i18ns.userid_neither_ad_nor_order = await this.languageService.get('my_ad.userid_neither_ad_nor_order');
 
     try {
-      
+
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
           // console.log('this.order', this.order);
@@ -138,12 +146,21 @@ export class OrderDetailComponent implements OnInit {
       }
 
       await getNewStatusFn();
-      this.initNewStatus = setInterval(getNewStatusFn,5000);
+      this.initNewStatus = setInterval(getNewStatusFn, 5000);
 
 
 
     } catch (e) {
-      console.error(e);
+      if (e.error == 'userid_neither_ad_nor_order') {
+        this.dialogService.alert(this.i18ns.userid_neither_ad_nor_order).subscribe(
+          res => {
+            this.router.navigate(['/otc']);
+            return;
+          }
+        );
+      } else {
+        console.error('load order error ', e);
+      }
     }
 
     this.i18ns.waitPay = await this.languageService.get('otc.waitPay');
@@ -173,7 +190,8 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_finish = await this.languageService.get('my_ad.order_status_finish');
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
-
+    
+    
     
 
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');

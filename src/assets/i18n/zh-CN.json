@@ -146,6 +146,7 @@
     "ad_coin_type": "币种",
     "has_no_order": "没有交易信息",
     "order_id": "编号",
+    "userid_neither_ad_nor_order": "无权访问该数据。",
     "order_status": "状态",
     "order_status_unfinish": "未完成",
     "order_status_finish": "已完成",

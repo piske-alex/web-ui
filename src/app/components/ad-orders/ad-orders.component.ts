@@ -82,16 +82,17 @@ export class AdOrdersComponent implements OnInit {
       // this.adUserId = this.data.userId;
 
       await this.adService.getOrder({adid: this.adId}).then( (data) => {
-        // this.orders = data;
-        this.orders = data.sort((obj1, obj2) => {
-          if (obj1.create_time > obj2.create_time) {
-              return -1;
-          }
-          if (obj1.create_time < obj2.create_time) {
-              return 1;
-          }
-          return 0;
-        });
+         this.orders = data;
+        // this.orders = data.sort((obj1, obj2) => {
+        //   if (obj1.create_time > obj2.create_time) {
+        //       return -1;
+        //   }
+        //   if (obj1.create_time < obj2.create_time) {
+        //       return 1;
+        //   }
+        //   return 0;
+        // });
+        console.log('adid orders1', data);
         this.isLoading = false;
       } , error => {
         console.log('adid orders2', error);

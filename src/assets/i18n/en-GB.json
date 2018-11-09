@@ -146,6 +146,7 @@
     "goto_order": "Trading Information",
     "has_no_order": "No Trading Information",
     "order_id": "ID",
+    "userid_neither_ad_nor_order": "No access to this data.",
     "order_status": "Status",
     "order_status_unfinish": "Unfinished",
     "order_status_finish": "Finished",
