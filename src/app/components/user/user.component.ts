@@ -8,6 +8,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { Deal } from '../../models/ad/Deal';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { TradeItem } from 'src/app/models/common/TradeItem';
+import { HostListener} from '@angular/core';
 
 @Component({
   selector: 'gz-user',
@@ -26,6 +27,8 @@ export class UserComponent implements OnInit {
   total: number;
   isLoading: boolean;
   isShowLoadMore:boolean;
+  isLoadMoreing = false;
+  isLoadMoreing2 = false;
 
   i18ns: any = {};
 
@@ -36,6 +39,17 @@ export class UserComponent implements OnInit {
               private languageService: LanguageService,
               private adService: AdService,
               private userService: UserService) {
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+   let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+   // console.log('winScroll', winScroll);
+   let divOffHeight = document.querySelector('.gz-list-ad').scrollHeight;
+    console.log('divOffHeight', divOffHeight);
+   if (winScroll + 928 > divOffHeight) {
+    this.loadMorePublishList();
+   }
   }
 
   async ngOnInit() {
@@ -78,6 +92,11 @@ export class UserComponent implements OnInit {
   }
 
   private async loadMorePublishList() {
+    if (this.isLoadMoreing) {
+      return ;
+    }
+    this.isLoadMoreing = true;
+
     let currentListLength = 0;
       if (this.publishList) {
         currentListLength = this.publishList.length;
@@ -90,10 +109,10 @@ export class UserComponent implements OnInit {
         currency: '',
         payment: '',
         offset: currentListLength,
-        limit: 100,
+        limit: 15,
         userid: this.userId,
       };
-      this.isLoading = true;
+      //this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
       this.isLoading = false;
 
@@ -110,7 +129,9 @@ export class UserComponent implements OnInit {
       } else {
         this.isShowLoadMore = false;
       }
+      this.isLoadMoreing = false;
     } catch (e) {
+      this.isLoadMoreing = false;
       this.isLoading = false;
       console.error(e);
     }
@@ -120,7 +141,7 @@ export class UserComponent implements OnInit {
   private async loadDealList() {
     try {
       this.isLoading = true;
-      const _result = await this.adService.listDealList2({otherUserId: this.userId, offset: 0 , limit: 10});
+      const _result = await this.adService.listDealList2({otherUserId: this.userId, offset: 0 , limit: 15});
       this.dealWithMeList = _result.list;
       this.total = _result.total;
       this.isLoading = false;
@@ -136,14 +157,19 @@ export class UserComponent implements OnInit {
   }
 
   private async loadMoreDealList() {
+    if (this.isLoadMoreing2) {
+      return ;
+    }
+    this.isLoadMoreing2 = true;
+
     try {
       let currentListLength = 0;
       if (this.dealWithMeList) {
         currentListLength = this.dealWithMeList.length;
       }
 
-      this.isLoading = true;
-      const _result = await this.adService.listDealList2({otherUserId: this.userId, offset: currentListLength , limit: 1000});
+      //this.isLoading = true;
+      const _result = await this.adService.listDealList2({otherUserId: this.userId, offset: currentListLength , limit: 15});
       this.isLoading = false;
 
       if (this.dealWithMeList) {
@@ -159,9 +185,10 @@ export class UserComponent implements OnInit {
       } else {
         this.isShowLoadMore = false;
       }
-
+      this.isLoadMoreing2 = false;
     } catch (e) {
       this.isLoading = false;
+      this.isLoadMoreing2 = false;
       console.error(e);
     }
   }

@@ -4,6 +4,11 @@
   background: $article_bg;
   max-width: 1200px;
 }
+.gz-list-trade {
+  background: $article_bg;
+  margin-top: $section_margin_top;
+  padding-bottom: 50px;
+}
 
 @media (min-width: 760px){
   .gz-header-container2 {

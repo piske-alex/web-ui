@@ -11,7 +11,7 @@
 </header>
 
 <article class="gz-coin-select">
-  <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush fetchCur">
     <li class="list-group-item" *ngFor="let coin of coinList" (click)="goToAction(coin)">
       <img src="./assets/images/{{coin.code}}.png">
       <span>{{coin.name}}</span>

@@ -16,7 +16,7 @@ export class CommonService {
   constructor(private httpService: HttpService) {
   }
 
-  listMyTradeList(params): Promise<{ list: TradeItem[], total: number }> {
+  listMyTradeList(params): Promise<{ list: TradeItem[], total: any }> {
     return new Promise((resolve, reject) => {
       if (this.cache['myTradeList'] !== undefined) {
         resolve(this.cache['myTradeList']);

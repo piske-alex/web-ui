@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
+import { DialogService } from '../../providers/dialog/dialog.service';
 
 @Component({
   selector: 'app-ad-orders',
@@ -31,7 +32,8 @@ export class AdOrdersComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private adService: AdService,
-    private languageService: LanguageService) {
+    private languageService: LanguageService,
+    private dialogService: DialogService) {
   }
 
   async ngOnInit() {
@@ -69,13 +71,16 @@ export class AdOrdersComponent implements OnInit {
     this.i18ns.bt_bank_transfer = await this.languageService.get('element_list_trans.bt_bank_transfer');
     this.i18ns.noPayed = await this.languageService.get('my_ad.order_status_buypay_status_0');
     this.i18ns.payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
+    this.i18ns.userid_not_ad_userid = await this.languageService.get('my_ad.userid_not_ad_userid');
     
     this.i18ns.do_rating = await this.languageService.get('my_trade.do_rating');
     this.i18ns.rating_1 = await this.languageService.get('my_trade.rating_1');
     this.i18ns.rating_0 = await this.languageService.get('my_trade.rating_0');
     this.i18ns.amount = await this.languageService.get('otc.amount');
     this.i18ns.orderNo = await this.languageService.get('otc.orderNo');
-    
+
+    this.i18ns.advertisement_not_found = await this.languageService.get('my_ad.advertisement_not_found');
+
     try {
        this.adData = await this.adService.getOtcAdById({ adid: this.adId });
       // console.log('ad', this.adData);
@@ -95,7 +100,16 @@ export class AdOrdersComponent implements OnInit {
         console.log('adid orders1', data);
         this.isLoading = false;
       } , error => {
-        console.log('adid orders2', error);
+        if (error.error == 'userid_not_ad_userid') {
+          this.dialogService.alert(this.i18ns.userid_not_ad_userid).subscribe(
+            res => {
+              this.router.navigate(['/otc']);
+              return;
+            }
+          );
+        } else {
+          console.log('adid orders2', error);
+        }
         this.isLoading = false;
       });
       // this.orders = _result.data;
@@ -104,7 +118,15 @@ export class AdOrdersComponent implements OnInit {
       console.log('loginUserId orders', this.orders);
 
     } catch (e) {
-      console.error(e);
+      console.error('error when load', e);
+      if (e.error === 'advertisement not found') {
+        this.dialogService.alert(this.i18ns.advertisement_not_found).subscribe(
+          res => {
+            this.router.navigate(['/otc']);
+            return;
+          }
+        );
+      }
       this.isLoading = false;
     }
 

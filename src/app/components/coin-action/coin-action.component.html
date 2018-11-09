@@ -6,7 +6,7 @@
     <div class="gz-title">
       OTC {{coinType}}
     </div>
-    <div (click)="goToTransactionList()">
+    <div class="fetchCur" (click)="goToTransactionList()">
       <gz-i18n key="coin.detail"></gz-i18n>
     </div>
   </div>
@@ -30,7 +30,7 @@
   </section>
 
   <section class="gz-full-tab">
-    <nav class="nav">
+    <nav class="nav fetchCur">
       <a [class]="'nav-link ' + (isDeposit() ? 'active': '')" (click)="toDeposit()"><gz-i18n key="coin.Deposit"></gz-i18n></a>
       <a [class]="'nav-link ' + (isWithraw() ? 'active': '')" (click)="toWithraw()"><gz-i18n key="coin.Withraw"></gz-i18n></a>
       <!--<a [class]="'nav-link ' + (isTransfer() ? 'active': '')" (click)="toTransfer()">资产划转</a>-->

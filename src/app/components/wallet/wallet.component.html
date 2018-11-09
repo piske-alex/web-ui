@@ -34,7 +34,7 @@
   <div class="loader" *ngIf="isLoading">Loading...</div>
 
   <section class="gz-my-coin-list" *ngIf="!isLoading">
-    <div class="gz-my-coin" *ngFor="let data of coinList" (click)="goToCoinAction(data)">
+    <div class="gz-my-coin fetchCur" *ngFor="let data of coinList" (click)="goToCoinAction(data)">
       <div class="gz-coin-detail">
         <div class="gz-coin-cointype">{{data.coinType}}</div>
         <div class="gz-coin-amount">
