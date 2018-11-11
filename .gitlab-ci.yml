@@ -41,8 +41,11 @@ docker:
 
 app-deploy:
   stage: deploy
-  image: cdrx/rancher-gitlab-deploy
+  image: heunghingwan/rancher-cli-k8s
+  variables:
+    GIT_STRATEGY: none
   cache: {}
   dependencies: []
   script:
-    - upgrade --stack ${DEV_STACK} --service ${DEV_SERVICE}
+    - rancher login ${RANCHER_URL} -t ${RANCHER_TOKEN} --context ${RANCHER_PROJECT_ID}
+    - rancher kubectl --namespace="${DEV_STACK}" patch deployment "${DEV_SERVICE}" --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"'"${DEV_SERVICE}"'","image":"'"${DEV_REGISTRY_URL}"'/'"${DEV_IMAGE}"'","env":[{"name":"FORCE_RESTART_AT","value":"'"${CI_PIPELINE_ID}"'"}]}]}}}}'
