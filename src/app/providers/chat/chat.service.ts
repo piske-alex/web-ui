@@ -41,7 +41,7 @@ export class ChatService {
      console.log('### >>> loginChat:::', this.isLogin);
     if (this.isLogin && this.chat
       && this.conservationObj
-      && (this.conservationObj.creator == (String(this.user.id) + this.chat_topic_keyword)) {
+      && (this.conservationObj.creator == (String(this.user.id) + this.chat_topic_keyword))) {
       return;
     }
     const chat_top = this.chat_topic_keyword;
