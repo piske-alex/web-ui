@@ -20,9 +20,9 @@ export class EnvironmentConstant {
   // public static API_URL = 'http://office.ddns.need.sh:8011/api';
   // public static AVATAR = 'https://www.koin-exchange.com/avatar';
   // public static API_URL = 'https://www.koin-exchange.com/api';
-   public static AVATAR = 'https://kcb.alpha-beta.tech/avatar';
-   public static API_URL = 'https://kcb.alpha-beta.tech/api';
-   public static BG_URL = 'https://admin-api-kcb.alpha-beta.tech';
+   public static AVATAR = 'https://otcfiretesting.space/avatar';
+   public static API_URL = 'https://otcfiretesting.space/api';
+   public static BG_URL = 'https://admin-api.otcfiretesting.space';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
 
 }
