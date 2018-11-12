@@ -39,7 +39,9 @@ export class ChatService {
 
   loginChat() {
      console.log('### >>> loginChat:::', this.isLogin);
-    if (this.isLogin) {
+    if (this.isLogin && this.chat
+      && this.conservationObj
+      && (this.conservationObj.creator == (String(this.user.id) + this.chat_topic_keyword)) {
       return;
     }
     const chat_top = this.chat_topic_keyword;
@@ -53,7 +55,7 @@ export class ChatService {
         this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
           this.chat = chat;
           this.isLogin = true;
-          console.log('chat info:' , chat);
+          // console.log('chat info:' , chat);
           // chat.on(AV.Event.MESSAGE, (message, conversation) => {
           //    console.log('--loginChat--------3333--------message: ', message);
           //   const _from = message.from;
@@ -120,16 +122,16 @@ export class ChatService {
     return new Promise((resolve, reject) => {
       let chat_union_ids = '';
       if (Number(adUserId) > Number(anotherUserId)) {
-        chat_union_ids = String(adUserId) + '_' + String(anotherUserId) + '_' + String(adId);
+        chat_union_ids = String(adUserId) + '_' + String(anotherUserId) + '_' + String(adId) ;
       } else {
         chat_union_ids = String(anotherUserId) + '_' + String(adUserId) + '_' + String(adId) ;
       }
 
-      const _conservationObj = this.conservationObj[chat_union_ids];
-      let _conversation = _conservationObj && _conservationObj.conversation || null;
-      if (!_conversation) {
+      // const _conservationObj = this.conservationObj[chat_union_ids];
+      // let _conversation = _conservationObj && _conservationObj.conversation || null;
+      // if (!_conversation) {
         // console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
-         _conversation =
+        let  _conversation =
         this.chat.createConversation({
           members: [(String(adUserId) + this.chat_topic_keyword),
             (String(anotherUserId) + this.chat_topic_keyword),
@@ -142,9 +144,9 @@ export class ChatService {
         }, error => {
           console.error.bind(console);
         });
-      } else {
-        resolve(_conversation);
-      }
+      // } else {
+      //   resolve(_conversation);
+      // }
     });
   }
 
@@ -319,7 +321,7 @@ export class ChatService {
           chat_union_ids = String(anotherUserId) + '_' + String(adUserId) + '_' + String(adId) ;
         }
         if (conversation) {
-          // console.log('### >>> send message ...', chat_union_ids);
+          // console.log('### >>>conversation ...', conversation);
 
           const _textMessage = new AV.TextMessage(message);
           _textMessage.setAttributes({
@@ -338,14 +340,15 @@ export class ChatService {
           this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
           this.conservationObj[chat_union_ids].conversation = conversation;
           this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
-          this.conservationObj[chat_union_ids].chatList.push({
-            from: String(this.user.id),
-            content: message,
-            avatar: this.user.avatar || '',
-            sendTimestamp: Date.now(),
-            isMe: true,
-          });
-          resolve(this.conservationObj[chat_union_ids].chatList);
+          // console.log('aaa', this.user.id);
+          // this.conservationObj[chat_union_ids].chatList.push({
+          //   from: String(this.user.id),
+          //   content: message,
+          //   avatar: this.user.avatar || '',
+          //   sendTimestamp: Date.now(),
+          //   isMe: true,
+          // });
+          // resolve(this.conservationObj[chat_union_ids].chatList);
           // console.log('### >>> send message ...end');
           // return conversation;
         } else {
@@ -519,9 +522,9 @@ export class ChatService {
   closeChatClient() {
     this.isLogin = false;
     // console.log('closeChatClient');
-    if (this.chat) {
-      this.chat.close().then(function() {  }).catch(console.error.bind(console));
-    }
+    // if (this.chat) {
+    //   this.chat.close().then(function() {  }).catch(console.error.bind(console));
+    // }
   }
 
 

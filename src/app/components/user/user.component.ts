@@ -29,6 +29,7 @@ export class UserComponent implements OnInit {
   isShowLoadMore:boolean;
   isLoadMoreing = false;
   isLoadMoreing2 = false;
+  isFirstLoad:boolean = true;
 
   i18ns: any = {};
 
@@ -43,6 +44,11 @@ export class UserComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    if(this.isFirstLoad){
+      this.isFirstLoad = false;
+      return;
+    }
+
    let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
    // console.log('winScroll', winScroll);
    let divOffHeight = document.querySelector('.gz-list-ad').scrollHeight;
@@ -81,6 +87,8 @@ export class UserComponent implements OnInit {
       };
       this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
+      console.log(document.querySelector('.gz-list-ad').scrollHeight)
+      debugger
       this.isLoading = false;
       this.publishList = _result.list;
       this.total = _result.total;
@@ -115,7 +123,7 @@ export class UserComponent implements OnInit {
       //this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
       this.isLoading = false;
-
+      debugger
       if (this.publishList) {
         const tempList = this.publishList.concat(_result.list);
         this.publishList = tempList;
@@ -202,6 +210,7 @@ export class UserComponent implements OnInit {
 
   selectPublish() {
     this.isSelectPublish = true;
+    console.log('aa');
     this.loadPublishList();
   }
 

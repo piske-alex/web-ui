@@ -37,6 +37,8 @@ export class ListChatingComponent implements OnInit {
 
   isLoading: boolean;
 
+
+
   constructor(private userService: UserService,
               private chatService: ChatService,
               private dialogService: DialogService) {
@@ -76,6 +78,7 @@ export class ListChatingComponent implements OnInit {
   }
 
   async refreshchatlist() {
+
     if (!this.chatService.isLogin) {
       try {
         this.chatService.loginChat();
@@ -87,6 +90,7 @@ export class ListChatingComponent implements OnInit {
     if (this.chatingList) {
       const tempList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
       this.isLoading = false;
+
       if (this.chatingList.length != tempList.length) {
        // console.log('chatingList updateScroll');
         this.chatingList = tempList;
@@ -98,6 +102,7 @@ export class ListChatingComponent implements OnInit {
       this.chatingList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
       this.isLoading = false;
       this._updateScroll();
+
     }
 
     // this.chatingList = await this.chatService.updateChatList(this.adId, this.adUserId, this.anotherUserId, this.orderId);
