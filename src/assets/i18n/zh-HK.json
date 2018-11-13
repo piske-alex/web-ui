@@ -339,6 +339,7 @@
   },
   "user_real_cert": {
     "user_real_cert": "實名認證",
+    "input_max_size":"上傳的圖片不能超過50K",
     "input_name":"請輸入姓名",
     "input_cardno":"請輸入證件號",
     "card_front":"證件正面",

@@ -339,6 +339,7 @@
   },
   "user_real_cert": {
     "user_real_cert": "Verified",
+    "input_max_size":"Photo is too large, please do not upload more than 50K",
     "input_name":"Please enter your name",
     "input_cardno":"Please enter the ID number",
     "card_front":"Document front",

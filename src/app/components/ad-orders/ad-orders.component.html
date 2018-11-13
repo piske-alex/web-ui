@@ -57,7 +57,11 @@
         
       </div>
     </section>
-    <div class="loader" *ngIf="isLoading">Loading...</div>
+    <div class="loader fetchCur" *ngIf="isLoading">Loading...</div>
+    <div (click)="loadMoreList()" *ngIf="isShowLoadMore"
+       style="text-align:center;margin-bottom: 25px;margin-top:10px; background-color:#E9BC32;color:black; ">
+        <gz-i18n key="common.load_more"></gz-i18n>
+    </div>
     <div class="align_center" *ngIf="!isLoading && !orders">{{this.i18ns.has_no_order}}</div>
     
 

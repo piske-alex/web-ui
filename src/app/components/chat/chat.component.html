@@ -42,8 +42,8 @@
 
   <section class="gz-empty-foot"></section>
   <div>
-    <ul class="list-group list-group-flush" *ngIf="chatTemplates">
-      <li class="list-group-item fetchCur" *ngFor="let template of chatTemplates" (click)="sendTemplate(template)">{{template.value}}</li>
+    <ul class="list-group list-group-flush fetchCur" *ngIf="chatTemplates">
+      <li class="list-group-item" *ngFor="let template of chatTemplates" (click)="sendTemplate(template)">{{template.value}}</li>
     </ul>
   </div>
 </article>

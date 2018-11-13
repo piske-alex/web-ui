@@ -5,6 +5,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
 import { DialogService } from '../../providers/dialog/dialog.service';
+import { HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-ad-orders',
@@ -25,8 +26,10 @@ export class AdOrdersComponent implements OnInit {
   anotherUserId: string;
 
   adType: string;
-
+  count:number;
   isLoading: boolean;
+  isLoadMoreing = false;
+  isShowLoadMore = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -34,6 +37,18 @@ export class AdOrdersComponent implements OnInit {
     private adService: AdService,
     private languageService: LanguageService,
     private dialogService: DialogService) {
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+   let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+   // console.log('winScroll', winScroll);
+   let divOffHeight = document.querySelector('.gz-list-tr').scrollHeight;
+    //console.log('divOffHeight', divOffHeight);
+   if (winScroll + 400 > divOffHeight) {
+     console.log
+    this.loadMoreList();
+   }
   }
 
   async ngOnInit() {
@@ -85,9 +100,15 @@ export class AdOrdersComponent implements OnInit {
        this.adData = await this.adService.getOtcAdById({ adid: this.adId });
       // console.log('ad', this.adData);
       // this.adUserId = this.data.userId;
-
-      await this.adService.getOrder({adid: this.adId}).then( (data) => {
-         this.orders = data;
+      const _params = {
+        adid: this.adId,
+        offset: 0,
+        limit: 15,
+      };
+      await this.adService.getOrder(_params).then( (data) => {
+        console.log(data)
+         this.orders = data.list;
+         this.count = data.count[0].count;
         // this.orders = data.sort((obj1, obj2) => {
         //   if (obj1.create_time > obj2.create_time) {
         //       return -1;
@@ -115,7 +136,14 @@ export class AdOrdersComponent implements OnInit {
       // this.orders = _result.data;
      // const loginUserId = localStorage.getItem('user_id');
      // this.orders = await this.adService.getOrder({userid: loginUserId});
-      console.log('loginUserId orders', this.orders);
+      
+      if (this.count > this.orders.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+
+     console.log('loginUserId orders', this.orders);
 
     } catch (e) {
       console.error('error when load', e);
@@ -131,6 +159,73 @@ export class AdOrdersComponent implements OnInit {
     }
 
   }
+
+  private async loadMoreList() {
+    if (this.isLoadMoreing) {
+      return ;
+    }
+    if(!this.isShowLoadMore){
+      return;
+    }
+    this.isLoadMoreing = true;
+    try {
+      let currentListLength = 0;
+      if (this.orders) {
+        currentListLength = this.orders.length;
+      }
+      console.log('load more length', currentListLength);
+      const _params = {
+        adid: this.adId,
+        offset: currentListLength,
+        limit: 15,
+      };
+      // this.isLoading = true;
+     
+      let tList:any;
+      const _result = await this.adService.getOrder(_params).then( (data) => {
+        //this.orders = data;
+        tList = data.list;
+       console.log('adid orders1', data);
+       this.isLoading = false;
+      } , error => {
+        if (error.error == 'userid_not_ad_userid') {
+          this.dialogService.alert(this.i18ns.userid_not_ad_userid).subscribe(
+            res => {
+              this.router.navigate(['/otc']);
+              return;
+            }
+          );
+        } else {
+          console.log('adid orders2', error);
+        }
+        this.isLoading = false;
+      });
+      
+      this.isLoading = false;
+      if (this.orders) {
+        this.orders = this.orders.concat(tList);
+      } else {
+        this.orders = tList;
+      }
+
+      if (this.count > this.orders.length) {
+        this.isShowLoadMore = true;
+      } else {
+        this.isShowLoadMore = false;
+      }
+      this.isLoadMoreing = false;
+    } catch (e) {
+      this.isLoading = false;
+      this.isLoadMoreing = false;
+      console.error(e);
+      if (e.message) {
+        this.dialogService.alert(e.message);
+      }
+
+    }
+
+  }
+
 
   goBack() {
     this.location.back();

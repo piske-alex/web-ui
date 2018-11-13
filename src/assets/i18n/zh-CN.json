@@ -340,6 +340,7 @@
   },
   "user_real_cert": {
     "user_real_cert": "实名认证",
+    "input_max_size":"上传的图片不能超过50K",
     "input_name":"请输入姓名",
     "input_cardno":"请输入证件号",
     "card_front":"证件正面",
