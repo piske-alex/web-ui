@@ -25,6 +25,8 @@ export class UserSettingComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.i18ns.set_paypass_first = await this.languageService.get('user_setting.set_paypass_first');
+
     this.userId = localStorage.getItem('user_id');
     if (!this.userId) {
       this.router.navigate(['/login']);
@@ -40,7 +42,7 @@ export class UserSettingComponent implements OnInit {
     // }
     this.user = await this.userService.getDetail({ id: this.userId });
     // console.error(this.user);
-    this.i18ns.set_paypass_first = await this.languageService.get('user_setting.set_paypass_first');
+    
   }
 
   goBack() {
@@ -49,13 +51,15 @@ export class UserSettingComponent implements OnInit {
   }
 
   goToVerify() {
-    if (!this.user.payPass ) {
-      return this.dialogService.alert(this.i18ns.set_paypass_first);
-     } else {
-      if (!this.user.kycStatus  || this.user.kycStatus === 'unverified' ) {
-        this.router.navigate(['/userRealCert']);
+    setTimeout(() => {
+      if (!this.user.payPass ) {
+        return this.dialogService.alert(this.i18ns.set_paypass_first);
+       } else {
+        if (!this.user.kycStatus  || this.user.kycStatus === 'unverified' ) {
+          this.router.navigate(['/userRealCert']);
+         }
        }
-     }
+    }, 1000);
   }
 
   goToBindEmail() {
