@@ -154,12 +154,13 @@ export class LoginComponent implements OnInit {
             if (_user) {
               localStorage.setItem('user_id', _user.id);
               localStorage.setItem('user', JSON.stringify(_user));
-              if (!_user.username) {
-                this.router.navigate(['setNickName', { userId: _user.id || '' }]);
-              }
               this.languageService.initConfig(_user.language);
               localStorage.setItem('language', _user.language);
-              this.router.navigate(['/my', { userId: _user.id }]);
+              if (!_user.username || _user.username == null) {
+                this.router.navigate(['setNickName', { userId: _user.id || '' }]);
+              } else {
+                this.router.navigate(['/my', { userId: _user.id }]);
+              }
             } else {
               this.dialogService.alert(this.i18ns.err_getuserdetail_fail);
               this.isLoading = false;
