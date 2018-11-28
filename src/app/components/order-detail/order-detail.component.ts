@@ -348,7 +348,7 @@ export class OrderDetailComponent implements OnInit {
                 this.dialogService.alert(this.i18ns.paypassword_invalid);
               } else if (err.error.name == 'PasswordNotActive') {
                 let passwordNotActive = this.i18ns.err_PasswordNotActive;
-                const activetime  = err.error.activetoLocaleString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+                const activetime  = err.error.active.toLocaleString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
                 passwordNotActive = passwordNotActive.replace('{0}', activetime);
                 this.dialogService.alert(passwordNotActive);
               } else if (err.error == 'the order status must be unfinish') {
