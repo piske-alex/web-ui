@@ -43,13 +43,15 @@
 
   <section class="gz-edit-row gz-mt-10">
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.input_name}}" [(ngModel)]="realName" tabindex="1">
+      <input type="text" placeholder="{{this.i18ns.input_name}}" [(ngModel)]="realName" tabindex="1"
+       maxlength="50">
     </div>
   </section>
 
   <section class="gz-edit-row gz-mt-10">
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.input_cardno}}" [(ngModel)]="realCardNo" tabindex="2">
+      <input type="text" placeholder="{{this.i18ns.input_cardno}}" [(ngModel)]="realCardNo" tabindex="2"
+       maxlength="100">
     </div>
   </section>
 

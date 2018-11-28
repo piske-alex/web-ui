@@ -38,6 +38,9 @@ export class UserEmailComponent implements OnInit {
     this.i18ns.input_valid_email = await this.languageService.get('user_email.input_valid_email');
     this.i18ns.bind_email_success = await this.languageService.get('user_email.bind_email_success');
     this.i18ns.bind_email_failure = await this.languageService.get('user_email.bind_email_failure');
+    this.i18ns.bind_failure_email_existed = await this.languageService.get('user_email.bind_failure_email_existed');
+    this.i18ns.bind_failure_email_verified = await this.languageService.get('user_email.bind_failure_email_verified');
+
   }
 
   goBack() {
@@ -80,7 +83,11 @@ export class UserEmailComponent implements OnInit {
           // this.goBack();
           this.router.navigate(['/userSetting']);
       }, error => {
-        if (error.error.success === false && error.error.errmsg !== undefined) {
+        if (error.success === false && error.error == 'email existed') {
+          this.dialogService.alert(this.i18ns.bind_failure_email_existed);
+        } else if (error.success === false && error.error == 'email verified') {
+          this.dialogService.alert(this.i18ns.bind_failure_email_verified);
+        } else if (error.success === false && error.error !== undefined) {
           this.dialogService.alert(error.error.errmsg);
         } else {
           this.dialogService.alert(this.i18ns.bind_email_failure);

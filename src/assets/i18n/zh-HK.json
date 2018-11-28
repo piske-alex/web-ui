@@ -335,6 +335,8 @@
     "input_valid_email":"請輸入有效郵箱",
     "bind_email_success":"綁定郵箱成功",
     "bind_email_failure":"綁定郵箱失敗",
+    "bind_failure_email_existed":"綁定失敗， 郵箱地址已存在。",
+    "bind_failure_email_verified":"綁定失敗，郵箱地址已認證。",
     "submit":"提交"
   },
   "user_real_cert": {

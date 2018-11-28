@@ -335,6 +335,8 @@
     "input_valid_email":"Please enter a valid email address",
     "bind_email_success":"Binding the mailbox successfully",
     "bind_email_failure":"Binding mailbox failed",
+    "bind_failure_email_existed":"Binding mailbox failed, email address already exists.",
+    "bind_failure_email_verified":"Binding mailbox failed, email address already verified.",
     "submit":"Submit"
   },
   "user_real_cert": {

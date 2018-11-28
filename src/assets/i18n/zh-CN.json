@@ -336,6 +336,8 @@
     "input_valid_email":"请输入有效邮箱",
     "bind_email_success":"绑定邮箱成功",
     "bind_email_failure":"绑定邮箱失败",
+    "bind_failure_email_existed":"绑定失败，邮箱地址已存在。",
+    "bind_failure_email_verified":"绑定失败，邮箱地址已认证。",
     "submit":"提交"
   },
   "user_real_cert": {
