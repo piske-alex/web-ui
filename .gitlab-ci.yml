@@ -1,19 +1,9 @@
-# This file is a template, and might need editing before it works on your project.
-# Official framework image. Look for the different tagged releases at:
-# https://hub.docker.com/r/library/node/tags/
 image: node:10
 stages:
   - build
-#  - test
   - docker
   - deploy
 
-# Pick zero or more services to be used on all builds.
-# Only needed when using a docker container to run your tests in.
-# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
-
-# This folder is cached between builds
-# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -34,10 +24,25 @@ docker:
   services:
     - docker:dind
   cache: {}
+  only:
+    - master
   script:
     - docker login -u ${DEV_REGISTRY_USER} -p ${DEV_REGISTRY_PASS} ${DEV_REGISTRY_URL}
     - docker build -t ${DEV_REGISTRY_URL}/${DEV_IMAGE} .
     - docker push ${DEV_REGISTRY_URL}/${DEV_IMAGE}
+
+docker-uat:
+  stage: docker
+  image: docker:latest
+  services:
+    - docker:dind
+  cache: {}
+  only:
+    - uat
+  script:
+    - docker login -u ${UAT_REGISTRY_USER} -p ${UAT_REGISTRY_PASS} ${UAT_REGISTRY_URL}
+    - docker build -t ${UAT_REGISTRY_URL}/${DEV_IMAGE} .
+    - docker push ${UAT_REGISTRY_URL}/${DEV_IMAGE}
 
 app-deploy:
   stage: deploy
@@ -46,6 +51,21 @@ app-deploy:
     GIT_STRATEGY: none
   cache: {}
   dependencies: []
+  only:
+    - master
   script:
     - rancher login ${RANCHER_URL} -t ${RANCHER_TOKEN} --context ${RANCHER_PROJECT_ID}
     - rancher kubectl --namespace="${DEV_STACK}" patch deployment "${DEV_SERVICE}" --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"'"${DEV_SERVICE}"'","image":"'"${DEV_REGISTRY_URL}"'/'"${DEV_IMAGE}"'","env":[{"name":"FORCE_RESTART_AT","value":"'"${CI_PIPELINE_ID}"'"}]}]}}}}'
+
+app-deploy-uat:
+  stage: deploy
+  image: heunghingwan/rancher-cli-k8s
+  variables:
+    GIT_STRATEGY: none
+  cache: {}
+  dependencies: []
+  only:
+    - uat
+  script:
+    - rancher login ${UAT_RANCHER_URL} -t ${UAT_RANCHER_TOKEN} --context ${UAT_RANCHER_PROJECT_ID}
+    - rancher kubectl --namespace="${DEV_STACK}" patch deployment "${DEV_SERVICE}" --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"'"${DEV_SERVICE}"'","image":"'"${UAT_REGISTRY_URL}"'/'"${DEV_IMAGE}"'","env":[{"name":"FORCE_RESTART_AT","value":"'"${CI_PIPELINE_ID}"'"}]}]}}}}'
