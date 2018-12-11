@@ -111,7 +111,7 @@ export class CoinActionWithrawComponent implements OnInit {
     let _params = {
       coin: this.coinType,
       accountType: 'otc',
-      address: this.address,
+      address: this.address.trim(),
       amount: this.amount,
       paypassword: this.paypassword,
       tag: this.remark,
@@ -173,6 +173,10 @@ export class CoinActionWithrawComponent implements OnInit {
 
   refreshWillReceive() {
     this._loadProcessingTransaction();
+  }
+
+  addressOnblur() {
+    this.address = this.address.trim();
   }
 
 }

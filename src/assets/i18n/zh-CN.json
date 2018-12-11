@@ -276,6 +276,7 @@
     "mark_dispute_err_notpaid":"交易尚未支付",
     "mark_receive_err_notpaid":"交易尚未支付",
     "paypassword_invalid":"资金密码错误",
+    "paypassword_notfound":"资金密码没有设置",
     "err_PasswordNotActive":"在{0}之前密码不可用",
     "order_must_be_unfinish":"交易状态必须是未完成",
     "order_has_been_confirm":"交易已经标记收款",
@@ -427,7 +428,7 @@
     "out_address":"转出地址",
     "trans_confirm_time":"到账时间",
     "buy_sell_has_dispute_order":"订单正在争议",
-    "reach_maximun_unflnish_order":"已超出未完成的订单上限，上限为3张未完成的订单",
+    "reach_maximun_unflnish_order":"已超出未完成的订单上限",
     "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息"
   },
   "trust": {

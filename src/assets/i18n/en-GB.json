@@ -276,6 +276,7 @@
     "mark_dispute_err_notpaid":"Failure, the order not paid.",
     "mark_receive_err_notpaid":"Failure, the order not paid.",
     "paypassword_invalid":"Payment password invalid.",
+    "paypassword_notfound":"Payment password is not set up.",
     "err_PasswordNotActive":"Password is not active before {0}",
     "order_must_be_unfinish":"The order status must be unfinish",
     "order_has_been_confirm":"The order has been confirm",
@@ -426,7 +427,7 @@
     "out_address":"Transfer out Address",
     "trans_confirm_time":"Time of arrival",
     "buy_sell_has_dispute_order":"The transaction has dispute order",
-    "reach_maximun_unflnish_order":"Unfinished order limit has been exceeded, up to 3 orders",
+    "reach_maximun_unflnish_order":"Unfinished order limit has been exceeded",
     "goto_old_unfinish_order":"There are unfinished order. Please check the old order information first."
   },
   "trust": {

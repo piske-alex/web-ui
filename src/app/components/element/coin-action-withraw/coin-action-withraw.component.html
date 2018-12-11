@@ -2,7 +2,9 @@
   <div class="gz-action-withraw-row" >
     <div class="gz-label">{{this.i18ns.send_address}}</div>
     <div class="gz-input">
-      <input type="text" class="gz-input" [(ngModel)]="address" placeholder="{{this.i18ns.input_address}}" tabindex="1">
+      <input type="text" class="gz-input" [(ngModel)]="address" 
+      placeholder="{{this.i18ns.input_address}}" tabindex="1"
+      (blur)="addressOnblur()" >
     </div>
   </div>
   <div class="gz-action-withraw-row">

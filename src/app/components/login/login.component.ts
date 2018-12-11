@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     this.i18ns.err_getuserdetail_fail = await this.languageService.get('user.err_getuserdetail_fail');
     this.i18ns.err_usergroup_disabled = await this.languageService.get('user.err_usergroup_disabled');
     this.i18ns.invalid_verification_code = await this.languageService.get('user.invalid_verification_code');
-    
+
     const _accessToken = localStorage.getItem('access_token');
     const _loginTimestamp = localStorage.getItem('login_timestamp');
     if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
@@ -203,7 +203,7 @@ export class LoginComponent implements OnInit {
         console.log ('error', error.error );
         if (error.error.errmsg) {
           if (error.error.errmsg == 'login or password wrong') {
-            this.dialogService.alert(this.i18ns.err_phone_or_password); // 
+            this.dialogService.alert(this.i18ns.err_phone_or_password); //
           } else {
             this.dialogService.alert(error.error.errmsg); // this.i18ns.err_phone_or_password
           }

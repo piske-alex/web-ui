@@ -175,7 +175,8 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.mark_dispute_err_notpaid = await this.languageService.get('otc.mark_dispute_err_notpaid');
     this.i18ns.mark_receive_err_notpaid = await this.languageService.get('otc.mark_receive_err_notpaid');
     this.i18ns.paypassword_invalid = await this.languageService.get('otc.paypassword_invalid');
-    
+    this.i18ns.paypassword_notfound = await this.languageService.get('otc.paypassword_notfound');
+
     this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
     this.i18ns.order_has_been_confirm = await this.languageService.get('otc.order_has_been_confirm');
     this.i18ns.order_already_mark_dispute = await this.languageService.get('otc.order_already_mark_dispute');
@@ -344,7 +345,9 @@ export class OrderDetailComponent implements OnInit {
               this.dialogService.alert(this.i18ns.mark_receive_err_notpaid);
             } else {
               // order payment has been confirm
-              if (err.error.name == 'PasswordInvalid') {
+              if (err.error.name == 'NotFoundError') {
+                this.dialogService.alert(this.i18ns.paypassword_notfound);
+              } else if (err.error.name == 'PasswordInvalid') {
                 this.dialogService.alert(this.i18ns.paypassword_invalid);
               } else if (err.error.name == 'PasswordNotActive') {
                 let passwordNotActive = this.i18ns.err_PasswordNotActive;
