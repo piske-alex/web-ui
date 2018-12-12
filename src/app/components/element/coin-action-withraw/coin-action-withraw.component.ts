@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WalletService } from '../../../providers/wallet/wallet.service';
 import { LanguageService } from '../../../providers/language/language.service';
 import { DialogService } from '../../../providers/dialog/dialog.service';
+import { Constants } from '../../../models/common/Constants';
 
 @Component({
   selector: 'gz-coin-action-withraw',
@@ -33,7 +35,8 @@ export class CoinActionWithrawComponent implements OnInit {
 
   i18ns: any = {};
 
-  constructor(private languageService: LanguageService,
+  constructor(private router: Router,
+              private languageService: LanguageService,
               private walletService: WalletService,
               private dialogService: DialogService) {
   }
@@ -124,7 +127,11 @@ export class CoinActionWithrawComponent implements OnInit {
           this.amount = '';
           this.paypassword = '';
           this.remark = '';
-          this.dialogService.alert(this.i18ns.send_success);
+          this.dialogService.alert(this.i18ns.send_success).subscribe(
+            res => {
+              this.router.navigate(['/coinAction', {coinType: this.coinType, action: Constants.COIN_ACTIONS.DEPOSIT}]);
+            }
+          );;
         // }
       }, err => {
         console.log('err----', err);

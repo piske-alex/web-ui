@@ -104,6 +104,7 @@
     "refresh":"Refresh",
     "send_success":"Send success",
     "withraw_amount":"Number of extraction",
+    "net_receive_amount":"Number of arrival",
     "txid":"TXID",
     "loading":"Loading..."
   },

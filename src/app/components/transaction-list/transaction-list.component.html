@@ -18,6 +18,11 @@
         <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.receive_number"></gz-i18n>: </span>
         <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.send_number"></gz-i18n>: </span>
         <span>{{transaction.amount | btcFormat}}{{transaction.coin}}</span>
+        <span *ngIf="transaction.type === 'send'">
+          (<gz-i18n key="element_coin_withraw.net_receive_amount"></gz-i18n>
+          :
+          {{transaction.net_amount | btcFormat}} {{transaction.coin}})
+        </span>
       </div>
       <div>
         <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.in_address"></gz-i18n>: </span>

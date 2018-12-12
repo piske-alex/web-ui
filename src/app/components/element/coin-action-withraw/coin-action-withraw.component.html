@@ -58,6 +58,8 @@
       <div>
         <span><gz-i18n key="element_coin_withraw.withraw_amount"></gz-i18n>: </span>
         <span>{{transaction.amount | btcFormat}} {{transaction.coin}}</span>
+        <span>(<gz-i18n key="element_coin_withraw.net_receive_amount"></gz-i18n>: </span>
+        <span>{{transaction.net_amount | btcFormat}} {{transaction.coin}})</span>
       </div>
     </div>
   </div>

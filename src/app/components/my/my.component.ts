@@ -50,7 +50,7 @@ export class MyComponent implements OnInit {
     // } catch (e) {
     //   console.error(e);
     // }
-    // localStorage.removeItem('user');
+     localStorage.removeItem('user');
 
     try {
       if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {

@@ -85,13 +85,12 @@ export class HttpService {
               // 如果是401
               this.gotoLogin();
               resolve({success: false, message: error.error || '请先登录!'});
-            } else if(error.success === false){
-              if(error.message === "Unauthorized"){
-                let msg =  this.languageService.get('otc.Unauthorized');
+            } else if (error.success === false) {
+              if (error.message === 'Unauthorized' || error.message  === 'unauthorized') {
+                const msg =  this.languageService.get('otc.Unauthorized');
                 resolve({success: false, message: msg});
               }
-            }
-            else {
+            } else {
               reject(error);
             }
           });

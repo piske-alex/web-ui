@@ -33,6 +33,7 @@ export class CoinActionComponent implements OnInit {
 
     this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
       data.allBalance = (+data.balance + +data.locked).toFixed(8);
+      data.usableAmount = (+data.balance -  +data.locked).toFixed(8);
       this.coinBalance = data;
     }, error => {
       console.error(error);

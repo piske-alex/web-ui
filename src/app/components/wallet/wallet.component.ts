@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { Constants } from "../../models/common/Constants";
-import { WalletService } from "../../providers/wallet/wallet.service";
-import { LanguageService } from "../../providers/language/language.service";
-import { CommonService } from "../../providers/common/common.service";
+import { Router } from '@angular/router';
+import { Constants } from '../../models/common/Constants';
+import { WalletService } from '../../providers/wallet/wallet.service';
+import { LanguageService } from '../../providers/language/language.service';
+import { CommonService } from '../../providers/common/common.service';
 
 @Component({
   selector: 'gz-wallet',

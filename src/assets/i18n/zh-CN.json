@@ -104,6 +104,7 @@
     "refresh":"刷新",
     "send_success":"发送成功",
     "withraw_amount":"提取数量",
+    "net_receive_amount":"到账数量",
     "txid":"TXID",
     "loading":"加载中..."
   },
