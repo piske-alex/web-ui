@@ -63,8 +63,13 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.err_insufficient_balance = await this.languageService.get('element_coin_withraw.err_insufficient_balance');
     this.i18ns.send_success = await this.languageService.get('element_coin_withraw.send_success');
 
+    this.i18ns.paypassword_invalid = await this.languageService.get('otc.paypassword_invalid');
+    this.i18ns.paypassword_notfound = await this.languageService.get('otc.paypassword_notfound');
+    this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
+
     this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
-      data.total = (+data.balance + +data.locked).toFixed(8);
+      data.total = (+data.balance - +data.locked).toFixed(8);
+      data.usableAmount = (+data.balance -  +data.locked).toFixed(8);
       this.coinBalance = data;
     }, error => {
       console.error(error);
@@ -131,22 +136,29 @@ export class CoinActionWithrawComponent implements OnInit {
             res => {
               this.router.navigate(['/coinAction', {coinType: this.coinType, action: Constants.COIN_ACTIONS.DEPOSIT}]);
             }
-          );;
+          );
         // }
       }, err => {
         console.log('err----', err);
         if (err.error) {
-          if (err.error == 'password wrong') {
-            this.dialogService.alert(this.i18ns.err_paypassword_invalid);
-          } else if (err.error == 'address invaild') {
+          if (err.error == 'address invaild') {
             this.dialogService.alert(this.i18ns.err_address_invalid);
           } else if (err.error == 'coin network error') {
             this.dialogService.alert(this.i18ns.err_coin_network_error);
           } else if (err.error == 'Insufficient balance') {
             this.dialogService.alert(this.i18ns.err_insufficient_balance);
           } else {
-            if (err.error) {
-              this.dialogService.alert(err.error);
+            if (err.error.name) {
+              if (err.error.name == 'NotFoundError') {
+                this.dialogService.alert(this.i18ns.paypassword_notfound);
+              } else if (err.error.name == 'PasswordInvalid') {
+                this.dialogService.alert(this.i18ns.paypassword_invalid);
+              } else if (err.error.name == 'PasswordNotActive') {
+                let passwordNotActive = this.i18ns.err_PasswordNotActive;
+                const activetime  = err.error.active.toLocaleString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+                passwordNotActive = passwordNotActive.replace('{0}', activetime);
+                this.dialogService.alert(passwordNotActive);
+              }
             }
           }
         }

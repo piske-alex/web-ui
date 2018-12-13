@@ -13,7 +13,7 @@
     <div class="gz-label {{isFocus('nickname')}}"><gz-i18n key="user.input_nickname"></gz-i18n></div>
     <div>
       <input type="text" class="{{isFocus('nickname')}}" placeholder="{{this.i18ns.input_nickname}}"
-             [(ngModel)]="nickname" maxlength="100"
+             [(ngModel)]="nickname" maxlength="50"
              (focus)="focus('nickname')" (blur)="blur('nickname')">
     </div>
   </section>
