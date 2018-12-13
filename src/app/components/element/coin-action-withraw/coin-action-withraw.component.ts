@@ -24,10 +24,11 @@ export class CoinActionWithrawComponent implements OnInit {
   paypassword: string;
 
 
-  coinBalance: { balance: string, locked: string, total: string } = {
+  coinBalance: { balance: string, locked: string, total: string , usableAmount: string} = {
     balance: '0.00000000',
     locked: '0.00000000',
     total: '0.00000000',
+    usableAmount: '0.00000000',
   };
 
   @Input()
