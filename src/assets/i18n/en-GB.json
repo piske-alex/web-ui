@@ -176,7 +176,7 @@
   },
   "otc": {
     "sellbtc_time":"Send coin time",
-    "Unauthorized":"Unauthorized",
+    "Unauthorized":"Unauthorized or current user logged out automatically, please log in again",
     "iBuy": "I Buy",
     "iSell": "I Sell",
     "postAd": "Post Ad",
@@ -354,6 +354,7 @@
     "input_bust":"Please select half-length photo",
     "checked_promise":"Please checked the information I promised",
     "input_right_image":"Please select image file",
+    "submit_fail":"Submit failure",
     "promise":"The information I promised to submit belongs to me and there is no misappropriation of other people's documents.",
     "submit":"Submit"
   },

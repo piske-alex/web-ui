@@ -176,7 +176,7 @@
   },
   "otc": {
     "sellbtc_time":"放币时间",
-    "Unauthorized":"未授权",
+    "Unauthorized":"未授权或当前用户已自动登出，请重新登录",
     "iBuy": "我要购买",
     "iSell": "我要出售",
     "postAd": "发布广告",
@@ -355,6 +355,7 @@
     "input_bust":"请选择半身像",
     "checked_promise":"请选择我承诺",
     "input_right_image":"请选择图片文件",
+    "submit_fail":"提交失败",
     "promise":"我承诺提交的信息属于本人所有，不存在盗用他人证件的行为。",
     "submit":"提交"
   },

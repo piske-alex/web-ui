@@ -55,6 +55,7 @@ export class UserRealCertificationComponent implements OnInit {
     this.i18ns.checked_promise = await this.languageService.get('user_real_cert.checked_promise');
     this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
     this.i18ns.input_max_size = await this.languageService.get('user_real_cert.input_max_size');
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
   }
 
   goBack() {
@@ -111,6 +112,9 @@ export class UserRealCertificationComponent implements OnInit {
       this.userService.realCertifiation(_params).then( data => {
         // this.goBack();
       this.router.navigate(['/userSetting']);
+      }, error => {
+        this.dialogService.alert(this.i18ns.submit_fail);
+        console.error(error);
       });
     } catch (e) {
       console.error(e);
