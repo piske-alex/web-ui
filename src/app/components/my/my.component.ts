@@ -137,6 +137,36 @@ export class MyComponent implements OnInit {
     }
   }
 
+
+  // async fileChange(event) {
+  //   const files = event && event.target && event.target.files;
+  //   if (files) {
+  //     try {
+  //       const _result: any = await this._getImgB64(files[0]);
+  //       let _b64img = _result.b64img;
+  //       this.user.avatar = _b64img;
+  //       const _fileInfo = _result.fileInfo;
+  //       if (_b64img.indexOf(';base64,') != -1) {
+  //         _b64img = _b64img.split(';base64,')[1];
+  //       }
+  //       await this.userService.setBanner({
+  //         file: _b64img,
+  //         // oldfileName: 'c47cb23b-0cbc-4bf2-bb56-2db145f86c0c.png',
+  //         oldfileName: '',
+  //         fileName: _fileInfo.name
+  //       }).then(
+  //         (res) => {
+  //           console.log('res', res);
+  //         }, (err) => {
+
+  //         }
+  //       );
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // }
+
   private _getImgB64(file: any) {
     var reader = new FileReader();
     var fileInfo = {

@@ -67,6 +67,20 @@ export class UserService {
     });
   }
 
+  setBanner(params: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.COMMON.ADD_BANNER, params).then(data => {
+        if (data && data.success) {
+          resolve(data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
   forgetPassword(params: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.USER.FORGET_PASSWORD, params).then(data => {

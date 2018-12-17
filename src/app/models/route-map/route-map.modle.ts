@@ -29,6 +29,7 @@ export class RouteMap {
       COUNTRY_CODE: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/countryCode'),
       COIN_RATE: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/rate'),
       SMS_CODE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/verify'),
+      ADD_BANNER: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/banner'),
       AD_BANNERS: new RouteJson(RouteMap.METHODS.GET, RouteMap.BACK_GROUND_URL_V1, '/select_active_banners '),
     },
     USER: {
