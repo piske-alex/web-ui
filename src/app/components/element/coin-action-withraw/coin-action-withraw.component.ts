@@ -135,7 +135,18 @@ export class CoinActionWithrawComponent implements OnInit {
           this.remark = '';
           this.dialogService.alert(this.i18ns.send_success).subscribe(
             res => {
-              this.router.navigate(['/coinAction', {coinType: this.coinType, action: Constants.COIN_ACTIONS.DEPOSIT}]);
+            //  this.router.navigate(['/coinAction', {coinType: this.coinType, action: Constants.COIN_ACTIONS.WITHRAW}]);
+              // coinAction;coinType=BTC;action=withraw
+            // this.router.navigateByUrl('/', {skipLocationChange: true}).then( () => {
+            //   this.router.navigate(['/coinAction', {coinType: this.coinType,
+            // action: Constants.COIN_ACTIONS.DEPOSIT, rand: Math.random()}]);
+            //   console.log('_result---1-', data);
+            // }, errRedirect => {
+            //   this.router.navigate(['/coinAction', {coinType: this.coinType,
+            // action: Constants.COIN_ACTIONS.DEPOSIT, rand: Math.random()}]);
+            //   console.log('_result---2-', data);
+            // }
+            // );
             }
           );
         // }
@@ -160,6 +171,8 @@ export class CoinActionWithrawComponent implements OnInit {
                 passwordNotActive = passwordNotActive.replace('{0}', activetime);
                 this.dialogService.alert(passwordNotActive);
               }
+            } else {
+              this.dialogService.alert(err.error);
             }
           }
         }

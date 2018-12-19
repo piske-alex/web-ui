@@ -65,7 +65,7 @@
           <b>{{price.USD | rateFormat}} USD</b>
           <span>{{price.CNY | rateFormat}} CNY</span>
         </div>
-        <div class="gz-coin-change">
+        <div class="gz-coin-change" style="min-width:100px;">
           <div class="gz-price-up" *ngIf="price.changePercent >= 0">
             <img src="/assets/images/icon-up.png" alt="" class="gz-icon">
             <b>{{price.changePercent}}%</b>
@@ -73,7 +73,7 @@
           <div class="gz-price-down" *ngIf="price.changePercent < 0">
             <img src="/assets/images/icon-down.png" alt="" class="gz-icon">
             {{price.changePercent}}%
-          </div>
+          </div>&nbsp;
         </div>
       </div>
     </section>

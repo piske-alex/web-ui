@@ -74,19 +74,18 @@ export class HomeComponent implements OnInit {
 
   initSwiper() {
     this.mySwiper = new Swiper('.footcs', {
-      //slidesPerView: 'auto',
+      // slidesPerView: 'auto',
       freeMode: true,
-      observer:true,//修改swiper自己或子元素时，自动初始化swiper
-      observeParents:true,//修改swiper的父元素时，自动初始化swiper
-      
-      //autoResize:true,
+      observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+      observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+      // autoResize:true,
       autoplay: true,
-      autoplayDisableOnInteraction:false,
+      autoplayDisableOnInteraction: false,
       speed: 5000,
-      //grabCursor: true,// 开启鼠标的抓手状态
+      // grabCursor: true, // 开启鼠标的抓手状态
       loop: true,
       pagination : '.footcsPagination',
-      paginationClickable :true,
+      paginationClickable : true,
 
     });
   }
