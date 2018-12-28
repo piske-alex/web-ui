@@ -50,16 +50,36 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
           }
       }
 
-
-      this.banners = await this.commonService.getBannerList({ type: file_type });
-       console.log('banners', this.banners);
-      (this.banners || []).forEach(_data => {
-          let urlParam: UrlParam;
-          urlParam = new UrlParam();
-          urlParam.imageUrl = EnvironmentConstant.MINIO_URL_V1 + '/banner/' + _data.filename_mobile;
-          urlParam.linkUrl = _data.id;
-          this.slides.push(urlParam);
-      });
+      if ( file_type == 'pc') {
+        this.banners = await this.commonService.getBannerList({ type: file_type });
+        console.log('banners', this.banners);
+       (this.banners || []).forEach(_data => {
+           let urlParam: UrlParam;
+           urlParam = new UrlParam();
+           if (_data.filename_desktop ) {
+            urlParam.imageUrl = EnvironmentConstant.MINIO_URL_V1 + '/banner/' + _data.filename_desktop ;
+           } else if (_data.filename_mobile ) {
+            urlParam.imageUrl = EnvironmentConstant.MINIO_URL_V1 + '/banner/' + _data.filename_desktop ;
+           }
+           urlParam.linkUrl = _data.id;
+           this.slides.push(urlParam);
+       });
+      } else {
+        this.banners = await this.commonService.getBannerList({ type: file_type });
+        console.log('banners', this.banners);
+        (this.banners || []).forEach(_data => {
+            let urlParam: UrlParam;
+            urlParam = new UrlParam();
+            if (_data.filename_mobile ) {
+              urlParam.imageUrl = EnvironmentConstant.MINIO_URL_V1 + '/banner/' + _data.filename_mobile ;
+             } else if (_data.filename_desktop ) {
+              urlParam.imageUrl = EnvironmentConstant.MINIO_URL_V1 + '/banner/' + _data.filename_desktop ;
+             }
+            urlParam.linkUrl = _data.id;
+            this.slides.push(urlParam);
+        });
+      }
+      
     } catch (e) {
       console.error(e);
     }
