@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { UrlParam } from "../../../models/common/UrlParam";
+import { UrlParam } from '../../../models/common/UrlParam';
+import { CommonService } from '../../../providers/common/common.service';
+import { EnvironmentConstant } from '../../../../environments/environment';
 
 declare let Swiper: any;
 
@@ -10,31 +12,57 @@ declare let Swiper: any;
 })
 export class SwiperSlideComponent implements OnInit, AfterViewInit {
   mySwiper: any;
-  
   slides: Array<UrlParam>;
 
-  constructor() { }
+  banners: any = [];
 
-  ngOnInit() {
+  constructor(private commonService: CommonService) { }
 
-    this.slides = new Array<UrlParam>();
-    let urlParam: UrlParam;
-    urlParam = new UrlParam();
-    urlParam.imageUrl = "./assets/images/1.jpg";
-    urlParam.linkUrl = "['/adShow']";
-    this.slides.push(urlParam);
+  async ngOnInit() {
 
-    urlParam = new UrlParam();
-    urlParam.imageUrl = "./assets/images/2.jpg";
-    urlParam.linkUrl = "['/adShow']";
-    this.slides.push(urlParam);
+     this.slides = new Array<UrlParam>();
+    // let urlParam: UrlParam;
+    // urlParam = new UrlParam();
+    // urlParam.imageUrl = "./assets/images/1.jpg";
+    // urlParam.linkUrl = "88";
+    // this.slides.push(urlParam);
 
-    urlParam = new UrlParam();
-    urlParam.imageUrl = "./assets/images/3.jpg";
-    urlParam.linkUrl = "['/adShow']";
-    this.slides.push(urlParam);
+    // urlParam = new UrlParam();
+    // urlParam.imageUrl = "./assets/images/2.jpg";
+    // urlParam.linkUrl = "88";
+    // this.slides.push(urlParam);
+
+    // urlParam = new UrlParam();
+    // urlParam.imageUrl = "./assets/images/3.jpg";
+    // urlParam.linkUrl = "88";
+    // this.slides.push(urlParam);
+
+    try {
+      const sUserAgent = navigator.userAgent;
+      const mobileAgents = ['Android', 'iPhone', 'Symbian', 'WindowsPhone', 'iPod', 'BlackBerry', 'Windows CE'];
+      let isMobile = 0;
+      let file_type = 'pc';
+      for ( let i = 0; i < mobileAgents.length; i++) {
+          if (sUserAgent.indexOf(mobileAgents[i]) > -1) {
+            isMobile = 1;
+            file_type = 'phone';
+              break;
+          }
+      }
 
 
+      this.banners = await this.commonService.getBannerList({ type: file_type });
+       console.log('banners', this.banners);
+      (this.banners || []).forEach(_data => {
+          let urlParam: UrlParam;
+          urlParam = new UrlParam();
+          urlParam.imageUrl = EnvironmentConstant.MINIO_URL_V1 + '/banner/' + _data.filename_mobile;
+          urlParam.linkUrl = _data.id;
+          this.slides.push(urlParam);
+      });
+    } catch (e) {
+      console.error(e);
+    }
 
     setTimeout(() => {
       this.initSwiper();

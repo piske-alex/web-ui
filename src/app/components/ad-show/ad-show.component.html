@@ -10,12 +10,13 @@
   <article class="gz-register gz-form">
     <section class="gz-country">
       <div style="min-width: 60px;"></div>
-      <div class="gz-country-select">
-        Welcome to Ad page
+      <div class="gz-country-select" style="text-align: left;">
+        <div [innerHTML]="this.bannerDescription" ></div>
+        
       </div>
-      <div>
+      <!-- <div>
         <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-      </div>
+      </div> -->
     </section>
   </article>
   

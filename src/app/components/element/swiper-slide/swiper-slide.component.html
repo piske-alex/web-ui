@@ -3,7 +3,8 @@
   <div class="swiper-wrapper">
     <!--<ng-content></ng-content>-->
     <div class="swiper-slide" *ngFor="let data of slides">
-        <a [routerLink]="['/adShow']"><img [src]="data.imageUrl" alt="" width="100%"></a>
+        <!-- <a [routerLink]="['/adShow']"><img [src]="data.imageUrl" alt="" width="100%"></a> -->
+        <a [routerLink]="['/adShow']" [queryParams]="{ id : data.linkUrl }"><img [src]="data.imageUrl" alt="" width="100%"></a>
     </div>
     
   </div>

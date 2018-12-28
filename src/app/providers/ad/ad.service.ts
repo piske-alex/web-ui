@@ -116,19 +116,6 @@ export class AdService {
     });
   }
 
-  listSwiperAd(params): Promise<UrlParam[]> {
-    return new Promise((resolve, reject) => {
-      this.httpService.request(RouteMap.V1.COMMON.AD_BANNERS, params).then(data => {
-        if (data && data.success) {
-          resolve(data.data);
-        } else {
-          reject(data);
-        }
-      }, error => {
-        reject(error);
-      });
-    });
-  }
 
   getOtcAdById(params): Promise<TransactionListItem> {
     return new Promise((resolve, reject) => {

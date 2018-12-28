@@ -194,5 +194,37 @@ export class CommonService {
     });
   }
 
+  getBannerList(params): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      if (this.cache['BannerList'] !== undefined) {
+        resolve(this.cache['BannerList']);
+      } else {
+        this.httpService.request(RouteMap.V1.COMMON.GET_BANNERS, params).then(data => {
+          if (data && data.success) {
+            this.cache['BannerList'] = data.data;
+            resolve(data.data);
+          } else {
+            reject(data.errMsg);
+          }
+        }, error => {
+          reject(error);
+        });
+      }
+    });
+  }
+
+  getBannerInfo(params): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.COMMON.GET_BANNERS, params).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data.errMsg);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 
 }

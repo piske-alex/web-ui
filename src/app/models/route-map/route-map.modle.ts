@@ -18,7 +18,7 @@ export class RouteMap {
     DELETE: 'delete'
   };
   private static API_URL_V1 = EnvironmentConstant.API_URL_V1;
-  private static BACK_GROUND_URL_V1 = EnvironmentConstant.BG_URL;
+
   static V1 = {
     COMMON: {
       COUNTRY: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/country'),
@@ -30,7 +30,7 @@ export class RouteMap {
       COIN_RATE: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/rate'),
       SMS_CODE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/verify'),
       ADD_BANNER: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/banner'),
-      AD_BANNERS: new RouteJson(RouteMap.METHODS.GET, RouteMap.BACK_GROUND_URL_V1, '/select_active_banners '),
+      GET_BANNERS: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/banner'),
     },
     USER: {
       LOGIN: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/login'),

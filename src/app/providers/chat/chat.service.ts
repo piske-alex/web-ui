@@ -336,10 +336,10 @@ export class ChatService {
             sendTimestamp: Date.now(),
           });
           conversation.send(_textMessage);
-           // console.log('### >>> send message ...', _textMessage);
-          this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
-          this.conservationObj[chat_union_ids].conversation = conversation;
-          this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
+            console.log('### >>> send message ...', _textMessage);
+          // this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
+          // this.conservationObj[chat_union_ids].conversation = conversation;
+          // this.conservationObj[chat_union_ids].chatList = this.conservationObj[chat_union_ids].chatList || [];
           // console.log('aaa', this.user.id);
           // this.conservationObj[chat_union_ids].chatList.push({
           //   from: String(this.user.id),

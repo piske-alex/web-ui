@@ -22,7 +22,7 @@ export class EnvironmentConstant {
   // public static API_URL = 'https://www.koin-exchange.com/api';
    public static AVATAR = 'https://otcfiretesting.space/avatar';
    public static API_URL = 'https://otcfiretesting.space/api';
-   public static BG_URL = 'https://admin-api.otcfiretesting.space';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
+  public static MINIO_URL_V1 = 'https://minio.otcfiretesting.space';
 
 }
