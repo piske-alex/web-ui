@@ -20,6 +20,8 @@ export class CoinActionWithrawComponent implements OnInit {
 
   address: string;
   amount: number | string;
+  trans_fee: number ;
+  min_amount: number ;
   remark: string;
   paypassword: string;
 
@@ -49,6 +51,8 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.remark = await this.languageService.get('element_coin_withraw.remark');
     this.i18ns.input_trans_password = await this.languageService.get('element_coin_withraw.input_trans_password');
     this.i18ns.input_amount = await this.languageService.get('element_coin_withraw.input_amount');
+    this.i18ns.err_input_amount_min = await this.languageService.get('element_coin_withraw.err_input_amount_min');
+
     this.i18ns.input_remark = await this.languageService.get('element_coin_withraw.input_remark');
     this.i18ns.input_address = await this.languageService.get('element_coin_withraw.input_address');
     this.i18ns.input_address = this.i18ns.input_address.replace(/\$\{coinType\}/g, this.coinType);
@@ -57,6 +61,27 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.notice_info = await this.languageService.get('element_coin_withraw.notice_info');
     this.i18ns.send_address = this.i18ns.send_address.replace(/\$\{coinType\}/g, this.coinType);
     this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{coinType\}/g, this.coinType);
+    if (this.coinType == 'BTC') {
+      this.min_amount = 0.01;
+    } else if (this.coinType == 'LTC') {
+      this.min_amount = 0.1;
+    } else if (this.coinType == 'USDT') {
+      this.min_amount = 200;
+    } else {
+      this.min_amount = 0.01;
+    }
+
+    await this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
+      data.total = (+data.balance - +data.locked).toFixed(8);
+      data.usableAmount = (+data.balance -  +data.locked).toFixed(8);
+      this.coinBalance = data;
+      this.trans_fee = data.withdraw_fee;
+    }, error => {
+      console.error(error);
+    });
+
+    this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{trans_fee\}/g, this.trans_fee);
+    this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{min_amount\}/g, this.min_amount);
 
     this.i18ns.err_paypassword_invalid = await this.languageService.get('element_coin_withraw.err_paypassword_invalid');
     this.i18ns.err_address_invalid = await this.languageService.get('element_coin_withraw.err_address_invalid');
@@ -67,14 +92,6 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.paypassword_invalid = await this.languageService.get('otc.paypassword_invalid');
     this.i18ns.paypassword_notfound = await this.languageService.get('otc.paypassword_notfound');
     this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
-
-    this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
-      data.total = (+data.balance - +data.locked).toFixed(8);
-      data.usableAmount = (+data.balance -  +data.locked).toFixed(8);
-      this.coinBalance = data;
-    }, error => {
-      console.error(error);
-    });
 
     this._loadProcessingTransaction();
   }
@@ -107,6 +124,10 @@ export class CoinActionWithrawComponent implements OnInit {
 
     if (!this.amount  ) {
       return this.dialogService.alert(this.i18ns.input_amount);
+    }
+
+    if ( Number(this.amount) < Number(this.min_amount) )  {
+      return this.dialogService.alert(this.i18ns.err_input_amount_min);
     }
 
     if (!this.paypassword || this.paypassword.trim() == '') {
