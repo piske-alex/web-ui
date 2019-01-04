@@ -24,7 +24,7 @@ export class HttpService {
 
     setTimeout(() => {
       this.closeLoading();
-    }, 30000);
+    }, 65000);
   }
 
   closeLoading() {

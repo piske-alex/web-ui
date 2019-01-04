@@ -157,13 +157,12 @@ export class UserRealCertificationComponent implements OnInit {
   }
 
   async imgChange(event, imgObj) {
-    var files = event && event.target && event.target.files;
+    const files = event && event.target && event.target.files;
     if (files) {
-      let fileType = files[0].type.toUpperCase();
-      console.log('fileType', fileType);
-      console.log(files[0].size)
-      let size = files[0].size;
-      if(size > 50 * 1024){
+      const fileType = files[0].type.toUpperCase();
+
+      const size = files[0].size;
+      if (size > 10 * 1024 * 1024) {
         return this.dialogService.alert(this.i18ns.input_max_size);
       }
 

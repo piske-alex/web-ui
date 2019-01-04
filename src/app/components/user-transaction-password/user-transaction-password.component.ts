@@ -40,12 +40,16 @@ export class UserTransactionPasswordComponent implements OnInit {
       return;
     }
 
-    this.countryCode = '86';
+    this.countryCode = '852';
     try {
       this.countryCodes = await this.commonService.getCountryCodeList();
     } catch (e) {
       console.error(e);
     }
+
+    const _user = JSON.parse(localStorage.getItem('user'));
+    this.countryCode  =  _user.countryCallingCode;
+    this.phoneNo = _user.phone;
 
     this.i18ns.inputPhone = await this.languageService.get('user.inputPhone');
     this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');

@@ -48,6 +48,12 @@ export class ForgetPasswordComponent implements OnInit {
     // ];
     // // TODO delete end.
 
+    const _user = JSON.parse(localStorage.getItem('user'));
+    if (_user) {
+      this.countryCode  =  _user.countryCallingCode;
+      this.phoneNo = _user.phone;
+    }
+
     this.i18ns.inputPhone = await this.languageService.get('user.inputPhone');
     this.i18ns.inputSmsCode = await this.languageService.get('user.inputSmsCode');
     this.i18ns.resendSmsCode = await this.languageService.get('user.resendSmsCode');
