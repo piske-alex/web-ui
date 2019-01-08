@@ -48,6 +48,8 @@ export class RouteMap {
       GET_DETAIL: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/detail'),
       ADD_BLACK_LIST: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/block'),
       ADD_TRUST_LIST: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/trust'),
+      GET_COLLECTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/getcollection'),
+      POST_COLLECTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/postcollection'),
     },
     AD: {
       PUBLISH_OTC_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc'),
