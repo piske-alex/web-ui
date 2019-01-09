@@ -23,6 +23,7 @@ export class CollectionInfoDetailComponent implements OnInit {
   ebankUserName: string = "";
 
   ercodePicUrl:string = "";
+  ercodeInfo:string = "";
 
   userId: string = "";
   collectionInfo: userCollectInfo = new userCollectInfo();
@@ -73,6 +74,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     
 
     this.ercodePicUrl = "";
+    this.ercodeInfo = "";
   }
 
   async submit() {
@@ -118,39 +120,20 @@ export class CollectionInfoDetailComponent implements OnInit {
       userid: this.userId,
       settype: this.settype,
       alipay_qrcode_url: this.ercodePicUrl ,
-      alipay_qrcode_info: "",
-      alipay_account: this.aliAccount ,
-      alipay_name: this.aliUserName,
+      alipay_qrcode_info: this.ercodeInfo,
+      alipay_account: this.encode(this.aliAccount) ,
+      alipay_name: this.encode(this.aliUserName),
   
       wxpay_qrcode_url: this.ercodePicUrl,
-      wxpay_qrcode_info: "",
-      wxpay_account: this.wxAccount,
-      wxpay_name: this.wxUserName,
+      wxpay_qrcode_info: this.ercodeInfo,
+      wxpay_account: this.encode(this.wxAccount),
+      wxpay_name: this.encode(this.wxUserName),
 
-      ebank_bank: this.ebankName,
-      ebank_branch: this.ebankBranch,
-      ebank_account: this.ebankAccount,
-      ebank_name: this.ebankUserName,
+      ebank_bank: this.encode(this.ebankName),
+      ebank_branch: this.encode(this.ebankBranch),
+      ebank_account: this.encode(this.ebankAccount),
+      ebank_name: this.encode(this.ebankUserName),
     };
-
-    /*let _pic_params = {
-      file:"",
-      fileName:"",
-      oldfileName:""
-    };
-    if(this.settype == "ali"){
-      _pic_params.file = this.aliImg.src;
-      _pic_params.fileName = this.aliImg.name;
-      _pic_params.oldfileName = "";
-      _params.alipay_qrcode_url = await this.userService.postUploadCollectionInfoPicture(_pic_params);
-    }
-    if(this.settype == "wx"){
-      _pic_params.file = this.wxImg.src;
-      _pic_params.fileName = this.wxImg.name;
-      _pic_params.oldfileName = "";
-      _params.wxpay_qrcode_url = await this.userService.postUploadCollectionInfoPicture(_pic_params);
-    }*/
-    
 
     console.log('para', _params);
 
@@ -167,6 +150,15 @@ export class CollectionInfoDetailComponent implements OnInit {
     }
   }
 
+  private encode(param:string){
+    if(param == "")
+      return "";
+    return encodeURI(param);
+  }
+
+  private getObjectURL (file) {
+    return window.URL.createObjectURL(file);
+  }
 
   private _toUploadB64(b64img) {
     if (b64img.indexOf(';base64,') != -1) {
@@ -220,6 +212,12 @@ export class CollectionInfoDetailComponent implements OnInit {
 
         let _fileInfo = _result.fileInfo;
         
+        console.log(this.getObjectURL(files[0]));// newfile[0]是通过input file上传的二维码图片文件
+        qrcode.decode(this.getObjectURL(files[0]));
+        qrcode.callback = function (imgMsg) {
+            this.ercodeInfo = imgMsg
+            console.log("二维码解析：" + imgMsg);
+        }
 
         let _pic_params = {
           file: _result.b64img,
@@ -229,7 +227,8 @@ export class CollectionInfoDetailComponent implements OnInit {
         this.ercodePicUrl = await this.userService.postUploadCollectionInfoPicture(_pic_params);
         imgObj.src = _result.b64img;
         imgObj.name = _fileInfo.name;
-
+        
+        console.log(this.ercodePicUrl);
       } catch (e) {
         console.error(e);
       }

@@ -33,7 +33,8 @@
               "node_modules/leancloud-storage/dist/av.js",
               "node_modules/leancloud-realtime/dist/realtime.browser.min.js",
               "node_modules/leancloud-realtime-plugin-typed-messages/dist/typed-messages.min.js",
-              "src/assets/swiper/js/swiper.min.js"
+              "src/assets/swiper/js/swiper.min.js",
+              "src/assets/qrcode/reqrcode.js"
             ]
           },
           "configurations": {
