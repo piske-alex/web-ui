@@ -18,6 +18,7 @@ export class RouteMap {
     DELETE: 'delete'
   };
   private static API_URL_V1 = EnvironmentConstant.API_URL_V1;
+  private static API_URL = EnvironmentConstant.API_URL;
 
   static V1 = {
     COMMON: {
@@ -49,7 +50,8 @@ export class RouteMap {
       ADD_BLACK_LIST: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/block'),
       ADD_TRUST_LIST: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/trust'),
       GET_COLLECTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/getcollection'),
-      POST_COLLECTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/postcollection'),
+      POST_COLLECTION: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/user/postcollection'),
+      POST_UPLOAD_COLLECTION_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL, '/info/paymentcollection'),
     },
     AD: {
       PUBLISH_OTC_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc'),

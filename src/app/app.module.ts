@@ -82,6 +82,8 @@ import { ListChatingComponent } from './components/element/list-chating/list-cha
 import { ConfirmDialogComponent } from './components/element/confirm-dialog/confirm-dialog.component';
 import { AlertDialogComponent } from './components/element/alert-dialog/alert-dialog.component';
 import { MessageWarnComponent } from './components/element/message-warn/message-warn.component';
+import { CollectionInfoComponent } from './components/collection-info/collection-info.component';
+import { CollectionInfoDetailComponent } from './components/collection-info-detail/collection-info-detail.component';
 
 
 library.add(fas);
@@ -157,6 +159,8 @@ const createTranslateLoader = function (http: HttpClient) {
     ConfirmDialogComponent,
     AlertDialogComponent,
     MessageWarnComponent,
+    CollectionInfoComponent,
+    CollectionInfoDetailComponent,
 
 
   ],

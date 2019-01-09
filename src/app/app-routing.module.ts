@@ -32,6 +32,8 @@ import { OrderDetailBComponent } from './components/order-detail-b/order-detail-
 import { AdShowComponent } from './components/ad-show/ad-show.component';
 import { MyMsgComponent } from './components/my-msg/my-msg.component';
 import { ChatingComponent } from './components/chating/chating.component';
+import { CollectionInfoComponent } from './components/collection-info/collection-info.component';
+import { CollectionInfoDetailComponent } from './components/collection-info-detail/collection-info-detail.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -67,6 +69,8 @@ const routes: Routes = [
   {path: 'adShow', component: AdShowComponent},
   {path: 'myMsg', component: MyMsgComponent},
   {path: 'chating', component: ChatingComponent},
+  {path: 'collectionInfo', component: CollectionInfoComponent},
+  {path: 'collectionInfoDetail', component: CollectionInfoDetailComponent},
 ];
 
 @NgModule({

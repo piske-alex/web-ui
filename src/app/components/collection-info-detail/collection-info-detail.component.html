@@ -1,0 +1,101 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+        <gz-i18n key="user_collection.alicolInfo" *ngIf="settype=='ali'"></gz-i18n>
+        <gz-i18n key="user_collection.wxcolInfo" *ngIf="settype=='wx'"></gz-i18n>
+        <gz-i18n key="user_collection.ebankcolInfo" *ngIf="settype=='ebank'"></gz-i18n>
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-form">
+  <!--ali-->
+  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ali'">
+    <div class="gz-edit-left">
+      <input type="text" placeholder="{{this.i18ns.account}}" [(ngModel)]="aliAccount" tabindex="1"
+       maxlength="1000">
+    </div>
+  </section>
+  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ali'">
+    <div class="gz-edit-left">
+      <input type="text" placeholder="{{this.i18ns.username}}" [(ngModel)]="aliUserName" tabindex="2"
+       maxlength="1000">
+    </div>
+  </section>
+  <section class="gz-full-img fetchCur" *ngIf="settype=='ali'">
+    <div class="inputFileWrapper">
+      <label for="">
+        <input type="file" #aliImgFile (change)="imgChange($event, aliImg)" tabindex="3">
+          <span class="custorm-style">
+              <span class="left-button" (click)="selectImg(aliImgFile)">{{this.i18ns.QRCode}}</span>
+              <span class="right-text"  (click)="selectImg(aliImgFile)">{{aliImg.name}}</span>
+          </span>
+      </label>
+    </div>
+    <img alt="{{this.i18ns.QRCode}}" [src]="aliImg.src || '/assets/images/id_front.jpg'" (click)="selectImg(aliImgFile)">
+  </section>
+
+  <!--wx-->
+  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='wx'">
+      <div class="gz-edit-left">
+        <input type="text" placeholder="{{this.i18ns.account}}" [(ngModel)]="wxAccount" tabindex="1"
+         maxlength="1000">
+      </div>
+    </section>
+    <section class="gz-edit-row gz-mt-10" *ngIf="settype=='wx'">
+      <div class="gz-edit-left">
+        <input type="text" placeholder="{{this.i18ns.username}}" [(ngModel)]="wxUserName" tabindex="2"
+         maxlength="1000">
+      </div>
+    </section>
+    <section class="gz-full-img fetchCur" *ngIf="settype=='wx'">
+      <div class="inputFileWrapper">
+        <label for="">
+          <input type="file" #wxImgFile (change)="imgChange($event, wxImg)" tabindex="3">
+            <span class="custorm-style">
+                <span class="left-button" (click)="selectImg(wxImgFile)">{{this.i18ns.QRCode}}</span>
+                <span class="right-text"  (click)="selectImg(wxImgFile)">{{wxImg.name}}</span>
+            </span>
+        </label>
+      </div>
+      <img alt="{{this.i18ns.QRCode}}" [src]="wxImg.src || '/assets/images/body_half.jpg'" (click)="selectImg(wxImgFile)">
+    </section>
+
+  <!--ebank-->
+  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+      <div class="gz-edit-left">
+        <input type="text" placeholder="{{this.i18ns.bank}}" [(ngModel)]="ebankName" tabindex="1"
+         maxlength="1000">
+      </div>
+    </section>
+    <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+      <div class="gz-edit-left">
+        <input type="text" placeholder="{{this.i18ns.subbranch}}" [(ngModel)]="ebankBranch" tabindex="2"
+         maxlength="1000">
+      </div>
+    </section>
+  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+      <div class="gz-edit-left">
+        <input type="text" placeholder="{{this.i18ns.account}}" [(ngModel)]="ebankAccount" tabindex="3"
+         maxlength="1000">
+      </div>
+    </section>
+    <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+      <div class="gz-edit-left">
+        <input type="text" placeholder="{{this.i18ns.collectname}}" [(ngModel)]="ebankUserName" tabindex="4"
+         maxlength="1000">
+      </div>
+    </section>
+
+  <section class="gz-submit">
+    <div class="btn btn-primary gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="5">
+      <gz-i18n key="user_real_cert.submit"></gz-i18n>
+    </div>
+  </section>
+
+</article>
+

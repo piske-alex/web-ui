@@ -385,6 +385,30 @@
     "lang_hk":"Traditional Chinese",
     "set_paypass_first": "Please set fund password at first"
   },
+  "user_collection": {
+    "colInfo":"collection Information",
+    "ali":"alipay",
+    "wx":"wechat",
+    "ebank":"ebank",
+    "account":"account",
+    "username":"user name",
+    "QRCode":"QRcode",
+    "bank":"bank",
+    "subbranch":"subbranch",
+    "collectname":"Payee",
+    "not_set":"Not set",
+    "had_set":"Has been set",
+    "alicolInfo":"alipay information",
+    "wxcolInfo":"wechat information",
+    "ebankcolInfo":"bank information",
+
+    "tip_input":"plese input",
+    "tip_upload":"please upload",
+
+    "submit":"submit",
+    "upload":"upload"
+
+  },
   "user_trans_password": {
     "trans_password": "Fund password",
     "tip":"Setting a fund password will be used for withdrawals of digital assets to protect your digital assets from being easily stolen.",

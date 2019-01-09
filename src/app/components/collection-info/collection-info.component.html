@@ -1,0 +1,62 @@
+<header class="gz-header-container">
+  <div class="gz-header">
+    <div>
+      <fa-icon [icon]="['fas', 'chevron-left']" class="gz-back" (click)="goBack()"></fa-icon>
+    </div>
+    <div class="gz-title">
+      <gz-i18n key="user_collection.colInfo"></gz-i18n>
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<article class="gz-my">
+
+
+  <section class="gz-my-group">
+    <div [ngClass]="{fetchCur: collectionInfo.alipay_notset == true }">
+      <div class="gz-my-row" (click)="goToDetail('ali')">
+        <div class="gz-my-left">
+          <div><gz-i18n key="user_collection.ali"></gz-i18n></div>
+        </div>
+        <div class="gz-my-right">
+          <div>
+            <span *ngIf="collectionInfo.alipay_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
+            <span *ngIf="!collectionInfo.alipay_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{fetchCur: collectionInfo.wxpay_notset == true }">
+      <div class="gz-my-row" (click)="goToDetail('wx')" >
+        <div class="gz-my-left">
+          <div><gz-i18n key="user_collection.wx"></gz-i18n></div>
+        </div>
+        <div class="gz-my-right">
+          <div>
+            <span *ngIf="collectionInfo.wxpay_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
+            <span *ngIf="!collectionInfo.wxpay_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{fetchCur: collectionInfo.ebank_notset == true }">
+      <div class="gz-my-row" (click)="goToDetail('ebank')" routerLink="/collectionInfoDetail" [queryParams]="{settype: 'ebank'}">
+        <div class="gz-my-left">
+          <div><gz-i18n key="user_collection.ebank"></gz-i18n></div>
+        </div>
+        <div class="gz-my-right">
+          <div>
+            <span *ngIf="collectionInfo.ebank_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
+            <span *ngIf="!collectionInfo.ebank_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</article>

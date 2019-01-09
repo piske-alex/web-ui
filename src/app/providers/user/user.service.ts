@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RouteMap } from '../../models/route-map/route-map.modle';
 import { HttpService } from '../http/http.service';
 import { User } from '../../models/user/user';
+import { userCollectInfo } from '../../models/user/userCollectInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -188,6 +189,48 @@ export class UserService {
           reject(data);
         }
       }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  getCollectionInfoByUserId(params: any): Promise<userCollectInfo> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.USER.GET_COLLECTION, params).then(data => {
+        if (data && data.success) {
+          return resolve(userCollectInfo.newInstance(data.data));
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  addOrUpdateCollectionInfo(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.USER.POST_COLLECTION, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  
+  postUploadCollectionInfoPicture(params): Promise<any>{
+    return new Promise((resolve,reject)=>{
+      this.httpService.request(RouteMap.V1.USER.POST_UPLOAD_COLLECTION_PICTURE,params,true).then(data=>{
+        if(data&&data.success){
+          resolve(data.fileName);
+        }else{
+          reject(data);
+        }
+      },error=>{
         reject(error);
       });
     });

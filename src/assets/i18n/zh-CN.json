@@ -386,7 +386,30 @@
     "lang_hk":"繁体中文",
     "set_paypass_first": "请先设置资金密码"
   },
-  "user_trans_password": {
+  "user_collection": {
+    "colInfo":"收款信息",
+    "ali":"支付宝",
+    "wx":"微信",
+    "ebank":"网银",
+    "account":"账户",
+    "username":"用户名",
+    "QRCode":"收款QRcode",
+    "bank":"银行",
+    "subbranch":"支行",
+    "collectname":"收款人",
+    "not_set":"未设置",
+    "had_set":"已设置",
+    "alicolInfo":"支付宝收款信息",
+    "wxcolInfo":"微信收款信息",
+    "ebankcolInfo":"银行收款信息",
+
+    "tip_input":"请输入",
+    "tip_upload":"请上传",
+
+    "submit":"提交",
+    "upload":"上传"
+
+  },"user_trans_password": {
     "trans_password": "资金密码",
     "tip":"设置资金密码将用于数字资产的提款，保护您的数字资产不被他们轻易盗用。",
     "input_trans_password":"请输入资金密码",
