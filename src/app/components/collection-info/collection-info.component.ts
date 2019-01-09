@@ -26,7 +26,11 @@ export class CollectionInfoComponent implements OnInit {
   }
 
   async ngOnInit() {
-    
+    const _accessToken = localStorage.getItem('access_token');
+    if (!_accessToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.userId = localStorage.getItem('user_id');
     if (!this.userId) {
       this.router.navigate(['/login']);
