@@ -22,9 +22,10 @@ export class HelpCenterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.externalHelpUrl = 'https://kcb.zendesk.com/';
+    this.externalHelpUrl = 'https://koin-exchangehelp.zendesk.com';
 
-    window.location.href = this.externalHelpUrl;
+     window.location.href = this.externalHelpUrl;
+
   }
 
   goBack() {
