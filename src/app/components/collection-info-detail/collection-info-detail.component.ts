@@ -220,10 +220,14 @@ export class CollectionInfoDetailComponent implements OnInit {
             this.ercodeInfo = imgMsg
             console.log("二维码解析：" + this.ercodeInfo);
         }
+        let _b64img = _result.b64img;
+        if (_b64img.indexOf(';base64,') != -1) {
+          _b64img = _b64img.split(';base64,')[1];
+        }
 
         this.loading = true;
         let _pic_params = {
-          file: _result.b64img,
+          file: _b64img,
           fileName: _fileInfo.name,
           oldfileName: this.ercodePicUrl
         };
