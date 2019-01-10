@@ -74,7 +74,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     
 
     this.ercodePicUrl = "";
-    this.ercodeInfo = "";
+    //this.ercodeInfo = "";
   }
 
   async submit() {
@@ -115,7 +115,7 @@ export class CollectionInfoDetailComponent implements OnInit {
         return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.username);
       }
     }
-
+    console.log('this.ercodeInfo:', this.ercodeInfo);
     let _params = {
       userid: this.userId,
       settype: this.settype,
@@ -136,7 +136,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     };
 
     console.log('para', _params);
-
+    
     try {
       this.userService.addOrUpdateCollectionInfo(_params).then( data => {
         this.router.navigate(['/collectionInfo']);
@@ -153,7 +153,8 @@ export class CollectionInfoDetailComponent implements OnInit {
   private encode(param:string){
     if(param == "")
       return "";
-    return encodeURI(param);
+    return param;
+    //return encodeURI(param);
   }
 
   private getObjectURL (file) {
@@ -216,7 +217,7 @@ export class CollectionInfoDetailComponent implements OnInit {
         qrcode.decode(this.getObjectURL(files[0]));
         qrcode.callback = function (imgMsg) {
             this.ercodeInfo = imgMsg
-            console.log("二维码解析：" + imgMsg);
+            console.log("二维码解析：" + this.ercodeInfo);
         }
 
         let _pic_params = {
