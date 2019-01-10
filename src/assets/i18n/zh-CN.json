@@ -67,7 +67,7 @@
   "element_coin_deposit":{
     "to_address_recharge":"向如下地址汇入${coinType}完成充值",
     "attention":"注意事项",
-    "attention_info":" ${coinType}地址只能充值${coinType}资产，任何充入${coinType}地址的非${coinType}资产将不可找回。充值上述地址需要1个网络确认才能到帐，最低存入金额为 0.01 ${coinType}",
+    "attention_info":" ${coinType}地址只能充值${coinType}资产，任何充入${coinType}地址的非${coinType}资产将不可找回。充值上述地址需要6个网络确认才能到帐，最低存入金额为 0.01 ${coinType}",
     "start_trans":"即将到账的转账",
     "refresh":"刷新",
     "send_coin_number":"发送数量",

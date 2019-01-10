@@ -66,7 +66,7 @@ export class CoinActionWithrawComponent implements OnInit {
     } else if (this.coinType == 'LTC') {
       this.min_amount = 0.1;
     } else if (this.coinType == 'USDT') {
-      this.min_amount = 0; // 20190106 lcy ,should be 200
+      this.min_amount = 0.01; // 20190106 lcy ,should be 200
     } else {
       this.min_amount = 0.01;
     }

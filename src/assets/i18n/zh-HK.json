@@ -67,7 +67,7 @@
   "element_coin_deposit":{
     "to_address_recharge":"向如下位址匯入${coinType}完成充值",
     "attention":"注意事項",
-    "attention_info":" ${coinType}位址只能充值${coinType}資產，任何充入${coinType}位址的非${coinType}資產將不可找回。充值上述位址需要1個網路確認才能到帳，最低存入金額為 0.01 ${coinType}",
+    "attention_info":" ${coinType}位址只能充值${coinType}資產，任何充入${coinType}位址的非${coinType}資產將不可找回。充值上述位址需要6個網路確認才能到帳，最低存入金額為 0.01 ${coinType}",
     "start_trans":"即將到賬的轉帳",
     "refresh":"刷新",
     "send_coin_number":"發送數量",
