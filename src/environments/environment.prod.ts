@@ -7,5 +7,6 @@ export class EnvironmentConstant {
   public static AVATAR = '/avatar';
   public static API_URL = '/api';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
-  public static MINIO_URL_V1 = 'https://minio.otcfiretesting.space';
+  //public static MINIO_URL_V1 = 'https://minio.koin-exchange.com';
+  public static MINIO_URL_V1 = '';
 }
