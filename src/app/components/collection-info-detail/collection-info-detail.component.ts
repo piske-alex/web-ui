@@ -33,6 +33,7 @@ export class CollectionInfoDetailComponent implements OnInit {
   wxImg: any = {};
 
   i18ns: any = {};
+  loading:boolean = false;
 
   constructor(private router: Router,
               private activeRoute : ActivatedRoute,
@@ -220,6 +221,7 @@ export class CollectionInfoDetailComponent implements OnInit {
             console.log("二维码解析：" + this.ercodeInfo);
         }
 
+        this.loading = true;
         let _pic_params = {
           file: _result.b64img,
           fileName: _fileInfo.name,
@@ -228,13 +230,14 @@ export class CollectionInfoDetailComponent implements OnInit {
         this.ercodePicUrl = await this.userService.postUploadCollectionInfoPicture(_pic_params);
         imgObj.src = _result.b64img;
         imgObj.name = _fileInfo.name;
-        
+        this.loading = false;
+
         console.log(this.ercodePicUrl);
       } catch (e) {
         console.error(e);
       }
     }
-  }
+  } 
 
   goBack() {
     this.router.navigate(['/collectionInfo']);

@@ -84,6 +84,7 @@ import { AlertDialogComponent } from './components/element/alert-dialog/alert-di
 import { MessageWarnComponent } from './components/element/message-warn/message-warn.component';
 import { CollectionInfoComponent } from './components/collection-info/collection-info.component';
 import { CollectionInfoDetailComponent } from './components/collection-info-detail/collection-info-detail.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 library.add(fas);
@@ -161,6 +162,7 @@ const createTranslateLoader = function (http: HttpClient) {
     MessageWarnComponent,
     CollectionInfoComponent,
     CollectionInfoDetailComponent,
+    LoadingComponent,
 
 
   ],
