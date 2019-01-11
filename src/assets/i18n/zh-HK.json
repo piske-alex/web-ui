@@ -62,7 +62,8 @@
     "alert_title":"提示",
     "alert_ok":"確定",
     "load_more":"... 正在加載更多的數據 ...",
-    "confirm_title":"確認"
+    "confirm_title":"確認",
+    "ask_customer_service":"諮詢客服"
   },
   "element_coin_deposit":{
     "to_address_recharge":"向如下位址匯入${coinType}完成充值",
