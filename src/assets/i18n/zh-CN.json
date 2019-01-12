@@ -195,7 +195,7 @@
     "currentPrice": "当前报价",
     "referencePrice": "市场参考价格",
     "order": "订单",
-    "orderDelay15Min": "将在托管中保存15分钟，逾期未付款交易将自动取消。",
+    "orderDelay15Min": "将在托管中保存${delay}分钟，逾期未付款交易将自动取消。",
     "seller": "卖家",
     "buyer": "买家",
     "orderNo": "订单编号",
@@ -412,6 +412,10 @@
 
     "tip_input":"请输入",
     "tip_upload":"请上传",
+
+    "ali_short":"支付宝",
+    "wx_short":"微信",
+    "ebank_short":"网银",
 
     "submit":"提交",
     "upload":"上传"

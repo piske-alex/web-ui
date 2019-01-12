@@ -26,16 +26,9 @@ export class EnvironmentConstant {
   public static API_URL_V1 = EnvironmentConstant.API_URL;
   public static MINIO_URL_V1 = 'https://minio.otcfiretesting.space';
 
-<<<<<<< HEAD
   //public static AVATAR = 'https://koin-exchange.com/avatar';
   //public static API_URL = 'https://koin-exchange.com/api';
   //public static API_URL_V1 = EnvironmentConstant.API_URL;
   //public static MINIO_URL_V1 = 'https://minio.koin-exchange.com';
-=======
-  // public static AVATAR = 'https://koin-exchange.com/avatar';
-  // public static API_URL = 'https://koin-exchange.com/api';
-  // public static API_URL_V1 = EnvironmentConstant.API_URL;
-  // public static MINIO_URL_V1 = 'https://minio.koin-exchange.com';
->>>>>>> 93a4c42a2c530b1d517ab12f10dc6b3a213c31bc
 
 }

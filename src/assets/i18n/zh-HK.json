@@ -195,7 +195,7 @@
     "currentPrice": "當前報價",
     "referencePrice": "市場參考價格",
     "order": "訂單",
-    "orderDelay15Min": "將在託管中保存15分鐘，逾期未付款交易將自動取消。",
+    "orderDelay15Min": "將在託管中保存${delay}分鐘，逾期未付款交易將自動取消。",
     "seller": "賣家",
     "buyer": "買家",
     "orderNo": "訂單編號",
@@ -411,6 +411,10 @@
 
     "tip_input":"請輸入",
     "tip_upload":"請上傳",
+
+    "ali_short":"支付寶",
+    "wx_short":"微信",
+    "ebank_short":"網銀",
 
     "submit":"提交",
     "upload":"上傳"

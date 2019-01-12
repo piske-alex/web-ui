@@ -195,7 +195,7 @@
     "currentPrice": "Current Price",
     "referencePrice": "Current quote market reference price",
     "order": "Order",
-    "orderDelay15Min": "Will be saved in the hosting for 15 minutes, the overdue payment will be automatically cancelled.",
+    "orderDelay15Min": "Will be saved in the hosting for ${delay} minutes, the overdue payment will be automatically cancelled.",
     "seller": "Seller",
     "buyer": "Buyer",
     "orderNo": "Order number",
@@ -411,6 +411,10 @@
 
     "tip_input":"plese input",
     "tip_upload":"please upload",
+
+    "ali_short":"alipay",
+    "wx_short":"wechat",
+    "ebank_short":"ebank",
 
     "submit":"submit",
     "upload":"upload"
