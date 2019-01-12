@@ -21,14 +21,14 @@ export class EnvironmentConstant {
   // public static AVATAR = 'https://www.koin-exchange.com/avatar';
   // public static API_URL = 'https://www.koin-exchange.com/api';
 
-  //  public static AVATAR = 'https://otcfiretesting.space/avatar';
-  //  public static API_URL = 'https://otcfiretesting.space/api';
-  // public static API_URL_V1 = EnvironmentConstant.API_URL;
-  // public static MINIO_URL_V1 = 'https://minio.otcfiretesting.space';
-
-  public static AVATAR = 'https://koin-exchange.com/avatar';
-  public static API_URL = 'https://koin-exchange.com/api';
+  public static AVATAR = 'https://otcfiretesting.space/avatar';
+  public static API_URL = 'https://otcfiretesting.space/api';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
-  public static MINIO_URL_V1 = 'https://minio.koin-exchange.com';
+  public static MINIO_URL_V1 = 'https://minio.otcfiretesting.space';
+
+  // public static AVATAR = 'https://koin-exchange.com/avatar';
+  // public static API_URL = 'https://koin-exchange.com/api';
+  // public static API_URL_V1 = EnvironmentConstant.API_URL;
+  // public static MINIO_URL_V1 = 'https://minio.koin-exchange.com';
 
 }

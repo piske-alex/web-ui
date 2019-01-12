@@ -285,6 +285,12 @@
     "order_has_been_confirm":"The order has been confirm",
     "order_already_mark_dispute":"The order has been dispute",
     "order_already_mark_finish":"The order has been finish",
+    "seller_collection_info_not_complete":"Please set collection Information",
+    "seller_collection_info_not_ap":"Please set alipay collection Information",
+    "seller_collection_info_not_wp":"Please set wxpay collection Information",
+    "seller_collection_info_not_bt":"Please set bank collection Information",
+    "saleWarn_merchant_1": "4. Please note buyer has requested payment methoed, please complete corresponding payment collection information before transction.",
+    "saleWarn_merchant_2": "5. Please note buyer has requested that seller need mark receipt or dispute within 1 munite after buyer mark payment. After 1 minute, the transction will be marked as force confirm.",
     "mark_dispute_success":"Mark dispute success. The system will be processed. ",
     "mark_receive_success":"Mark receipt success. The system will be processed."
   },

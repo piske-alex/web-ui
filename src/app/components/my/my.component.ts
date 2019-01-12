@@ -24,9 +24,9 @@ export class MyComponent implements OnInit {
               private dialogService: DialogService) {
   }
 
-  ngOnDestroy(): void {
-    zE(function() {zE.hide(); } );
-  }
+  // ngOnDestroy(): void {
+  //   zE(function() {zE.hide(); } );
+  // }
 
   async ngOnInit() {
 
@@ -118,7 +118,7 @@ export class MyComponent implements OnInit {
   }
 
   showCustomerServiceIcon() {
-    zE(function() {zE.show(); } );
+    // zE(function() {zE.show(); } );
   }
 
   setAvatar(avatarFile) {

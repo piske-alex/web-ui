@@ -82,9 +82,19 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.err_adv_seller_insufficient_balance = await this.languageService.get('otc.err_adv_seller_insufficient_balance');
     this.i18ns.err_seller_insufficient_balance = await this.languageService.get('otc.err_seller_insufficient_balance');
     this.i18ns.not_trans_as_ad_hidden = await this.languageService.get('otc.not_trans_as_ad_hidden');
+    this.i18ns.err_seller_collection_info_not_complete = await this.languageService.get('otc.seller_collection_info_not_complete');
+    this.i18ns.err_seller_collection_info_not_ap = await this.languageService.get('otc.seller_collection_info_not_ap');
+    this.i18ns.err_seller_collection_info_not_wp = await this.languageService.get('otc.seller_collection_info_not_wp');
+    this.i18ns.err_seller_collection_info_not_bt = await this.languageService.get('otc.seller_collection_info_not_bt');
+    this.i18ns.saleWarn_merchant_1 = await this.languageService.get('otc.saleWarn_merchant_1');
+    this.i18ns.saleWarn_merchant_2 = await this.languageService.get('otc.saleWarn_merchant_2');
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
+      if (this.data.limitMinAmount == this.data.limitMaxAmount) {
+        this.receiveAmount = this.data.limitMinAmount;
+        this.payAmount = +((this.receiveAmount / +this.data.rate).toFixed(8));
+      }
     } catch (e) {
       console.error(e);
       if (e.error === 'advertisement not found') {
@@ -118,10 +128,10 @@ export class TransactionBComponent implements OnInit {
     + '~' + this.transform(this.data.limitMaxAmount) + ' ' + this.data.transactionCurrency;
   }
 
-  getRightTopTxt(){
+  getRightTopTxt() {
     return this.transform(this.data.rate) + ' ' + this.data.transactionCurrency;
   }
-  
+
   async transaction() {
     // if (this.data.adType === '1') {
       let _payDes = this.i18ns.sale;
@@ -177,6 +187,14 @@ export class TransactionBComponent implements OnInit {
       console.error('---------------------error_transaction: ', error);
       if (error.error === 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.insufficient_balance);
+      } else if (error.error === 'seller_collection_info_not_complete') {
+        this.dialogService.alert(this.i18ns.err_seller_collection_info_not_complete);
+      } else if (error.error === 'seller_collection_info_not_ap') {
+        this.dialogService.alert(this.i18ns.err_seller_collection_info_not_ap);
+      } else if (error.error === 'seller_collection_info_not_wp') {
+        this.dialogService.alert(this.i18ns.err_seller_collection_info_not_wp);
+      } else if (error.error === 'seller_collection_info_not_bt') {
+        this.dialogService.alert(this.i18ns.err_seller_collection_info_not_bt);
       } else if (error.error === 'adv_seller_insufficient_balance') {
         this.dialogService.alert(this.i18ns.err_adv_seller_insufficient_balance);
       } else if (error.error === 'seller_insufficient_balance') {
