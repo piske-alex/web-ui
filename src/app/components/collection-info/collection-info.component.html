@@ -14,7 +14,7 @@
 
 
   <section class="gz-my-group">
-    <div [ngClass]="{fetchCur: collectionInfo.alipay_notset == true }">
+    <div [ngClass]="{fetchCur: true }">
       <div class="gz-my-row" (click)="goToDetail('ali')">
         <div class="gz-my-left">
           <div><gz-i18n key="user_collection.ali"></gz-i18n></div>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div [ngClass]="{fetchCur: collectionInfo.wxpay_notset == true }">
+    <div [ngClass]="{fetchCur: true }">
       <div class="gz-my-row" (click)="goToDetail('wx')" >
         <div class="gz-my-left">
           <div><gz-i18n key="user_collection.wx"></gz-i18n></div>
@@ -42,8 +42,8 @@
         </div>
       </div>
     </div>
-    <div [ngClass]="{fetchCur: collectionInfo.ebank_notset == true }">
-      <div class="gz-my-row" (click)="goToDetail('ebank')" routerLink="/collectionInfoDetail" [queryParams]="{settype: 'ebank'}">
+    <div [ngClass]="{fetchCur: true }">
+      <div class="gz-my-row" (click)="goToDetail('ebank')">
         <div class="gz-my-left">
           <div><gz-i18n key="user_collection.ebank"></gz-i18n></div>
         </div>

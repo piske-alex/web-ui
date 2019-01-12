@@ -73,6 +73,20 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.settype = params['settype'];
     });
     
+    if(this.settype == "ali" && this.collectionInfo.alipay_qrcode_url != ""){
+      this.aliImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.alipay_qrcode_url;
+      this.aliUserName = this.collectionInfo.alipay_name;
+      this.aliAccount = this.collectionInfo.alipay_account;
+    }else if(this.settype == "wx" && this.collectionInfo.alipay_qrcode_url != ""){
+      this.wxImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.wxpay_qrcode_url;
+      this.wxAccount = this.collectionInfo.wxpay_account;
+      this.wxUserName = this.collectionInfo.wxpay_name;
+    }else if(this.settype == "ebank"){
+      this.ebankName = this.collectionInfo.ebank_name;
+      this.ebankBranch = this.collectionInfo.ebank_branch;
+      this.ebankAccount = this.collectionInfo.ebank_account;
+      this.ebankUserName = this.collectionInfo.ebank_name;
+    }
 
     this.ercodePicUrl = "";
     //this.ercodeInfo = "";
@@ -220,10 +234,14 @@ export class CollectionInfoDetailComponent implements OnInit {
             this.ercodeInfo = imgMsg
             console.log("二维码解析：" + this.ercodeInfo);
         }
+        let _b64img = _result.b64img;
+        if (_b64img.indexOf(';base64,') != -1) {
+          _b64img = _b64img.split(';base64,')[1];
+        }
 
         this.loading = true;
         let _pic_params = {
-          file: _result.b64img,
+          file: _b64img,
           fileName: _fileInfo.name,
           oldfileName: this.ercodePicUrl
         };

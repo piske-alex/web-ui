@@ -62,7 +62,8 @@
     "alert_title":"Information",
     "alert_ok":"OK",
     "load_more":"... loading more data ...",
-    "confirm_title":"Confirm"
+    "confirm_title":"Confirm",
+    "ask_customer_service":"customer service"
   },
   "element_coin_deposit":{
     "to_address_recharge":"Import to the following address ${coinType} Complete recharge",
@@ -194,7 +195,7 @@
     "currentPrice": "Current Price",
     "referencePrice": "Current quote market reference price",
     "order": "Order",
-    "orderDelay15Min": "Will be saved in the hosting for 15 minutes, the overdue payment will be automatically cancelled.",
+    "orderDelay15Min": "Will be saved in the hosting for ${delay} minutes, the overdue payment will be automatically cancelled.",
     "seller": "Seller",
     "buyer": "Buyer",
     "orderNo": "Order number",
@@ -284,6 +285,12 @@
     "order_has_been_confirm":"The order has been confirm",
     "order_already_mark_dispute":"The order has been dispute",
     "order_already_mark_finish":"The order has been finish",
+    "seller_collection_info_not_complete":"Please set collection Information",
+    "seller_collection_info_not_ap":"Please set alipay collection Information",
+    "seller_collection_info_not_wp":"Please set wxpay collection Information",
+    "seller_collection_info_not_bt":"Please set bank collection Information",
+    "saleWarn_merchant_1": "4. Please note buyer has requested payment methoed, please complete corresponding payment collection information before transction.",
+    "saleWarn_merchant_2": "5. Please note buyer has requested that seller need mark receipt or dispute within 1 munite after buyer mark payment. After 1 minute, the transction will be marked as force confirm.",
     "mark_dispute_success":"Mark dispute success. The system will be processed. ",
     "mark_receive_success":"Mark receipt success. The system will be processed."
   },
@@ -405,6 +412,10 @@
     "tip_input":"plese input",
     "tip_upload":"please upload",
 
+    "ali_short":"alipay",
+    "wx_short":"wechat",
+    "ebank_short":"ebank",
+
     "submit":"submit",
     "upload":"upload"
 
@@ -481,5 +492,9 @@
     "HK": "China Hong Kong",
     "UK": "United Kingdom",
     "SG": "Singapore"
+  },
+  "paymentCertification":{
+    "delete":"delete",
+    "tip":"please upload the picture of certification"
   }
 }

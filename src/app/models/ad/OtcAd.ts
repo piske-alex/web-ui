@@ -1,5 +1,6 @@
 export class OtcAd {
   id: string;
+  is_merchant: number = 0;
   status: string;
   adType: string; // 1 出售, 2 购买
   coinType: string;

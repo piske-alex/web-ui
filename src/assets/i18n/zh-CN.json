@@ -62,7 +62,8 @@
     "alert_title":"提示",
     "alert_ok":"确定",
     "load_more":"... 正在加载更多的数据 ...",
-    "confirm_title":"确认"
+    "confirm_title":"确认",
+    "ask_customer_service":"咨询客服"
   },
   "element_coin_deposit":{
     "to_address_recharge":"向如下地址汇入${coinType}完成充值",
@@ -194,7 +195,7 @@
     "currentPrice": "当前报价",
     "referencePrice": "市场参考价格",
     "order": "订单",
-    "orderDelay15Min": "将在托管中保存15分钟，逾期未付款交易将自动取消。",
+    "orderDelay15Min": "将在托管中保存${delay}分钟，逾期未付款交易将自动取消。",
     "seller": "卖家",
     "buyer": "买家",
     "orderNo": "订单编号",
@@ -284,6 +285,12 @@
     "order_has_been_confirm":"交易已经标记收款",
     "order_already_mark_dispute":"交易已经标记争议",
     "order_already_mark_finish":"交易已经标记完成",
+    "seller_collection_info_not_complete":"请先设置收款信息",
+    "seller_collection_info_not_ap":"请先设置支付宝收款信息",
+    "seller_collection_info_not_wp":"请先设置微信收款信息",
+    "seller_collection_info_not_bt":"请先设置银行收款信息",
+    "saleWarn_merchant_1": "4.请注意交易方所要求的收款方式，需完善相应收款信息才可进行交易。",
+    "saleWarn_merchant_2": "5.请注意交易方要求付款后，卖方能即时确认。买方付款后，卖方需在1分钟内进行标记收款或标记争议，超时未处理，系统将强制标记收款。",
     "mark_dispute_success":"标记争议成功，系统会进行后续处理。",
     "mark_receive_success":"标记收款成功，系统会进行后续处理"
   },
@@ -406,6 +413,10 @@
     "tip_input":"请输入",
     "tip_upload":"请上传",
 
+    "ali_short":"支付宝",
+    "wx_short":"微信",
+    "ebank_short":"网银",
+
     "submit":"提交",
     "upload":"上传"
 
@@ -481,5 +492,9 @@
     "HK":"中国香港",
     "UK":"英国",
     "SG":"新加坡"
+  },
+  "paymentCertification":{
+    "delete":"删除",
+    "tip":"请上传凭据图片"
   }
 }

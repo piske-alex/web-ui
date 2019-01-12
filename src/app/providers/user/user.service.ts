@@ -236,6 +236,20 @@ export class UserService {
     });
   }
 
+  postUploadPaymentCertPicture(params): Promise<any>{
+    return new Promise((resolve,reject)=>{
+      this.httpService.request(RouteMap.V1.USER.POST_UPLOAD_CERT_PICTURE,params,true).then(data=>{
+        if(data&&data.success){
+          resolve(data.filename);
+        }else{
+          reject(data);
+        }
+      },error=>{
+        reject(error);
+      });
+    });
+  }
+
   addBlackList(params: any): Promise<User> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.USER.ADD_BLACK_LIST, params, true).then(data => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from '../../providers/user/user.service';
+import { userCollectInfo } from '../../models/user/userCollectInfo';
 import { User } from '../../models/user/user';
 import { LanguageService } from '../../providers/language/language.service';
 import { DialogService } from '../../providers/dialog/dialog.service';
@@ -16,6 +17,8 @@ export class UserSettingComponent implements OnInit {
   userId: string;
   user: User = new User();
   i18ns: any = {};
+  collectionInfo: userCollectInfo = new userCollectInfo();
+  collectionShowTip:string = "";
 
   constructor(private location: Location,
     private userService: UserService,
@@ -43,6 +46,31 @@ export class UserSettingComponent implements OnInit {
     this.user = await this.userService.getDetail({ id: this.userId });
     // console.error(this.user);
     
+    this.i18ns.ali = await this.languageService.get('user_collection.ali_short');
+    this.i18ns.wx = await this.languageService.get('user_collection.wx_short');
+    this.i18ns.ebank = await this.languageService.get('user_collection.ebank_short');
+    this.i18ns.notset = await this.languageService.get('user_collection.not_set');
+    this.i18ns.set = await this.languageService.get('user_collection.had_set');
+
+    this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
+    if(this.collectionInfo.alipay_name !="" || this.collectionInfo.wxpay_name !="" || this.collectionInfo.ebank_name !=""){
+      this.collectionShowTip = this.i18ns.set + "(";
+
+      if(this.collectionInfo.alipay_name !="")
+        this.collectionShowTip = this.collectionShowTip + this.i18ns.ali + ",";
+      if(this.collectionInfo.wxpay_name !="")
+        this.collectionShowTip = this.collectionShowTip + this.i18ns.wx + ",";
+      if(this.collectionInfo.ebank_name !="")
+        this.collectionShowTip = this.collectionShowTip + this.i18ns.ebank + ",";
+      if(this.collectionShowTip.endsWith(','))
+        this.collectionShowTip = this.collectionShowTip.substring(0,this.collectionShowTip.lastIndexOf(","));
+      this.collectionShowTip = this.collectionShowTip + ")";
+    }else{
+      this.collectionShowTip = this.i18ns.notset;
+    }
+
+    
+
   }
 
   goBack() {

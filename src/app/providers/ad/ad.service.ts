@@ -6,6 +6,7 @@ import { OtcAd } from '../../models/ad/OtcAd';
 import { Deal } from '../../models/ad/Deal';
 import { TradeItem } from 'src/app/models/common/TradeItem';
 import { UrlParam } from 'src/app/models/common/UrlParam';
+import { PaymentCertification } from '../../models/ad/PaymentCertification';
 
 @Injectable({
   providedIn: 'root'
@@ -122,6 +123,41 @@ export class AdService {
       this.httpService.request(RouteMap.V1.AD.GET_OTC_AD, params).then(data => {
         if (data && data.success) {
           resolve(TransactionListItem.newInstance(data.data));
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  getPaymentCertList(params): Promise<PaymentCertification[]> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.GET_PAYMENT_CERT, params).then(data => {
+        if (data && data.success) {
+          let _result = {list: [], total: 0};
+            if (data.data && data.data.length > 0) {
+              _result.list = data.data.map(_data => {
+                return PaymentCertification.newInstance(_data);
+              });
+              //_result.total = data.total;
+            }
+          resolve(_result.list);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  postPaymentCert(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.POST_PAYMENT_CERT, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
         } else {
           reject(data);
         }

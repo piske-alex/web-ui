@@ -37,6 +37,7 @@ export class OrderDetailBComponent implements OnInit {
   isShowSellConfirm: boolean;
   isShowPassword: boolean;
   
+
   paypassword: string;
   isShowPayPassword: boolean;
 
@@ -198,15 +199,18 @@ export class OrderDetailBComponent implements OnInit {
 
     this.isShowBuyDispute = false;
 
-    
-
     this.btccnt = (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
 
     this.timeout = true;
 
     let createTime: Date = new Date(this.order.create_time * 1000);
     let createTimePlap = createTime.getTime();
-    createTime.setTime(createTimePlap + 1000 * 60 * 15);
+    let delay:number =  this.order.ad_data.is_merchant == 1 ? 6 : 15 ;
+
+    this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
+    this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace("${delay}",delay);
+
+    createTime.setTime(createTimePlap + 1000 * 60 * delay);
     this.go(createTime);
 
     setTimeout(() => {
@@ -402,8 +406,8 @@ export class OrderDetailBComponent implements OnInit {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
-              this.location.back();
-              this.location.back();
+              //this.location.back();
+              //this.location.back();
             }
           );
         }, err => {

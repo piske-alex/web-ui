@@ -67,6 +67,8 @@
     <p>{{i18ns.saleWarn_2}}</p>
     <p>{{i18ns.saleWarn_3}}</p>
     <p>{{i18ns.saleWarn_4}}</p>
+    <p *ngIf="data.is_merchant == 1">{{i18ns.saleWarn_merchant_1}}</p>
+    <p *ngIf="data.is_merchant == 1">{{i18ns.saleWarn_merchant_2}}</p>
   </section>
 </article>
 
