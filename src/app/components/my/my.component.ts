@@ -1,10 +1,13 @@
-import { Component, OnInit ,OnChanges } from '@angular/core';
+import { Component, OnInit , OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../providers/user/user.service';
 import { User } from '../../models/user/user';
 import { ChatService } from '../../providers/chat/chat.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { DialogService } from '../../providers/dialog/dialog.service';
+ // import { * } from '../../../assets/snippet.js';
+// import '../../../assets/snippet.js';
+ declare var zE: any;
 
 @Component({
   selector: 'gz-my',
@@ -24,9 +27,9 @@ export class MyComponent implements OnInit {
               private dialogService: DialogService) {
   }
 
-  // ngOnDestroy(): void {
-  //   zE(function() {zE.hide(); } );
-  // }
+  ngOnDestroy(): void {
+    zE(function() {zE.hide(); } );
+  }
 
   async ngOnInit() {
 
@@ -118,7 +121,11 @@ export class MyComponent implements OnInit {
   }
 
   showCustomerServiceIcon() {
-    // zE(function() {zE.show(); } );
+     zE(function() {zE.show(); } );
+  }
+
+  gotohelp() {
+     window.location.href = 'https://koin-exchangehelp.zendesk.com/hc/zh-tw';
   }
 
   setAvatar(avatarFile) {
