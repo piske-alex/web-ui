@@ -85,6 +85,7 @@ import { MessageWarnComponent } from './components/element/message-warn/message-
 import { CollectionInfoComponent } from './components/collection-info/collection-info.component';
 import { CollectionInfoDetailComponent } from './components/collection-info-detail/collection-info-detail.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { CertificateComponent } from './components/element/certificate/certificate.component';
 
 
 library.add(fas);
@@ -163,6 +164,7 @@ const createTranslateLoader = function (http: HttpClient) {
     CollectionInfoComponent,
     CollectionInfoDetailComponent,
     LoadingComponent,
+    CertificateComponent,
 
 
   ],

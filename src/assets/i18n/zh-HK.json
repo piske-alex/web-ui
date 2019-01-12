@@ -481,5 +481,9 @@
     "HK": "中國香港",
     "UK": "英國",
     "SG": "新加坡"
+  },
+  "paymentCertification":{
+    "delete":"刪除",
+    "tip":"請上傳憑據圖片"
   }
 }

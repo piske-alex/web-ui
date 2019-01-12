@@ -116,7 +116,9 @@
           <gz-i18n key="transaction.trans_send"></gz-i18n>
       </div>
   </footer>
-
+  <section>
+    <gz-certificate [orderid]="this.orderId" [adid]="this.adId"  *ngIf="this.order?.status == 'dispute'"></gz-certificate>
+  </section>
 </article>
 
 <section class="gz-bg" *ngIf="isShowPayPassword" (click)="cancelSellerConfirm()"></section>

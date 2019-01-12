@@ -52,6 +52,7 @@ export class RouteMap {
       GET_COLLECTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/getcollection'),
       POST_COLLECTION: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/user/postcollection'),
       POST_UPLOAD_COLLECTION_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL, '/info/paymentcollection'),
+      POST_UPLOAD_CERT_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL, '/info/paymentcert'),
     },
     AD: {
       PUBLISH_OTC_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc'),
@@ -67,6 +68,8 @@ export class RouteMap {
       UPDATE_ORDER_RATING: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/rating'),
       GET_TRANS_BY_USERID: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/get_trans_by_userid'),
       GET_TRANS_BETWEEN_USERIDS: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/get_trans_between_userids'),
+      GET_PAYMENT_CERT : new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/get_otc_payment_certificate'),
+      POST_PAYMENT_CERT: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/post_otc_payment_certificate'),
     },
     WALLET: {
       MY_ACCOUNT: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/coin/my'),

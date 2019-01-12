@@ -1,0 +1,93 @@
+@import "../../../../constants";
+
+.gz-list-tr_cert {
+  display: flex;
+  //justify-content: space-between;
+  //align-items: center;
+  border-bottom: 1px solid $border_default;
+  padding: 0 10px;
+  flex-wrap: wrap;
+  
+  //&:last-child {
+  //  border-bottom: 0px;
+  //}
+
+  .gz-list-tr-left {
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+  }
+
+  .gz-list-tr-detail {
+    margin-left: 10px;
+    width:200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    padding: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .gz-list-tr-detail {
+    align-items: left;
+    color: $sub_font_color;
+  }
+}
+
+.ml10{ margin-left: 10px;}
+.mt10{ margin-top: 10px;}
+
+.float_left{
+  float: left;
+}
+.float_right{
+  float: right;
+}
+
+.w15{
+  width:15%
+}
+
+
+
+
+
+.inputFileWrapper label{
+  display: block;
+  float: left;
+  position: relative;
+}
+.inputFileWrapper input[type="file"]{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip:rect(0,0,0,0);
+}
+.inputFileWrapper .custorm-style{
+  display: block;
+  width: 390px;
+  height: 40px;
+}
+.inputFileWrapper .custorm-style .left-button{
+  width: 80px;
+  line-height: 40px;
+  background: #6a7275;
+  color: #fff;
+  display: block;
+  text-align: center;
+  float: left;
+}
+.inputFileWrapper .custorm-style .right-text{
+  width: 300px;
+  height: 40px;
+  //line-height: 50px;
+  display: block;
+  //float: right;
+  padding: 5px;
+  border: 1px solid #6a7275;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

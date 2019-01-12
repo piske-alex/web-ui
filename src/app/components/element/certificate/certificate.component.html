@@ -1,0 +1,27 @@
+<section class="gz-list-tr_cert mt10">
+  <h3><gz-i18n key="paymentCertification.tip"></gz-i18n></h3>
+
+<div class="inputFileWrapper">
+  <label for="">
+    <input type="file" #certImgFile (change)="imgChange($event)">
+      <span class="custorm-style">
+          <span class="left-button" (click)="selectImg(certImgFile)">{{this.i18ns.upload}}</span>
+      </span>
+  </label>
+</div>
+</section>
+
+<section class="gz-list-tr_cert" >
+  <div class="gz-list-tr-left" *ngFor="let data of itemList">
+      
+          <div class="gz-list-tr-detail">
+              <img [src]="data.certificate_url" width="200" height="200"   />
+          </div>
+          
+      
+  </div>
+
+
+
+</section>
+<gz-loading [showLoading]="loading"></gz-loading>

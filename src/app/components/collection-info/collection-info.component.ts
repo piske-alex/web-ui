@@ -42,13 +42,13 @@ export class CollectionInfoComponent implements OnInit {
   }
 
   goToDetail(param:string) {
-    if(param == "ali"  && this.collectionInfo && this.collectionInfo.alipay_notset){
+    if(param == "ali"  && this.collectionInfo){
       this.router.navigate(['collectionInfoDetail'],{ queryParams: { settype: param } }); 
     }
-    if(param == "wx"  && this.collectionInfo && this.collectionInfo.wxpay_notset){
+    if(param == "wx"  && this.collectionInfo){
       this.router.navigate(['collectionInfoDetail'],{ queryParams: { settype: param } }); 
     }
-    if(param == "ebank"  && this.collectionInfo && this.collectionInfo.ebank_notset){
+    if(param == "ebank"  && this.collectionInfo){
       this.router.navigate(['collectionInfoDetail'],{ queryParams: { settype: param } }); 
     }
   }

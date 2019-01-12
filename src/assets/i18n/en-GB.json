@@ -481,5 +481,9 @@
     "HK": "China Hong Kong",
     "UK": "United Kingdom",
     "SG": "Singapore"
+  },
+  "paymentCertification":{
+    "delete":"delete",
+    "tip":"please upload the picture of certification"
   }
 }

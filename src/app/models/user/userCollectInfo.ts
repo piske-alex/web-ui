@@ -21,6 +21,8 @@ export class userCollectInfo{
     wxpay_notset : boolean;
     ebank_notset : boolean;
 
+    minio_url_prefix:string;//前缀，非表中字段
+
     static newInstance(obj): userCollectInfo {
         let _item = new userCollectInfo();
         if(obj == null){
@@ -51,6 +53,8 @@ export class userCollectInfo{
         _item.ebank_account = obj.ebank_account;
 
         _item.status = obj.status;
+
+        _item.minio_url_prefix = obj.minio_url_prefix;
 
         _item.alipay_notset = obj.alipay_account == "" || obj.alipay_account == null ;
         _item.wxpay_notset = obj.wxpay_account == "" || obj.wxpay_account == null ;
