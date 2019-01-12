@@ -85,6 +85,22 @@
         </div>
       </div>
     </div>
+    <div class="gz-my-row" (click)="showCustomerServiceIcon()" *ngIf="isHadLogin">
+      <div class="gz-my-left">
+        <div>
+          <img src="/assets/images/icon-question.png" alt="" class="gz-icon">
+        </div>
+        <div>
+          <gz-i18n key="common.ask_customer_service"></gz-i18n>
+        </div>
+      </div>
+      <div class="gz-my-right">
+        <div>
+          <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+        </div>
+      </div>
+    </div>
+    
     <div class="gz-my-row" (click)="logout()" *ngIf="isHadLogin">
       <div class="gz-my-left">
         <div>

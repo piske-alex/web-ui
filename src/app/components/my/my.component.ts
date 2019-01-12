@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../providers/user/user.service';
 import { User } from '../../models/user/user';
@@ -23,6 +23,10 @@ export class MyComponent implements OnInit {
               private userService: UserService,
               private dialogService: DialogService) {
   }
+
+  // ngOnDestroy(): void {
+  //   zE(function() {zE.hide(); } );
+  // }
 
   async ngOnInit() {
 
@@ -111,6 +115,10 @@ export class MyComponent implements OnInit {
       }
     });
 
+  }
+
+  showCustomerServiceIcon() {
+    // zE(function() {zE.show(); } );
   }
 
   setAvatar(avatarFile) {

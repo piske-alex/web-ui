@@ -2,6 +2,7 @@ export class TransactionListItem {
 
 
   adId: string;
+  is_merchant: number;
   userId: string; // 用户 id
   userHeadUrl: string; // 用户头像 url
   username: string; // 用户名
@@ -36,6 +37,7 @@ export class TransactionListItem {
   static newInstance(obj): TransactionListItem {
     let _item = new TransactionListItem();
     _item.adId = obj.id;
+    _item.is_merchant = obj.is_merchant;
     _item.userId = obj.userid;
     _item.username = obj.username;
     _item.userHeadUrl = obj.avatar;

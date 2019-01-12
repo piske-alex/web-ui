@@ -92,6 +92,13 @@ export class OtcComponent implements OnInit, OnDestroy {
     } else if (_adType == '2') {
       _adType = '1';
     }
+    this.coinTypes = await this.commonService.getCoinTypeList();
+    if ( this.coinTypes.length > 0 ) {
+      this.coinTypeCode = this.coinTypes[0].code;
+      console.log ('sssssssssssssss', this.coinTypes[0].code);
+    }
+
+
     this.coinTypeCode = _coinType || this.coinTypeCode;
     this.countryCode = _countryCode || this.countryCode;
 
@@ -102,8 +109,6 @@ export class OtcComponent implements OnInit, OnDestroy {
     // this.filter.payTypeCode = this.payTypeCode;
     this.filter.currencyCode = '';
     this.filter.payTypeCode = '';
-
-    this.coinTypes = await this.commonService.getCoinTypeList();
 
     this.i18ns.listError = await this.languageService.get('otc.listError');
 

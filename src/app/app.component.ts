@@ -36,7 +36,9 @@ export class AppComponent implements OnInit {
     // if (!this.isLoginSuccess) {
     //   this.goToLogin();
     // }
-
+    // console.log('3333333333') ;
+    // zE(function() {zE.hide();});
+    // console.log('444444444444') ;
     if (innerWidth < 1200) {
       setTimeout(() => {
         (<any>document.querySelector('.gz-landing-page')).style.display = 'none';
