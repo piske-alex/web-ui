@@ -161,7 +161,6 @@ export class PostAdComponent implements OnInit {
   }
 
   checkPrice() {
-
     const _rate = this.ad.price / this.coinRate;
     if (_rate < 0.9) {
       this.dialogService.confirm({ content: this.i18ns.priceWarn_1 }).subscribe(res => {
@@ -180,6 +179,8 @@ export class PostAdComponent implements OnInit {
           return false;
         }
       });
+    } else {
+      this.doPublish();
     }
     return true;
   }
@@ -281,19 +282,21 @@ export class PostAdComponent implements OnInit {
   }
 
   async publish() {
+    console.log('aaaa -- 001');
     if (this._isSubmiting) {
       return;
     }
-
+    console.log('aaaa -- 002');
     const _remarkWarn = this._validateRemark();
     if (_remarkWarn) {
+      console.log('aaaa -- 003');
       return this.dialogService.alert(_remarkWarn);
     }
-
+    console.log('aaaa -- 004');
     if (!this.checkPrice()) {
       this.ad.price = null;
       this._isSubmiting = false;
-
+      console.log('aaaa -- 005');
       return;
     }
   }
