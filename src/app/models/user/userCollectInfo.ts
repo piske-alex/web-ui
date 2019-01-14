@@ -26,35 +26,35 @@ export class userCollectInfo{
     static newInstance(obj): userCollectInfo {
         let _item = new userCollectInfo();
         if(obj == null){
-            _item.alipay_notset = false ;
-            _item.wxpay_notset = false ;
-            _item.ebank_notset = false ;
+            _item.alipay_notset = true ;
+            _item.wxpay_notset = true ;
+            _item.ebank_notset = true ;
             return _item;
         }
 
         _item.id = obj.id;
-        _item.userid = obj.userid;
+        _item.userid = obj.userid || "";
 
         _item.pay_type = obj.pay_type;
 
-        _item.alipay_qrcode_url = obj.alipay_qrcode_url;
-        _item.alipay_qrcode_info = obj.alipay_qrcode_info;
-        _item.alipay_account = obj.alipay_account;
-        _item.alipay_name = obj.alipay_name;
+        _item.alipay_qrcode_url = obj.alipay_qrcode_url || "";
+        _item.alipay_qrcode_info = obj.alipay_qrcode_info || "";
+        _item.alipay_account = obj.alipay_account || "";
+        _item.alipay_name = obj.alipay_name || "";
 
-        _item.wxpay_qrcode_url = obj.wxpay_qrcode_url;
-        _item.wxpay_qrcode_info = obj.wxpay_qrcode_info;
-        _item.wxpay_account = obj.wxpay_account;
-        _item.wxpay_name = obj.wxpay_name;
+        _item.wxpay_qrcode_url = obj.wxpay_qrcode_url || "";
+        _item.wxpay_qrcode_info = obj.wxpay_qrcode_info || "";
+        _item.wxpay_account = obj.wxpay_account || "";
+        _item.wxpay_name = obj.wxpay_name || "";
         
-        _item.ebank_branch = obj.ebank_branch;
-        _item.ebank_bank = obj.ebank_bank;
-        _item.ebank_name = obj.ebank_name;
-        _item.ebank_account = obj.ebank_account;
+        _item.ebank_branch = obj.ebank_branch || "";
+        _item.ebank_bank = obj.ebank_bank || "";
+        _item.ebank_name = obj.ebank_name || "";
+        _item.ebank_account = obj.ebank_account || "";
 
-        _item.status = obj.status;
+        _item.status = obj.status || "";
 
-        _item.minio_url_prefix = obj.minio_url_prefix;
+        _item.minio_url_prefix = obj.minio_url_prefix || "";
 
         _item.alipay_notset = obj.alipay_account == "" || obj.alipay_account == null ;
         _item.wxpay_notset = obj.wxpay_account == "" || obj.wxpay_account == null ;

@@ -416,6 +416,16 @@
     "wx_short":"wechat",
     "ebank_short":"ebank",
 
+    "aliacct":"alipay account",
+    "aliacctname":"account name",
+    "paypic":"payment code picture",
+    "wechatacct":"微信账户号",
+    "wechatacctname":"微信账户名称",
+    "bankname":"bank name",
+    "branchname":"branch name",
+    "acctno":"account No",
+    "acctname":"account name",
+
     "submit":"submit",
     "upload":"upload"
 

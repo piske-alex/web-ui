@@ -416,6 +416,16 @@
     "wx_short":"微信",
     "ebank_short":"網銀",
 
+    "aliacct":"支付寶賬號",
+    "aliacctname":"支付寶賬號名",
+    "paypic":"支付碼圖片",
+    "wechatacct":"微信賬戶號",
+    "wechatacctname":"微信賬戶名字",
+    "bankname":"銀行名",
+    "branchname":"分行名",
+    "acctno":"賬戶號碼",
+    "acctname":"賬戶名字",
+
     "submit":"提交",
     "upload":"上傳"
 

@@ -14,15 +14,17 @@
 
 <article class="gz-form">
   <!--ali-->
-  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ali'">
+  <section class="gz-mt-10" *ngIf="settype=='ali'">
+    <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacct"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.account}}" [(ngModel)]="aliAccount" tabindex="1"
+      <input type="text" placeholder="{{this.i18ns.aliacct}}" [(ngModel)]="aliAccount" tabindex="1"
        maxlength="1000">
     </div>
   </section>
-  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ali'">
+  <section class="gz-mt-10" *ngIf="settype=='ali'">
+    <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacctname"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.username}}" [(ngModel)]="aliUserName" tabindex="2"
+      <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" tabindex="2"
        maxlength="1000">
     </div>
   </section>
@@ -31,24 +33,26 @@
       <label for="">
         <input type="file" #aliImgFile (change)="imgChange($event, aliImg)" tabindex="3">
           <span class="custorm-style">
-              <span class="left-button" (click)="selectImg(aliImgFile)">{{this.i18ns.QRCode}}</span>
+              <span class="left-button" (click)="selectImg(aliImgFile)">{{this.i18ns.paypic}}</span>
               <span class="right-text"  (click)="selectImg(aliImgFile)">{{aliImg.name}}</span>
           </span>
       </label>
     </div>
-    <img alt="{{this.i18ns.QRCode}}" [src]="aliImg.src || '/assets/images/id_front.jpg'" (click)="selectImg(aliImgFile)">
+    <img alt="{{this.i18ns.QRCode}}" [src]="aliImg.src || '/assets/images/ali.png'" (click)="selectImg(aliImgFile)">
   </section>
 
   <!--wx-->
-  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='wx'">
+  <section class="gz-mt-10" *ngIf="settype=='wx'">
+      <div style="min-width: 60px;"><gz-i18n key="user_collection.wechatacct"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.account}}" [(ngModel)]="wxAccount" tabindex="1"
+        <input type="text" placeholder="{{this.i18ns.wechatacct}}" [(ngModel)]="wxAccount" tabindex="1"
          maxlength="1000">
       </div>
     </section>
-    <section class="gz-edit-row gz-mt-10" *ngIf="settype=='wx'">
+    <section class="gz-mt-10" *ngIf="settype=='wx'">
+      <div style="min-width: 60px;"><gz-i18n key="user_collection.wechatacctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.username}}" [(ngModel)]="wxUserName" tabindex="2"
+        <input type="text" placeholder="{{this.i18ns.wechatacctname}}" [(ngModel)]="wxUserName" tabindex="2"
          maxlength="1000">
       </div>
     </section>
@@ -57,36 +61,40 @@
         <label for="">
           <input type="file" #wxImgFile (change)="imgChange($event, wxImg)" tabindex="3">
             <span class="custorm-style">
-                <span class="left-button" (click)="selectImg(wxImgFile)">{{this.i18ns.QRCode}}</span>
+                <span class="left-button" (click)="selectImg(wxImgFile)">{{this.i18ns.paypic}}</span>
                 <span class="right-text"  (click)="selectImg(wxImgFile)">{{wxImg.name}}</span>
             </span>
         </label>
       </div>
-      <img alt="{{this.i18ns.QRCode}}" [src]="wxImg.src || '/assets/images/body_half.jpg'" (click)="selectImg(wxImgFile)">
+      <img alt="{{this.i18ns.QRCode}}" [src]="wxImg.src || '/assets/images/wechat.png'" (click)="selectImg(wxImgFile)">
     </section>
 
   <!--ebank-->
-  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+  <section class="gz-mt-10" *ngIf="settype=='ebank'">
+      <div style="min-width: 60px;"><gz-i18n key="user_collection.bankname"></gz-i18n></div>
       <div class="gz-edit-left">
         <input type="text" placeholder="{{this.i18ns.bank}}" [(ngModel)]="ebankName" tabindex="1"
          maxlength="1000">
       </div>
     </section>
-    <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+    <section class="gz-mt-10" *ngIf="settype=='ebank'">
+      <div style="min-width: 60px;"><gz-i18n key="user_collection.branchname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.subbranch}}" [(ngModel)]="ebankBranch" tabindex="2"
+        <input type="text" placeholder="{{this.i18ns.branchname}}" [(ngModel)]="ebankBranch" tabindex="2"
          maxlength="1000">
       </div>
     </section>
-  <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+  <section class="gz-mt-10" *ngIf="settype=='ebank'">
+      <div style="min-width: 60px;"><gz-i18n key="user_collection.acctno"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.account}}" [(ngModel)]="ebankAccount" tabindex="3"
+        <input type="text" placeholder="{{this.i18ns.acctno}}" [(ngModel)]="ebankAccount" tabindex="3"
          maxlength="1000">
       </div>
     </section>
-    <section class="gz-edit-row gz-mt-10" *ngIf="settype=='ebank'">
+    <section class="gz-mt-10" *ngIf="settype=='ebank'">
+      <div style="min-width: 60px;"><gz-i18n key="user_collection.acctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.collectname}}" [(ngModel)]="ebankUserName" tabindex="4"
+        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName" tabindex="4"
          maxlength="1000">
       </div>
     </section>

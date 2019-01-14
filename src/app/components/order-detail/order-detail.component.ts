@@ -5,6 +5,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { LanguageService } from '../../providers/language/language.service';
 import { ListChatingComponent } from '../element/list-chating/list-chating.component';
 import { DialogService } from '../../providers/dialog/dialog.service';
+import { CommonService } from 'src/app/providers/common/common.service';
 
 @Component({
   selector: 'gz-order-detail',
@@ -47,6 +48,7 @@ export class OrderDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private location: Location,
               private languageService: LanguageService,
+              private commonService:CommonService,
               private adService: AdService,
               private dialogService: DialogService) {
   }
@@ -206,7 +208,12 @@ export class OrderDetailComponent implements OnInit {
 
     let createTime: Date = new Date(this.order.create_time * 1000);
     let createTimePlap = createTime.getTime();
-    let delay:number =  this.order.ad_data.is_merchant == 1 ? 6 : 15 ;
+    let merchantTime :number = 6;
+    await this.commonService.getSettingInfo({key:"merchant_order_no_payment_timeout_seconds"}).then(d=>{
+      if(!isNaN(d))
+        merchantTime = parseFloat(d)/60;
+    },error=>{});
+    let delay:number =  this.order.ad_data.is_merchant == 1 ? merchantTime : 15 ;
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace("${delay}",delay);
     createTime.setTime(createTimePlap + 1000 * 60 * delay);
