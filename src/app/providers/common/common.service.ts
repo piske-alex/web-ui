@@ -227,4 +227,18 @@ export class CommonService {
     });
   }
 
+  getSettingInfo(params): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.COMMON.GET_SETTING, params).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data.errMsg);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 }

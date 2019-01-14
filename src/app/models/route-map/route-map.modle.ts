@@ -32,6 +32,7 @@ export class RouteMap {
       SMS_CODE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/verify'),
       ADD_BANNER: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/banner'),
       GET_BANNERS: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/banner'),
+      GET_SETTING: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/setting'),
     },
     USER: {
       LOGIN: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/login'),
@@ -51,8 +52,8 @@ export class RouteMap {
       ADD_TRUST_LIST: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/trust'),
       GET_COLLECTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/user/getcollection'),
       POST_COLLECTION: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/user/postcollection'),
-      POST_UPLOAD_COLLECTION_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL, '/info/paymentcollection'),
-      POST_UPLOAD_CERT_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL, '/info/paymentcert'),
+      POST_UPLOAD_COLLECTION_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/paymentcollection'),
+      POST_UPLOAD_CERT_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/paymentcert'),
     },
     AD: {
       PUBLISH_OTC_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc'),
