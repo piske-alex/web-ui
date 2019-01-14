@@ -54,7 +54,11 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    
+    this.activeRoute.queryParams.subscribe((params: Params) => {
+      this.settype = params['settype'];
+    });
+    
     this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
 
     this.i18ns.account = await this.languageService.get('user_collection.account');
@@ -69,10 +73,16 @@ export class CollectionInfoDetailComponent implements OnInit {
     this.i18ns.tip_input = await this.languageService.get('user_collection.tip_input');
     this.i18ns.tip_upload = await this.languageService.get('user_collection.tip_upload');
     
-    this.activeRoute.queryParams.subscribe((params: Params) => {
-      this.settype = params['settype'];
-    });
-    
+    this.i18ns.aliacct = await this.languageService.get('user_collection.aliacct');
+    this.i18ns.aliacctname = await this.languageService.get('user_collection.aliacctname');
+    this.i18ns.paypic = await this.languageService.get('user_collection.paypic');
+    this.i18ns.wechatacct = await this.languageService.get('user_collection.wechatacct');
+    this.i18ns.wechatacctname = await this.languageService.get('user_collection.wechatacctname');
+    this.i18ns.bankname = await this.languageService.get('user_collection.bankname');
+    this.i18ns.branchname = await this.languageService.get('user_collection.branchname');
+    this.i18ns.acctno = await this.languageService.get('user_collection.acctno');
+    this.i18ns.acctname = await this.languageService.get('user_collection.acctname');
+
     if(this.settype == "ali" && this.collectionInfo.alipay_qrcode_url != ""){
       this.aliImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.alipay_qrcode_url;
       this.aliUserName = this.collectionInfo.alipay_name;
@@ -85,7 +95,7 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.ebankName = this.collectionInfo.ebank_name;
       this.ebankBranch = this.collectionInfo.ebank_branch;
       this.ebankAccount = this.collectionInfo.ebank_account;
-      this.ebankUserName = this.collectionInfo.ebank_name;
+      this.ebankUserName = this.collectionInfo.ebank_bank;
     }
 
     this.ercodePicUrl = "";

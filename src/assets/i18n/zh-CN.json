@@ -417,6 +417,17 @@
     "wx_short":"微信",
     "ebank_short":"网银",
 
+    "aliacct":"支付宝账号",
+    "aliacctname":"支付宝账号名",
+    "paypic":"支付码图片",
+    "wechatacct":"微信账户号",
+    "wechatacctname":"微信账户名称",
+    "bankname":"银行名",
+    "branchname":"分行名",
+    "acctno":"账户号码",
+    "acctname":"账户名字",
+
+
     "submit":"提交",
     "upload":"上传"
 

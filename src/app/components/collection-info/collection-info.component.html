@@ -21,8 +21,8 @@
         </div>
         <div class="gz-my-right">
           <div>
-            <span *ngIf="collectionInfo.alipay_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
-            <span *ngIf="!collectionInfo.alipay_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
+            <span *ngIf="showTip && collectionInfo.alipay_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
+            <span *ngIf="showTip && !collectionInfo.alipay_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </div>
         </div>
@@ -35,8 +35,8 @@
         </div>
         <div class="gz-my-right">
           <div>
-            <span *ngIf="collectionInfo.wxpay_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
-            <span *ngIf="!collectionInfo.wxpay_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
+            <span *ngIf="showTip && collectionInfo.wxpay_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
+            <span *ngIf="showTip && !collectionInfo.wxpay_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </div>
         </div>
@@ -49,8 +49,8 @@
         </div>
         <div class="gz-my-right">
           <div>
-            <span *ngIf="collectionInfo.ebank_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
-            <span *ngIf="!collectionInfo.ebank_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
+            <span *ngIf="showTip && collectionInfo.ebank_notset"><gz-i18n key="user_collection.not_set"></gz-i18n></span>
+            <span *ngIf="showTip && !collectionInfo.ebank_notset"><gz-i18n key="user_collection.had_set"></gz-i18n></span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </div>
         </div>

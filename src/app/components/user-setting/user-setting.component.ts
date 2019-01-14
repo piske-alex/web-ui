@@ -55,7 +55,7 @@ export class UserSettingComponent implements OnInit {
     this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
     if(this.collectionInfo.alipay_name !="" || this.collectionInfo.wxpay_name !="" || this.collectionInfo.ebank_name !=""){
       this.collectionShowTip = this.i18ns.set + "(";
-
+      console.log(this.collectionInfo)
       if(this.collectionInfo.alipay_name !="")
         this.collectionShowTip = this.collectionShowTip + this.i18ns.ali + ",";
       if(this.collectionInfo.wxpay_name !="")
