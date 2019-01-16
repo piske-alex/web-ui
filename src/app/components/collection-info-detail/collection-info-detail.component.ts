@@ -60,7 +60,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     });
     
     this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
-
+    console.log(this.collectionInfo)
     this.i18ns.account = await this.languageService.get('user_collection.account');
     this.i18ns.username = await this.languageService.get('user_collection.username');
     this.i18ns.QRCode = await this.languageService.get('user_collection.QRCode');
@@ -87,7 +87,7 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.aliImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.alipay_qrcode_url;
       this.aliUserName = this.collectionInfo.alipay_name;
       this.aliAccount = this.collectionInfo.alipay_account;
-    }else if(this.settype == "wx" && this.collectionInfo.alipay_qrcode_url != ""){
+    }else if(this.settype == "wx" && this.collectionInfo.wxpay_qrcode_url != ""){
       this.wxImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.wxpay_qrcode_url;
       this.wxAccount = this.collectionInfo.wxpay_account;
       this.wxUserName = this.collectionInfo.wxpay_name;
