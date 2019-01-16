@@ -59,6 +59,8 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.settype = params['settype'];
     });
     
+    this.ercodePicUrl = "";
+
     this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
     console.log(this.collectionInfo)
     this.i18ns.account = await this.languageService.get('user_collection.account');
@@ -87,10 +89,14 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.aliImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.alipay_qrcode_url;
       this.aliUserName = this.collectionInfo.alipay_name;
       this.aliAccount = this.collectionInfo.alipay_account;
+      this.ercodePicUrl = this.collectionInfo.alipay_qrcode_url;
+      this.aliImg.name = this.collectionInfo.alipay_qrcode_url;
     }else if(this.settype == "wx" && this.collectionInfo.wxpay_qrcode_url != ""){
       this.wxImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.wxpay_qrcode_url;
       this.wxAccount = this.collectionInfo.wxpay_account;
       this.wxUserName = this.collectionInfo.wxpay_name;
+      this.ercodePicUrl = this.collectionInfo.wxpay_qrcode_url;
+      this.wxImg.name = this.collectionInfo.wxpay_qrcode_url;
     }else if(this.settype == "ebank"){
       this.ebankName = this.collectionInfo.ebank_name;
       this.ebankBranch = this.collectionInfo.ebank_branch;
@@ -98,7 +104,7 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.ebankUserName = this.collectionInfo.ebank_bank;
     }
 
-    this.ercodePicUrl = "";
+    
     //this.ercodeInfo = "";
   }
 
