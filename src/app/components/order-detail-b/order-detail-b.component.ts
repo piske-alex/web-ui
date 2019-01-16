@@ -449,8 +449,8 @@ export class OrderDetailBComponent implements OnInit {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
-              this.location.back();
-              this.location.back();
+              //this.location.back();
+              //this.location.back();
             }
           );
         }, err => {

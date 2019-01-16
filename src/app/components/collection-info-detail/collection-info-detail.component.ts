@@ -144,12 +144,12 @@ export class CollectionInfoDetailComponent implements OnInit {
     let _params = {
       userid: this.userId,
       settype: this.settype,
-      alipay_qrcode_url: this.ercodePicUrl ,
+      alipay_qrcode_url: this.settype == "ali"? this.ercodePicUrl : "" ,
       alipay_qrcode_info: this.ercodeInfo,
       alipay_account: this.encode(this.aliAccount) ,
       alipay_name: this.encode(this.aliUserName),
   
-      wxpay_qrcode_url: this.ercodePicUrl,
+      wxpay_qrcode_url: this.settype == "wx"? this.ercodePicUrl : "",
       wxpay_qrcode_info: this.ercodeInfo,
       wxpay_account: this.encode(this.wxAccount),
       wxpay_name: this.encode(this.wxUserName),
