@@ -98,10 +98,10 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.ercodePicUrl = this.collectionInfo.wxpay_qrcode_url;
       this.wxImg.name = this.collectionInfo.wxpay_qrcode_url;
     }else if(this.settype == "ebank"){
-      this.ebankName = this.collectionInfo.ebank_name;
+      this.ebankName = this.collectionInfo.ebank_bank;
       this.ebankBranch = this.collectionInfo.ebank_branch;
       this.ebankAccount = this.collectionInfo.ebank_account;
-      this.ebankUserName = this.collectionInfo.ebank_bank;
+      this.ebankUserName = this.collectionInfo.ebank_name;
     }
 
     
