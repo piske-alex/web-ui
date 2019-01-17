@@ -59,8 +59,10 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.settype = params['settype'];
     });
     
-    this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
+    this.ercodePicUrl = "";
 
+    this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
+    console.log(this.collectionInfo)
     this.i18ns.account = await this.languageService.get('user_collection.account');
     this.i18ns.username = await this.languageService.get('user_collection.username');
     this.i18ns.QRCode = await this.languageService.get('user_collection.QRCode');
@@ -87,18 +89,22 @@ export class CollectionInfoDetailComponent implements OnInit {
       this.aliImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.alipay_qrcode_url;
       this.aliUserName = this.collectionInfo.alipay_name;
       this.aliAccount = this.collectionInfo.alipay_account;
-    }else if(this.settype == "wx" && this.collectionInfo.alipay_qrcode_url != ""){
+      this.ercodePicUrl = this.collectionInfo.alipay_qrcode_url;
+      this.aliImg.name = this.collectionInfo.alipay_qrcode_url;
+    }else if(this.settype == "wx" && this.collectionInfo.wxpay_qrcode_url != ""){
       this.wxImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.wxpay_qrcode_url;
       this.wxAccount = this.collectionInfo.wxpay_account;
       this.wxUserName = this.collectionInfo.wxpay_name;
+      this.ercodePicUrl = this.collectionInfo.wxpay_qrcode_url;
+      this.wxImg.name = this.collectionInfo.wxpay_qrcode_url;
     }else if(this.settype == "ebank"){
-      this.ebankName = this.collectionInfo.ebank_name;
+      this.ebankName = this.collectionInfo.ebank_bank;
       this.ebankBranch = this.collectionInfo.ebank_branch;
       this.ebankAccount = this.collectionInfo.ebank_account;
-      this.ebankUserName = this.collectionInfo.ebank_bank;
+      this.ebankUserName = this.collectionInfo.ebank_name;
     }
 
-    this.ercodePicUrl = "";
+    
     //this.ercodeInfo = "";
   }
 
@@ -144,12 +150,12 @@ export class CollectionInfoDetailComponent implements OnInit {
     let _params = {
       userid: this.userId,
       settype: this.settype,
-      alipay_qrcode_url: this.ercodePicUrl ,
+      alipay_qrcode_url: this.settype == "ali"? this.ercodePicUrl : "" ,
       alipay_qrcode_info: this.ercodeInfo,
       alipay_account: this.encode(this.aliAccount) ,
       alipay_name: this.encode(this.aliUserName),
   
-      wxpay_qrcode_url: this.ercodePicUrl,
+      wxpay_qrcode_url: this.settype == "wx"? this.ercodePicUrl : "",
       wxpay_qrcode_info: this.ercodeInfo,
       wxpay_account: this.encode(this.wxAccount),
       wxpay_name: this.encode(this.wxUserName),

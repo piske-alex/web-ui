@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { RouteJson, RouteMap } from '../../models/route-map/route-map.modle';
-import { Observable, Subject } from 'rxjs/index';
+import { Observable, Subject,throwError  } from 'rxjs/index';
 import { LanguageService } from '../../providers/language/language.service';
+import { catchError ,timeout } from 'rxjs/operators';
 
 @Injectable()
 export class HttpService {
@@ -54,7 +55,7 @@ export class HttpService {
         observable = this.http.get(requestUrl, {params: params});
         break;
       case RouteMap.METHODS.POST:
-        observable = this.http.post(requestUrl, JSON.stringify(params));
+        observable = this.http.post(requestUrl, JSON.stringify(params)).pipe(timeout(12000),catchError(e=>{ return throwError("Timeout has occurred")}));
         break;
       case RouteMap.METHODS.PUT:
         observable = this.http.put(requestUrl, JSON.stringify(params));
@@ -76,6 +77,10 @@ export class HttpService {
             }
           },
           error => {
+            if(error == "Timeout has occurred"){
+              reject(error);
+              return;
+            }
 
             if (isLoading) {
               this.closeLoading();
