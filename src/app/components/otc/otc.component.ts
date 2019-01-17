@@ -37,7 +37,7 @@ export class OtcComponent implements OnInit, OnDestroy {
   adTotal: number;
 
   countryCode = 'CN';
-  coinTypeCode = 'BTC';
+  coinTypeCode = '';
   currencyCode = 'CNY';
   payTypeCode = 'AP';
   payTypeNames = '';

@@ -341,7 +341,7 @@ export class PostAdComponent implements OnInit {
           if (error.error == 'Insufficient balance') {
             this.dialogService.alert(this.i18ns.insufficient_balance);
           } else {
-            this.dialogService.alert(error.error);
+            this.dialogService.alert( this.i18ns.publishError);
           }
         }
       });

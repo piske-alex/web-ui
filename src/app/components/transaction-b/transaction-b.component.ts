@@ -217,12 +217,13 @@ export class TransactionBComponent implements OnInit {
   }
 
   changePay() {
-      this.receiveAmount = +((this.payAmount * +this.data.rate).toFixed(2));
+    const tempCalValue = String(+((this.payAmount * +this.data.rate).toFixed(3)));
+    this.receiveAmount = tempCalValue.substring(0, tempCalValue.length - 0);
   }
 
   changeReceive() {
-      this.payAmount = +((this.receiveAmount / +this.data.rate).toFixed(8));
-
+    const tempCalValue = String(+((this.receiveAmount / +this.data.rate).toFixed(9)));
+    this.payAmount = tempCalValue.substring(0, tempCalValue.length - 0);
   }
 
   getLeftPlacehold() {
@@ -268,7 +269,7 @@ export class TransactionBComponent implements OnInit {
   }
 
   edit() {
-    this.router.navigate(['/postAd', { adId: this.adId || '' }])
+    this.router.navigate(['/postAd', { adId: this.adId || '' }]);
   }
 
   onKeyPress_Pay(value: any) {
@@ -297,7 +298,7 @@ export class TransactionBComponent implements OnInit {
     const p6 = /(\.+)(\d+)(\.+)/g; // 屏蔽1....234.的情况
     tmpVal = tmpVal.replace(p6, '$1$2'); // 屏蔽最后一位的.
 
-    //point = point - 1;
+    // point = point - 1;
 
     if (point != undefined && !isNaN(point) && point == 0) { // 如果没有小数位,则不输入小数点
         tmpVal = tmpVal.replace(/\./g, '');
@@ -324,7 +325,7 @@ export class TransactionBComponent implements OnInit {
         }
     }
 
-    //if(tmpVal !=""&&tmpVal!= undefined && !isNaN(tmpVal))
+    // if(tmpVal !=""&&tmpVal!= undefined && !isNaN(tmpVal))
     //  tmpVal = parseFloat(tmpVal);
     return tmpVal;
 }
@@ -332,15 +333,21 @@ export class TransactionBComponent implements OnInit {
 
 onblur_pay() {
   if (this.payAmount) {
-    this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
-    this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+    const tempCalValue1 = String((Number(this.payAmount) * 1.000000000).toFixed(9));
+    this.payAmount = tempCalValue1.substring(0, tempCalValue1.length - 1);
+
+    const tempCalValue2 = String((Number(this.receiveAmount) * 1.000).toFixed(3));
+    this.receiveAmount = tempCalValue2.substring(0, tempCalValue2.length - 1);
   }
 }
 
 onblur_receive() {
   if (this.receiveAmount) {
-    this.payAmount =  String((Number(this.payAmount) * 1.00000000).toFixed(8));
-    this.receiveAmount =  String((Number(this.receiveAmount) * 1.00).toFixed(2));
+    const tempCalValue1 = String((Number(this.payAmount) * 1.000000000).toFixed(9));
+    this.payAmount = tempCalValue1.substring(0, tempCalValue1.length - 1);
+
+    const tempCalValue2 = String((Number(this.receiveAmount) * 1.000).toFixed(3));
+    this.receiveAmount = tempCalValue2.substring(0, tempCalValue2.length - 1);
   }
 }
 

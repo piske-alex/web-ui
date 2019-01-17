@@ -87,7 +87,6 @@ export class TransactionComponent implements OnInit {
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });
-      console.log('ad1111111111111111Info ', this.data);
     } catch (e) {
       console.error(e);
       if (e.error === 'advertisement not found') {
@@ -210,19 +209,22 @@ export class TransactionComponent implements OnInit {
   }
 
   changePay() {
-
     if (this.data.adType === '1') {
-      this.receiveAmount = +((this.payAmount / +this.data.rate).toFixed(8));
+      let tempCalValue = String(+((this.payAmount / +this.data.rate).toFixed(9)));
+      this.receiveAmount = tempCalValue.substring(0, tempCalValue.length - 0);
     } else {
-      this.receiveAmount = +((this.payAmount * +this.data.rate).toFixed(2));
+      let tempCalValue = String(+((this.payAmount * +this.data.rate).toFixed(3)));
+      this.receiveAmount = tempCalValue.substring(0, tempCalValue.length - 0);
     }
   }
 
   changeReceive() {
     if (this.data.adType === '1') {
-      this.payAmount = +((this.receiveAmount * +this.data.rate).toFixed(2));
+      const tempCalValue = String(+((this.receiveAmount * +this.data.rate).toFixed(3)));
+      this.payAmount = tempCalValue.substring(0, tempCalValue.length - 1);
     } else {
-      this.payAmount = +((this.receiveAmount / +this.data.rate).toFixed(8));
+      const tempCalValue = String(+((this.receiveAmount / +this.data.rate).toFixed(9)));
+      this.payAmount = tempCalValue.substring(0, tempCalValue.length - 1);
     }
   }
 
@@ -269,7 +271,7 @@ export class TransactionComponent implements OnInit {
   }
 
   edit() {
-    this.router.navigate(['/postAd', { adId: this.adId || '' }])
+    this.router.navigate(['/postAd', { adId: this.adId || '' }]);
   }
 
   onKeyPress_Pay(value: any) {
@@ -334,15 +336,21 @@ export class TransactionComponent implements OnInit {
 
 onblur_pay() {
   if (this.payAmount) {
-    this.payAmount =  String((Number(this.payAmount) * 1.00).toFixed(2));
-    this.receiveAmount =  String((Number(this.receiveAmount) * 1.00000000).toFixed(8));
+    const tempCalValue1 = String((Number(this.payAmount) * 1.00).toFixed(3));
+    this.payAmount = tempCalValue1.substring(0, tempCalValue1.length - 1);
+
+    const tempCalValue2 = String((Number(this.receiveAmount) * 1.00000000).toFixed(9));
+    this.receiveAmount = tempCalValue2.substring(0, tempCalValue2.length - 1);
   }
 }
 
 onblur_receive() {
   if (this.receiveAmount) {
-    this.payAmount =  String((Number(this.payAmount) * 1.00).toFixed(2));
-    this.receiveAmount =  String((Number(this.receiveAmount) * 1.00000000).toFixed(8));
+    const tempCalValue1 = String((Number(this.payAmount) * 1.000).toFixed(3));
+    this.payAmount = tempCalValue1.substring(0, tempCalValue1.length - 1);
+
+    const tempCalValue2 = String((Number(this.receiveAmount) * 1.000000000).toFixed(9));
+    this.receiveAmount = tempCalValue2.substring(0, tempCalValue2.length - 1);
   }
 }
 
