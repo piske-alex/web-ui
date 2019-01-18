@@ -193,17 +193,12 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_finish = await this.languageService.get('my_ad.order_status_finish');
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
-    
-    
-    
 
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
 
-    
-
-    this.btccnt = (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
+    this.btccnt = this.order.coin_amount ; // (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
     this.timeout = true;
 
     let createTime: Date = new Date(this.order.create_time * 1000);

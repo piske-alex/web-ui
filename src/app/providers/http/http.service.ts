@@ -55,7 +55,8 @@ export class HttpService {
         observable = this.http.get(requestUrl, {params: params});
         break;
       case RouteMap.METHODS.POST:
-        observable = this.http.post(requestUrl, JSON.stringify(params)).pipe(timeout(12000),catchError(e=>{ return throwError("Timeout has occurred")}));
+        observable = this.http.post(requestUrl, JSON.stringify(params))
+            .pipe(timeout(120000));
         break;
       case RouteMap.METHODS.PUT:
         observable = this.http.put(requestUrl, JSON.stringify(params));
@@ -77,7 +78,7 @@ export class HttpService {
             }
           },
           error => {
-            if(error == "Timeout has occurred"){
+            if ( error && error.name && error.name == 'TimeoutError') {
               reject(error);
               return;
             }
