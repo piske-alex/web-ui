@@ -20,7 +20,7 @@
           <div class="gz-list-cell_20 float_left"><span>{{i18ns.price}}: </span><span>{{data.price | cnyFormat }} {{data.currency || ''}}</span></div>
           <div class="gz-list-cell_23 float_left"><span>{{i18ns.orderCreateTime}}: </span><span>{{data.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
           <div class="gz-list-cell_23 float_left"><span>{{i18ns.trade_time}}: </span><span *ngIf="data.paymentStatus==1">{{data.paymentTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
-          <div class="gz-list-cell_23 float_left"><span>{{i18ns.collect_time}}: </span><span *ngIf="data.sellerPaymentConfirm==1">{{data.confirmTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+          <div class="gz-list-cell_23 float_left"><span>{{i18ns.collect_time}}: </span><span *ngIf="data.sellerPaymentConfirm!=0">{{data.confirmTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
     
         </div>
       </div>
