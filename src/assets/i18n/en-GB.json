@@ -299,6 +299,7 @@
     "unread_count": "Unread",
     "last_msg_time": "Recent session time",
     "goto_detail": "Enter the conversation",
+    "has_no_msg": "--- has no message ---",
     "msg_ad": "ad"
   },
   "my_trade": {

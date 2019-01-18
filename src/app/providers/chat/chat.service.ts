@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { EnvironmentConstant } from '../../../environments/environment';
 
 const AV = (<any>window).AV;
 
@@ -22,7 +23,7 @@ export class ChatService {
 
   constructor() {
     this.initChat();
-    this.chat_topic_keyword = '_dev01';
+    this.chat_topic_keyword = EnvironmentConstant.CHATING_TOPIC_KEYWORD ; // '_dev01';
   }
 
   initChat() {
