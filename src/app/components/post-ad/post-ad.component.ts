@@ -335,7 +335,7 @@ export class PostAdComponent implements OnInit {
       }, error => {
         this._isSubmiting = false;
         console.error('---------------------error_publishOtcAd: ', error);
-        if (error.status === 403 && error.error.userGroup === 'user') {
+        if (error.status === 403 && (error.userGroup === 'user' || error.error.userGroup === 'user')) {
           this.dialogService.alert(this.i18ns.onlyRealUser);
         } else {
           if (error.error == 'Insufficient balance') {
