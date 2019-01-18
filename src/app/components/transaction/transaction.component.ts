@@ -221,10 +221,10 @@ export class TransactionComponent implements OnInit {
   changeReceive() {
     if (this.data.adType === '1') {
       const tempCalValue = String(+((this.receiveAmount * +this.data.rate).toFixed(3)));
-      this.payAmount = tempCalValue.substring(0, tempCalValue.length - 1);
+      this.payAmount = tempCalValue.substring(0, tempCalValue.length - 0);
     } else {
       const tempCalValue = String(+((this.receiveAmount / +this.data.rate).toFixed(9)));
-      this.payAmount = tempCalValue.substring(0, tempCalValue.length - 1);
+      this.payAmount = tempCalValue.substring(0, tempCalValue.length - 0);
     }
   }
 

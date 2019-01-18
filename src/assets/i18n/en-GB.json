@@ -351,7 +351,7 @@
   },
   "user_real_cert": {
     "user_real_cert": "Verified",
-    "input_max_size":"Photo is too large, please do not upload more than 50K",
+    "input_max_size":"Photo is too large, please do not upload more than 10M",
     "input_name":"Please enter your name",
     "input_cardno":"Please enter the ID number",
     "card_front":"Document front",
@@ -495,7 +495,7 @@
     "cnyprice": "Price",
     "withrawProcessingHelp":"Remember to make sure you are sending the right cryptocurrency to the right address. You input the amount and submit. Once you submit, we will deal with it immediately",
     "selectCoin": "Select a cryptocurrency",
-    "depositWillReceiveHelp": "<p>Tips</p><p>In ${coinTYpe} network reception ${coinTYpe} usually takes 10 minutes, we will receive ${coinTYpe} after the network confirms, it will be credited to you. The minimum deposit amount is 0.01 ${coinTYpe}, we will not process less than this amount ${coinTYpe} deposit request, transfers to each other within the platform are real-time and free of charge.</p>"
+    "depositWillReceiveHelp": "<p>Tips</p><p>In ${coinTYpe} network reception ${coinTYpe} usually takes 10 minutes, we will receive ${coinTYpe} after the network 1 confirms, it will be credited to you. The minimum deposit amount is 0.01 ${coinTYpe}, we will not process less than this amount ${coinTYpe} deposit request, transfers to each other within the platform are real-time and free of charge.</p>"
   },
   "countryName": {
     "CN": "China",
