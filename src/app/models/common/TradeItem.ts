@@ -53,7 +53,7 @@ export class TradeItem {
       _item.username = "";
       _item.currency = obj.legal_currency;
       _item.tradeCurrency = obj.crypto_currency;
-      _item.transactionCount = obj.coin_amount; // obj.amount / obj.legal_currency_rate;
+      _item.transactionCount = obj.coin_amount * 1; // obj.amount / obj.legal_currency_rate;
       _item.price = obj.legal_currency_rate;
       _item.tradeTime = obj.payment_time;
       _item.collectTime = obj.confirm_time;

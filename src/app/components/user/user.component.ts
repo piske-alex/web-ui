@@ -88,7 +88,7 @@ export class UserComponent implements OnInit {
       this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
       console.log(document.querySelector('.gz-list-ad').scrollHeight)
-      debugger
+      
       this.isLoading = false;
       this.publishList = _result.list;
       this.total = _result.total;
@@ -123,7 +123,7 @@ export class UserComponent implements OnInit {
       //this.isLoading = true;
       let _result = await this.adService.listTransactionList(_params);
       this.isLoading = false;
-      debugger
+      
       if (this.publishList) {
         const tempList = this.publishList.concat(_result.list);
         this.publishList = tempList;
