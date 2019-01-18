@@ -25,10 +25,12 @@ export class EnvironmentConstant {
   public static API_URL = 'https://otcfiretesting.space/api';
   public static API_URL_V1 = EnvironmentConstant.API_URL;
   public static MINIO_URL_V1 = 'https://minio.otcfiretesting.space';
+  public static CHATING_TOPIC_KEYWORD = '_dev01';
 
   //public static AVATAR = 'https://koin-exchange.com/avatar';
   //public static API_URL = 'https://koin-exchange.com/api';
   //public static API_URL_V1 = EnvironmentConstant.API_URL;
   //public static MINIO_URL_V1 = 'https://minio.koin-exchange.com';
+  //public static CHATING_TOPIC_KEYWORD = '_prd01';
 
 }

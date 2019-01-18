@@ -37,3 +37,4 @@
     
 </article>
 <div class="loader" *ngIf="isLoading">Loading...</div>
+<div class="align_center" *ngIf="!isLoading && isNoData">{{this.i18ns.has_no_msg}}</div>

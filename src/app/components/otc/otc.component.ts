@@ -92,15 +92,16 @@ export class OtcComponent implements OnInit, OnDestroy {
     } else if (_adType == '2') {
       _adType = '1';
     }
-    this.coinTypes = await this.commonService.getCoinTypeList();
-    if ( this.coinTypes.length > 0 ) {
-      this.coinTypeCode = this.coinTypes[0].code;
-      console.log ('sssssssssssssss', this.coinTypes[0].code);
-    }
-
 
     this.coinTypeCode = _coinType || this.coinTypeCode;
     this.countryCode = _countryCode || this.countryCode;
+
+    this.coinTypes = await this.commonService.getCoinTypeList();
+    if ( this.coinTypes.length > 0 ) {
+      if (this.coinTypeCode != this.coinTypes[0].code) {
+        this.coinTypeCode = this.coinTypes[0].code;
+      }
+    }
 
     this.filter.adType = _adType || '2'; // 1 出售, 2 购买
     this.filter.coinType = this.coinTypeCode;

@@ -299,6 +299,7 @@
     "unread_count": "未讀",
     "last_msg_time": "最近會話時間",
     "goto_detail": "進入對話",
+    "has_no_msg": "--- 暫無消息 ---",
     "msg_ad": "廣告"
   },
   "my_trade": {
