@@ -51,7 +51,7 @@ export class OrderDetailBComponent implements OnInit {
               private route: ActivatedRoute,
               private location: Location,
               private languageService: LanguageService,
-              private commonService:CommonService,
+              private commonService: CommonService,
               private adService: AdService,
               private dialogService: DialogService) {
   }
@@ -201,7 +201,7 @@ export class OrderDetailBComponent implements OnInit {
 
     this.isShowBuyDispute = false;
 
-    this.btccnt = (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
+    this.btccnt = this.order.coin_amount ; //  (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
 
     this.timeout = true;
 

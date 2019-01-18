@@ -160,7 +160,7 @@ export class TransactionComponent implements OnInit {
     // const _result = await this.adService.transaction({ adid: this.data.adId, amount: this.payAmount });
     // const _orderId = _result.orderid;
     // this.router.navigate(['/orderDetail', { orderId: _orderId }]);
-    this.adService.transaction({ adid: this.data.adId, amount: this.payAmount }).then(async (data) => {
+    this.adService.transaction({ adid: this.data.adId, amount: this.payAmount, coin_amount: this.receiveAmount }).then(async (data) => {
       const _result = data;
       const _orderId = _result.orderid;
        console.log('order', _result);
