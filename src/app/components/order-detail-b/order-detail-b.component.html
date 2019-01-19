@@ -81,19 +81,19 @@
   </section>
 
   <section class="gz-row-btn">
-    <div class="btn btn-primary gz-circle" (click)="cancelOrder()" *ngIf="this.isShowCancel">
+    <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="cancelOrder()" *ngIf="this.isShowCancel">
       <gz-i18n key="otc.cancelTransaction"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellDispute" (click)="sellMarkDispute()">
+    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellDispute" gzDelayClick (debounceClick)="sellMarkDispute()">
       <gz-i18n key="otc.markDispute"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellConfirm" (click)="sellOrder()">
+    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellConfirm" gzDelayClick (debounceClick)="sellOrder()">
       <gz-i18n key="otc.markReceive"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="this.isAdOwner && isShowBuyDispute" (click)="buyMarkDispute()">
+    <div class="btn btn-primary gz-circle" *ngIf="this.isAdOwner && isShowBuyDispute" gzDelayClick (debounceClick)="buyMarkDispute()">
       <gz-i18n key="otc.markDispute"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="this.isAdOwner && isShowBuyPay" (click)="payOrder()">
+    <div class="btn btn-primary gz-circle" *ngIf="this.isAdOwner && isShowBuyPay" gzDelayClick (debounceClick)="payOrder()">
       <gz-i18n key="otc.markPay"></gz-i18n>
     </div>
   </section>
@@ -121,7 +121,7 @@
   </section>
 </article>
 
-<section class="gz-bg" *ngIf="isShowPayPassword" (click)="cancelSellerConfirm()"></section>
+<section class="gz-bg" *ngIf="isShowPayPassword" gzDelayClick (debounceClick)="cancelSellerConfirm()"></section>
 <div class="gz-popup" *ngIf="isShowPayPassword">
   <div class="gz-popup-content">
     <h3><gz-i18n key="user_trans_password.input_trans_password"></gz-i18n></h3>

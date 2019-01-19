@@ -24,6 +24,7 @@ export class UserRealCertificationComponent implements OnInit {
   credType: string = '1';
 
   country: Country = new Country();
+  isSubmit: boolean = false;
 
   i18ns: any = {};
 
@@ -74,6 +75,10 @@ export class UserRealCertificationComponent implements OnInit {
   }
 
   async submit() {
+    if(this.isSubmit){
+      return;
+    }
+
     if (!this.realName || this.realName.trim() == '') {
       return this.dialogService.alert(this.i18ns.input_name);
     }
@@ -107,16 +112,20 @@ export class UserRealCertificationComponent implements OnInit {
     };
 
     console.log('real-cert para', _params);
-
+    this.isSubmit = true;
     try {
+
       this.userService.realCertifiation(_params).then( data => {
+        this.isSubmit = false;
         // this.goBack();
       this.router.navigate(['/userSetting']);
       }, error => {
+        this.isSubmit = false;
         this.dialogService.alert(this.i18ns.submit_fail);
         console.error(error);
       });
     } catch (e) {
+      this.isSubmit = false;
       console.error(e);
       this.dialogService.alert(e.error);
     }
