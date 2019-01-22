@@ -78,6 +78,7 @@ export class HttpService {
             }
           },
           error => {
+            console.log('error at http service', error);
             if ( error && error.name && error.name == 'TimeoutError') {
               reject(error);
               return;

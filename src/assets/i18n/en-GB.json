@@ -291,7 +291,7 @@
     "seller_collection_info_not_bt":"Please set bank collection Information",
     "saleWarn_merchant_1": "4. Please note buyer has requested payment methoed, please complete corresponding payment collection information before transction.",
     "saleWarn_merchant_2": "5. Please note buyer has requested that seller need mark receipt or dispute within 1 munite after buyer mark payment. After 1 minute, the transction will be marked as force confirm.",
-    "mark_dispute_success":"Mark dispute sucessfully, customer service will follow up this dispute order, please kindly upload your transction certification via below channels:<br/>1. Upload transcation certification in current order detail page, or <br/>2. Submit support ticket in 'ME -> Customer Service', and provide order id and upload transaction certification. ",
+    "mark_dispute_success":"Mark dispute sucessfully, customer service will follow up this dispute order, please kindly upload your transction certification via below channels:\r1. Upload transcation certification in current order detail page, or \r2. Submit support ticket in 'ME -> Customer Service', and provide order id and upload transaction certification. ",
     "mark_receive_success":"Mark receipt success. The system will be processed."
   },
   "my_msg": {
