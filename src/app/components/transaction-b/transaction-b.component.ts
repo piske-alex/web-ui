@@ -5,6 +5,7 @@ import { AdService } from '../../providers/ad/ad.service';
 import { TransactionListItem } from '../../models/ad/TransactionListItem';
 import { LanguageService } from '../../providers/language/language.service';
 import { DialogService } from '../../providers/dialog/dialog.service';
+import { CommonService } from 'src/app/providers/common/common.service';
 
 @Component({
   selector: 'app-transaction-b',
@@ -29,6 +30,7 @@ export class TransactionBComponent implements OnInit {
     private location: Location,
     private adService: AdService,
     private languageService: LanguageService,
+    private commonService: CommonService,
     private dialogService: DialogService) {
   }
 
@@ -87,7 +89,14 @@ export class TransactionBComponent implements OnInit {
     this.i18ns.err_seller_collection_info_not_wp = await this.languageService.get('otc.seller_collection_info_not_wp');
     this.i18ns.err_seller_collection_info_not_bt = await this.languageService.get('otc.seller_collection_info_not_bt');
     this.i18ns.saleWarn_merchant_1 = await this.languageService.get('otc.saleWarn_merchant_1');
+    let delayConfirm:number = 2;
+    await this.commonService.getSettingInfo({key:"merchant_order_no_confirm_payment_timeout_seconds"}).then( d => {
+      if(!isNaN(d))
+      delayConfirm = parseFloat(d)/60;
+    }, error => {});
     this.i18ns.saleWarn_merchant_2 = await this.languageService.get('otc.saleWarn_merchant_2');
+    this.i18ns.saleWarn_merchant_2 = this.i18ns.saleWarn_merchant_2.replace('{1}', delayConfirm);
+
 
     try {
       this.data = await this.adService.getOtcAdById({ adid: this.adId });

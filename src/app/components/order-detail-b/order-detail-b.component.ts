@@ -225,7 +225,11 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace('${delay}', delay);
 
-    const delayConfirm:number = 2;
+    let delayConfirm:number = 2;
+    await this.commonService.getSettingInfo({key:"merchant_order_no_confirm_payment_timeout_seconds"}).then(d=>{
+      if(!isNaN(d))
+      delayConfirm = parseFloat(d)/60;
+    }, error=>{});
     this.i18ns.orderHadPaidNeedConfirmIn2Min = await this.languageService.get('otc.orderHadPaidNeedConfirmIn2Min');
     this.i18ns.orderHadPaidNeedConfirmIn2Min = this.i18ns.orderHadPaidNeedConfirmIn2Min.replace('{delay}', delayConfirm);
 
