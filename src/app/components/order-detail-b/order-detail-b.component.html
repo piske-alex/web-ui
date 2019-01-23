@@ -22,6 +22,10 @@
     <p *ngIf="!this.isStop">
       {{this.i18ns.orderDelay15Min}}
     </p>
+
+    <p *ngIf="this.isShowHadPaidNeedConfirm" class="hadPaidNeedConfirm">
+      {{this.i18ns.orderHadPaidNeedConfirmIn2Min}}
+    </p>
   </section>
 
   

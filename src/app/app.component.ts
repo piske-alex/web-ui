@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
               private chatService: ChatService,
               private languageService: LanguageService) {
       console.log('AppComponent AppComponent AppComponent');
-      this.chatService.initChat();
-      this.chatService.loginChat();
+    //  this.chatService.initChat();
+    //  this.chatService.loginChat();
 
     // ###### change language
     // setTimeout(() => {
