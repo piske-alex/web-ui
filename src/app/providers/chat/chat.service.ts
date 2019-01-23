@@ -530,6 +530,8 @@ export class ChatService {
 
   closeChatClient() {
     this.isLogin = false;
+    this.conservationObj = {};
+
     // console.log('closeChatClient');
     // if (this.chat) {
     //   this.chat.close().then(function() {  }).catch(console.error.bind(console));
