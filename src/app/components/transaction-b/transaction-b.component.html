@@ -74,11 +74,11 @@
     <fa-icon [icon]="['fas', 'comment-dots']"></fa-icon>
     {{i18ns.contact}}
   </div>
-  <div class="btn gz-foot-blue" *ngIf="data.userId != userId"  (click)="transaction()" (keyup.enter)="transaction()" tabindex="3">
+  <div class="btn gz-foot-blue" *ngIf="data.userId != userId"  gzDelayClick (debounceClick)="transaction()" (keyup.enter)="transaction()" tabindex="3">
     <span *ngIf="data.adType == '2'">{{i18ns.sale}}</span>
     <span *ngIf="data.adType == '1'">{{i18ns.buy}}</span>
   </div>
-  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="obtained()" (keyup.enter)="obtained()" tabindex="3">
+  <div class="btn gz-foot-blue" *ngIf="data.userId == userId" gzDelayClick (debounceClick)="obtained()" (keyup.enter)="obtained()" tabindex="3">
     <span><gz-i18n key="transaction.obtained"></gz-i18n></span>
   </div>
   <!--<div class="btn gz-foot-blue" *ngIf="data.userId == userId" (click)="edit()">-->

@@ -37,7 +37,7 @@ export class OrderDetailBComponent implements OnInit {
   isShowSellDispute: boolean;
   isShowSellConfirm: boolean;
   isShowPassword: boolean;
-  
+  isShowHadPaidNeedConfirm: boolean;
 
   paypassword: string;
   isShowPayPassword: boolean;
@@ -82,6 +82,7 @@ export class OrderDetailBComponent implements OnInit {
       this.isShowBuyDispute = true;
       this.isShowSellDispute = false;
       this.isShowSellConfirm = false;
+      this.isShowHadPaidNeedConfirm = false;
 
     } else {
       this.isAdOwner = false;
@@ -89,6 +90,7 @@ export class OrderDetailBComponent implements OnInit {
       this.isShowBuyDispute = false;
       this.isShowSellDispute = true;
       this.isShowSellConfirm = true;
+      this.isShowHadPaidNeedConfirm = false;
     }
 
     this.orderId = this.route.snapshot.paramMap.get('orderId');
@@ -103,7 +105,7 @@ export class OrderDetailBComponent implements OnInit {
           this.order = await this.adService.getOrder({orderid: this.orderId});
           // console.log('this.order', this.order);
           this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
-          
+
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
             if (this.order.payment_status == '1') { // had paid
               // if(this.initNewStatus !== undefined)
@@ -116,6 +118,9 @@ export class OrderDetailBComponent implements OnInit {
                 this.isShowBuyDispute = false;
                 this.isShowSellDispute = true;
                 this.isShowSellConfirm = true;
+                if (this.order.ad_data.is_merchant == 1) {
+                  this.isShowHadPaidNeedConfirm = true;
+                }
               } else { // buy
                 this.isShowCancel = false;
                 this.isShowBuyPay = false;
@@ -144,6 +149,7 @@ export class OrderDetailBComponent implements OnInit {
             this.isShowBuyDispute = false;
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
+            this.isShowHadPaidNeedConfirm = false;
             if(this.initNewStatus !== undefined)
                 clearInterval(this.initNewStatus);
             this.stopInterval();
@@ -183,6 +189,8 @@ export class OrderDetailBComponent implements OnInit {
 
     this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
     this.i18ns.mark_dispute_success = await this.languageService.get('otc.mark_dispute_success');
+
+
     this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
     this.i18ns.order_must_be_unfinish = await this.languageService.get('otc.order_must_be_unfinish');
     this.i18ns.order_has_been_confirm = await this.languageService.get('otc.order_has_been_confirm');
@@ -211,11 +219,15 @@ export class OrderDetailBComponent implements OnInit {
     await this.commonService.getSettingInfo({key:"merchant_order_no_payment_timeout_seconds"}).then(d=>{
       if(!isNaN(d))
         merchantTime = parseFloat(d)/60;
-    },error=>{});
-    let delay:number =  this.order.ad_data.is_merchant == 1 ? merchantTime : 15 ;
+    }, error=>{});
 
+    let delay:number =  this.order.ad_data.is_merchant == 1 ? merchantTime : 15 ;
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
-    this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace("${delay}",delay);
+    this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace('${delay}', delay);
+
+    const delayConfirm:number = 2;
+    this.i18ns.orderHadPaidNeedConfirmIn2Min = await this.languageService.get('otc.orderHadPaidNeedConfirmIn2Min');
+    this.i18ns.orderHadPaidNeedConfirmIn2Min = this.i18ns.orderHadPaidNeedConfirmIn2Min.replace('{delay}', delayConfirm);
 
     createTime.setTime(createTimePlap + 1000 * 60 * delay);
     this.go(createTime);

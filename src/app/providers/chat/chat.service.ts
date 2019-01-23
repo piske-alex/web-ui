@@ -52,7 +52,7 @@ export class ChatService {
         this.user = JSON.parse(_user);
         this.currentLoginUserId = this.user.id;
 
-         console.log('### >>> create im client:::', this.user);
+        // console.log('### >>> create im client:::', this.user);
         this.realtime.createIMClient(String(this.user.id) + this.chat_topic_keyword).then(chat => {
           this.chat = chat;
           this.isLogin = true;
@@ -128,9 +128,9 @@ export class ChatService {
         chat_union_ids = String(anotherUserId) + '_' + String(adUserId) + '_' + String(adId) ;
       }
 
-      // const _conservationObj = this.conservationObj[chat_union_ids];
-      // let _conversation = _conservationObj && _conservationObj.conversation || null;
-      // if (!_conversation) {
+       const _conservationObj = this.conservationObj[chat_union_ids];
+       let _conversation = _conservationObj && _conservationObj.conversation || null;
+       if (!_conversation) {
         // console.log('### >>> conversion not found, create conservation now......', chat_union_ids);
         let  _conversation =
         this.chat.createConversation({
@@ -143,11 +143,12 @@ export class ChatService {
         }).then(conversation => {
           resolve(conversation);
         }, error => {
+          console.log('eror when getConversationLocal',error);
           console.error.bind(console);
         });
-      // } else {
-      //   resolve(_conversation);
-      // }
+       } else {
+         resolve(_conversation);
+       }
     });
   }
 
@@ -312,8 +313,10 @@ export class ChatService {
 
 
   send(adId, adUserId, anotherUserId, orderId, message, adUserName , anotherUserName): Promise<any> {
+    console.log('chat sve need send : ' , message);
     return new Promise(async (resolve, reject) => {
       try {
+        console.log('chat sve need send 001 ');
         const conversation: any = await this.getConversationLocal(adId, adUserId, anotherUserId);
         let chat_union_ids = '';
         if (Number(adUserId) > Number(anotherUserId)) {
@@ -321,9 +324,10 @@ export class ChatService {
         } else {
           chat_union_ids = String(anotherUserId) + '_' + String(adUserId) + '_' + String(adId) ;
         }
+        console.log('chat sve need send 002 ');
         if (conversation) {
           // console.log('### >>>conversation ...', conversation);
-
+          console.log('chat sve need send 003 ');
           const _textMessage = new AV.TextMessage(message);
           _textMessage.setAttributes({
             for: String(adId),
@@ -336,7 +340,9 @@ export class ChatService {
             avatar: this.user.avatar || '',
             sendTimestamp: Date.now(),
           });
+          console.log('chat sve need send 004 ');
           conversation.send(_textMessage);
+          console.log('chat sve need send 005 ');
             console.log('### >>> send message ...', _textMessage);
           // this.conservationObj[chat_union_ids] = this.conservationObj[chat_union_ids] || {};
           // this.conservationObj[chat_union_ids].conversation = conversation;
@@ -353,10 +359,12 @@ export class ChatService {
           // console.log('### >>> send message ...end');
           // return conversation;
         } else {
+          console.log('chat sve need send 009 ');
           console.log('### >>> not found conversaction or create failed!!!');
           reject('### >>> not found conversaction or create failed!!!');
         }
       } catch (e) {
+        console.log('chat sve need send 010 ');
         console.error(e);
         reject(e);
       }
@@ -522,6 +530,8 @@ export class ChatService {
 
   closeChatClient() {
     this.isLogin = false;
+    this.conservationObj = {};
+
     // console.log('closeChatClient');
     // if (this.chat) {
     //   this.chat.close().then(function() {  }).catch(console.error.bind(console));

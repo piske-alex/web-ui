@@ -99,7 +99,7 @@
   </section>
 
   <section class="gz-submit">
-    <div class="btn btn-primary gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="7">
+    <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="submit()" [debounceTime]="1000" (keyup.enter)="submit()" tabindex="7">
       <gz-i18n key="user_real_cert.submit"></gz-i18n>
     </div>
   </section>

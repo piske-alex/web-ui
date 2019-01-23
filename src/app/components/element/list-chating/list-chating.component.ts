@@ -113,6 +113,16 @@ export class ListChatingComponent implements OnInit {
 
 
   async send(message) {
+    if (!this.chatService || !this.chatService.isLogin) {
+      console.log('need chat service relogin', message);
+      try {
+        this.chatService.loginChat();
+      } catch (e) {
+        console.error('list chating  error', e);
+        this.chatService.loginChat();
+      }
+    }
+    console.log('need send msg', message);
     try {
       // this.chatingList = await this.chatService.send(this.adId, this.adUserId, this.anotherUserId, message);
       // this._updateScroll();

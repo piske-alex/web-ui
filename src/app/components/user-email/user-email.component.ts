@@ -37,6 +37,7 @@ export class UserEmailComponent implements OnInit {
     this.i18ns.input_email = await this.languageService.get('user_email.input_email');
     this.i18ns.input_valid_email = await this.languageService.get('user_email.input_valid_email');
     this.i18ns.bind_email_success = await this.languageService.get('user_email.bind_email_success');
+    this.i18ns.bind_email_success_need_active = await this.languageService.get('user_email.bind_email_success_need_active');
     this.i18ns.bind_email_failure = await this.languageService.get('user_email.bind_email_failure');
     this.i18ns.bind_failure_email_existed = await this.languageService.get('user_email.bind_failure_email_existed');
     this.i18ns.bind_failure_email_verified = await this.languageService.get('user_email.bind_failure_email_verified');
@@ -79,7 +80,7 @@ export class UserEmailComponent implements OnInit {
       // , verifyCode: this.emailVerifyCode
       // let _result = await this.userService.bindEmail({email: this.email});
       this.userService.bindEmail({email: this.email}).then(async (data) => {
-        this.dialogService.alert(this.i18ns.bind_email_success);
+        this.dialogService.alert(this.i18ns.bind_email_success_need_active);
           // this.goBack();
           this.router.navigate(['/userSetting']);
       }, error => {

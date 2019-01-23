@@ -58,9 +58,10 @@ export class MyComponent implements OnInit {
     //   console.error(e);
     // }
      localStorage.removeItem('user');
+     localStorage.removeItem('user_id');
 
     try {
-      if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 30) {
+    //  if (_accessToken && Date.now() - +_loginTimestamp < 1000 * 60 * 10) {
         this.user = await this.userService.getDetail({});
         this.isHadLogin = true;
         // console.log('user detail: ', this.user);
@@ -68,7 +69,7 @@ export class MyComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(this.user));
         this.chatService.initChat();
         this.chatService.loginChat();
-      }
+     // }
 
       const _user = localStorage.getItem('user');
       if (_user) {
