@@ -54,6 +54,7 @@ export class RouteMap {
       POST_COLLECTION: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/user/postcollection'),
       POST_UPLOAD_COLLECTION_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/paymentcollection'),
       POST_UPLOAD_CERT_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/paymentcert'),
+      POST_USER_CERT_PICTURE: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/info/usercert'),
     },
     AD: {
       PUBLISH_OTC_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc'),

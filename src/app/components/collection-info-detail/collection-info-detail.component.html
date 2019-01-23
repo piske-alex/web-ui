@@ -29,7 +29,7 @@
     </div>
   </section>
   <section class="gz-full-img fetchCur" *ngIf="settype=='ali'">
-    <div class="inputFileWrapper">
+    <div class="inputFileWrapper" *ngIf="!loading">
       <label for="">
         <input type="file" #aliImgFile (change)="imgChange($event, aliImg)" tabindex="3">
           <span class="custorm-style">
@@ -38,7 +38,7 @@
           </span>
       </label>
     </div>
-    <img alt="{{this.i18ns.QRCode}}" [src]="aliImg.src || '/assets/images/ali.png'" (click)="selectImg(aliImgFile)">
+    <img alt="{{this.i18ns.QRCode}}" [src]="aliImg.src || '/assets/images/ali.png'" >
   </section>
 
   <!--wx-->
@@ -57,7 +57,7 @@
       </div>
     </section>
     <section class="gz-full-img fetchCur" *ngIf="settype=='wx'">
-      <div class="inputFileWrapper">
+      <div class="inputFileWrapper" *ngIf="!loading">
         <label for="">
           <input type="file" #wxImgFile (change)="imgChange($event, wxImg)" tabindex="3">
             <span class="custorm-style">
@@ -66,7 +66,7 @@
             </span>
         </label>
       </div>
-      <img alt="{{this.i18ns.QRCode}}" [src]="wxImg.src || '/assets/images/wechat.png'" (click)="selectImg(wxImgFile)">
+      <img alt="{{this.i18ns.QRCode}}" [src]="wxImg.src || '/assets/images/wechat.png'" >
     </section>
 
   <!--ebank-->

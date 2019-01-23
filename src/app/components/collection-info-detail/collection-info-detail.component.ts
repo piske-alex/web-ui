@@ -268,6 +268,7 @@ export class CollectionInfoDetailComponent implements OnInit {
 
         console.log(this.ercodePicUrl);
       } catch (e) {
+        this.dialogService.alert("Upload picture fail");
         console.error(e);
       }
     }

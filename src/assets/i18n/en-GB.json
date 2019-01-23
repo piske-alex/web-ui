@@ -63,7 +63,8 @@
     "alert_ok":"OK",
     "load_more":"... loading more data ...",
     "confirm_title":"Confirm",
-    "ask_customer_service":"customer service"
+    "ask_customer_service":"customer service",
+    "process":"processing..."
   },
   "element_coin_deposit":{
     "to_address_recharge":"Import to the following address ${coinType} Complete recharge",
