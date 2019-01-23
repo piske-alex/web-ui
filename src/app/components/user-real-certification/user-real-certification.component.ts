@@ -27,6 +27,10 @@ export class UserRealCertificationComponent implements OnInit {
   isSubmit: boolean = false;
 
   i18ns: any = {};
+  loading:boolean = false;
+  fontloading:boolean = false;
+  backloading:boolean = false;
+  halfloading:boolean = false;
 
   @ViewChild(SelectCountryComponent)
   private selectCountryComponent;
@@ -106,26 +110,31 @@ export class UserRealCertificationComponent implements OnInit {
       frontPhotoName: this.frontImg.name,
       backPhotoName: this.backImg.name,
       halfPhotoName: this.halfImg.name,
-      frontPhoto: this._toUploadB64(this.frontImg.src),
-      backPhoto: this._toUploadB64(this.backImg.src),
-      halfPhoto: this._toUploadB64(this.halfImg.src),
+      //frontPhoto: this._toUploadB64(this.frontImg.src),
+      //backPhoto: this._toUploadB64(this.backImg.src),
+      //halfPhoto: this._toUploadB64(this.halfImg.src),
     };
 
     console.log('real-cert para', _params);
     this.isSubmit = true;
+
+    this.loading = true;
     try {
 
       this.userService.realCertifiation(_params).then( data => {
         this.isSubmit = false;
+        this.loading = false;
         // this.goBack();
       this.router.navigate(['/userSetting']);
       }, error => {
         this.isSubmit = false;
+        this.loading = false;
         this.dialogService.alert(this.i18ns.submit_fail);
         console.error(error);
       });
     } catch (e) {
       this.isSubmit = false;
+      this.loading = false;
       console.error(e);
       this.dialogService.alert(e.error);
     }
@@ -165,7 +174,7 @@ export class UserRealCertificationComponent implements OnInit {
     img.click();
   }
 
-  async imgChange(event, imgObj) {
+  async imgChange(event, imgObj , isLoadShow) {
     const files = event && event.target && event.target.files;
     if (files) {
       const fileType = files[0].type.toUpperCase();
@@ -179,12 +188,28 @@ export class UserRealCertificationComponent implements OnInit {
         return this.dialogService.alert(this.i18ns.input_right_image);
       }
 
+      this.loading = true;
+      isLoadShow = this.loading;
+
       try {
         let _result: any = await this._getImgB64(files[0]);
-        imgObj.src = _result.b64img;
         let _fileInfo = _result.fileInfo;
+        let _b64img = _result.b64img;
+
+        let _pic_params = {
+          file: _b64img,
+          fileName: _fileInfo.name
+        };
+        let usercertpic = await this.userService.postUploadPaymentCertPicture(_pic_params);
+        imgObj.src = _result.b64img;
         imgObj.name = _fileInfo.name;
+        this.loading = false;
+        isLoadShow = this.loading;
+
       } catch (e) {
+        this.loading = false;
+        isLoadShow = this.loading;
+        this.dialogService.alert("Upload picture fail");
         console.error(e);
       }
     }

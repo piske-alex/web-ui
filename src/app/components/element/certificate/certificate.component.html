@@ -1,7 +1,7 @@
 <section class="gz-list-tr_cert mt10">
   <h3><gz-i18n key="paymentCertification.tip"></gz-i18n></h3>
 
-<div class="inputFileWrapper">
+<div class="inputFileWrapper" *ngIf="!loading">
   <label for="">
     <input type="file" #certImgFile (change)="imgChange($event)">
       <span class="custorm-style">

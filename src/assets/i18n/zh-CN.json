@@ -63,7 +63,8 @@
     "alert_ok":"确定",
     "load_more":"... 正在加载更多的数据 ...",
     "confirm_title":"确认",
-    "ask_customer_service":"咨询客服"
+    "ask_customer_service":"咨询客服",
+    "process":"处理中..."
   },
   "element_coin_deposit":{
     "to_address_recharge":"向如下地址汇入${coinType}完成充值",
