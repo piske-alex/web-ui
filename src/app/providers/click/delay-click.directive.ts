@@ -11,16 +11,19 @@ export class DelayClickDirective {
   debounceTime = 500;
   @Output() 
   debounceClick = new EventEmitter();
-
+  @Input() 
+  timeOut = 3000;
   @HostBinding('style.color') color: string;
 
-  private clicks = new Subject();
+  private clickSubject = new Subject();
   private subscription: Subscription;
 
   constructor() { }
 
   ngOnInit() {
-    this.subscription = this.clicks.pipe(debounceTime(this.debounceTime)).subscribe(e => {this.debounceClick.emit(e)});
+    this.subscription = this.clickSubject.pipe(debounceTime(this.debounceTime)).subscribe(e => {
+      this.debounceClick.emit(e);
+    });
   }
 
   ngOnDestroy() {
@@ -31,7 +34,17 @@ export class DelayClickDirective {
   clickEvent(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.clicks.next(event);
+
+    event.target.disabled = true;
+    let orignialClassName = event.target.className;
+    event.target.className = "btnUnconfirm";
+
+    this.clickSubject.next(event);
+    setTimeout(() => {
+      event.target.disabled = false;
+      event.target.className = orignialClassName;
+      console.log(event.target.className);
+    }, this.timeOut);
   }
 
 }

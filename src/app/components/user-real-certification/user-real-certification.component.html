@@ -55,12 +55,12 @@
     </div>
   </section>
 
-  <section class="gz-full-img fetchCur">
-    <div class="inputFileWrapper" *ngIf="!fontloading">
+  <section class="gz-full-img ">
+    <div class="inputFileWrapper fetchCur" *ngIf="!frontImg.isLoadShow">
       <label for="">
-        <input type="file" #frontImgFile (change)="imgChange($event, frontImg, fontloading)" tabindex="3">
+        <input type="file" #frontImgFile (change)="imgChange($event, frontImg)" tabindex="3">
           <span class="custorm-style">
-              <span class="left-button" (click)="selectImg(frontImgFile)">{{this.i18ns.card_front}}</span>
+              <span class="left-button" (click)="selectImg(frontImgFile)">{{this.i18ns.card_front}}{{this.i18ns.upload}}</span>
               <span class="right-text"  (click)="selectImg(frontImgFile)">{{frontImg.name}}</span>
           </span>
       </label>
@@ -68,24 +68,24 @@
     <img alt="{{this.i18ns.card_front}}" [src]="frontImg.src || '/assets/images/id_front.jpg'" >
   </section>
 
-  <section class="gz-full-img fetchCur">
-      <div class="inputFileWrapper" *ngIf="!backloading">
+  <section class="gz-full-img ">
+      <div class="inputFileWrapper fetchCur" *ngIf="!this.backImg.isLoadShow">
           <label for="">
-              <input type="file" #backImgFile (change)="imgChange($event, backImg , backloading)" tabindex="4">
+              <input type="file" #backImgFile (change)="imgChange($event, backImg)" tabindex="4">
               <span class="custorm-style">
-                  <span class="left-button" (click)="selectImg(backImgFile)">{{this.i18ns.card_back}}</span>
+                  <span class="left-button" (click)="selectImg(backImgFile)">{{this.i18ns.card_back}}{{this.i18ns.upload}}</span>
                   <span class="right-text"  (click)="selectImg(backImgFile)">{{backImg.name}}</span>
               </span>
           </label>
         </div>
         <img alt="{{this.i18ns.card_back}}" [src]="backImg.src || '/assets/images/id_back.jpg'" >
   </section>
-  <section class="gz-full-img fetchCur">
-      <div class="inputFileWrapper" *ngIf="!halfloading">
+  <section class="gz-full-img ">
+      <div class="inputFileWrapper fetchCur" *ngIf="!this.halfImg.isLoadShow">
           <label for="">
-              <input type="file" #halfImgFile (change)="imgChange($event, halfImg , halfloading)" tabindex="5">
+              <input type="file" #halfImgFile (change)="imgChange($event, halfImg)" tabindex="5">
               <span class="custorm-style">
-                  <span class="left-button" (click)="selectImg(halfImgFile)">{{this.i18ns.bust}}</span>
+                  <span class="left-button" (click)="selectImg(halfImgFile)">{{this.i18ns.bust}}{{this.i18ns.upload}}</span>
                   <span class="right-text"  (click)="selectImg(halfImgFile)">{{halfImg.name}}</span>
               </span>
           </label>
@@ -99,13 +99,16 @@
   </section>
 
   <section class="gz-submit">
-    <div class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit()" [debounceTime]="1000" (keyup.enter)="submit()" tabindex="7">
+    
+    <button class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="3500" tabindex="7"><gz-i18n key="user_real_cert.submit"></gz-i18n></button>
+
+    <!--<div class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit()" [debounceTime]="5000" (keyup.enter)="submit()" tabindex="7">
       <gz-i18n key="user_real_cert.submit"></gz-i18n>
     </div>
     <div class="btnUnconfirm" tabindex="7" *ngIf="loading">
       <gz-i18n key="common.process"></gz-i18n>
-    </div>
-
+    </div>-->
+    
   </section>
 
 </article>
