@@ -61,6 +61,12 @@ export class UserRealCertificationComponent implements OnInit {
     this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
     this.i18ns.input_max_size = await this.languageService.get('user_real_cert.input_max_size');
     this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
+    this.i18ns.upload = await this.languageService.get("user_collection.upload");
+
+    this.frontImg.isLoadShow = false;
+    this.backImg.isLoadShow = false;
+    this.frontImg.isLoadShow = false;
+
   }
 
   goBack() {
@@ -174,7 +180,7 @@ export class UserRealCertificationComponent implements OnInit {
     img.click();
   }
 
-  async imgChange(event, imgObj , isLoadShow) {
+  async imgChange(event, imgObj) {
     const files = event && event.target && event.target.files;
     if (files) {
       const fileType = files[0].type.toUpperCase();
@@ -189,26 +195,29 @@ export class UserRealCertificationComponent implements OnInit {
       }
 
       this.loading = true;
-      isLoadShow = this.loading;
+      imgObj.isLoadShow = true;
 
       try {
         let _result: any = await this._getImgB64(files[0]);
         let _fileInfo = _result.fileInfo;
         let _b64img = _result.b64img;
+        if (_b64img.indexOf(';base64,') != -1) {
+          _b64img = _b64img.split(';base64,')[1];
+        }
 
         let _pic_params = {
           file: _b64img,
           fileName: _fileInfo.name
         };
-        let usercertpic = await this.userService.postUploadPaymentCertPicture(_pic_params);
+        let usercertpic = await this.userService.postUploadUserCertPicture(_pic_params);
         imgObj.src = _result.b64img;
-        imgObj.name = _fileInfo.name;
+        imgObj.name = usercertpic; //数据库存的名称
         this.loading = false;
-        isLoadShow = this.loading;
+        imgObj.isLoadShow = this.loading;
 
       } catch (e) {
         this.loading = false;
-        isLoadShow = this.loading;
+        imgObj.isLoadShow = this.loading;
         this.dialogService.alert("Upload picture fail");
         console.error(e);
       }
