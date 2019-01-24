@@ -18,7 +18,9 @@
     <h3 *ngIf="order.status == 'unfinish'">
       {{delayDesc}}
     </h3>
-
+    <h3 *ngIf="this.isShowHadPaidNeedConfirm">
+        {{delayDesc2}}
+      </h3>
     <p *ngIf="!this.isStop">
       {{this.i18ns.orderDelay15Min}}
     </p>

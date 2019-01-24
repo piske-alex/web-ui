@@ -15,10 +15,12 @@ import { CommonService } from 'src/app/providers/common/common.service';
 })
 export class OrderDetailBComponent implements OnInit {
   delayDesc: string;
+  delayDesc2:string;
   orderId: string;
   order: any = {};
   i18ns: any = {};
   _ordertimer: any = 1;
+  _ordertimer2: any = null;
   chatmsg: string;
   adId: string;
   adUserId: string;
@@ -26,6 +28,7 @@ export class OrderDetailBComponent implements OnInit {
   isAdOwner: boolean;
   timeout: boolean;
   isStop: boolean;
+  isStopByPaymentDelay: boolean;
   payStatus: string;
 
   btccnt: string;
@@ -75,6 +78,7 @@ export class OrderDetailBComponent implements OnInit {
     const currentLoginUserId = localStorage.getItem('user_id');
     this.isStop = false;
     this.isShowPayPassword = false;
+    this.isStopByPaymentDelay = true;
 
     if (currentLoginUserId === this.adUserId) { // buyer
       this.isAdOwner = true;
@@ -98,6 +102,11 @@ export class OrderDetailBComponent implements OnInit {
     let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
 
     this.i18ns.userid_neither_ad_nor_order = await this.languageService.get('my_ad.userid_neither_ad_nor_order');
+    let delayConfirm:number = 2;
+    await this.commonService.getSettingInfo({key:"merchant_order_no_confirm_payment_timeout_seconds"}).then(d=>{
+      if(!isNaN(d))
+      delayConfirm = parseFloat(d)/60;
+    }, error=>{});
 
     try {
 
@@ -120,6 +129,10 @@ export class OrderDetailBComponent implements OnInit {
                 this.isShowSellConfirm = true;
                 if (this.order.ad_data.is_merchant == 1) {
                   this.isShowHadPaidNeedConfirm = true;
+                  this.isStopByPaymentDelay = false;
+                  if (this._ordertimer2 == null) {
+                    this.startIntervalByPaidDelay(this.order.payment_time,delayConfirm);
+                  }
                 }
               } else { // buy
                 this.isShowCancel = false;
@@ -153,7 +166,9 @@ export class OrderDetailBComponent implements OnInit {
             if(this.initNewStatus !== undefined)
                 clearInterval(this.initNewStatus);
             this.stopInterval();
+            this.stopInterval2();
             this.isStop = true;
+            this.isStopByPaymentDelay = true;
           }
     }
 
@@ -172,6 +187,8 @@ export class OrderDetailBComponent implements OnInit {
         console.error('load order error ', e);
       }
     }
+
+    this.i18ns.waitcollection = await this.languageService.get('otc.waitcollection');
 
     this.i18ns.waitPay = await this.languageService.get('otc.waitPay');
     this.i18ns.minute = await this.languageService.get('otc.minute');
@@ -225,22 +242,33 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace('${delay}', delay);
 
-    let delayConfirm:number = 2;
-    await this.commonService.getSettingInfo({key:"merchant_order_no_confirm_payment_timeout_seconds"}).then(d=>{
-      if(!isNaN(d))
-      delayConfirm = parseFloat(d)/60;
-    }, error=>{});
+    
     this.i18ns.orderHadPaidNeedConfirmIn2Min = await this.languageService.get('otc.orderHadPaidNeedConfirmIn2Min');
     this.i18ns.orderHadPaidNeedConfirmIn2Min = this.i18ns.orderHadPaidNeedConfirmIn2Min.replace('{delay}', delayConfirm);
 
-    createTime.setTime(createTimePlap + 1000 * 60 * delay);
-    this.go(createTime);
-
+    if (this.order.status == 'unfinish' && this.order.payment_status == '1' && !this.isAdOwner && this.order.ad_data.is_merchant == 1) {
+      //let paymentTime: Date = new Date(this.order.payment_time * 1000);
+      //let paymentTimePlap = paymentTime.getTime();
+      //paymentTime.setTime(paymentTimePlap + 1000 * 60 * delayConfirm);
+      //this.go2(paymentTime);
+      this.startIntervalByPaidDelay(this.order.payment_time,delayConfirm);
+    }else{
+      createTime.setTime(createTimePlap + 1000 * 60 * delay);
+      this.go(createTime);
+    }
+    
     setTimeout(() => {
       if (document.querySelector('.div_list_chat')) {
         document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
       }
     }, 1500);
+  }
+
+  startIntervalByPaidDelay(payment_time,delayConfirm){
+      let paymentTime: Date = new Date(payment_time * 1000);
+      let paymentTimePlap = paymentTime.getTime();
+      paymentTime.setTime(paymentTimePlap + 1000 * 60 * delayConfirm);
+      this.go2(paymentTime);
   }
 
   goBack() {
@@ -271,6 +299,32 @@ export class OrderDetailBComponent implements OnInit {
       this.isShowBuyPay = false;
     }
  }
+
+ leftTimer2(enddate: Date) {
+  let leftTime: number = ((new Date(enddate).getTime()) - new Date().getTime()); // 计算剩余的毫秒数
+  let days: number = Math.floor(leftTime / 1000 / 60 / 60 / 24); // 计算剩余的天数
+  let hours = Math.floor(leftTime / 1000 / 60 / 60 % 24); // 计算剩余的小时
+  let minutes = Math.floor(leftTime / 1000 / 60 % 60); // 计算剩余的分钟
+  let seconds = Math.floor(leftTime / 1000 % 60); // 计算剩余的秒数
+  days = this.checkTime(days);
+  hours = this.checkTime(hours);
+  minutes = this.checkTime(minutes);
+  seconds = this.checkTime(seconds);
+  if (days >= 0 || hours >= 0 || minutes >= 0 || seconds >= 0) {
+    this.delayDesc2 = this.i18ns.waitcollection + ` ${minutes} ` + this.i18ns.minute + ` ${seconds} ` + this.i18ns.second;
+    // console.log(days + "天" + hours + "小时" + minutes + "分" + seconds + "秒");
+  } else {
+    this.delayDesc2 = "";//this.i18ns.pay_timeout;
+  }
+  if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
+    this.delayDesc2 = "";//this.i18ns.pay_timeout;
+    window.clearInterval(this._ordertimer2);
+    this._ordertimer2 = null;
+    this.timeout = false;
+    this.isShowBuyPay = false;
+  }
+}
+
  checkTime(i) { // 将0-9的数字前面加上0，例1变为01
     if (i < 10) {
     i = '0' + i;
@@ -286,6 +340,14 @@ export class OrderDetailBComponent implements OnInit {
       this._ordertimer = null;
     }
   }
+  stopInterval2() {
+    this.isStopByPaymentDelay = true;
+    this.delayDesc2 = '';
+    if (this._ordertimer2 != null) {
+      window.clearInterval(this._ordertimer2);
+      this._ordertimer2 = null;
+    }
+  }
 
   go(v) {
     let date1 = new Date(), data2 = v;
@@ -295,6 +357,16 @@ export class OrderDetailBComponent implements OnInit {
     if(this.isStop == true)
       return;
     this._ordertimer = setInterval(() => {this.leftTimer(data2)} , 1000);
+  }
+
+  go2(v) {
+    let date1 = new Date(), data2 = v;
+    if (data2 < date1) {
+      return; // 设置的时间小于现在时间退出
+    }
+    if(this.isStopByPaymentDelay == true)
+      return;
+    this._ordertimer2 = setInterval(() => {this.leftTimer2(data2)} , 1000);
   }
 
   async cancelOrder() {

@@ -37,7 +37,7 @@ export class CertificateComponent implements OnInit {
   async ngOnInit() {
     this.i18ns.delete = await this.languageService.get('paymentCertification.delete');
     this.i18ns.upload = await this.languageService.get('user_collection.upload');
-
+    this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
 
     this.userId = localStorage.getItem('user_id');
     this.freshList();
