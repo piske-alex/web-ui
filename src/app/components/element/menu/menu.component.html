@@ -12,5 +12,10 @@
     <li class="nav-item" [class]="isActiveNav('my')" (click)="navTo('my')" routerLink="/my">
       <img src="/assets/images/menu/{{getHomeImg('my')}}" alt="" class="gz-icon">
     </li>
+    <li class="nav-item" [class]="isActiveNav('news')" >
+        <a href="https://www.koinexchange.net/" target="_blank">
+          <img src="/assets/images/menu/{{getHomeImg('news')}}" alt="" class="gz-icon">
+       </a>
+    </li>
   </ul>
 </nav>
