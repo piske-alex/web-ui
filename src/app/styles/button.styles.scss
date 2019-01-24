@@ -5,7 +5,8 @@ body .gz-app {
   .btnUnconfirm{
     border: 1px solid #3a404c;
     width: 80%;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 100;
     border-radius: 20px;
     color: #14171C;
     background: rgb(70, 68, 63);
@@ -13,8 +14,26 @@ body .gz-app {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    line-height: 2;
+    line-height: 1.5;
+    pointer-events: none;
+    padding: 6px 12px;
   }
+  .btnUnconfirmDiv{
+    border: 1px solid #3a404c;
+    font-size: 12px;
+    font-weight: 100;
+    border-radius: 20px;
+    color: #14171C;
+    background: rgb(70, 68, 63);
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 1.5;
+    pointer-events: none;
+    padding: 6px 12px;
+  }
+
 
   .btn {
     font-size: 12px;

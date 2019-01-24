@@ -28,5 +28,12 @@
         <gz-i18n key="tabsPage.my"></gz-i18n>
       </a>
     </li>
+    <li class="nav-item" [class]="isActiveNav('news')" >
+      <img src="/assets/images/icon-news.png" alt="" class="gz-icon" *ngIf="isActiveNav('news')">
+      <img src="/assets/images/icon-news-in.png" alt="" class="gz-icon" *ngIf="!isActiveNav('news')">
+      <a href="https://www.koinexchange.net/" target="_blank">
+        <gz-i18n key="tabsPage.news"></gz-i18n>
+      </a>
+    </li>
   </ul>
 </nav>

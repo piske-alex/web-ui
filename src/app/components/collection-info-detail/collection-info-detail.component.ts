@@ -74,6 +74,7 @@ export class CollectionInfoDetailComponent implements OnInit {
 
     this.i18ns.tip_input = await this.languageService.get('user_collection.tip_input');
     this.i18ns.tip_upload = await this.languageService.get('user_collection.tip_upload');
+    this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
     
     this.i18ns.aliacct = await this.languageService.get('user_collection.aliacct');
     this.i18ns.aliacctname = await this.languageService.get('user_collection.aliacctname');
@@ -167,15 +168,18 @@ export class CollectionInfoDetailComponent implements OnInit {
     };
 
     console.log('para', _params);
-    
+    this.loading = true;
     try {
       this.userService.addOrUpdateCollectionInfo(_params).then( data => {
+        this.loading = false;
         this.router.navigate(['/collectionInfo']);
       }, error => {
         this.dialogService.alert(this.i18ns.submit_fail);
+        this.loading = false;
         console.error(error);
       });
     } catch (e) {
+      this.loading = false;
       console.error(e);
       this.dialogService.alert(e.error);
     }
@@ -244,12 +248,12 @@ export class CollectionInfoDetailComponent implements OnInit {
 
         let _fileInfo = _result.fileInfo;
         
-        console.log(this.getObjectURL(files[0]));// newfile[0]是通过input file上传的二维码图片文件
+        /*console.log(this.getObjectURL(files[0]));// newfile[0]是通过input file上传的二维码图片文件
         qrcode.decode(this.getObjectURL(files[0]));
         qrcode.callback = function (imgMsg) {
             this.ercodeInfo = imgMsg
             console.log("二维码解析：" + this.ercodeInfo);
-        }
+        }*/
         let _b64img = _result.b64img;
         if (_b64img.indexOf(';base64,') != -1) {
           _b64img = _b64img.split(';base64,')[1];

@@ -35,15 +35,25 @@ export class DelayClickDirective {
     event.preventDefault();
     event.stopPropagation();
 
-    event.target.disabled = true;
-    let orignialClassName = event.target.className;
-    event.target.className = "btnUnconfirm";
-
+    //console.log(event)
+    
+    //event.currentTarget.disabled = true;
+    //console.log(event.currentTarget , event.target)
+    let target = event.currentTarget;
+    //debugger
+    let orignialClassName = target.className;
+    target.className = "btnUnconfirmDiv";
+    if(target.tagName.toLowerCase() == "button"){
+      target.disabled = true;
+      target.className = "btnUnconfirm";
+    }
+      
     this.clickSubject.next(event);
     setTimeout(() => {
-      event.target.disabled = false;
-      event.target.className = orignialClassName;
-      console.log(event.target.className);
+      //event.currentTarget.disabled = false;
+      target.className = orignialClassName;
+      if(target.tagName.toLowerCase() == "button")
+        target.disabled = false;
     }, this.timeOut);
   }
 

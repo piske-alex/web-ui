@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LanguageService } from "../../../providers/language/language.service";
+import { LanguageService } from '../../../providers/language/language.service';
 
 @Component({
   selector: 'gz-menu',
