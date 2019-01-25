@@ -42,10 +42,10 @@ export class DelayClickDirective {
     let target = event.currentTarget;
     //debugger
     let orignialClassName = target.className;
-    target.className = "btnUnconfirmDiv";
+    target.className = orignialClassName +" btnUn";//"btnUnconfirmDiv";
     if(target.tagName.toLowerCase() == "button"){
       target.disabled = true;
-      target.className = "btnUnconfirm";
+      target.className = orignialClassName +" btnUn" ; //"btnUnconfirm";
     }
       
     this.clickSubject.next(event);

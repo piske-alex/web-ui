@@ -26,15 +26,18 @@
     </p>
 
     <p *ngIf="this.isShowHadPaidNeedConfirm" class="hadPaidNeedConfirm">
-      {{this.i18ns.orderHadPaidNeedConfirmIn2Min}}
+      {{this.i18ns.merchant_msg_1}} <br/>
+      {{this.i18ns.merchant_msg_2}} <br/>
+      {{this.i18ns.merchant_msg_3}} <br/>
+     
     </p>
   </section>
 
   
-  <div class="gz-list-td fontSize" *ngIf="this.order?.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} , {{this.payStatus}}</div>
-  <div class="gz-list-td fontSize" *ngIf="this.order?.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} , {{this.payStatus}}</div>
-  <div class="gz-list-td fontSize" *ngIf="this.order?.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} , {{this.payStatus}}</div>
-  <div class="gz-list-td fontSize" *ngIf="this.order?.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} , {{this.payStatus}}</div>
+  <div class="gz-list-td fontSize" *ngIf="this.order?.ad_data.is_merchant != 1 && this.order?.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}}, {{this.payStatus}}</div>
+  <div class="gz-list-td fontSize" *ngIf="this.order?.ad_data.is_merchant != 1 && this.order?.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}}, {{this.payStatus}}</div>
+  <div class="gz-list-td fontSize" *ngIf="this.order?.ad_data.is_merchant != 1 && this.order?.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}}, {{this.payStatus}}</div>
+  <div class="gz-list-td fontSize" *ngIf="this.order?.ad_data.is_merchant != 1 && this.order?.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}}, {{this.payStatus}}</div>
 
 
   <section class="gz-row gz-row-1" *ngIf="!this.isAdOwner">

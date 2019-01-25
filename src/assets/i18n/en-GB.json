@@ -296,7 +296,10 @@
     "saleWarn_merchant_2": "5. Please note buyer has requested that seller need mark receipt or dispute within 1 munite after buyer mark payment. After {1} minute, the transction will be marked as dispute.",
     "mark_dispute_success":"Mark dispute sucessfully, customer service will follow up this dispute order, please kindly upload your transction certification via below channels:\r\n1. Upload transcation certification in current order detail page, or \r\n2. Submit support ticket in 'ME -> Customer Service', and provide order id and upload transaction certification. ",
     "mark_receive_success":"Mark receipt success. The system will be processed.",
-    "waitcollection":"wait for collection"
+    "waitcollection":"wait for collection",
+    "merchant_msg_1":"1. After payment receive and amount is correct, please click\"Mark Receipt\" to complete transction.",
+    "merchant_msg_2":"2. If you don't receive the payment from buyer, after {delay} minutes current order will be marked as \"Dispute\".",
+    "merchant_msg_3":"3. If the payment amount is not correct, please click \"Mark Dispute\", our customer service will follow up this dispute order."
   },
   "my_msg": {
     "chat_with_members": "Dialog Member",
@@ -482,7 +485,8 @@
     "trans_confirm_time":"Time of arrival",
     "buy_sell_has_dispute_order":"The transaction has dispute order",
     "reach_maximun_unflnish_order":"Unfinished order limit has been exceeded",
-    "goto_old_unfinish_order":"There are unfinished order. Please check the old order information first."
+    "goto_old_unfinish_order":"There are unfinished order. Please check the old order information first.",
+    "reach_maximun_unfinish_order_merchant":"Place order failure, you have uncompleted merchant order. (You can only place one merchant order at the same time.)"
   },
   "trust": {
     "praise": "Praise",
