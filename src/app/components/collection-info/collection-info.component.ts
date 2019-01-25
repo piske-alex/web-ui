@@ -18,7 +18,7 @@ export class CollectionInfoComponent implements OnInit {
   collectionInfo: userCollectInfo = new userCollectInfo();
   i18ns: any = {};
   showTip:boolean = false;
-
+  loading:boolean = false;
   constructor(private location: Location,
     private userService: UserService,
     private router: Router,
@@ -38,8 +38,10 @@ export class CollectionInfoComponent implements OnInit {
       return;
     }
     this.showTip = false;
+    this.loading = true;
     this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
     this.showTip = true;
+    this.loading = false;
     console.log(this.collectionInfo)
   }
 

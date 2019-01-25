@@ -33,12 +33,12 @@
       <gz-i18n key="element_coin_withraw.notice"></gz-i18n>
     </p>
     <p>      
-      {{this.i18ns.notice_info}}
+      {{this.i18ns.notice_info_tmp}}
     </p>
   </div>
   <div class="gz-btn-row">
     <!--active-->
-    <div class="btn btn-primary gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="5"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
+    <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="3500" tabindex="5"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
   </div>
 </div>
 
