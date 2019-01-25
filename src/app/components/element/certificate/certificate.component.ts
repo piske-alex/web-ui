@@ -38,7 +38,8 @@ export class CertificateComponent implements OnInit {
     this.i18ns.delete = await this.languageService.get('paymentCertification.delete');
     this.i18ns.upload = await this.languageService.get('user_collection.upload');
     this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
-
+    this.i18ns.input_max_size = await this.languageService.get('user_real_cert.input_max_size');
+    
     this.userId = localStorage.getItem('user_id');
     this.freshList();
   }

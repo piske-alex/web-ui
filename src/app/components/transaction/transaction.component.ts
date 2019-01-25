@@ -69,7 +69,8 @@ export class TransactionComponent implements OnInit {
     this.i18ns.goto_old_unfinish_order = await this.languageService.get('transaction.goto_old_unfinish_order');
     this.i18ns.buy_sell_has_dispute_order = await this.languageService.get('transaction.buy_sell_has_dispute_order');
     this.i18ns.reach_maximun_unflnish_order = await this.languageService.get('transaction.reach_maximun_unflnish_order');
-
+    this.i18ns.reach_maximun_unflnish_order_merchant = await this.languageService.get('transaction.reach_maximun_unflnish_order_merchant');
+    
     this.i18ns.ap_alipay = await this.languageService.get('element_list_trans.ap_alipay');
     this.i18ns.wp_wechatpay = await this.languageService.get('element_list_trans.wp_wechatpay');
     this.i18ns.pp_paypal = await this.languageService.get('element_list_trans.pp_paypal');
@@ -199,7 +200,9 @@ export class TransactionComponent implements OnInit {
         this.dialogService.alert(this.i18ns.onlyRealUser);
       } else if (error.error === 'advertisement not found') {
         this.dialogService.alert(this.i18ns.not_trans_as_ad_hidden);
-      } else {
+      } else if (error.error === 'reach_maximun_unflnish_order_merchant') {
+        this.dialogService.alert(this.i18ns.reach_maximun_unflnish_order_merchant);
+      }else {
         if (error.error) {
           this.dialogService.alert(error.error);
         }

@@ -2,6 +2,11 @@
 
 body .gz-app {
 
+  .btnUn{
+    pointer-events: none !important;
+    color: #14171C !important;
+    background: rgb(70, 68, 63) !important;
+  }
   .btnUnconfirm{
     border: 1px solid #3a404c;
     width: 80%;

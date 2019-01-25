@@ -296,7 +296,10 @@
     "saleWarn_merchant_2": "5.请注意交易方要求付款后，卖方能即时确认。买方付款后，卖方在{1}分钟内进行标记收款或标记争议，超时未处理，系统将强制标记争议。",
     "mark_dispute_success":"标记争议成功，客服会跟进后续处理，为方便客户跟进：\r\n1.请在当前页面上传交易凭证，或\r\n2.在'我的->咨询客服'提交工单，并提供订单号与交易凭证。",
     "mark_receive_success":"标记收款成功，系统会进行后续处理",
-    "waitcollection":"待收款"
+    "waitcollection":"待收款",
+    "merchant_msg_1":"1. 请于收到正确金额的买方付款后，按\"标记收款\"完成交易。",
+    "merchant_msg_2":"2. 如果一直未收到买方付款，{delay}分钟后系统会自动争议订单。",
+    "merchant_msg_3":"3. 如果收到的买方付款金额不足或不对，请按\"标记争议\"，我们的客服会尽快处理该争议订单。"
   },
   "my_msg": {
     "chat_with_members": "对话框成员",
@@ -483,7 +486,8 @@
     "trans_confirm_time":"到账时间",
     "buy_sell_has_dispute_order":"订单正在争议",
     "reach_maximun_unflnish_order":"已超出未完成的订单上限",
-    "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息"
+    "goto_old_unfinish_order":"15分钟内有未完成的交易，请先查看处理旧的交易信息",
+    "reach_maximun_unfinish_order_merchant":"下单失败，您还有其他未完成商户订单。(同一时间只能接一个商户订单)"
   },
   "trust": {
     "praise": "好评",

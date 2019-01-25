@@ -242,9 +242,12 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace('${delay}', delay);
 
-    
+    this.i18ns.merchant_msg_1 = await this.languageService.get('otc.merchant_msg_1');
+    this.i18ns.merchant_msg_3 = await this.languageService.get('otc.merchant_msg_3');
     this.i18ns.orderHadPaidNeedConfirmIn2Min = await this.languageService.get('otc.orderHadPaidNeedConfirmIn2Min');
     this.i18ns.orderHadPaidNeedConfirmIn2Min = this.i18ns.orderHadPaidNeedConfirmIn2Min.replace('{delay}', delayConfirm);
+    this.i18ns.merchant_msg_2 = await this.languageService.get('otc.merchant_msg_2');
+    this.i18ns.merchant_msg_2 = this.i18ns.merchant_msg_2.replace('{delay}', delayConfirm);
 
     if (this.order.status == 'unfinish' && this.order.payment_status == '1' && !this.isAdOwner && this.order.ad_data.is_merchant == 1) {
       //let paymentTime: Date = new Date(this.order.payment_time * 1000);
@@ -447,8 +450,13 @@ export class OrderDetailBComponent implements OnInit {
         action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
             res => {
-              this.location.back();
-              this.location.back();
+              //已经完成，跳转到钱包
+              //if (this.order.status == 'finish'){
+                this.router.navigate(['/wallet']);
+                //return;
+              //}
+              //this.location.back();
+              //this.location.back();
             }
           );
         }, err => {

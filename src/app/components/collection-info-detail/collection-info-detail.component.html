@@ -28,8 +28,8 @@
        maxlength="200">
     </div>
   </section>
-  <section class="gz-full-img fetchCur" *ngIf="settype=='ali'">
-    <div class="inputFileWrapper" *ngIf="!loading">
+  <section class="gz-full-img " *ngIf="settype=='ali'">
+    <div class="inputFileWrapper fetchCur" *ngIf="!loading">
       <label for="">
         <input type="file" #aliImgFile (change)="imgChange($event, aliImg)" tabindex="3">
           <span class="custorm-style">
@@ -56,8 +56,8 @@
          maxlength="200">
       </div>
     </section>
-    <section class="gz-full-img fetchCur" *ngIf="settype=='wx'">
-      <div class="inputFileWrapper" *ngIf="!loading">
+    <section class="gz-full-img " *ngIf="settype=='wx'">
+      <div class="inputFileWrapper fetchCur" *ngIf="!loading">
         <label for="">
           <input type="file" #wxImgFile (change)="imgChange($event, wxImg)" tabindex="3">
             <span class="custorm-style">
