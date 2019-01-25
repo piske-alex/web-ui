@@ -192,7 +192,7 @@
     "walletNotEnough": "Your wallet has insufficient balance",
     "adShowFail": "Ads will not display properly",
     "adWarning_1": "Publishing a trade ad is free",
-    "adWarning_2": "Each completed transaction is subject to a 0.7% fee",
+    "adWarning_2": "Each completed transaction is subject to a {0}% fee",
     "adWarning_3": "At least 0.05 BTC is requied in the wallet for the ad a display properly",
     "currentPrice": "Current Price",
     "referencePrice": "Current quote market reference price",

@@ -192,7 +192,7 @@
     "walletNotEnough": "您的钱包余额不足",
     "adShowFail": "广告将无法正常显示",
     "adWarning_1": "发布一则交易广告是免费的",
-    "adWarning_2": "每笔完成的交易需要缴纳0.7%的费用",
+    "adWarning_2": "每笔完成的交易需要缴纳{0}%的费用",
     "adWarning_3": "钱包中至少需要有0.05BTC，广告才会正常展示",
     "currentPrice": "当前报价",
     "referencePrice": "市场参考价格",
