@@ -97,7 +97,14 @@ export class PostAdComponent implements OnInit {
       this.ad.remark = _ad.remark;
     }
 
+    let adfee:number = 2;
+    await this.commonService.getSettingInfo({key:"OTC_ad_fee"}).then( d => {
+      if (!isNaN(d)) adfee = parseFloat(d) * 100;
+    }, error => {});
+
     this.i18ns = {};
+    this.i18ns.adWarning_2 = await this.languageService.get('otc.adWarning_2');
+    this.i18ns.adWarning_2 = this.i18ns.adWarning_2.replace('{0}', adfee);
     this.i18ns.publishError = await this.languageService.get('otc.publishError');
     this.i18ns.priceWarn_1 = await this.languageService.get('otc.price_warn_1');
     this.i18ns.priceWarn_2 = await this.languageService.get('otc.price_warn_2');
@@ -111,8 +118,6 @@ export class PostAdComponent implements OnInit {
     this.i18ns.insufficient_balance = await this.languageService.get('otc.insufficient_balance');
     this.i18ns.payType =  await this.languageService.get('otc.payType');
   }
-
-  
 
   goBack() {
     this.location.back();

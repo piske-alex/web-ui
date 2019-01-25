@@ -192,7 +192,7 @@
     "walletNotEnough": "您的錢包餘額不足",
     "adShowFail": "廣告將無法正常顯示",
     "adWarning_1": "發布一則交易廣告是免費的",
-    "adWarning_2": "每筆完成的交易需要繳納0.7%的費用",
+    "adWarning_2": "每筆完成的交易需要繳納{0}%的費用",
     "adWarning_3": "錢包中至少需要有0.05BTC，廣告才會正常展示",
     "currentPrice": "當前報價",
     "referencePrice": "市場參考價格",
