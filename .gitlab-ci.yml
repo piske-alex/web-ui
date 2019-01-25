@@ -31,19 +31,6 @@ docker:
     - docker build -t ${DEV_REGISTRY_URL}/${DEV_IMAGE} .
     - docker push ${DEV_REGISTRY_URL}/${DEV_IMAGE}
 
-docker-uat:
-  stage: docker
-  image: docker:latest
-  services:
-    - docker:dind
-  cache: {}
-  only:
-    - uat
-  script:
-    - docker login -u ${UAT_REGISTRY_USER} -p ${UAT_REGISTRY_PASS} ${UAT_REGISTRY_URL}
-    - docker build -t ${UAT_REGISTRY_URL}/${DEV_IMAGE} .
-    - docker push ${UAT_REGISTRY_URL}/${DEV_IMAGE}
-
 docker-prd:
   stage: docker
   image: docker:latest
@@ -69,19 +56,6 @@ app-deploy:
   script:
     - rancher login ${RANCHER_URL} -t ${RANCHER_TOKEN} --context ${RANCHER_PROJECT_ID}
     - rancher kubectl --namespace="${DEV_STACK}" patch deployment "${DEV_SERVICE}" --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"'"${DEV_SERVICE}"'","image":"'"${DEV_REGISTRY_URL}"'/'"${DEV_IMAGE}"'","env":[{"name":"FORCE_RESTART_AT","value":"'"${CI_PIPELINE_ID}"'"}]}]}}}}'
-
-app-deploy-uat:
-  stage: deploy
-  image: heunghingwan/rancher-cli-k8s
-  variables:
-    GIT_STRATEGY: none
-  cache: {}
-  dependencies: []
-  only:
-    - uat
-  script:
-    - rancher login ${UAT_RANCHER_URL} -t ${UAT_RANCHER_TOKEN} --context ${UAT_RANCHER_PROJECT_ID}
-    - rancher kubectl --namespace="${DEV_STACK}" patch deployment "${DEV_SERVICE}" --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"'"${DEV_SERVICE}"'","image":"'"${UAT_REGISTRY_URL}"'/'"${DEV_IMAGE}"'","env":[{"name":"FORCE_RESTART_AT","value":"'"${CI_PIPELINE_ID}"'"}]}]}}}}'
 
 app-deploy-prd:
   stage: deploy
