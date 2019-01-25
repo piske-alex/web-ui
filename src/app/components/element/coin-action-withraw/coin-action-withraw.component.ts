@@ -58,6 +58,8 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.input_address = this.i18ns.input_address.replace(/\$\{coinType\}/g, this.coinType);
 
     this.i18ns.send_address = await this.languageService.get('element_coin_withraw.send_address');
+
+    this.i18ns.notice_info_tmp = await this.languageService.get('element_coin_withraw.notice_info');
     this.i18ns.notice_info = await this.languageService.get('element_coin_withraw.notice_info');
     this.i18ns.send_address = this.i18ns.send_address.replace(/\$\{coinType\}/g, this.coinType);
     this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{coinType\}/g, this.coinType);
@@ -71,17 +73,23 @@ export class CoinActionWithrawComponent implements OnInit {
       this.min_amount = 0.01;
     }
 
+    this.i18ns.notice_info_tmp = this.i18ns.notice_info_tmp.replace(/\$\{coinType\}/g, this.coinType);
+    this.i18ns.notice_info_tmp = this.i18ns.notice_info_tmp.replace(/\$\{trans_fee\}/g, 0.001);
+    this.i18ns.notice_info_tmp = this.i18ns.notice_info_tmp.replace(/\$\{min_amount\}/g, this.min_amount);
+
     await this.walletService.walletBalance({coin: this.coinType, accountType: 'otc'}).then(data => {
       data.total = (+data.balance - +data.locked).toFixed(8);
       data.usableAmount = (+data.balance -  +data.locked).toFixed(8);
       this.coinBalance = data;
       this.trans_fee = data.withdraw_fee;
+      this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{trans_fee\}/g, this.trans_fee);
+      this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{min_amount\}/g, this.min_amount);
+      this.i18ns.notice_info_tmp = this.i18ns.notice_info;
     }, error => {
       console.error(error);
     });
 
-    this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{trans_fee\}/g, this.trans_fee);
-    this.i18ns.notice_info = this.i18ns.notice_info.replace(/\$\{min_amount\}/g, this.min_amount);
+    
 
     this.i18ns.err_paypassword_invalid = await this.languageService.get('element_coin_withraw.err_paypassword_invalid');
     this.i18ns.err_address_invalid = await this.languageService.get('element_coin_withraw.err_address_invalid');

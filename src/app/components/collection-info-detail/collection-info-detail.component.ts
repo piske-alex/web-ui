@@ -34,7 +34,7 @@ export class CollectionInfoDetailComponent implements OnInit {
 
   i18ns: any = {};
   loading:boolean = false;
-
+  showTip:boolean = false;
   constructor(private router: Router,
               private activeRoute : ActivatedRoute,
               private location: Location,
@@ -61,7 +61,9 @@ export class CollectionInfoDetailComponent implements OnInit {
     
     this.ercodePicUrl = "";
 
+    this.showTip = false;
     this.collectionInfo = await this.userService.getCollectionInfoByUserId({ userid: this.userId });
+    this.showTip = true;
     console.log(this.collectionInfo)
     this.i18ns.account = await this.languageService.get('user_collection.account');
     this.i18ns.username = await this.languageService.get('user_collection.username');
@@ -75,7 +77,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     this.i18ns.tip_input = await this.languageService.get('user_collection.tip_input');
     this.i18ns.tip_upload = await this.languageService.get('user_collection.tip_upload');
     this.i18ns.input_right_image = await this.languageService.get('user_real_cert.input_right_image');
-    
+    this.i18ns.input_max_size = await this.languageService.get('user_real_cert.input_max_size');
     this.i18ns.aliacct = await this.languageService.get('user_collection.aliacct');
     this.i18ns.aliacctname = await this.languageService.get('user_collection.aliacctname');
     this.i18ns.paypic = await this.languageService.get('user_collection.paypic');

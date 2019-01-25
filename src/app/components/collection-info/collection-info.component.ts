@@ -18,7 +18,7 @@ export class CollectionInfoComponent implements OnInit {
   collectionInfo: userCollectInfo = new userCollectInfo();
   i18ns: any = {};
   showTip:boolean = false;
-
+  loading:boolean = false;
   constructor(private location: Location,
     private userService: UserService,
     private router: Router,

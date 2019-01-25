@@ -12,8 +12,9 @@
 
 <article class="gz-my">
 
+  <div class="loader" *ngIf="!showTip">Loading...</div>
 
-  <section class="gz-my-group">
+  <section class="gz-my-group" *ngIf="showTip">
     <div [ngClass]="{fetchCur: true }">
       <div class="gz-my-row" (click)="goToDetail('ali')">
         <div class="gz-my-left">
