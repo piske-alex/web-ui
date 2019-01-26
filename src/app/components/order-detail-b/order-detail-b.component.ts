@@ -41,6 +41,7 @@ export class OrderDetailBComponent implements OnInit {
   isShowSellConfirm: boolean;
   isShowPassword: boolean;
   isShowHadPaidNeedConfirm: boolean;
+  isHiddenByTimeout:boolean;
 
   paypassword: string;
   isShowPayPassword: boolean;
@@ -79,7 +80,8 @@ export class OrderDetailBComponent implements OnInit {
     this.isStop = false;
     this.isShowPayPassword = false;
     this.isStopByPaymentDelay = true;
-
+    this.isHiddenByTimeout = false;
+    
     if (currentLoginUserId === this.adUserId) { // buyer
       this.isAdOwner = true;
       this.isShowBuyPay = true;
@@ -326,8 +328,7 @@ export class OrderDetailBComponent implements OnInit {
     this.timeout = false;
     this.isShowBuyPay = false;
     
-    this.isShowSellConfirm = false;
-    this.isShowSellDispute=false;
+    this.isHiddenByTimeout = true;
   }
 }
 
