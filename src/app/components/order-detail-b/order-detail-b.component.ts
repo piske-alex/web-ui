@@ -325,6 +325,9 @@ export class OrderDetailBComponent implements OnInit {
     this._ordertimer2 = null;
     this.timeout = false;
     this.isShowBuyPay = false;
+    
+    this.isShowSellConfirm = false;
+    this.isShowSellDispute=false;
   }
 }
 
