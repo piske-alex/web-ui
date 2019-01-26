@@ -29,16 +29,16 @@
   </div>
   
   <div class="gz-list-tr-right w15">
-        <div class="btn btn-primary gz-circle" (click)="toOrderDetail2(data)">
+        <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="toOrderDetail2(data)" [debounceTime]="500" [timeOut]="3500">
           {{this.i18ns.order_detail}}
         </div>
         <div class="ml10 float_right" *ngIf="this.loginUserId== data.userid  && data.isRating == 1 && data.orderRating == 1">{{this.i18ns.do_rating}}: {{this.i18ns.rating_1}} </div>
         <div class="ml10 float_right" *ngIf="this.loginUserId== data.userid  && data.isRating == 1 && data.orderRating == 0">{{this.i18ns.do_rating}}: {{this.i18ns.rating_0}} </div>
         
-        <div class="btn btn-primary gz-circle " *ngIf="this.loginUserId== data.userid && data.status == 'finish' && data.isRating == 0 " (click)="doOrderRating(data,'1')">
+        <div class="btn btn-primary gz-circle " *ngIf="this.loginUserId== data.userid && data.status == 'finish' && data.isRating == 0 " gzDelayClick (debounceClick)="doOrderRating(data,'1')" [debounceTime]="500" [timeOut]="3500">
             {{this.i18ns.rating_1}}
         </div>
-        <div class="btn btn-primary gz-circle " *ngIf="this.loginUserId== data.userid && data.status == 'finish' && data.isRating == 0 " (click)="doOrderRating(data,'0')">
+        <div class="btn btn-primary gz-circle " *ngIf="this.loginUserId== data.userid && data.status == 'finish' && data.isRating == 0 " gzDelayClick (debounceClick)="doOrderRating(data,'0')" [debounceTime]="500" [timeOut]="3500">
             {{this.i18ns.rating_0}}
         </div>
 

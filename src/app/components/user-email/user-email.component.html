@@ -32,7 +32,7 @@
   <!--</section>-->
 
   <section class="gz-submit">
-    <div class="btn btn-primary gz-circle" (click)="submit()" (keyup.enter)="submit()" tabindex="2">
+    <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="5000" tabindex="2">
       <gz-i18n key="user_email.submit"></gz-i18n>
     </div>
   </section>

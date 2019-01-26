@@ -25,7 +25,7 @@
         <fa-icon class="gz-active" [icon]="['fas', 'question-circle']"></fa-icon>
       </span>
     </div>
-    <div class="gz-link" (click)="refreshWillReceive()"><gz-i18n key="element_coin_deposit.refresh"></gz-i18n></div>
+    <div class="gz-link" gzDelayClick (debounceClick)="refreshWillReceive()" [debounceTime]="500" [timeOut]="3500"><gz-i18n key="element_coin_deposit.refresh"></gz-i18n></div>
   </div>
   <div *ngIf="!isLoadingTransaction">
     <div class="gz-list" *ngFor="let transaction of willReceiveTransactions">

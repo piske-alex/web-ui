@@ -77,7 +77,7 @@
     <fa-icon [icon]="['fas', 'comment-dots']"></fa-icon>
    {{i18ns.contact}} 
   </div>
-  <div class="btn gz-foot-blue" *ngIf="data.userId != userId" gzDelayClick (debounceClick)="transaction()" (keyup.enter)="transaction()" tabindex="3">
+  <div class="btn gz-foot-blue" *ngIf="data.userId != userId" gzDelayClick (debounceClick)="transaction()" [debounceTime]="1000" [timeOut]="5000" tabindex="3">
     <span *ngIf="data.adType == '2'"  >{{i18ns.sale}}</span>
     <span *ngIf="data.adType == '1'" >{{i18ns.buy}}</span>
   </div>
@@ -111,7 +111,7 @@
       <div class="gz-warn"><gz-i18n key="transaction.order_warn"></gz-i18n></div>
     </div>
     <div class="gz-popup-btn-row">
-        <div (click)="confirmTransaction()">        
+        <div gzDelayClick (debounceClick)="confirmTransaction()" [debounceTime]="1000" [timeOut]="5000">        
             <span *ngIf="data.adType == '1'">{{i18ns.confirm_buy}}</span>
             <span *ngIf="data.adType == '2'">{{i18ns.confirm_sell}}</span>
           </div>
