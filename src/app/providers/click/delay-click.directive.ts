@@ -12,7 +12,7 @@ export class DelayClickDirective {
   @Output() 
   debounceClick = new EventEmitter();
   @Input() 
-  timeOut = 3000;
+  timeOut = 3500;
   @HostBinding('style.color') color: string;
 
   private clickSubject = new Subject();

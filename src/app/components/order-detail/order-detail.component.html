@@ -82,16 +82,16 @@
     <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="cancelOrder()" *ngIf="this.isShowCancel">
       <gz-i18n key="otc.cancelTransaction"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellDispute" gzDelayClick (debounceClick)="sellMarkDispute()">
+    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellDispute" gzDelayClick (debounceClick)="sellMarkDispute()" [debounceTime]="1000" [timeOut]="6000">
       <gz-i18n key="otc.markDispute"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellConfirm" gzDelayClick (debounceClick)="sellOrder()">
+    <div class="btn btn-primary gz-circle" *ngIf="this.isShowSellConfirm" gzDelayClick (debounceClick)="sellOrder()" [debounceTime]="1000" [timeOut]="6000">
       <gz-i18n key="otc.markReceive"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner && isShowBuyDispute" gzDelayClick (debounceClick)="buyMarkDispute()">
+    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner && isShowBuyDispute" gzDelayClick (debounceClick)="buyMarkDispute()" [debounceTime]="1000" [timeOut]="6000">
       <gz-i18n key="otc.markDispute"></gz-i18n>
     </div>
-    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner && isShowBuyPay" gzDelayClick (debounceClick)="payOrder()">
+    <div class="btn btn-primary gz-circle" *ngIf="!this.isAdOwner && isShowBuyPay" gzDelayClick (debounceClick)="payOrder()" [debounceTime]="1000" [timeOut]="6000">
       <gz-i18n key="otc.markPay"></gz-i18n>
     </div>
   </section>

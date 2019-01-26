@@ -38,7 +38,7 @@
   </div>
   <div class="gz-btn-row">
     <!--active-->
-    <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="3500" tabindex="5"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
+    <div class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="5000" tabindex="5"><gz-i18n key="element_coin_withraw.confirm_send"></gz-i18n></div>
   </div>
 </div>
 
@@ -48,7 +48,7 @@
       <span><gz-i18n key="element_coin_withraw.trans_in_processing"></gz-i18n></span>
       <span class="gz-active" (click)="showInnerHelp()"><fa-icon [icon]="['fas', 'question-circle']"></fa-icon></span>
     </div>
-    <div class="gz-link" (click)="refreshWillReceive()"><gz-i18n key="element_coin_withraw.refresh"></gz-i18n></div>
+    <div class="gz-link" gzDelayClick (debounceClick)="refreshWillReceive()" [debounceTime]="500" [timeOut]="3500"><gz-i18n key="element_coin_withraw.refresh"></gz-i18n></div>
   </div>
   <div *ngIf="!isLoadingTransaction">
     <div class="gz-list" *ngFor="let transaction of transactions">
