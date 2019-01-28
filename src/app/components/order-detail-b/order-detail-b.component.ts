@@ -379,7 +379,7 @@ export class OrderDetailBComponent implements OnInit {
   async cancelOrder() {
     this.dialogService.confirm({ content: this.i18ns.confirm_cancelTransaction }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.location.back();
           this.location.back();
         }, err => {
@@ -397,7 +397,7 @@ export class OrderDetailBComponent implements OnInit {
   async payOrder() {
     this.dialogService.confirm({ content: this.i18ns.confirm_markPay }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.isShowBuyDispute = true;
           this.isShowBuyPay = false;
           this.isShowCancel = false;
@@ -451,7 +451,7 @@ export class OrderDetailBComponent implements OnInit {
     this.isShowPayPassword = false;
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
-        action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
+        action: 'seller_confirm', paypassword: this.paypassword, "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
             res => {
               //已经完成，跳转到钱包
@@ -510,7 +510,7 @@ export class OrderDetailBComponent implements OnInit {
   async sellMarkDispute() {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
               //this.location.back();
@@ -546,7 +546,7 @@ export class OrderDetailBComponent implements OnInit {
   async buyMarkDispute() {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
               //this.location.back();
