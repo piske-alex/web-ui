@@ -35,7 +35,7 @@ export class OrderDetailComponent implements OnInit {
   isShowSellDispute: boolean;
   isShowSellConfirm: boolean;
   isShowPassword: boolean;
-
+  isTmpHide: boolean;
   paypassword: string;
   isShowPayPassword: boolean;
 
@@ -65,7 +65,7 @@ export class OrderDetailComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    this.isTmpHide = false;
     this.adId = this.route.snapshot.paramMap.get('adId');
     this.adUserId = this.route.snapshot.paramMap.get('adUserId');
     this.anotherUserId = this.route.snapshot.paramMap.get('anotherUserId');
@@ -340,17 +340,20 @@ export class OrderDetailComponent implements OnInit {
     }
 
     this.isShowPayPassword = false;
+    this.isTmpHide = true;
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
         action: 'seller_confirm', paypassword: this.paypassword, "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
             res => {
+              this.isTmpHide = false;
               this.location.back();
               this.location.back();
             }
           );
         }, err => {
           console.log('err-sellerconfirm1', err);
+          this.isTmpHide = false;
           if (err.error) {
             if (err.error == 'order payment has not been confirmed') {
               this.dialogService.alert(this.i18ns.mark_receive_err_notpaid);
@@ -390,6 +393,7 @@ export class OrderDetailComponent implements OnInit {
     } catch (e) {
       console.log('err-sellerconfirm', e);
       this.dialogService.alert(e.message);
+      this.isTmpHide = false;
     }
   }
 

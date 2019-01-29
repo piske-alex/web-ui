@@ -43,6 +43,8 @@ export class OrderDetailBComponent implements OnInit {
   isShowHadPaidNeedConfirm: boolean;
   isHiddenByTimeout:boolean;
 
+  isTmpHide:boolean;
+
   paypassword: string;
   isShowPayPassword: boolean;
 
@@ -82,6 +84,8 @@ export class OrderDetailBComponent implements OnInit {
     this.isStopByPaymentDelay = true;
     this.isHiddenByTimeout = false;
     
+    this.isTmpHide = false;
+
     if (currentLoginUserId === this.adUserId) { // buyer
       this.isAdOwner = true;
       this.isShowBuyPay = true;
@@ -455,11 +459,13 @@ export class OrderDetailBComponent implements OnInit {
     }
 
     this.isShowPayPassword = false;
+    this.isTmpHide = true;
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
         action: 'seller_confirm', paypassword: this.paypassword, "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
             res => {
+              this.isTmpHide = false;
               //已经完成，跳转到钱包
               //if (this.order.status == 'finish'){
                 this.router.navigate(['/wallet']);
@@ -471,6 +477,7 @@ export class OrderDetailBComponent implements OnInit {
           );
         }, err => {
           console.log('err-sellerconfirm1', err);
+          this.isTmpHide = false;
           if (err.error) {
             if (err.error == 'order payment has not been confirmed') {
               this.dialogService.alert(this.i18ns.mark_receive_err_notpaid);
@@ -510,6 +517,7 @@ export class OrderDetailBComponent implements OnInit {
     } catch (e) {
       console.log('err-sellerconfirm', e);
       this.dialogService.alert(e.message);
+      this.isTmpHide = false;
     }
   }
 
