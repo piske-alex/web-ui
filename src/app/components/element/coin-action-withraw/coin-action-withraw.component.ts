@@ -125,24 +125,29 @@ export class CoinActionWithrawComponent implements OnInit {
     }
   }
 
-  async submit() {
+  async submit(event) {
     if (!this.address || this.address.trim() == '') {
+      event.next(2);
       return this.dialogService.alert(this.i18ns.input_address);
     }
 
     if (!this.amount  ) {
+      event.next(2);
       return this.dialogService.alert(this.i18ns.input_amount);
     }
 
     if ( Number(this.amount) < Number(this.min_amount) )  {
+      event.next(2);
       return this.dialogService.alert(this.i18ns.err_input_amount_min);
     }
 
     if (!this.paypassword || this.paypassword.trim() == '') {
+      event.next(2);
       return this.dialogService.alert(this.i18ns.input_trans_password);
     }
 
     if (!this.remark || this.remark.trim() == '') {
+      event.next(2);
       return this.dialogService.alert(this.i18ns.input_remark);
     }
 
@@ -164,6 +169,7 @@ export class CoinActionWithrawComponent implements OnInit {
           this.remark = '';
           this.dialogService.alert(this.i18ns.send_success).subscribe(
             res => {
+              event.next(2);
             //  this.router.navigate(['/coinAction', {coinType: this.coinType, action: Constants.COIN_ACTIONS.WITHRAW}]);
               // coinAction;coinType=BTC;action=withraw
             // this.router.navigateByUrl('/', {skipLocationChange: true}).then( () => {
@@ -205,8 +211,10 @@ export class CoinActionWithrawComponent implements OnInit {
             }
           }
         }
+        event.next(2);
       });
     } catch (e) {
+      event.next(2);
       console.log('catch----', e);
       if (e.error) {
       if (e.error == 'password wrong') {

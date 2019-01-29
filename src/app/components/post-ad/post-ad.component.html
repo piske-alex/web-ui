@@ -261,7 +261,7 @@
   <!--</section>-->
 
   <section class="gz-submit">
-    <div  class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="publish()" (keyup.enter)="publish()" tabindex="5">
+    <div  class="btn btn-primary gz-circle" gzDelayClick (debounceClick)="publish($event)" [debounceTime]="500" [timeOut]="9000" tabindex="5">
       <gz-i18n key="otc.publish"></gz-i18n>
     </div>
   </section>

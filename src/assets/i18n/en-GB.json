@@ -299,7 +299,8 @@
     "waitcollection":"wait for collection",
     "merchant_msg_1":"1. After payment receive and amount is correct, please click\"Mark Receipt\" to complete transaction.",
     "merchant_msg_2":"2. If you don't receive the payment from buyer, after {delay} minutes current order will be marked as \"Dispute\".",
-    "merchant_msg_3":"3. If the payment amount is not correct, please click \"Mark Dispute\", our customer service will follow up this dispute order."
+    "merchant_msg_3":"3. If the payment amount is not correct, please click \"Mark Dispute\", our customer service will follow up this dispute order.",
+    "modify_by_other":"the order has been modify, please try again"
   },
   "my_msg": {
     "chat_with_members": "Dialog Member",

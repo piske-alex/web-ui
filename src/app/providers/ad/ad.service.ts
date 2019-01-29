@@ -7,13 +7,14 @@ import { Deal } from '../../models/ad/Deal';
 import { TradeItem } from 'src/app/models/common/TradeItem';
 import { UrlParam } from 'src/app/models/common/UrlParam';
 import { PaymentCertification } from '../../models/ad/PaymentCertification';
+import { LanguageService } from '../../providers/language/language.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdService {
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService,private languageService: LanguageService) {
   }
 
   publishOtcAd(params): Promise<any> {
@@ -216,6 +217,9 @@ export class AdService {
         if (data && data.success) {
           resolve(data.data);
         } else {
+          if (data.error && data.error == 'modify_by_other') {
+            data.error = this.languageService.get('otc.modify_by_other');
+          }
           reject(data);
         }
       }, error => {

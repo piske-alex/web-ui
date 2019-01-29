@@ -376,16 +376,19 @@ export class OrderDetailBComponent implements OnInit {
     this._ordertimer2 = setInterval(() => {this.leftTimer2(data2)} , 1000);
   }
 
-  async cancelOrder() {
+  async cancelOrder(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_cancelTransaction }).subscribe(async res => {
       if (res) {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit', "updateTime" : this.order.update_time}).then(async (data) => {
+          event.next(2);
           this.location.back();
           this.location.back();
         }, err => {
+          event.next(2);
           this.dialogService.alert(err.error);
         });
       } else {
+          event.next(2);
           return;
       }
     });
@@ -394,7 +397,7 @@ export class OrderDetailBComponent implements OnInit {
     // force_confirm   force_cancel
   }
 
-  async payOrder() {
+  async payOrder(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markPay }).subscribe(async res => {
       if (res) {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit', "updateTime" : this.order.update_time}).then(async (data) => {
@@ -403,12 +406,15 @@ export class OrderDetailBComponent implements OnInit {
           this.isShowCancel = false;
           this.stopInterval();
           this.payStatus = await this.languageService.get('my_ad.order_status_buypay_status_1') ;
+          event.next(2);
         }, err => {
+          event.next(2);
           this.dialogService.alert(err.error);
         });
         // this.location.back();
         // this.location.back();
       } else {
+          event.next(2);
           return;
       }
     });
@@ -507,12 +513,13 @@ export class OrderDetailBComponent implements OnInit {
     }
   }
 
-  async sellMarkDispute() {
+  async sellMarkDispute(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
+              event.next(2);
               //this.location.back();
               //this.location.back();
             }
@@ -533,8 +540,10 @@ export class OrderDetailBComponent implements OnInit {
               this.dialogService.alert(err.error);
             }
           }
+          event.next(2);
         });
       } else {
+          event.next(2);
           return;
       }
     });
@@ -543,12 +552,13 @@ export class OrderDetailBComponent implements OnInit {
     // force_confirm   force_cancel
   }
 
-  async buyMarkDispute() {
+  async buyMarkDispute(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
         await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
+              event.next(2);
               //this.location.back();
               //this.location.back();
             }
@@ -565,8 +575,10 @@ export class OrderDetailBComponent implements OnInit {
           } else {
             this.dialogService.alert(err.error);
           }
+          event.next(2);
         });
       } else {
+          event.next(2);
           return;
       }
     });

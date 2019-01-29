@@ -100,7 +100,7 @@
     </section>
 
   <section class="gz-submit">
-      <button class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="3500" tabindex="5">
+      <button class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit($event)" [debounceTime]="500" [timeOut]="6000" tabindex="5">
         <gz-i18n key="user_real_cert.submit"></gz-i18n></button>
         
   </section>

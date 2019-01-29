@@ -111,8 +111,8 @@ export class CollectionInfoDetailComponent implements OnInit {
     //this.ercodeInfo = "";
   }
 
-  async submit() {
-
+  async submit(event) {
+    
     if(this.settype == "ali"){
       if (!this.aliAccount || this.aliAccount.trim() == '') {
         return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.account);
@@ -174,6 +174,8 @@ export class CollectionInfoDetailComponent implements OnInit {
     try {
       this.userService.addOrUpdateCollectionInfo(_params).then( data => {
         this.loading = false;
+        //console.log("http")
+        //event.next(2000);
         this.router.navigate(['/collectionInfo']);
       }, error => {
         this.dialogService.alert(this.i18ns.submit_fail);
@@ -185,6 +187,7 @@ export class CollectionInfoDetailComponent implements OnInit {
       console.error(e);
       this.dialogService.alert(e.error);
     }
+    
   }
 
   private encode(param:string){
