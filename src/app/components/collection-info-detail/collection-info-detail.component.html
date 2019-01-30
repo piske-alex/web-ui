@@ -94,7 +94,7 @@
     <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.acctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName" (keyup)="formatChar($event)" tabindex="4"
+        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName"  (keyup)="formatChar($event)" (ngModelChange)="ebankUserName=$event" tabindex="4"
          maxlength="200">
       </div>
     </section>
