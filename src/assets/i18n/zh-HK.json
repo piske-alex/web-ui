@@ -300,7 +300,8 @@
     "merchant_msg_1":"1. 請於收到正確金額的買方付款後，按\"標記收款\"完成交易。",
     "merchant_msg_2":"2. 如果壹直未收到買方付款，{delay}分鐘後系統會自動爭議訂單。",
     "merchant_msg_3":"3. 如果收到的買方付款金額不足或不對，請按\"標記爭議\"，我們的客服會盡快處理該爭議訂單。",
-    "modify_by_other":"訂單已被修改，請重試"
+    "modify_by_other":"訂單已被修改，請重試",
+    "common_error":"系統錯誤，請重試"
   },
   "my_msg": {
     "chat_with_members": "對話成員",
