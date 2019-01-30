@@ -221,7 +221,7 @@
   </section>
 
   <section class="gz-edit-row">
-    <textarea [(ngModel)]="ad.remark" maxlength="500" tabindex="4"></textarea>
+    <textarea [(ngModel)]="ad.remark" maxlength="500" tabindex="4" (keyup)="formatChar($event)"></textarea>
   </section>
 
   <!--<section class="gz-edit-row">-->

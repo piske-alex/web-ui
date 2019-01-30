@@ -58,7 +58,8 @@ export class CoinActionWithrawComponent implements OnInit {
     this.i18ns.input_address = this.i18ns.input_address.replace(/\$\{coinType\}/g, this.coinType);
 
     this.i18ns.send_address = await this.languageService.get('element_coin_withraw.send_address');
-
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
+    
     this.i18ns.notice_info_tmp = await this.languageService.get('element_coin_withraw.notice_info');
     this.i18ns.notice_info = await this.languageService.get('element_coin_withraw.notice_info');
     this.i18ns.send_address = this.i18ns.send_address.replace(/\$\{coinType\}/g, this.coinType);
@@ -207,7 +208,8 @@ export class CoinActionWithrawComponent implements OnInit {
                 this.dialogService.alert(passwordNotActive);
               }
             } else {
-              this.dialogService.alert(err.error);
+              let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+              this.dialogService.alert(error);
             }
           }
         }
@@ -226,7 +228,8 @@ export class CoinActionWithrawComponent implements OnInit {
       } else if (e.error == 'Insufficient balance') {
         this.dialogService.alert(this.i18ns.err_insufficient_balance);
       } else {
-          this.dialogService.alert(e.error);
+          let error = e.error && e.error != "" ? e.error: this.i18ns.submit_fail;
+          this.dialogService.alert(error);
         }
       }
     }

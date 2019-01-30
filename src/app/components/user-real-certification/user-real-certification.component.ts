@@ -224,4 +224,8 @@ export class UserRealCertificationComponent implements OnInit {
     }
   }
 
+  formatChar(event){
+    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5]/gi, '');
+  }
+  
 }

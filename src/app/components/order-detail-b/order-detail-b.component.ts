@@ -212,7 +212,7 @@ export class OrderDetailBComponent implements OnInit {
 
     this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
     this.i18ns.mark_dispute_success = await this.languageService.get('otc.mark_dispute_success');
-
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
 
     this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
     this.i18ns.order_must_be_unfinish = await this.languageService.get('otc.order_must_be_unfinish');
@@ -389,7 +389,8 @@ export class OrderDetailBComponent implements OnInit {
           this.location.back();
         }, err => {
           event.next(2);
-          this.dialogService.alert(err.error);
+          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+          this.dialogService.alert(error);
         });
       } else {
           event.next(2);
@@ -413,7 +414,8 @@ export class OrderDetailBComponent implements OnInit {
           event.next(2);
         }, err => {
           event.next(2);
-          this.dialogService.alert(err.error);
+          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+          this.dialogService.alert(error);
         });
         // this.location.back();
         // this.location.back();
@@ -508,7 +510,8 @@ export class OrderDetailBComponent implements OnInit {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 } else if (err.error) {
-                  this.dialogService.alert(err.error);
+                  let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+                  this.dialogService.alert(error);
                 }
               }
             }
@@ -545,7 +548,8 @@ export class OrderDetailBComponent implements OnInit {
               this.dialogService.alert(this.i18ns.order_already_mark_finish);
               this.ngOnInit();
             } else {
-              this.dialogService.alert(err.error);
+              let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+              this.dialogService.alert(error);
             }
           }
           event.next(2);
@@ -581,7 +585,8 @@ export class OrderDetailBComponent implements OnInit {
             this.dialogService.alert(this.i18ns.order_already_mark_finish);
             this.ngOnInit();
           } else {
-            this.dialogService.alert(err.error);
+            let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+            this.dialogService.alert(error);
           }
           event.next(2);
         });

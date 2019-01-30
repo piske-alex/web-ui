@@ -193,7 +193,8 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_finish = await this.languageService.get('my_ad.order_status_finish');
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
-
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
+    
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.confirm = await this.languageService.get('common.confirm');

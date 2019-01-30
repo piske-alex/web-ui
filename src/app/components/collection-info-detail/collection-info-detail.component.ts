@@ -6,6 +6,7 @@ import { Router,ActivatedRoute,Params  } from '@angular/router';
 import { Location } from '@angular/common';
 import { DialogService } from '../../providers/dialog/dialog.service';
 
+
 @Component({
   selector: 'gz-collection-info-detail',
   templateUrl: './collection-info-detail.component.html',
@@ -186,7 +187,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     } catch (e) {
       this.loading = false;
       console.error(e);
-      let error = e.error && e.error != "" ? e.error: this.i18ns.common_error;
+      let error = e.error && e.error != "" ? e.error: this.i18ns.submit_fail;
       this.dialogService.alert(e.error);
     }
     
@@ -284,6 +285,11 @@ export class CollectionInfoDetailComponent implements OnInit {
       }
     }
   } 
+
+  formatChar(event){
+    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5]/gi, '');
+  }
+
 
   goBack() {
     this.router.navigate(['/collectionInfo']);
