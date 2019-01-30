@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
 
     try {
       this.countryCodes = await this.commonService.getCountryCodeList();
+      console.log("version: 20190129")
     } catch (e) {
       console.error(e);
     }

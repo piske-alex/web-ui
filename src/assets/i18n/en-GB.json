@@ -294,12 +294,14 @@
     "seller_collection_info_not_bt":"Please set bank collection Information",
     "saleWarn_merchant_1": "4. Please note buyer has requested payment methoed, please complete corresponding payment collection information before transaction.",
     "saleWarn_merchant_2": "5. Please note buyer has requested that seller need mark receipt or dispute within 1 munite after buyer mark payment. After {1} minute, the transaction will be marked as dispute.",
-    "mark_dispute_success":"Mark dispute sucessfully, customer service will follow up this dispute order, please kindly upload your transaction certification via below channels:<br />1. Upload transacation certification in current order detail page, or <br />2. Submit support ticket in 'ME -> Customer Service', and provide order id and upload transaction certification. ",
+    "mark_dispute_success":"Mark dispute sucessfully, customer service will follow up this dispute order, please kindly upload your transaction certification via below channels:<br />1. Upload transaction certification in current order detail page, or <br />2. Submit support ticket in 'ME -> Customer Service', and provide order id and upload transaction certification. ",
     "mark_receive_success":"Mark receipt success. The system will be processed.",
     "waitcollection":"wait for collection",
     "merchant_msg_1":"1. After payment receive and amount is correct, please click\"Mark Receipt\" to complete transaction.",
     "merchant_msg_2":"2. If you don't receive the payment from buyer, after {delay} minutes current order will be marked as \"Dispute\".",
-    "merchant_msg_3":"3. If the payment amount is not correct, please click \"Mark Dispute\", our customer service will follow up this dispute order."
+    "merchant_msg_3":"3. If the payment amount is not correct, please click \"Mark Dispute\", our customer service will follow up this dispute order.",
+    "modify_by_other":"the order has been modify, please try again",
+    "common_error":"system error, please try again"
   },
   "my_msg": {
     "chat_with_members": "Dialog Member",

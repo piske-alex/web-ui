@@ -43,6 +43,8 @@ export class OrderDetailBComponent implements OnInit {
   isShowHadPaidNeedConfirm: boolean;
   isHiddenByTimeout:boolean;
 
+  isTmpHide:boolean;
+
   paypassword: string;
   isShowPayPassword: boolean;
 
@@ -82,6 +84,8 @@ export class OrderDetailBComponent implements OnInit {
     this.isStopByPaymentDelay = true;
     this.isHiddenByTimeout = false;
     
+    this.isTmpHide = false;
+
     if (currentLoginUserId === this.adUserId) { // buyer
       this.isAdOwner = true;
       this.isShowBuyPay = true;
@@ -208,7 +212,7 @@ export class OrderDetailBComponent implements OnInit {
 
     this.i18ns.err_PasswordNotActive = await this.languageService.get('otc.err_PasswordNotActive');
     this.i18ns.mark_dispute_success = await this.languageService.get('otc.mark_dispute_success');
-
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
 
     this.i18ns.mark_receive_success = await this.languageService.get('otc.mark_receive_success');
     this.i18ns.order_must_be_unfinish = await this.languageService.get('otc.order_must_be_unfinish');
@@ -376,16 +380,20 @@ export class OrderDetailBComponent implements OnInit {
     this._ordertimer2 = setInterval(() => {this.leftTimer2(data2)} , 1000);
   }
 
-  async cancelOrder() {
+  async cancelOrder(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_cancelTransaction }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit', "updateTime" : this.order.update_time}).then(async (data) => {
+          event.next(2);
           this.location.back();
           this.location.back();
         }, err => {
-          this.dialogService.alert(err.error);
+          event.next(2);
+          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+          this.dialogService.alert(error);
         });
       } else {
+          event.next(2);
           return;
       }
     });
@@ -394,21 +402,25 @@ export class OrderDetailBComponent implements OnInit {
     // force_confirm   force_cancel
   }
 
-  async payOrder() {
+  async payOrder(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markPay }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.isShowBuyDispute = true;
           this.isShowBuyPay = false;
           this.isShowCancel = false;
           this.stopInterval();
           this.payStatus = await this.languageService.get('my_ad.order_status_buypay_status_1') ;
+          event.next(2);
         }, err => {
-          this.dialogService.alert(err.error);
+          event.next(2);
+          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+          this.dialogService.alert(error);
         });
         // this.location.back();
         // this.location.back();
       } else {
+          event.next(2);
           return;
       }
     });
@@ -449,11 +461,13 @@ export class OrderDetailBComponent implements OnInit {
     }
 
     this.isShowPayPassword = false;
+    this.isTmpHide = true;
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
-        action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
+        action: 'seller_confirm', paypassword: this.paypassword, "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
             res => {
+              this.isTmpHide = false;
               //已经完成，跳转到钱包
               //if (this.order.status == 'finish'){
                 this.router.navigate(['/wallet']);
@@ -465,6 +479,7 @@ export class OrderDetailBComponent implements OnInit {
           );
         }, err => {
           console.log('err-sellerconfirm1', err);
+          this.isTmpHide = false;
           if (err.error) {
             if (err.error == 'order payment has not been confirmed') {
               this.dialogService.alert(this.i18ns.mark_receive_err_notpaid);
@@ -495,7 +510,8 @@ export class OrderDetailBComponent implements OnInit {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 } else if (err.error) {
-                  this.dialogService.alert(err.error);
+                  let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+                  this.dialogService.alert(error);
                 }
               }
             }
@@ -504,15 +520,17 @@ export class OrderDetailBComponent implements OnInit {
     } catch (e) {
       console.log('err-sellerconfirm', e);
       this.dialogService.alert(e.message);
+      this.isTmpHide = false;
     }
   }
 
-  async sellMarkDispute() {
+  async sellMarkDispute(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
+              event.next(2);
               //this.location.back();
               //this.location.back();
             }
@@ -530,11 +548,14 @@ export class OrderDetailBComponent implements OnInit {
               this.dialogService.alert(this.i18ns.order_already_mark_finish);
               this.ngOnInit();
             } else {
-              this.dialogService.alert(err.error);
+              let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+              this.dialogService.alert(error);
             }
           }
+          event.next(2);
         });
       } else {
+          event.next(2);
           return;
       }
     });
@@ -543,12 +564,13 @@ export class OrderDetailBComponent implements OnInit {
     // force_confirm   force_cancel
   }
 
-  async buyMarkDispute() {
+  async buyMarkDispute(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
+              event.next(2);
               //this.location.back();
               //this.location.back();
             }
@@ -563,10 +585,13 @@ export class OrderDetailBComponent implements OnInit {
             this.dialogService.alert(this.i18ns.order_already_mark_finish);
             this.ngOnInit();
           } else {
-            this.dialogService.alert(err.error);
+            let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+            this.dialogService.alert(error);
           }
+          event.next(2);
         });
       } else {
+          event.next(2);
           return;
       }
     });

@@ -35,7 +35,7 @@ export class OrderDetailComponent implements OnInit {
   isShowSellDispute: boolean;
   isShowSellConfirm: boolean;
   isShowPassword: boolean;
-
+  isTmpHide: boolean;
   paypassword: string;
   isShowPayPassword: boolean;
 
@@ -65,7 +65,7 @@ export class OrderDetailComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    this.isTmpHide = false;
     this.adId = this.route.snapshot.paramMap.get('adId');
     this.adUserId = this.route.snapshot.paramMap.get('adUserId');
     this.anotherUserId = this.route.snapshot.paramMap.get('anotherUserId');
@@ -193,7 +193,8 @@ export class OrderDetailComponent implements OnInit {
     this.i18ns.order_status_finish = await this.languageService.get('my_ad.order_status_finish');
     this.i18ns.order_status_canceled = await this.languageService.get('my_ad.order_status_canceled');
     this.i18ns.order_status_dispute = await this.languageService.get('my_ad.order_status_dispute');
-
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
+    
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
@@ -276,16 +277,19 @@ export class OrderDetailComponent implements OnInit {
     this._ordertimer = setInterval(() => {this.leftTimer(data2)} , 1000);
   }
 
-  async cancelOrder() {
+  async cancelOrder(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_cancelTransaction }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'cancel_submit', "updateTime" : this.order.update_time}).then(async (data) => {
+          event.next(2);
           this.location.back();
           this.location.back();
         }, err => {
+          event.next(2);
           this.dialogService.alert(err.error);
         });
       } else {
+          event.next(2);
           return;
       }
     });
@@ -294,21 +298,24 @@ export class OrderDetailComponent implements OnInit {
     // force_confirm   force_cancel
   }
 
-  async payOrder() {
+  async payOrder(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markPay }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'payment_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.isShowBuyDispute = true;
           this.isShowBuyPay = false;
           this.isShowCancel = false;
           this.stopInterval();
           this.payStatus = await this.languageService.get('my_ad.order_status_buypay_status_1') ;
+          event.next(2);
         }, err => {
+          event.next(2);
           this.dialogService.alert(err.error);
         });
         // this.location.back();
         // this.location.back();
       } else {
+          event.next(2);
           return;
       }
     });
@@ -334,17 +341,20 @@ export class OrderDetailComponent implements OnInit {
     }
 
     this.isShowPayPassword = false;
+    this.isTmpHide = true;
     try {
       this.adService.updateOrderStatus({orderid: this.orderId,
-        action: 'seller_confirm', paypassword: this.paypassword}).then(async (data) => {
+        action: 'seller_confirm', paypassword: this.paypassword, "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_receive_success).subscribe(
             res => {
+              this.isTmpHide = false;
               this.location.back();
               this.location.back();
             }
           );
         }, err => {
           console.log('err-sellerconfirm1', err);
+          this.isTmpHide = false;
           if (err.error) {
             if (err.error == 'order payment has not been confirmed') {
               this.dialogService.alert(this.i18ns.mark_receive_err_notpaid);
@@ -384,15 +394,17 @@ export class OrderDetailComponent implements OnInit {
     } catch (e) {
       console.log('err-sellerconfirm', e);
       this.dialogService.alert(e.message);
+      this.isTmpHide = false;
     }
   }
 
-  async sellMarkDispute() {
+  async sellMarkDispute(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).then(async (data) => {
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
+              event.next(2);
               //this.location.back();
               //this.location.back();
             }
@@ -413,8 +425,10 @@ export class OrderDetailComponent implements OnInit {
               this.dialogService.alert(err.error);
             }
           }
+          event.next(2);
         });
       } else {
+          event.next(2);
           return;
       }
     });
@@ -423,10 +437,10 @@ export class OrderDetailComponent implements OnInit {
     // force_confirm   force_cancel
   }
 
-  async buyMarkDispute() {
+  async buyMarkDispute(event) {
     this.dialogService.confirm({ content: this.i18ns.confirm_markDispute }).subscribe(async res => {
       if (res) {
-        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit'}).
+        await this.adService.updateOrderStatus({orderid: this.orderId, action: 'dispute_submit', "updateTime" : this.order.update_time}).
         then(async (data) => {
           this.dialogService.alert(this.i18ns.mark_dispute_success).subscribe(
             res2 => {
@@ -434,6 +448,7 @@ export class OrderDetailComponent implements OnInit {
               //this.location.back();
             }
           );
+          event.next(2);
         }, err => {
           if (err.error == 'the order status must be unfinish') {
             this.dialogService.alert(this.i18ns.order_must_be_unfinish);
@@ -446,8 +461,10 @@ export class OrderDetailComponent implements OnInit {
           }  else {
             this.dialogService.alert(err.error);
           }
+          event.next(2);
         });
       } else {
+        event.next(2);
           return;
       }
     });

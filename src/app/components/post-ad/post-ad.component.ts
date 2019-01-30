@@ -45,7 +45,7 @@ export class PostAdComponent implements OnInit {
   showInnerHelp = false;
   helpContent: string;
 
-  i18ns: any;
+  i18ns: any = {};
 
   private _isSubmiting = false;
 
@@ -102,7 +102,6 @@ export class PostAdComponent implements OnInit {
       if (!isNaN(d)) adfee = parseFloat(d) * 100;
     }, error => {});
 
-    this.i18ns = {};
     this.i18ns.adWarning_2 = await this.languageService.get('otc.adWarning_2');
     this.i18ns.adWarning_2 = this.i18ns.adWarning_2.replace('{0}', adfee);
     this.i18ns.publishError = await this.languageService.get('otc.publishError');
@@ -165,13 +164,14 @@ export class PostAdComponent implements OnInit {
     this.showInnerHelp = false;
   }
 
-  checkPrice() {
+  checkPrice(event) {
     const _rate = this.ad.price / this.coinRate;
     if (_rate < 0.9) {
       this.dialogService.confirm({ content: this.i18ns.priceWarn_1 }).subscribe(res => {
         if (res) {
-          this.doPublish();
+          this.doPublish(event);
         } else {
+          event.next(2);
           return false;
         }
       });
@@ -179,13 +179,14 @@ export class PostAdComponent implements OnInit {
     } else if (_rate > 1.1) {
       this.dialogService.confirm({ content: this.i18ns.priceWarn_2 }).subscribe(res => {
         if (res) {
-          this.doPublish();
+          this.doPublish(event);
         } else {
+          event.next(2);
           return false;
         }
       });
     } else {
-      this.doPublish();
+      this.doPublish(event);
     }
     return true;
   }
@@ -286,7 +287,7 @@ export class PostAdComponent implements OnInit {
     }
   }
 
-  async publish() {
+  async publish(event) {
     console.log('aaaa -- 001');
     if (this._isSubmiting) {
       return;
@@ -295,18 +296,20 @@ export class PostAdComponent implements OnInit {
     const _remarkWarn = this._validateRemark();
     if (_remarkWarn) {
       console.log('aaaa -- 003');
+      event.next(2);
       return this.dialogService.alert(_remarkWarn);
     }
     console.log('aaaa -- 004');
-    if (!this.checkPrice()) {
+    if (!this.checkPrice(event)) {
       this.ad.price = null;
       this._isSubmiting = false;
       console.log('aaaa -- 005');
+      event.next(2);
       return;
     }
   }
 
-  async doPublish() {
+  async doPublish(event) {
 
 
     // this.ad.adType = this.adTypeCode;
@@ -334,6 +337,7 @@ export class PostAdComponent implements OnInit {
         const _result = data;
         setTimeout(() => {
           this._isSubmiting = false;
+          event.next(2);
         }, 1000);
         // this.location.back();
         this.router.navigate(['/otc', { adType: this.adTypeCode, coinType: this.coinTypeCode, countryCode: this.countryCode }]);
@@ -349,11 +353,13 @@ export class PostAdComponent implements OnInit {
             this.dialogService.alert( this.i18ns.publishError);
           }
         }
+        event.next(2);
       });
     } catch (e) {
       this._isSubmiting = false;
       console.error(e);
       this.dialogService.alert(e && e.errMsg || this.i18ns.publishError);
+      event.next(2);
     }
   }
 
@@ -434,5 +440,8 @@ export class PostAdComponent implements OnInit {
     return tmpVal;
 }
 
+formatChar(event){
+  event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5]/gi, '');
+}
 
 }

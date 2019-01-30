@@ -17,14 +17,14 @@
   <section class="gz-mt-10" *ngIf="settype=='ali'">
     <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacct"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.aliacct}}" [(ngModel)]="aliAccount" tabindex="1"
+      <input type="text" placeholder="{{this.i18ns.aliacct}}" [(ngModel)]="aliAccount" (keyup)="formatChar($event)" tabindex="1"
        maxlength="200">
     </div>
   </section>
   <section class="gz-mt-10" *ngIf="settype=='ali'">
     <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacctname"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" tabindex="2"
+      <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" (keyup)="formatChar($event)" tabindex="2"
        maxlength="200">
     </div>
   </section>
@@ -45,14 +45,14 @@
   <section class="gz-mt-10" *ngIf="settype=='wx'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.wechatacct"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.wechatacct}}" [(ngModel)]="wxAccount" tabindex="1"
+        <input type="text" placeholder="{{this.i18ns.wechatacct}}" [(ngModel)]="wxAccount" (keyup)="formatChar($event)" tabindex="1"
          maxlength="200">
       </div>
     </section>
     <section class="gz-mt-10" *ngIf="settype=='wx'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.wechatacctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.wechatacctname}}" [(ngModel)]="wxUserName" tabindex="2"
+        <input type="text" placeholder="{{this.i18ns.wechatacctname}}" [(ngModel)]="wxUserName" (keyup)="formatChar($event)" tabindex="2"
          maxlength="200">
       </div>
     </section>
@@ -73,34 +73,34 @@
   <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.bankname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.bank}}" [(ngModel)]="ebankName" tabindex="1"
+        <input type="text" placeholder="{{this.i18ns.bank}}" [(ngModel)]="ebankName" (keyup)="formatChar($event)" tabindex="1"
          maxlength="200">
       </div>
     </section>
     <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.branchname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.branchname}}" [(ngModel)]="ebankBranch" tabindex="2"
+        <input type="text" placeholder="{{this.i18ns.branchname}}" [(ngModel)]="ebankBranch" (keyup)="formatChar($event)" tabindex="2"
          maxlength="200">
       </div>
     </section>
   <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.acctno"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.acctno}}" [(ngModel)]="ebankAccount" tabindex="3"
+        <input type="text" placeholder="{{this.i18ns.acctno}}" [(ngModel)]="ebankAccount" (keyup)="formatChar($event)" tabindex="3"
          maxlength="200">
       </div>
     </section>
     <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.acctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName" tabindex="4"
+        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName" (keyup)="formatChar($event)" tabindex="4"
          maxlength="200">
       </div>
     </section>
 
   <section class="gz-submit">
-      <button class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="3500" tabindex="5">
+      <button class="btn btn-primary gz-circle" *ngIf="!loading" gzDelayClick (debounceClick)="submit($event)" [debounceTime]="500" [timeOut]="6000" tabindex="5">
         <gz-i18n key="user_real_cert.submit"></gz-i18n></button>
         
   </section>

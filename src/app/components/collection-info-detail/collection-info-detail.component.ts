@@ -6,6 +6,7 @@ import { Router,ActivatedRoute,Params  } from '@angular/router';
 import { Location } from '@angular/common';
 import { DialogService } from '../../providers/dialog/dialog.service';
 
+
 @Component({
   selector: 'gz-collection-info-detail',
   templateUrl: './collection-info-detail.component.html',
@@ -87,6 +88,7 @@ export class CollectionInfoDetailComponent implements OnInit {
     this.i18ns.branchname = await this.languageService.get('user_collection.branchname');
     this.i18ns.acctno = await this.languageService.get('user_collection.acctno');
     this.i18ns.acctname = await this.languageService.get('user_collection.acctname');
+    this.i18ns.common_error = await this.languageService.get('otc.common_error');
 
     if(this.settype == "ali" && this.collectionInfo.alipay_qrcode_url != ""){
       this.aliImg.src = this.collectionInfo.minio_url_prefix + this.collectionInfo.alipay_qrcode_url;
@@ -111,8 +113,8 @@ export class CollectionInfoDetailComponent implements OnInit {
     //this.ercodeInfo = "";
   }
 
-  async submit() {
-
+  async submit(event) {
+    
     if(this.settype == "ali"){
       if (!this.aliAccount || this.aliAccount.trim() == '') {
         return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.account);
@@ -174,6 +176,8 @@ export class CollectionInfoDetailComponent implements OnInit {
     try {
       this.userService.addOrUpdateCollectionInfo(_params).then( data => {
         this.loading = false;
+        //console.log("http")
+        //event.next(2000);
         this.router.navigate(['/collectionInfo']);
       }, error => {
         this.dialogService.alert(this.i18ns.submit_fail);
@@ -183,8 +187,10 @@ export class CollectionInfoDetailComponent implements OnInit {
     } catch (e) {
       this.loading = false;
       console.error(e);
+      let error = e.error && e.error != "" ? e.error: this.i18ns.submit_fail;
       this.dialogService.alert(e.error);
     }
+    
   }
 
   private encode(param:string){
@@ -279,6 +285,11 @@ export class CollectionInfoDetailComponent implements OnInit {
       }
     }
   } 
+
+  formatChar(event){
+    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5]/gi, '');
+  }
+
 
   goBack() {
     this.router.navigate(['/collectionInfo']);
