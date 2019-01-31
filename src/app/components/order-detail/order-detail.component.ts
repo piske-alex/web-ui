@@ -286,7 +286,8 @@ export class OrderDetailComponent implements OnInit {
           this.location.back();
         }, err => {
           event.next(2);
-          this.dialogService.alert(err.error);
+          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+          this.dialogService.alert(error);
         });
       } else {
           event.next(2);
@@ -310,7 +311,8 @@ export class OrderDetailComponent implements OnInit {
           event.next(2);
         }, err => {
           event.next(2);
-          this.dialogService.alert(err.error);
+          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+          this.dialogService.alert(err);
         });
         // this.location.back();
         // this.location.back();
@@ -385,7 +387,8 @@ export class OrderDetailComponent implements OnInit {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 } else if (err.error) {
-                  this.dialogService.alert(err.error);
+                  let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+                  this.dialogService.alert(error);
                 }
               }
             }
@@ -422,7 +425,8 @@ export class OrderDetailComponent implements OnInit {
               this.dialogService.alert(this.i18ns.order_already_mark_finish);
               this.ngOnInit();
             } else {
-              this.dialogService.alert(err.error);
+              let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+              this.dialogService.alert(error);
             }
           }
           event.next(2);
@@ -459,7 +463,8 @@ export class OrderDetailComponent implements OnInit {
             this.dialogService.alert(this.i18ns.order_already_mark_finish);
             this.ngOnInit();
           }  else {
-            this.dialogService.alert(err.error);
+            let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
+            this.dialogService.alert(error);
           }
           event.next(2);
         });

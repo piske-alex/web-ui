@@ -218,7 +218,10 @@ export class AdService {
           resolve(data.data);
         } else {
           if (data.error && data.error == 'modify_by_other') {
-            data.error = this.languageService.get('otc.modify_by_other');
+            data.error =  this.languageService.get('otc.modify_by_other');
+            setTimeout(() => {
+              //这里是为了获取到modify_by_other
+            }, 500);
           }
           reject(data);
         }
