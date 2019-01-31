@@ -24,8 +24,10 @@
   <section class="gz-mt-10" *ngIf="settype=='ali'">
     <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacctname"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" (keyup)="formatCharaliUserName(this.aliUserName)" tabindex="2"
-       maxlength="200">
+      <!-- <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" (keyup)="formatCharaliUserName(this.aliUserName)" tabindex="2"
+       maxlength="200"> -->
+       <textarea [(ngModel)]="aliUserName" maxlength="1000" tabindex="2" style="width:100%; background-color: #181E26;color:#CACBD0;" rows = 3
+       placeholder="{{this.i18ns.aliacctname}}" (keyup)="formatCharaliUserName(this.aliUserName)"></textarea>
     </div>
   </section>
   <section class="gz-full-img " *ngIf="settype=='ali'">
