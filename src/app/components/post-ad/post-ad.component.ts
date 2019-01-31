@@ -441,7 +441,9 @@ export class PostAdComponent implements OnInit {
 }
 
 formatChar(event){
-  event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  //event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  let v = event.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  this.ad.remark = v;
 }
 
 }

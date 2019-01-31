@@ -224,8 +224,18 @@ export class UserRealCertificationComponent implements OnInit {
     }
   }
 
-  formatChar(event){
-    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  //formatChar(event){
+  //  event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  //}
+
+  formatCharCommon(value){
+    return value.replace(/[^\w\u4e00-\u9fa5]/gi, '');
+  }
+  formatCharrealName(value){
+    this.realName = this.formatCharCommon(value);
+  }
+  formatCharrealCardNo(value){
+    this.realCardNo = value.replace(/[^\da-zA-Z]/gi, '');
   }
 
 }

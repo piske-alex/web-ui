@@ -17,14 +17,14 @@
   <section class="gz-mt-10" *ngIf="settype=='ali'">
     <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacct"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.aliacct}}" [(ngModel)]="aliAccount" (keyup)="formatChar($event)" tabindex="1"
+      <input type="text" placeholder="{{this.i18ns.aliacct}}" [(ngModel)]="aliAccount" (keyup)="formatCharaliAccount(this.aliAccount)" tabindex="1"
        maxlength="200">
     </div>
   </section>
   <section class="gz-mt-10" *ngIf="settype=='ali'">
     <div style="min-width: 60px;"><gz-i18n key="user_collection.aliacctname"></gz-i18n></div>
     <div class="gz-edit-left">
-      <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" (keyup)="formatChar($event)" tabindex="2"
+      <input type="text" placeholder="{{this.i18ns.aliacctname}}" [(ngModel)]="aliUserName" (keyup)="formatCharaliUserName(this.aliUserName)" tabindex="2"
        maxlength="200">
     </div>
   </section>
@@ -45,14 +45,14 @@
   <section class="gz-mt-10" *ngIf="settype=='wx'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.wechatacct"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.wechatacct}}" [(ngModel)]="wxAccount" (keyup)="formatChar($event)" tabindex="1"
+        <input type="text" placeholder="{{this.i18ns.wechatacct}}" [(ngModel)]="wxAccount" (keyup)="formatCharwxAccount(this.wxAccount)" tabindex="1"
          maxlength="200">
       </div>
     </section>
     <section class="gz-mt-10" *ngIf="settype=='wx'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.wechatacctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.wechatacctname}}" [(ngModel)]="wxUserName" (keyup)="formatChar($event)" tabindex="2"
+        <input type="text" placeholder="{{this.i18ns.wechatacctname}}" [(ngModel)]="wxUserName" (keyup)="formatCharwxUserName(this.wxUserName)" tabindex="2"
          maxlength="200">
       </div>
     </section>
@@ -73,28 +73,28 @@
   <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.bankname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.bank}}" [(ngModel)]="ebankName" (keyup)="formatChar($event)" tabindex="1"
+        <input type="text" placeholder="{{this.i18ns.bank}}" [(ngModel)]="ebankName" (keyup)="formatCharebankName(this.ebankName)" tabindex="1"
          maxlength="200">
       </div>
     </section>
     <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.branchname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.branchname}}" [(ngModel)]="ebankBranch" (keyup)="formatChar($event)" tabindex="2"
+        <input type="text" placeholder="{{this.i18ns.branchname}}" [(ngModel)]="ebankBranch" (keyup)="formatCharebankBranch(this.ebankBranch)" tabindex="2"
          maxlength="200">
       </div>
     </section>
   <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.acctno"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.acctno}}" [(ngModel)]="ebankAccount" (keyup)="formatChar($event)" tabindex="3"
+        <input type="text" placeholder="{{this.i18ns.acctno}}" [(ngModel)]="ebankAccount" (keyup)="formatCharebankAccount(this.ebankAccount)" tabindex="3"
          maxlength="200">
       </div>
     </section>
     <section class="gz-mt-10" *ngIf="settype=='ebank'">
       <div style="min-width: 60px;"><gz-i18n key="user_collection.acctname"></gz-i18n></div>
       <div class="gz-edit-left">
-        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName"  (keyup)="formatChar($event)" (ngModelChange)="ebankUserName=$event" tabindex="4"
+        <input type="text" placeholder="{{this.i18ns.acctname}}" [(ngModel)]="ebankUserName"  (keyup)="formatCharebankUserName(this.ebankUserName)" tabindex="4"
          maxlength="200">
       </div>
     </section>

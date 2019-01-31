@@ -286,10 +286,37 @@ export class CollectionInfoDetailComponent implements OnInit {
     }
   } 
 
-  formatChar(event){
-    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  //formatChar(event){
+    //event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  //}
+  formatCharCommon(value){
+    return value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+  }
+  formatCharebankUserName(value){
+    this.ebankUserName = this.formatCharCommon(value);
+  }
+  formatCharebankAccount(value){
+    this.ebankAccount = this.formatCharCommon(value);
+  }
+  formatCharebankBranch(value){
+    this.ebankBranch = this.formatCharCommon(value);
+  }
+  formatCharebankName(value){
+    this.ebankName = this.formatCharCommon(value);
   }
 
+  formatCharwxAccount(value){
+    this.wxAccount = this.formatCharCommon(value);
+  }
+  formatCharwxUserName(value){
+    this.wxUserName = this.formatCharCommon(value);
+  }
+  formatCharaliAccount(value){
+    this.aliAccount = this.formatCharCommon(value);
+  }
+  formatCharaliUserName(value){
+    this.aliUserName = this.formatCharCommon(value);
+  }
   goBack() {
     this.router.navigate(['/collectionInfo']);
   }
