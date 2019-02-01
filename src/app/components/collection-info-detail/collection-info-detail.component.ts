@@ -287,7 +287,15 @@ export class CollectionInfoDetailComponent implements OnInit {
   } 
 
   formatChar(event){
-    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,]/gi, '');
+    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\s\-,。,#@]/gi, '');
+  }
+
+  formatCharCommon(value){
+    return value.replace(/[^\w\u4e00-\u9fa5\s\-,。,#@]/gi, '');
+  }
+
+  formatCharaliUserName(value){
+    this.aliUserName = this.formatCharCommon(value);
   }
 
   goBack() {
