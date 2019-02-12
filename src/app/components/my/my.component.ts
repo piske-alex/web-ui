@@ -1,4 +1,4 @@
-import { Component, OnInit , OnDestroy } from '@angular/core';
+import { Component, OnInit , OnDestroy , AfterViewInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../providers/user/user.service';
 import { User } from '../../models/user/user';
@@ -14,7 +14,7 @@ import { DialogService } from '../../providers/dialog/dialog.service';
   templateUrl: './my.component.html',
   styleUrls: ['./my.component.scss']
 })
-export class MyComponent implements OnInit {
+export class MyComponent implements OnInit, AfterViewInit, OnDestroy {
   userId: string;
   user: any = new User();
   i18ns: any = {};
@@ -25,6 +25,20 @@ export class MyComponent implements OnInit {
               private languageService: LanguageService,
               private userService: UserService,
               private dialogService: DialogService) {
+  }
+
+  loadScripts() {
+    const node = document.createElement('script');
+    node.src = 'https://static.zdassets.com/ekr/snippet.js?key=6f342b96-5dc8-4615-b088-05ce81d4b116';
+    node.type = 'text/javascript';
+    node.async = false;
+    node.charset = 'utf-8';
+    node.id = 'ze-snippet';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  async ngAfterViewInit() {
+    await this.loadScripts();
   }
 
   ngOnDestroy(): void {
