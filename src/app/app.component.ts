@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
               private router: Router,
               private chatService: ChatService,
               private languageService: LanguageService) {
-      console.log('AppComponent AppComponent AppComponent');
+    //  console.log('AppComponent AppComponent AppComponent');
     //  this.chatService.initChat();
     //  this.chatService.loginChat();
 

@@ -23,7 +23,7 @@ export class CommonService {
       } else {
         this.httpService.request(RouteMap.V1.AD.GET_TRANS_BY_USERID, params).then(data => {
           if (data && data.success) {
-            console.log('ddddd', data.data);
+            // console.log('ddddd', data.data);
             let _result = {list: [], total: 0};
             if (data.data && data.data.length > 0) {
               _result.list = data.data.map(_data => {

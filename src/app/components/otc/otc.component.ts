@@ -162,7 +162,7 @@ export class OtcComponent implements OnInit, OnDestroy {
 
       this.adList = _result.list;
       this.adTotal = _result.total;
-      console.error('_result.total', _result.total);
+      // console.error('_result.total', _result.total);
       if (_result.total > this.adList.length) {
         this.isShowLoadMore = true;
       } else {
@@ -190,7 +190,7 @@ export class OtcComponent implements OnInit, OnDestroy {
       if (this.adList) {
         currentListLength = this.adList.length;
       }
-      console.log('load more length', currentListLength);
+      // consoleconsole.log('load more length', currentListLength);
       const _params = {
         type: this.filter.adType === '2' ? 'sell' : 'buy',
         country: this.filter.countryCode,
