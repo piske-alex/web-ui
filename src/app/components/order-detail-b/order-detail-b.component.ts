@@ -229,7 +229,7 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
-
+    this.i18ns.modify_by_other = await this.languageService.get('otc.modify_by_other');
     this.isShowBuyDispute = false;
 
     this.btccnt = this.order.coin_amount ; //  (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
@@ -389,8 +389,13 @@ export class OrderDetailBComponent implements OnInit {
           this.location.back();
         }, err => {
           event.next(2);
-          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
-          this.dialogService.alert(error);
+          if (err.error == 'modify_by_other') {
+            this.dialogService.alert(this.i18ns.modify_by_other);
+            this.ngOnInit();
+          } else {
+            let error = (err.error && err.error != "") ? err.error : this.i18ns.submit_fail;
+            this.dialogService.alert(error);
+          }
         });
       } else {
           event.next(2);
@@ -414,8 +419,13 @@ export class OrderDetailBComponent implements OnInit {
           event.next(2);
         }, err => {
           event.next(2);
-          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
-          this.dialogService.alert(error);
+          if (err.error == 'modify_by_other') {
+            this.dialogService.alert(this.i18ns.modify_by_other);
+            this.ngOnInit();
+          } else {
+            let error = (err.error && err.error != "") ? err.error : this.i18ns.submit_fail;
+            this.dialogService.alert(error);
+          }
         });
         // this.location.back();
         // this.location.back();
@@ -506,7 +516,10 @@ export class OrderDetailBComponent implements OnInit {
               } else if (err.error == 'order_already_mark_finish') {
                 this.dialogService.alert(this.i18ns.order_already_mark_finish);
                 this.ngOnInit();
-              }  else {
+              } else if (err.error == 'modify_by_other') {
+                this.dialogService.alert(this.i18ns.modify_by_other);
+                this.ngOnInit();
+              }   else {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 } else if (err.error) {
@@ -547,7 +560,10 @@ export class OrderDetailBComponent implements OnInit {
             } else if (err.error == 'order_already_mark_finish') {
               this.dialogService.alert(this.i18ns.order_already_mark_finish);
               this.ngOnInit();
-            } else {
+            } else if (err.error == 'modify_by_other') {
+              this.dialogService.alert(this.i18ns.modify_by_other);
+              this.ngOnInit();
+            }  else {
               let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
               this.dialogService.alert(error);
             }
@@ -584,7 +600,10 @@ export class OrderDetailBComponent implements OnInit {
           } else if (err.error == 'order_already_mark_finish') {
             this.dialogService.alert(this.i18ns.order_already_mark_finish);
             this.ngOnInit();
-          } else {
+          } else if (err.error == 'modify_by_other') {
+            this.dialogService.alert(this.i18ns.modify_by_other);
+            this.ngOnInit();
+          }  else {
             let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
             this.dialogService.alert(error);
           }
