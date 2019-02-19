@@ -100,6 +100,7 @@ export class OtcComponent implements OnInit, OnDestroy {
     if ( this.coinTypes.length > 0 ) {
       if (this.coinTypeCode != this.coinTypes[0].code) {
         this.coinTypeCode = this.coinTypes[0].code;
+        this.loadList();
       }
     }
 

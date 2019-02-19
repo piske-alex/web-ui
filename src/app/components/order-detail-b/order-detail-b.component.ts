@@ -111,7 +111,7 @@ export class OrderDetailBComponent implements OnInit {
     let delayConfirm:number = 2;
     await this.commonService.getSettingInfo({key:"merchant_order_no_confirm_payment_timeout_seconds"}).then(d=>{
       if(!isNaN(d))
-      delayConfirm = parseFloat(d)/60;
+      delayConfirm = parseInt(d)/60;
     }, error=>{});
 
     try {
@@ -137,7 +137,7 @@ export class OrderDetailBComponent implements OnInit {
                   this.isShowHadPaidNeedConfirm = true;
                   this.isStopByPaymentDelay = false;
                   if (this._ordertimer2 == null) {
-                    this.startIntervalByPaidDelay(this.order.payment_time,delayConfirm);
+                    this.startIntervalByPaidDelay(this.order.payment_time, delayConfirm);
                   }
                 }
               } else { // buy
@@ -238,13 +238,25 @@ export class OrderDetailBComponent implements OnInit {
 
     let createTime: Date = new Date(this.order.create_time * 1000);
     let createTimePlap = createTime.getTime();
-    let merchantTime :number = 6;
-    await this.commonService.getSettingInfo({key:"merchant_order_no_payment_timeout_seconds"}).then(d=>{
-      if(!isNaN(d))
-        merchantTime = parseFloat(d)/60;
-    }, error=>{});
 
-    let delay:number =  this.order.ad_data.is_merchant == 1 ? merchantTime : 15 ;
+    let delayTime: number = 15;
+    let delayTimeSettings: number = 900;
+    if (this.order.ad_data.is_merchant == 1) {
+      await this.commonService.getSettingInfo({key: 'merchant_order_no_payment_timeout_seconds'}).then( d => {
+        if (!isNaN(d)) {
+          delayTimeSettings = parseInt(d);
+          delayTime = parseInt(d) / 60;
+        }
+      }, error => {});
+    } else {
+      await this.commonService.getSettingInfo({key: 'order_auto_cancel_time'}).then( d => {
+        if (!isNaN(d)) {
+          delayTimeSettings = parseInt(d);
+          delayTime = parseInt(d) / 60;
+        }
+      }, error => {});
+    }
+    const delay: number =  delayTime ;
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace('${delay}', delay);
 
@@ -260,12 +272,12 @@ export class OrderDetailBComponent implements OnInit {
       //let paymentTimePlap = paymentTime.getTime();
       //paymentTime.setTime(paymentTimePlap + 1000 * 60 * delayConfirm);
       //this.go2(paymentTime);
-      this.startIntervalByPaidDelay(this.order.payment_time,delayConfirm);
-    }else{
-      createTime.setTime(createTimePlap + 1000 * 60 * delay);
+      this.startIntervalByPaidDelay(this.order.payment_time, delayConfirm);
+    } else {
+      createTime.setTime(createTimePlap + 1000 * delayTimeSettings);
       this.go(createTime);
     }
-    
+
     setTimeout(() => {
       if (document.querySelector('.div_list_chat')) {
         document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
@@ -273,7 +285,7 @@ export class OrderDetailBComponent implements OnInit {
     }, 1500);
   }
 
-  startIntervalByPaidDelay(payment_time,delayConfirm){
+  startIntervalByPaidDelay(payment_time, delayConfirm) {
       let paymentTime: Date = new Date(payment_time * 1000);
       let paymentTimePlap = paymentTime.getTime();
       paymentTime.setTime(paymentTimePlap + 1000 * 60 * delayConfirm);

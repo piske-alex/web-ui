@@ -64,7 +64,7 @@
     "alert_ok":"OK",
     "load_more":"... loading more data ...",
     "confirm_title":"Confirm",
-    "ask_customer_service":"customer service",
+    "ask_customer_service":"Customer Service",
     "process":"processing..."
   },
   "element_coin_deposit":{
@@ -312,8 +312,8 @@
     "msg_ad": "ad"
   },
   "my_trade": {
-    "myBuy": "My buy order",
-    "mySell": "My sell order",
+    "myBuy": "My Buy Order",
+    "mySell": "My Sell Order",
     "do_rating": "Evaluation",
     "rating_1": "Praise",
     "rating_0": "Negative"
@@ -480,11 +480,11 @@
     "confirm_buy":"Confirm Buy",
     "cancel_sell":"Give up sell",
     "cancel_buy":"Give up buy",
-    "receive_number":"Receive Quantity",
-    "send_number":"Send Quantity",
-    "in_address":"Transfer in Address",
-    "out_address":"Transfer out Address",
-    "trans_confirm_time":"Time of arrival",
+    "receive_number":"Receive Quantity:",
+    "send_number":"Send Quantity:",
+    "in_address":"Transfer in Address:",
+    "out_address":"Transfer out Address:",
+    "trans_confirm_time":"Time of arrival:",
     "buy_sell_has_dispute_order":"The transaction has dispute order",
     "reach_maximun_unflnish_order":"Unfinished order limit has been exceeded",
     "goto_old_unfinish_order":"There are unfinished order. Please check the old order information first.",

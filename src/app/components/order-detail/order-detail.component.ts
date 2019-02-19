@@ -205,15 +205,27 @@ export class OrderDetailComponent implements OnInit {
 
     let createTime: Date = new Date(this.order.create_time * 1000);
     let createTimePlap = createTime.getTime();
-    let merchantTime :number = 6;
-    await this.commonService.getSettingInfo({key:"merchant_order_no_payment_timeout_seconds"}).then(d=>{
-      if(!isNaN(d))
-        merchantTime = parseFloat(d)/60;
-    },error=>{});
-    let delay:number =  this.order.ad_data.is_merchant == 1 ? merchantTime : 15 ;
+    let delayTime: number = 15;
+    let delayTimeSettings: number = 900;
+    if (this.order.ad_data.is_merchant == 1) {
+      await this.commonService.getSettingInfo({key: 'merchant_order_no_payment_timeout_seconds'}).then( d => {
+        if (!isNaN(d)) {
+          delayTimeSettings = parseInt(d);
+          delayTime = parseInt(d) / 60;
+        }
+      }, error => {});
+    } else {
+      await this.commonService.getSettingInfo({key: 'order_auto_cancel_time'}).then( d => {
+        if (!isNaN(d)) {
+          delayTimeSettings = parseInt(d);
+          delayTime = parseInt(d) / 60;
+        }
+      }, error => {});
+    }
+    const delay: number =  delayTime ;
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace("${delay}",delay);
-    createTime.setTime(createTimePlap + 1000 * 60 * delay);
+    createTime.setTime(createTimePlap + 1000 * delayTimeSettings);
     this.go(createTime);
 
     setTimeout(() => {

@@ -6,10 +6,10 @@
     <div class="gz-list-tr-detail">
         <div class="gz-list-cell_15 float_left">{{this.i18ns.orderNo}}: {{data.id}}</div>
 
-      <div class="gz-list-cell_22" *ngIf="data.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}} , <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
-      <div class="gz-list-cell_22" *ngIf="data.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}} , <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
-      <div class="gz-list-cell_22" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}} , <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
-      <div class="gz-list-cell_22" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}} , <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
+      <div class="gz-list-cell_22" *ngIf="data.status == 'unfinish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_unfinish}}, <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
+      <div class="gz-list-cell_22" *ngIf="data.status == 'finish'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_finish}}, <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
+      <div class="gz-list-cell_22" *ngIf="data.status == 'canceled'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_canceled}}, <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
+      <div class="gz-list-cell_22" *ngIf="data.status == 'dispute'">{{this.i18ns.order_status}}: {{this.i18ns.order_status_dispute}}, <span *ngIf="data.paymentStatus === 0">{{this.i18ns.noPayed}}</span><span *ngIf="data.paymentStatus === 1">{{this.i18ns.payed}}</span></div>
 
       <!--<div  class="gz-list-cell_10 float_left">{{data.username}}</div>
       <div class="gz-list-cell_8 float_left" *ngIf="data.type=='sell'">{{this.i18ns.sale}} {{data.tradeCurrency}}</div>
