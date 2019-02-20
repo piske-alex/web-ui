@@ -17,7 +17,10 @@
              (focus)="focus('nickname')" (blur)="blur('nickname')">
     </div>
   </section>
+  <!-- (click)="submit()" -->
   <section class="gz-submit">
-    <div class="btn btn-primary gz-circle" (click)="submit()"><gz-i18n key="common.save"></gz-i18n></div>
+    <div class="btn btn-primary gz-circle" 
+    gzDelayClick (debounceClick)="submit()" [debounceTime]="500" [timeOut]="2000" 
+    ><gz-i18n key="common.save"></gz-i18n></div>
   </section>
 </article>

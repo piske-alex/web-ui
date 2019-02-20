@@ -339,6 +339,7 @@
     "set_nickname":"设置昵称",
     "input_nickname":"请输入昵称",
     "err_username_had_used":"昵称已被使用",  
+    "err_username_had_setted":"昵称已被设置",  
     "confirm_logout": "确定要退出吗？",
     "inputValidPhone": "请输入正确的手机号码",
     

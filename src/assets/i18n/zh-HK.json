@@ -339,6 +339,7 @@
     "set_nickname":"設置昵稱",
     "input_nickname":"請輸入昵稱",
     "err_username_had_used":"昵稱已被使用",  
+    "err_username_had_setted":"昵稱已被設置",  
     "confirm_logout": "確定要退出嗎？",
     "inputValidPhone": "請輸入正確的手機號碼",
     "err_phone_or_password": "手機號或者密碼錯誤",

@@ -339,6 +339,7 @@
     "set_nickname":"Set Nickname",
     "input_nickname":"Please enter a nickname",
     "err_username_had_used":"The nickname have been used",    
+    "err_username_had_setted":"The nickname have been set",    
     "confirm_logout": "Are you sure you want to quit?",
     "inputValidPhone": "Please enter the correct phone number",
     "err_phone_or_password": "The phone number or password is incorrect",
