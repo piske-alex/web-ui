@@ -514,6 +514,9 @@
     "CN": "China",
     "HK": "China Hong Kong",
     "UK": "United Kingdom",
+    "MO": "China Macao",
+    "TW": "China Taiwan",
+    "MY": "Malaysia",
     "SG": "Singapore"
   },
   "paymentCertification":{
