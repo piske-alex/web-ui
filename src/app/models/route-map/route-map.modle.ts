@@ -35,7 +35,7 @@ export class RouteMap {
       GET_SETTING: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/info/setting'),
     },
     USER: {
-      LOGIN: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/login'),
+      LOGIN: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/merchant_a_login'),
       LOGOUT: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/logout'),
       REGISTER: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/signup'),
       SET_NICKNAME: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/user/username'),
