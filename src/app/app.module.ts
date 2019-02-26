@@ -88,6 +88,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { CertificateComponent } from './components/element/certificate/certificate.component';
 import { DelayClickDirective } from './providers/click/delay-click.directive';
 import { InputFormatPipe } from './pipes/inputFormat/input-format.pipe';
+import { TestAppApiComponent } from './components/test-app-api/test-app-api.component';
 
 
 library.add(fas);
@@ -169,6 +170,7 @@ const createTranslateLoader = function (http: HttpClient) {
     CertificateComponent,
     DelayClickDirective,
     InputFormatPipe,
+    TestAppApiComponent,
 
 
   ],
