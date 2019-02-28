@@ -27,6 +27,9 @@ export class TestAppApiComponent implements OnInit {
    api7result: any;
    api8result: any;
 
+   order: any = {};
+   paypassword: string;
+
   constructor(private location: Location,
     private router: Router,
     private userService: UserService,
@@ -36,7 +39,7 @@ export class TestAppApiComponent implements OnInit {
     private dialogService: DialogService) { }
 
     async ngOnInit() {
-
+      this.paypassword = 'Aa123456';
   }
 
   clearAllResult() {
@@ -132,6 +135,9 @@ export class TestAppApiComponent implements OnInit {
     this.httpService.request(new RouteJson(RouteMap.METHODS.POST, this.API_URL_V1,
        '/otc/merchant_a_get_order'), _params).then(async (data) => {
        console.log('order', data);
+       if (data.success) {
+        this.order = data.data.orderinfo;
+       }
        this.clearAllResult();
        this.api2result = JSON.stringify(data);
     }, error => {
@@ -144,10 +150,10 @@ export class TestAppApiComponent implements OnInit {
   // 7.收款
   merchant_a_mark_receipt() {
     const _params = {
-      // orderid: this.orderId,
-      // action: 'seller_confirm',
-      // paypassword: this.paypassword,
-      // updateTime : this.order.update_time
+       orderid: this.order.id,
+       action: 'seller_confirm',
+       paypassword: this.paypassword,
+       updateTime : this.order.update_time
     };
 
     this.httpService.request(new RouteJson(RouteMap.METHODS.POST, this.API_URL_V1,
@@ -165,10 +171,10 @@ export class TestAppApiComponent implements OnInit {
   // 8.争议
   merchant_a_mark_dispute() {
     const _params = {
-      // orderid: this.orderId,
-      // action: 'dispute_submit',
-      // paypassword: this.paypassword,
-      // updateTime : this.order.update_time
+       orderid: this.order.id,
+       action: 'dispute_submit',
+       paypassword: this.paypassword,
+       updateTime : this.order.update_time
     };
 
     this.httpService.request(new RouteJson(RouteMap.METHODS.POST, this.API_URL_V1,
