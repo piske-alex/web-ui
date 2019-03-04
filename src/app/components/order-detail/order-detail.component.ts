@@ -39,6 +39,9 @@ export class OrderDetailComponent implements OnInit {
   paypassword: string;
   isShowPayPassword: boolean;
 
+  isFirst: boolean;
+  distantTime: number;
+  
   userId: string;
 
   @ViewChild(ListChatingComponent)
@@ -93,11 +96,21 @@ export class OrderDetailComponent implements OnInit {
     let payed = await this.languageService.get('my_ad.order_status_buypay_status_1');
 
     this.i18ns.userid_neither_ad_nor_order = await this.languageService.get('my_ad.userid_neither_ad_nor_order');
+    
+    this.isFirst = true;
 
     try {
 
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
+          if(this.isFirst){
+            this.isFirst = false;
+            let now = new Date().getTime(); 
+            let serNowTime = this.order.serverTime * 1000; 
+            this.distantTime = now - serNowTime; //本地时间与服务器时间差值
+            //console.log(now,serNowTime,this.distantTime);
+            //console.log(new Date().setTime(now) ,new Date().setTime(serNowTime));
+          }
           // console.log('this.order', this.order);
           this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
           if (this.order.status == 'unfinish') { // unfinish, finish, canceled, dispute
@@ -225,7 +238,7 @@ export class OrderDetailComponent implements OnInit {
     const delay: number =  delayTime ;
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace("${delay}",delay);
-    createTime.setTime(createTimePlap + 1000 * delayTimeSettings);
+    createTime.setTime(createTimePlap + 1000 * delayTimeSettings + this.distantTime);
     this.go(createTime);
 
     setTimeout(() => {

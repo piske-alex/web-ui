@@ -48,6 +48,9 @@ export class OrderDetailBComponent implements OnInit {
   paypassword: string;
   isShowPayPassword: boolean;
 
+  isFirst: boolean;
+  distantTime: number;
+  
   userId: string;
 
   @ViewChild(ListChatingComponent)
@@ -114,10 +117,21 @@ export class OrderDetailBComponent implements OnInit {
       delayConfirm = parseInt(d)/60;
     }, error=>{});
 
+    
+    this.isFirst = true;
+
     try {
 
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
+          if(this.isFirst){
+            this.isFirst = false;
+            let now = new Date().getTime(); 
+            let serNowTime = this.order.serverTime * 1000; 
+            this.distantTime = now - serNowTime; //本地时间与服务器时间差值
+            //console.log(serNowTime,this.distantTime);
+          }
+
           // console.log('this.order', this.order);
           this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
 
@@ -274,7 +288,7 @@ export class OrderDetailBComponent implements OnInit {
       //this.go2(paymentTime);
       this.startIntervalByPaidDelay(this.order.payment_time, delayConfirm);
     } else {
-      createTime.setTime(createTimePlap + 1000 * delayTimeSettings);
+      createTime.setTime(createTimePlap + 1000 * delayTimeSettings + this.distantTime);
       this.go(createTime);
     }
 
