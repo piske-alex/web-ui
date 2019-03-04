@@ -34,5 +34,7 @@ export class ListAdComponent implements OnInit {
   toTransaction(data: TransactionListItem) {
     this.router.navigate(['/transaction', {adId: data.adId || ''}]);
   }
-
+  toTransactionB(data: TransactionListItem) {
+    this.router.navigate(['/transactionB', {adId: data.adId || ''}]);
+  }
 }
