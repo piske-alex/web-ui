@@ -29,6 +29,8 @@ export class TestAppApiComponent implements OnInit {
 
    order: any = {};
    paypassword: string;
+   old_order_amount: number;
+   partfinishamount: number;
 
   constructor(private location: Location,
     private router: Router,
@@ -50,6 +52,9 @@ export class TestAppApiComponent implements OnInit {
     this.api6result = '';
     this.api7result = '';
     this.api8result = '';
+
+    this.old_order_amount = 0;
+    this.partfinishamount = 0;
   }
 
   // 2.限额
@@ -135,10 +140,11 @@ export class TestAppApiComponent implements OnInit {
     this.httpService.request(new RouteJson(RouteMap.METHODS.POST, this.API_URL_V1,
        '/otc/merchant_a_get_order'), _params).then(async (data) => {
        console.log('order', data);
+       this.clearAllResult();
        if (data.success) {
         this.order = data.data.orderinfo;
+        this.old_order_amount = data.data.orderinfo.amount;
        }
-       this.clearAllResult();
        this.api2result = JSON.stringify(data);
     }, error => {
       console.error('error test app api: ', error);
@@ -189,7 +195,33 @@ export class TestAppApiComponent implements OnInit {
     });
   }
 
+ // 9.部分放币
+ merchant_a_mark_partfinish() {
+   if (this.partfinishamount <= 0
+    || this.partfinishamount >= this.old_order_amount) {
+      alert('invalid part finish amount');
+      return;
+   }
 
+  const _params = {
+     orderid: this.order.id,
+     action: 'partfinish',
+     paypassword: this.paypassword,
+     partfinish_amount: this.partfinishamount,
+     updateTime : this.order.update_time
+  };
+
+  this.httpService.request(new RouteJson(RouteMap.METHODS.POST, this.API_URL_V1,
+     '/otc/merchant_a_mark_partfinish'), _params).then(async (data) => {
+     console.log('order', data);
+     this.clearAllResult();
+     this.api2result = JSON.stringify(data);
+  }, error => {
+    console.error('error test app api: ', error);
+    this.clearAllResult();
+    this.api2result = JSON.stringify(error);
+  });
+}
 
 
 }

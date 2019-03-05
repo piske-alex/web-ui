@@ -29,6 +29,13 @@
 <br>
 <div (click)="merchant_a_mark_dispute()">8.争议 merchant_a_mark_dispute</div>
 <br>
+<div (click)="merchant_a_mark_partfinish()">9.部分 merchant_a_mark_partfinish</div>
+<div>部分放币金额
+  <input type="text" [(ngModel)]="partfinishamount" maxlength="20" >
+  (原订单金额: {{old_order_amount}})
+</div>
+<br>
+<br>
 <div>
     {{api2result}}
 </div>
