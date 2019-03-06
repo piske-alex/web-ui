@@ -183,7 +183,7 @@ export class OrderDetailBComponent implements OnInit {
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
             this.isShowHadPaidNeedConfirm = false;
-            if(this.initNewStatus !== undefined)
+            if(this.initNewStatus !== undefined && this.order.status != "dispute")
                 clearInterval(this.initNewStatus);
             this.stopInterval();
             this.stopInterval2();

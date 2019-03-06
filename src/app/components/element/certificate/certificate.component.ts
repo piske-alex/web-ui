@@ -18,6 +18,9 @@ export class CertificateComponent implements OnInit {
   public orderid: string = "";
   @Input()
   public adid: string = "";
+  @Input()
+  public showUploadBtn: boolean = false;
+
 
   certImg:any = {};
   userId: string = "";

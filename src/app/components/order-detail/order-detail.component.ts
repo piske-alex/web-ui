@@ -153,7 +153,7 @@ export class OrderDetailComponent implements OnInit {
             this.isShowBuyDispute = false;
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
-            if(this.initNewStatus !== undefined)
+            if(this.initNewStatus !== undefined && this.order.status != "dispute")
                 clearInterval(this.initNewStatus);
             this.stopInterval();
             this.isStop = true;
@@ -315,7 +315,11 @@ export class OrderDetailComponent implements OnInit {
            if (err.error == 'modify_by_other') {
             this.dialogService.alert(this.i18ns.modify_by_other);
             this.ngOnInit();
-          } else {
+          }else if (err.error == 'the order status must be unfinish') {
+            this.dialogService.alert(this.i18ns.order_must_be_unfinish);
+            this.ngOnInit();
+          }
+          else {
             let error = (err.error && err.error != "") ? err.error : this.i18ns.submit_fail;
             this.dialogService.alert(error);
           }

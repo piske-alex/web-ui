@@ -116,38 +116,38 @@ export class CollectionInfoDetailComponent implements OnInit {
 
     if (this.settype == "ali") {
       if (!this.aliAccount || this.aliAccount.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.account);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.aliacct);
       }
       if (!this.aliUserName || this.aliUserName.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.username);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.aliacctname);
       }
       if (!this.ercodePicUrl || this.ercodePicUrl == '') {
-        return this.dialogService.alert(this.i18ns.tip_upload + this.i18ns.QRCode);
+        return this.dialogService.alert(this.i18ns.tip_upload + this.i18ns.paypic);
       }
     }
     if (this.settype == "wx") {
       if (!this.wxAccount || this.wxAccount.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.account);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.wechatacct);
       }
       if (!this.wxUserName || this.wxUserName.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.username);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.wechatacctname);
       }
       if (!this.ercodePicUrl || this.ercodePicUrl == '') {
-        return this.dialogService.alert(this.i18ns.tip_upload + this.i18ns.QRCode);
+        return this.dialogService.alert(this.i18ns.tip_upload + this.i18ns.paypic);
       }
     }
     if (this.settype == "ebank") {
       if (!this.ebankName || this.ebankName.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.bank);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.bankname);
       }
       if (!this.ebankBranch || this.ebankBranch.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.subbranch);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.branchname);
       }
       if (!this.ebankAccount || this.ebankAccount.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.account);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.acctno);
       }
       if (!this.ebankUserName || this.ebankUserName.trim() == '') {
-        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.username);
+        return this.dialogService.alert(this.i18ns.tip_input + this.i18ns.acctname);
       }
     }
     // console.log('this.ercodeInfo:', this.ercodeInfo);
