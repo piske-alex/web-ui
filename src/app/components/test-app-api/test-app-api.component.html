@@ -23,6 +23,8 @@
 <div (click)="merchant_a_get_order()">6.抢单 merchant_a_get_order</div>
 <br>
 <div (click)="merchant_a_mark_receipt()">7.收款 merchant_a_mark_receipt</div>
+<br>
+<br>
 <div>支付密码
   <input type="text" [(ngModel)]="paypassword" maxlength="20" >
 </div>
@@ -30,6 +32,8 @@
 <div (click)="merchant_a_mark_dispute()">8.争议 merchant_a_mark_dispute</div>
 <br>
 <div (click)="merchant_a_mark_partfinish()">9.部分 merchant_a_mark_partfinish</div>
+<br>
+<br>
 <div>部分放币金额
   <input type="text" [(ngModel)]="partfinishamount" maxlength="20" >
   (原订单金额: {{old_order_amount}})
