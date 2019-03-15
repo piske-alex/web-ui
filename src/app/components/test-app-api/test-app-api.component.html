@@ -12,33 +12,47 @@
 <br>
 <div>1.登录 merchant_a_login</div>
 <br>
-<div (click)="merchant_a_get_user_remaining_quota()">2.限额 merchant_a_get_user_remaining_quota</div>
+<div (click)="merchant_a_get_user_remaining_quota()" 
+style="background-color:rgb(121, 121, 243);width:300px;">2.限额 merchant_a_get_user_remaining_quota</div>
 <br>
-<div (click)="merchant_a_get_remaining_balance()">3.余额 merchant_a_get_remaining_balance</div>
+<div (click)="merchant_a_get_remaining_balance()" 
+style="background-color:rgb(121, 121, 243);width:300px;">3.余额 merchant_a_get_remaining_balance</div>
 <br>
-<div (click)="merchant_a_get_transaction_history()">4.历史 merchant_a_get_transaction_history</div>
+<div (click)="merchant_a_get_transaction_history()" 
+style="background-color:rgb(121, 121, 243);width:300px;">4.历史 merchant_a_get_transaction_history</div>
 <br>
-<div (click)="merchant_a_get_standing_no()">5.筹号 merchant_a_get_standing_no</div>
+<div (click)="merchant_a_get_standing_no()" 
+style="background-color:rgb(121, 121, 243);width:300px;">5.筹号 merchant_a_get_standing_no</div>
 <br>
-<div (click)="merchant_a_get_order()">6.抢单 merchant_a_get_order</div>
+<div (click)="merchant_a_get_order()" 
+style="background-color:rgb(121, 121, 243);width:300px;">6.抢单 merchant_a_get_order</div>
 <br>
-<div (click)="merchant_a_mark_receipt()">7.收款 merchant_a_mark_receipt</div>
+<div (click)="merchant_a_mark_receipt()" 
+style="background-color:rgb(121, 121, 243);width:300px;">7.收款 merchant_a_mark_receipt</div>
 <br>
 <br>
 <div>支付密码
   <input type="text" [(ngModel)]="paypassword" maxlength="20" >
 </div>
 <br>
-<div (click)="merchant_a_mark_dispute()">8.争议 merchant_a_mark_dispute</div>
+<div (click)="merchant_a_mark_dispute()" 
+style="background-color:rgb(121, 121, 243);width:300px;">8.争议 merchant_a_mark_dispute</div>
 <br>
-<div (click)="merchant_a_mark_partfinish()">9.部分 merchant_a_mark_partfinish</div>
+<div (click)="merchant_a_mark_partfinish()" 
+style="background-color:rgb(121, 121, 243);width:300px;">9.部分放币 merchant_a_mark_partfinish</div>
 <br>
+
 <br>
 <div>部分放币金额
   <input type="text" [(ngModel)]="partfinishamount" maxlength="20" >
   (原订单金额: {{old_order_amount}})
 </div>
 <br>
+
+<div (click)="merchant_a_logout()" 
+style="background-color:rgb(121, 121, 243);width:300px;">10.注销 merchant_a_logout</div>
+<br>
+
 <br>
 <div>
     {{api2result}}

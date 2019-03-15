@@ -224,6 +224,23 @@ export class TestAppApiComponent implements OnInit {
 }
 
 
+  // 10.注销
+  merchant_a_logout() {
+    const _params = null;
+
+    this.httpService.request(new RouteJson(RouteMap.METHODS.GET, this.API_URL_V1,
+       '/merchant_a_logout'), _params).then(async (data) => {
+       this.clearAllResult();
+       this.api2result = JSON.stringify(data);
+    }, error => {
+      console.error('error test app api: ', error);
+      this.clearAllResult();
+      this.api2result = JSON.stringify(error);
+    });
+  }
+
+
+
 }
 
 export class RouteJson {
