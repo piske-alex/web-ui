@@ -30,9 +30,10 @@ export class ChatService {
     if (this.realtime) {
       return;
     }
+    // https://github.com/leancloud/javascript-sdk/blob/master/demo/settings/index.html
     this.realtime = new AV.Realtime({
-      appId: 'SLDdimkCsvFh1R5xlreorNl0-gzGzoHsz',
-      appKey: 'Pd10DELIIqFQkIkNJdv490IW',
+      appId: 'FNHw86LIu6lnFToIEDemKCQl-gzGzoHsz', // 'SLDdimkCsvFh1R5xlreorNl0-gzGzoHsz',
+      appKey: 'DyvpOorH5HK1CVLDqDhb4gNT', // 'Pd10DELIIqFQkIkNJdv490IW',
       region: 'cn', // 美国节点为 "us"
     });
 
