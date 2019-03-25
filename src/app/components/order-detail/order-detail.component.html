@@ -116,7 +116,7 @@
   </footer>
 
   <section>
-    <gz-certificate [orderid]="this.orderId" [adid]="this.adId"  *ngIf="this.order?.status == 'dispute'"></gz-certificate>
+    <gz-certificate [orderid]="this.orderId" [adid]="this.adId"  [showUploadBtn]="this.order?.status == 'dispute'"></gz-certificate>
   </section>
 
 

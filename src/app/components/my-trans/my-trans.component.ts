@@ -18,9 +18,9 @@ export class MyTransComponent implements OnInit {
   list: TradeItem[] = [];
   adType: string; // buy sell
   total: number;
-  isLoading: boolean;
-  isShowLoadMore:boolean;
-  isLoadMoreing:boolean;
+  isLoading = false;
+  isShowLoadMore = false;
+  isLoadMoreing = false;
 
   constructor(private location: Location,
     private router: Router,
@@ -31,9 +31,9 @@ export class MyTransComponent implements OnInit {
   @HostListener('window:scroll', [])
   onWindowScroll() {
    let winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    console.log('winScroll', winScroll);
+   // console.log('winScroll', winScroll);
    let divOffHeight = document.querySelector('.gz-list-trade').scrollHeight;
-    console.log('divOffHeight', divOffHeight);
+   // console.log('divOffHeight', divOffHeight);
    if (winScroll + 958 > divOffHeight) {
     this.loadMoreTrade();
    }
@@ -45,7 +45,7 @@ export class MyTransComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    
+
     this.userId = localStorage.getItem('user_id');
     if (!this.userId) {
       this.router.navigate(['/login']);
@@ -95,10 +95,11 @@ export class MyTransComponent implements OnInit {
       // this.list =  await this.cmService.listMyTradeList(_params);
       this.isLoading = true;
       const _result =  await this.cmService.listMyTradeList(_params);
+
       this.list = _result.list;
-      this.total = _result.total[0].count;
+      this.total = _result.total;
       this.isLoading = false;
-      console.log('my trade list', this.list);
+      // console.log('my trade list', this.list);
       if (this.total > this.list.length) {
         this.isShowLoadMore = true;
       } else {
@@ -129,11 +130,11 @@ export class MyTransComponent implements OnInit {
     };
 
     try {
-      console.log('my trade list');
+      // console.log('my trade list');
       //this.isLoading = true;
       // this.list =  await this.cmService.listMyTradeList(_params);
       const _result =  await this.cmService.listMyTradeList(_params);
-      console.log('my trade list', this.list);
+      // console.log('my trade list', this.list);
       this.isLoading = false;
 
       if (this.list) {
@@ -143,7 +144,7 @@ export class MyTransComponent implements OnInit {
         this.list = _result.list;
       }
 
-      this.total = _result.total[0].count;
+      this.total = _result.total;
 
       if (this.total > this.list.length) {
         this.isShowLoadMore = true;

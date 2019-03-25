@@ -63,6 +63,7 @@ export class RouteMap {
       GET_OTC_AD: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/detail'),
       TRANSACTION_AD: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/order'),
       GET_ORDER: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/order'),
+      GET_SERVER_DATE_TIME: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc/get_server_date_time'),
       UPDATE_ORDER_STATUS: new RouteJson(RouteMap.METHODS.POST, RouteMap.API_URL_V1, '/otc/orderstatus'),
       LIST_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/otc'),
       DEAL_TRANSACTION: new RouteJson(RouteMap.METHODS.GET, RouteMap.API_URL_V1, '/ad/otc/transaction/deal'),

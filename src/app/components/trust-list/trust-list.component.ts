@@ -76,7 +76,7 @@ export class TrustListComponent implements OnInit {
       this.isLoading = true;
       this.list = await this.userService.getUserList({ relationship: this.relationShip });
       this.isLoading = false;
-       console.log('trust getUserList', this.list);
+      // console.log('trust getUserList', this.list);
     } catch (e) {
       console.error(e);
       this.dialogService.alert(e.error);

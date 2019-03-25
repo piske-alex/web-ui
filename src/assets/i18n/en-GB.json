@@ -64,7 +64,7 @@
     "alert_ok":"OK",
     "load_more":"... loading more data ...",
     "confirm_title":"Confirm",
-    "ask_customer_service":"customer service",
+    "ask_customer_service":"Customer Service",
     "process":"processing..."
   },
   "element_coin_deposit":{
@@ -300,7 +300,7 @@
     "merchant_msg_1":"1. After payment receive and amount is correct, please click\"Mark Receipt\" to complete transaction.",
     "merchant_msg_2":"2. If you don't receive the payment from buyer, after {delay} minutes current order will be marked as \"Dispute\".",
     "merchant_msg_3":"3. If the payment amount is not correct, please click \"Mark Dispute\", our customer service will follow up this dispute order.",
-    "modify_by_other":"the order has been modify, please try again",
+    "modify_by_other":"The order has been modified, please try again.",
     "common_error":"system error, please try again"
   },
   "my_msg": {
@@ -312,8 +312,8 @@
     "msg_ad": "ad"
   },
   "my_trade": {
-    "myBuy": "My buy order",
-    "mySell": "My sell order",
+    "myBuy": "My Buy Order",
+    "mySell": "My Sell Order",
     "do_rating": "Evaluation",
     "rating_1": "Praise",
     "rating_0": "Negative"
@@ -339,6 +339,7 @@
     "set_nickname":"Set Nickname",
     "input_nickname":"Please enter a nickname",
     "err_username_had_used":"The nickname have been used",    
+    "err_username_had_setted":"The nickname have been set",    
     "confirm_logout": "Are you sure you want to quit?",
     "inputValidPhone": "Please enter the correct phone number",
     "err_phone_or_password": "The phone number or password is incorrect",
@@ -480,11 +481,11 @@
     "confirm_buy":"Confirm Buy",
     "cancel_sell":"Give up sell",
     "cancel_buy":"Give up buy",
-    "receive_number":"Receive Quantity",
-    "send_number":"Send Quantity",
-    "in_address":"Transfer in Address",
-    "out_address":"Transfer out Address",
-    "trans_confirm_time":"Time of arrival",
+    "receive_number":"Receive Quantity:",
+    "send_number":"Send Quantity:",
+    "in_address":"Transfer in Address:",
+    "out_address":"Transfer out Address:",
+    "trans_confirm_time":"Time of arrival:",
     "buy_sell_has_dispute_order":"The transaction has dispute order",
     "reach_maximun_unflnish_order":"Unfinished order limit has been exceeded",
     "goto_old_unfinish_order":"There are unfinished order. Please check the old order information first.",
@@ -513,6 +514,9 @@
     "CN": "China",
     "HK": "China Hong Kong",
     "UK": "United Kingdom",
+    "MO": "China Macao",
+    "TW": "China Taiwan",
+    "MY": "Malaysia",
     "SG": "Singapore"
   },
   "paymentCertification":{

@@ -52,7 +52,7 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
 
       if ( file_type == 'pc') {
         this.banners = await this.commonService.getBannerList({ type: file_type });
-        console.log('banners', this.banners);
+       // console.log('banners', this.banners);
        (this.banners || []).forEach(_data => {
            let urlParam: UrlParam;
            urlParam = new UrlParam();
@@ -66,7 +66,7 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
        });
       } else {
         this.banners = await this.commonService.getBannerList({ type: file_type });
-        console.log('banners', this.banners);
+        // console.log('banners', this.banners);
         (this.banners || []).forEach(_data => {
             let urlParam: UrlParam;
             urlParam = new UrlParam();
@@ -79,7 +79,7 @@ export class SwiperSlideComponent implements OnInit, AfterViewInit {
             this.slides.push(urlParam);
         });
       }
-      
+
     } catch (e) {
       console.error(e);
     }

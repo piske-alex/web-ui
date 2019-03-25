@@ -153,9 +153,9 @@ export class ChatService {
   }
 
   loginAndGetChatDialogList(): Promise<any> {
-    console.log('--------------loginAndGetChatDialogList----: ');
+    // console.log('--------------loginAndGetChatDialogList----: ');
     if (this.isLogin && this.chat) {
-      console.log('--------------loginAndGetChatDialogList----if: ');
+      // console.log('--------------loginAndGetChatDialogList----if: ');
       const _user = localStorage.getItem('user');
       this.user = JSON.parse(_user);
       this.currentLoginUserId = this.user.id;
@@ -231,7 +231,7 @@ export class ChatService {
       });
 
     } else {
-      console.log('--------------loginAndGetChatDialogList----else: ');
+      // console.log('--------------loginAndGetChatDialogList----else: ');
       const _user = localStorage.getItem('user');
       this.user = JSON.parse(_user);
       this.currentLoginUserId = this.user.id;

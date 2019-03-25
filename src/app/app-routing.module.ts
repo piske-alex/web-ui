@@ -34,6 +34,7 @@ import { MyMsgComponent } from './components/my-msg/my-msg.component';
 import { ChatingComponent } from './components/chating/chating.component';
 import { CollectionInfoComponent } from './components/collection-info/collection-info.component';
 import { CollectionInfoDetailComponent } from './components/collection-info-detail/collection-info-detail.component';
+import { TestAppApiComponent } from './components/test-app-api/test-app-api.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -71,6 +72,7 @@ const routes: Routes = [
   {path: 'chating', component: ChatingComponent},
   {path: 'collectionInfo', component: CollectionInfoComponent},
   {path: 'collectionInfoDetail', component: CollectionInfoDetailComponent},
+  {path: 'testappapi', component: TestAppApiComponent},
 ];
 
 @NgModule({

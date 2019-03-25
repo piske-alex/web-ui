@@ -13,7 +13,7 @@ import { CommonService } from '../../providers/common/common.service';
 export class WalletComponent implements OnInit {
   userId: string;
   isLoading = false;
-
+  coinPrices = [];
   accountType = 2;
   mainCoin: any = {
     usableAmount: '0.00000000',
@@ -40,7 +40,7 @@ export class WalletComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    
     this.i18ns.title = await this.languageService.get('wallet.title');
     this.i18ns.cointEqualsCurrency = await this.languageService.get('wallet.cointEqualsCurrency');
     this.i18ns.deposit = await this.languageService.get('wallet.deposit');
@@ -50,6 +50,7 @@ export class WalletComponent implements OnInit {
     this.i18ns.freeze = await this.languageService.get('wallet.freeze');
     this.i18ns.cnyprice = await this.languageService.get('wallet.cnyprice');
 
+    await this._loadCoinRate();
     this.loadAccount();
   }
 
@@ -69,6 +70,27 @@ export class WalletComponent implements OnInit {
     this.router.navigate(['/coinSelect', {action: Constants.COIN_ACTIONS.WITHRAW}]);
   }
 
+   private async _loadCoinRate() {
+    await this.commonService.getCoinRate('', '').then(data => {
+      const _coinPrices = [];
+      for (const coinType in data) {
+        if (data[coinType] !== undefined) {
+          const _data = data[coinType];
+          _coinPrices.push({
+            coinType: coinType,
+            // changePercent: (_data.change * 100).toFixed(2),
+            USD: _data.value.USD,
+            CNY: _data.value.CNY,
+          });
+        }
+      }
+      this.coinPrices = _coinPrices;
+     // console.log('123123456456',_coinPrices);
+    }, error => {
+      console.error(error);
+    });
+  }
+
   private async loadAccount() {
     try {
       this.isLoading = true;
@@ -76,15 +98,17 @@ export class WalletComponent implements OnInit {
       this.coinList = [];
       for (let _coin in _coins) {
         // console.log(_coin);
-        let _rate = await this.commonService.getCoinRate(_coin, this.defaultCurrency);
-        // console.log(_rate);
+        // let _rate = await this.commonService.getCoinRate(_coin, this.defaultCurrency);
+        // console.log('123123',_rate);
+         let _coinRate = this.coinPrices.find(obj => obj.coinType == _coin);
+        // console.log('123123123',obj);
         let _data = _coins[_coin];
         this.coinList.push({
           coinType: _coin,
           balanceAmount: _data.balance,
           usableAmount: (+_data.balance -  +_data.locked),
           freezeAmount: _data.locked,
-          rate: _rate.value,
+          rate: _coinRate.CNY,
           currency: this.defaultCurrency,
         });
       }
@@ -96,13 +120,13 @@ export class WalletComponent implements OnInit {
          for (let i = 0; i < len; i++) {
 
           let _data = this.coinList[i];
-          let _rate = await this.commonService.getCoinRate(_data.coinType, this.defaultCurrency);
+          // let _rate = await this.commonService.getCoinRate(_data.coinType, this.defaultCurrency);
           this.mainCoin = {
             coinType: _data.coinType,
             usableAmount: _data.usableAmount,
             freezeAmount: _data.freezeAmount,
             totalAmount: _data.balanceAmount, // (+_data.usableAmount + +_data.freezeAmount).toFixed(8),
-            rate: _rate.value,
+            rate: _data.rate,
             currencyAmount: '0.00',
             currency: this.defaultCurrency,
           };

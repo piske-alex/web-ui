@@ -15,8 +15,8 @@
     <div class="gz-transaction-date">{{date}}</div>
     <div class="gz-list" *ngFor="let transaction of transactions[date]">
       <div class="gz-coin gz-coin-{{transaction.type}}">
-        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.receive_number"></gz-i18n>: </span>
-        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.send_number"></gz-i18n>: </span>
+        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.receive_number"></gz-i18n> </span>
+        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.send_number"></gz-i18n> </span>
         <span>{{transaction.amount | btcFormat}}{{transaction.coin}}</span>
         <span *ngIf="transaction.type === 'send'">
           (<gz-i18n key="element_coin_withraw.net_receive_amount"></gz-i18n>
@@ -25,8 +25,8 @@
         </span>
       </div>
       <div>
-        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.in_address"></gz-i18n>: </span>
-        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.out_address"></gz-i18n>: </span>
+        <span *ngIf="transaction.type === 'receive'"><gz-i18n key="transaction.in_address"></gz-i18n> </span>
+        <span *ngIf="transaction.type === 'send'"><gz-i18n key="transaction.out_address"></gz-i18n> </span>
         <span>{{transaction.address}}</span>
       </div>
       <div>
@@ -34,7 +34,7 @@
         <span>{{transaction.txid}}</span>
       </div>
       <div>
-        <span><gz-i18n key="transaction.trans_confirm_time"></gz-i18n>: </span>
+        <span><gz-i18n key="transaction.trans_confirm_time"></gz-i18n> </span>
         <span>{{transaction.confirmTime}}</span>
       </div>
     </div>

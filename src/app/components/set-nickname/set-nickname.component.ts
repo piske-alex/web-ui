@@ -38,6 +38,8 @@ export class SetNicknameComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('userId');
     this.i18ns.input_nickname = await this.languageService.get('user.input_nickname');
     this.i18ns.err_username_had_used = await this.languageService.get('user.err_username_had_used');
+    this.i18ns.submit_fail = await this.languageService.get('user_real_cert.submit_fail');
+    this.i18ns.err_username_had_setted = await this.languageService.get('user.err_username_had_setted');
   }
 
   goBack() {
@@ -73,17 +75,26 @@ export class SetNicknameComponent implements OnInit {
           if (err.error == 'username have been used') {
             return this.dialogService.alert(this.i18ns.err_username_had_used);
           } else {
-            this.dialogService.alert(err.error);
+            if (err.status === 403 && err.error.userGroup === 'user') {
+              this.dialogService.alert(this.i18ns.err_username_had_setted);
+            } else {
+              this.dialogService.alert(this.i18ns.submit_fail);
+            }
           }
         }
       });
     } catch (e) {
-      console.error(e);
-      this.dialogService.alert(e.error);
+      if (e.status === 403 && e.error.userGroup === 'user') {
+        this.dialogService.alert(this.i18ns.err_username_had_setted);
+      } else {
+        this.dialogService.alert(this.i18ns.submit_fail);
+      }
     }
 
   }
-  formatChar(event){
-    event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\-\s]/gi, '');
+  formatChar(value) {
+    //event.target.value = event.target.value.replace(/[^\w\u4e00-\u9fa5\-\s]/gi, '');
+    let v = value.replace(/[^\w\u4e00-\u9fa5\-]/gi, '');
+    this.nickname = v;
   }
 }

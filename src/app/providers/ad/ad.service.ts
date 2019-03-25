@@ -211,15 +211,33 @@ export class AdService {
     });
   }
 
+  getServDateTime(params): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpService.request(RouteMap.V1.AD.GET_SERVER_DATE_TIME, params, true).then(data => {
+        if (data && data.success) {
+          resolve(data.data);
+        } else {
+          reject(data);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+
   updateOrderStatus(params): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpService.request(RouteMap.V1.AD.UPDATE_ORDER_STATUS, params, true).then(data => {
         if (data && data.success) {
           resolve(data.data);
         } else {
-          if (data.error && data.error == 'modify_by_other') {
-            data.error = this.languageService.get('otc.modify_by_other');
-          }
+          // if (data.error && data.error == 'modify_by_other') {
+          //   data.error =  this.languageService.get('otc.modify_by_other');
+          //   setTimeout(() => {
+          //     //这里是为了获取到modify_by_other
+          //   }, 500);
+          // }
           reject(data);
         }
       }, error => {

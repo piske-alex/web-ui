@@ -96,13 +96,18 @@ export class OtcComponent implements OnInit, OnDestroy {
     this.coinTypeCode = _coinType || this.coinTypeCode;
     this.countryCode = _countryCode || this.countryCode;
 
-    this.coinTypes = await this.commonService.getCoinTypeList();
-    if ( this.coinTypes.length > 0 ) {
-      if (this.coinTypeCode != this.coinTypes[0].code) {
-        this.coinTypeCode = this.coinTypes[0].code;
-      }
-    }
+    await this.commonService.getCoinTypeList().then(
+      (res) => {
+        this.coinTypes = res;
+        if ( res.length > 0 ) {
+          if (this.coinTypeCode != res[0].code) {
+            this.coinTypeCode = res[0].code;
+          }
+        }
+      }, (err) => {
 
+      }
+    );
     this.filter.adType = _adType || '2'; // 1 出售, 2 购买
     this.filter.coinType = this.coinTypeCode;
     this.filter.countryCode = this.countryCode;
@@ -162,7 +167,7 @@ export class OtcComponent implements OnInit, OnDestroy {
 
       this.adList = _result.list;
       this.adTotal = _result.total;
-      console.error('_result.total', _result.total);
+      // console.error('_result.total', _result.total);
       if (_result.total > this.adList.length) {
         this.isShowLoadMore = true;
       } else {
@@ -190,7 +195,7 @@ export class OtcComponent implements OnInit, OnDestroy {
       if (this.adList) {
         currentListLength = this.adList.length;
       }
-      console.log('load more length', currentListLength);
+      // consoleconsole.log('load more length', currentListLength);
       const _params = {
         type: this.filter.adType === '2' ? 'sell' : 'buy',
         country: this.filter.countryCode,

@@ -48,6 +48,9 @@ export class OrderDetailBComponent implements OnInit {
   paypassword: string;
   isShowPayPassword: boolean;
 
+  isFirst: boolean;
+  distantTime: number;
+  
   userId: string;
 
   @ViewChild(ListChatingComponent)
@@ -111,13 +114,24 @@ export class OrderDetailBComponent implements OnInit {
     let delayConfirm:number = 2;
     await this.commonService.getSettingInfo({key:"merchant_order_no_confirm_payment_timeout_seconds"}).then(d=>{
       if(!isNaN(d))
-      delayConfirm = parseFloat(d)/60;
+      delayConfirm = parseInt(d)/60;
     }, error=>{});
+
+    
+    this.isFirst = true;
 
     try {
 
       let getNewStatusFn = async () =>{
           this.order = await this.adService.getOrder({orderid: this.orderId});
+          if(this.isFirst){
+            this.isFirst = false;
+            let now = new Date().getTime(); 
+            let serNowTime = this.order.serverTime * 1000; 
+            this.distantTime = now - serNowTime; //本地时间与服务器时间差值
+            //console.log(serNowTime,this.distantTime);
+          }
+
           // console.log('this.order', this.order);
           this.payStatus = this.order.payment_status === 0 ? noPayed : payed ;
 
@@ -137,7 +151,7 @@ export class OrderDetailBComponent implements OnInit {
                   this.isShowHadPaidNeedConfirm = true;
                   this.isStopByPaymentDelay = false;
                   if (this._ordertimer2 == null) {
-                    this.startIntervalByPaidDelay(this.order.payment_time,delayConfirm);
+                    this.startIntervalByPaidDelay(this.order.payment_time, delayConfirm);
                   }
                 }
               } else { // buy
@@ -169,7 +183,7 @@ export class OrderDetailBComponent implements OnInit {
             this.isShowSellDispute = false;
             this.isShowSellConfirm = false;
             this.isShowHadPaidNeedConfirm = false;
-            if(this.initNewStatus !== undefined)
+            if(this.initNewStatus !== undefined && this.order.status != "dispute")
                 clearInterval(this.initNewStatus);
             this.stopInterval();
             this.stopInterval2();
@@ -229,7 +243,7 @@ export class OrderDetailBComponent implements OnInit {
     this.i18ns.input_trans_password = await this.languageService.get('user_trans_password.input_trans_password');
     this.i18ns.cancel = await this.languageService.get('common.cancel');
     this.i18ns.confirm = await this.languageService.get('common.confirm');
-
+    this.i18ns.modify_by_other = await this.languageService.get('otc.modify_by_other');
     this.isShowBuyDispute = false;
 
     this.btccnt = this.order.coin_amount ; //  (this.order.amount / this.order.ad_data.legal_currency_rate).toFixed(8) ;
@@ -238,13 +252,25 @@ export class OrderDetailBComponent implements OnInit {
 
     let createTime: Date = new Date(this.order.create_time * 1000);
     let createTimePlap = createTime.getTime();
-    let merchantTime :number = 6;
-    await this.commonService.getSettingInfo({key:"merchant_order_no_payment_timeout_seconds"}).then(d=>{
-      if(!isNaN(d))
-        merchantTime = parseFloat(d)/60;
-    }, error=>{});
 
-    let delay:number =  this.order.ad_data.is_merchant == 1 ? merchantTime : 15 ;
+    let delayTime: number = 15;
+    let delayTimeSettings: number = 900;
+    if (this.order.ad_data.is_merchant == 1) {
+      await this.commonService.getSettingInfo({key: 'merchant_order_no_payment_timeout_seconds'}).then( d => {
+        if (!isNaN(d)) {
+          delayTimeSettings = parseInt(d);
+          delayTime = parseInt(d) / 60;
+        }
+      }, error => {});
+    } else {
+      await this.commonService.getSettingInfo({key: 'order_auto_cancel_time'}).then( d => {
+        if (!isNaN(d)) {
+          delayTimeSettings = parseInt(d);
+          delayTime = parseInt(d) / 60;
+        }
+      }, error => {});
+    }
+    const delay: number =  delayTime ;
     this.i18ns.orderDelay15Min = await this.languageService.get('otc.orderDelay15Min');
     this.i18ns.orderDelay15Min = this.i18ns.orderDelay15Min.replace('${delay}', delay);
 
@@ -260,12 +286,12 @@ export class OrderDetailBComponent implements OnInit {
       //let paymentTimePlap = paymentTime.getTime();
       //paymentTime.setTime(paymentTimePlap + 1000 * 60 * delayConfirm);
       //this.go2(paymentTime);
-      this.startIntervalByPaidDelay(this.order.payment_time,delayConfirm);
-    }else{
-      createTime.setTime(createTimePlap + 1000 * 60 * delay);
+      this.startIntervalByPaidDelay(this.order.payment_time, delayConfirm);
+    } else {
+      createTime.setTime(createTimePlap + 1000 * delayTimeSettings + this.distantTime);
       this.go(createTime);
     }
-    
+
     setTimeout(() => {
       if (document.querySelector('.div_list_chat')) {
         document.querySelector('.div_list_chat').scrollTop = document.querySelector('.div_list_chat').scrollHeight + 150;
@@ -273,7 +299,7 @@ export class OrderDetailBComponent implements OnInit {
     }, 1500);
   }
 
-  startIntervalByPaidDelay(payment_time,delayConfirm){
+  startIntervalByPaidDelay(payment_time, delayConfirm) {
       let paymentTime: Date = new Date(payment_time * 1000);
       let paymentTimePlap = paymentTime.getTime();
       paymentTime.setTime(paymentTimePlap + 1000 * 60 * delayConfirm);
@@ -389,8 +415,13 @@ export class OrderDetailBComponent implements OnInit {
           this.location.back();
         }, err => {
           event.next(2);
-          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
-          this.dialogService.alert(error);
+          if (err.error == 'modify_by_other') {
+            this.dialogService.alert(this.i18ns.modify_by_other);
+            this.ngOnInit();
+          } else {
+            let error = (err.error && err.error != "") ? err.error : this.i18ns.submit_fail;
+            this.dialogService.alert(error);
+          }
         });
       } else {
           event.next(2);
@@ -414,8 +445,13 @@ export class OrderDetailBComponent implements OnInit {
           event.next(2);
         }, err => {
           event.next(2);
-          let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
-          this.dialogService.alert(error);
+          if (err.error == 'modify_by_other') {
+            this.dialogService.alert(this.i18ns.modify_by_other);
+            this.ngOnInit();
+          } else {
+            let error = (err.error && err.error != "") ? err.error : this.i18ns.submit_fail;
+            this.dialogService.alert(error);
+          }
         });
         // this.location.back();
         // this.location.back();
@@ -506,7 +542,10 @@ export class OrderDetailBComponent implements OnInit {
               } else if (err.error == 'order_already_mark_finish') {
                 this.dialogService.alert(this.i18ns.order_already_mark_finish);
                 this.ngOnInit();
-              }  else {
+              } else if (err.error == 'modify_by_other') {
+                this.dialogService.alert(this.i18ns.modify_by_other);
+                this.ngOnInit();
+              }   else {
                 if (err.error.message) {
                   this.dialogService.alert(err.error.message);
                 } else if (err.error) {
@@ -547,7 +586,10 @@ export class OrderDetailBComponent implements OnInit {
             } else if (err.error == 'order_already_mark_finish') {
               this.dialogService.alert(this.i18ns.order_already_mark_finish);
               this.ngOnInit();
-            } else {
+            } else if (err.error == 'modify_by_other') {
+              this.dialogService.alert(this.i18ns.modify_by_other);
+              this.ngOnInit();
+            }  else {
               let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
               this.dialogService.alert(error);
             }
@@ -584,7 +626,10 @@ export class OrderDetailBComponent implements OnInit {
           } else if (err.error == 'order_already_mark_finish') {
             this.dialogService.alert(this.i18ns.order_already_mark_finish);
             this.ngOnInit();
-          } else {
+          } else if (err.error == 'modify_by_other') {
+            this.dialogService.alert(this.i18ns.modify_by_other);
+            this.ngOnInit();
+          }  else {
             let error = err.error && err.error != "" ? err.error: this.i18ns.submit_fail;
             this.dialogService.alert(error);
           }

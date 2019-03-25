@@ -23,13 +23,12 @@ export class CommonService {
       } else {
         this.httpService.request(RouteMap.V1.AD.GET_TRANS_BY_USERID, params).then(data => {
           if (data && data.success) {
-            console.log('ddddd', data.data);
             let _result = {list: [], total: 0};
             if (data.data && data.data.length > 0) {
               _result.list = data.data.map(_data => {
                 return TradeItem.newInstance(_data);
               });
-              _result.total = data.total;
+              _result.total = data.total[0].count;
             }
             resolve(_result);
           } else {
